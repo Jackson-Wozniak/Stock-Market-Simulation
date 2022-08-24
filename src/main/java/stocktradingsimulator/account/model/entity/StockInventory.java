@@ -1,6 +1,7 @@
-package stocktradingsimulator.account.entity;
+package stocktradingsimulator.account.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,16 +10,22 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/*
+    Entity for handling the stocks that a user owns
+    Includes the ticker symbol and amount owned for each stock type, as well as
+    a call back to the account username for sorting each inventory
+ */
 @Entity
 @Table(name = "stock_owned")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class StockOwned implements Serializable {
+public class StockInventory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -32,7 +39,7 @@ public class StockOwned implements Serializable {
     @Column(name = "owned")
     private Integer amountOwned;
 
-    public StockOwned(Account account, String ticker){
+    public StockInventory(Account account, String ticker){
         this.account = account;
         this.ticker = ticker;
         this.amountOwned = 1;

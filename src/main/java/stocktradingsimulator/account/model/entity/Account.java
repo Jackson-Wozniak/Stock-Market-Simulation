@@ -1,4 +1,4 @@
-package stocktradingsimulator.account.entity;
+package stocktradingsimulator.account.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -7,9 +7,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
+/*
+    Class that is used to buy/sell stocks on the market.
+    Keeps a total balance that is used for stock trading, as well as a
+    Set of Owned Stocks (Stock Ticker, Amount Owned)
+ */
 @Entity
 @Table(name = "accounts")
 @Getter
@@ -25,7 +29,7 @@ public class Account implements Serializable {
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Set<StockOwned> stocksOwned;
+    private Set<StockInventory> stocksOwned;
 
     public Account(String username){
         this.username = username;

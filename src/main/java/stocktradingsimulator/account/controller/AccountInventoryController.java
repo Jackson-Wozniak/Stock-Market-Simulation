@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import stocktradingsimulator.account.entity.Account;
 import stocktradingsimulator.account.exception.AccountNotFoundException;
-import stocktradingsimulator.account.payload.StockBuy;
-import stocktradingsimulator.account.service.StockOwnedService;
+import stocktradingsimulator.account.model.payload.BuyStock;
+import stocktradingsimulator.account.service.StockInventoryService;
 
 @RestController
 @RequestMapping(value = "/api/v1/inventory")
@@ -17,11 +16,11 @@ import stocktradingsimulator.account.service.StockOwnedService;
 public class AccountInventoryController {
 
     @Autowired
-    private StockOwnedService stockOwnedService;
+    private StockInventoryService stockInventoryService;
 
     @PostMapping(value = "/buy")
-    public void buyNewStock(@RequestBody StockBuy stockBuy) throws AccountNotFoundException {
-        stockOwnedService.updateStockOwned(stockBuy);
+    public void buyNewStock(@RequestBody BuyStock buyStock) throws AccountNotFoundException {
+        stockInventoryService.updateStockInventory(buyStock);
     }
 
 }
