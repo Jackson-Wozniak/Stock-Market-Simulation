@@ -15,9 +15,9 @@ import stocktradingsimulator.account.utils.FindStockInventory;
 public class StockInventoryService {
 
     @Autowired
-    private StockInventoryRepository stockOwnedRepository;
+    private final StockInventoryRepository stockOwnedRepository;
     @Autowired
-    private AccountService accountService;
+    private final AccountService accountService;
 
     public void updateStockInventory(BuyStock buyStock) throws AccountNotFoundException {
         Account account =  accountService.getAccountByName(buyStock.getUsername());

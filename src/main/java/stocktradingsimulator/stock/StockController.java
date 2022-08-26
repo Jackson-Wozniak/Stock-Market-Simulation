@@ -39,10 +39,6 @@ public class StockController {
 
     @GetMapping(value = "/price/{ticker}")
     public double getStockPrice(@PathVariable String ticker) throws StockNotFoundException {
-        try{
-            return stockService.getStockPriceWithTickerSymbol(ticker);
-        }catch(StockNotFoundException ex){
-            throw new StockNotFoundException(ex.getMessage());
-        }
+        return stockService.getStockPriceWithTickerSymbol(ticker);
     }
 }

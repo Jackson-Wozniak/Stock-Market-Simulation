@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class SaveDefaultStocks {
 
     @Autowired
-    private StockService stockService;
+    private final StockService stockService;
 
     //uncomment when needing to save default stocks
 //    @Bean

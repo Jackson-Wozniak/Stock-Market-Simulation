@@ -17,7 +17,7 @@ import stocktradingsimulator.account.service.AccountService;
 public class AccountController {
 
     @Autowired
-    private AccountService accountService;
+    private final AccountService accountService;
 
     @RequestMapping(value = "get/{username}")
     public Account getAccountByUsername(@PathVariable String username) throws AccountNotFoundException {

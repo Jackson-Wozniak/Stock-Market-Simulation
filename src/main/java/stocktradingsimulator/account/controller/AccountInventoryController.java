@@ -16,7 +16,7 @@ import stocktradingsimulator.account.service.StockInventoryService;
 public class AccountInventoryController {
 
     @Autowired
-    private StockInventoryService stockInventoryService;
+    private final StockInventoryService stockInventoryService;
 
     @PostMapping(value = "/buy")
     public void buyNewStock(@RequestBody BuyStock buyStock) throws AccountNotFoundException {

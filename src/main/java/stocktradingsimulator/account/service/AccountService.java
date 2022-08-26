@@ -13,7 +13,7 @@ import stocktradingsimulator.account.repository.AccountRepository;
 public class AccountService {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     public Account getAccountByName(String username) throws AccountNotFoundException {
         return accountRepository.findById(username)

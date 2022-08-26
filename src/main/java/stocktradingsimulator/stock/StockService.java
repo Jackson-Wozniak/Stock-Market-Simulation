@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class StockService {
 
     @Autowired
-    private StockRepository stockRepository;
+    private final StockRepository stockRepository;
 
     public List<Stock> getAllStocks(){
         return stockRepository.findAll();
@@ -37,7 +37,7 @@ public class StockService {
     }
 
     public double getStockPriceWithTickerSymbol(String ticker) throws StockNotFoundException {
-        if(!DoesStockExist.doesStockExistWithTicker(this, ticker)){
+        if(DoesStockExist.stockExistsWithTicker(this, ticker)){
             throw new StockNotFoundException("No stock with ticker symbol " + ticker + " exists");
         }
         return getStockByTickerSymbol(ticker).getPrice();
@@ -45,13 +45,13 @@ public class StockService {
 
     //Ignore any stocks that do not currently exist
     public void updateStockInDatabase(Stock stock) {
-        if(!DoesStockExist.doesStockExistWithTicker(this, stock.getTicker())){
+        if(DoesStockExist.stockExistsWithTicker(this, stock.getTicker())){
             return;
         }
         stockRepository.save(stock);
     }
 
     public void saveDefaultStockToDatabase(List<Stock> defaultStocks){
-        defaultStocks.forEach(defaultStock -> stockRepository.save(defaultStock));
+        defaultStocks.forEach(stockRepository::save);
     }
 }
