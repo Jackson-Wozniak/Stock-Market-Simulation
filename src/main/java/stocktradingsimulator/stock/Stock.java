@@ -3,17 +3,15 @@ package stocktradingsimulator.stock;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import stocktradingsimulator.stock.utils.DefaultStockPrices;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.math.BigDecimal;
+import javax.persistence.*;
 
 @Entity(name = "stock")
 @Table(name = "stock")
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 public class Stock {
 
@@ -40,15 +38,4 @@ public class Stock {
 
     @Column(name = "volatile")
     private Boolean volatileStock;
-
-    public Stock(String ticker, String companyName, String sector, String marketCap, boolean volatileStock){
-        this.ticker = ticker;
-        this.companyName = companyName;
-        this.sector = sector;
-        this.marketCap = marketCap;
-        this.volatileStock = volatileStock;
-        this.price = 0.0;
-        this.lastDayPrice = 0.0;
-        this.optimism = 0;
-    }
 }

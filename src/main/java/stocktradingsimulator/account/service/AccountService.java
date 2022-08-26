@@ -3,9 +3,9 @@ package stocktradingsimulator.account.service;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import stocktradingsimulator.account.model.entity.Account;
 import stocktradingsimulator.account.exception.AccountNotFoundException;
 import stocktradingsimulator.account.exception.InvalidAccountException;
+import stocktradingsimulator.account.model.entity.Account;
 import stocktradingsimulator.account.repository.AccountRepository;
 
 @Service

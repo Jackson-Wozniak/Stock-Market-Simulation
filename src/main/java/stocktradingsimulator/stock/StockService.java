@@ -3,6 +3,7 @@ package stocktradingsimulator.stock;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stocktradingsimulator.stock.utils.DoesStockExist;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,7 +52,7 @@ public class StockService {
         stockRepository.save(stock);
     }
 
-    public void saveDefaultStockToDatabase(List<Stock> defaultStocks){
-        defaultStocks.forEach(stockRepository::save);
+    public void saveDefaultStockToDatabase(List<DefaultStock> defaultStocks){
+        defaultStocks.forEach(stock -> stockRepository.save((Stock) stock));
     }
 }

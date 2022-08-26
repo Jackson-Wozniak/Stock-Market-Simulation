@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import stocktradingsimulator.account.model.entity.Account;
 import stocktradingsimulator.account.exception.AccountNotFoundException;
 import stocktradingsimulator.account.exception.InvalidAccountException;
+import stocktradingsimulator.account.model.entity.Account;
 import stocktradingsimulator.account.service.AccountService;
 
 @RestController

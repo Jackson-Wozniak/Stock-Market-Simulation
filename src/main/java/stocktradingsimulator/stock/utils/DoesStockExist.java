@@ -1,4 +1,7 @@
-package stocktradingsimulator.stock;
+package stocktradingsimulator.stock.utils;
+
+import stocktradingsimulator.stock.StockNotFoundException;
+import stocktradingsimulator.stock.StockService;
 
 public class DoesStockExist {
 
