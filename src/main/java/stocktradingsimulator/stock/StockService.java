@@ -32,16 +32,22 @@ public class StockService {
 
     public Stock getStockByTickerSymbol(String ticker) throws StockNotFoundException {
         return stockRepository.findById(ticker)
-                .orElseThrow(() -> new StockNotFoundException("No Stock Exists with that Ticker symbol"));
+                .orElseThrow(() -> new StockNotFoundException(
+                        "No stock with ticker symbol " + ticker + " exists"));
     }
 
     public double getStockPriceWithTickerSymbol(String ticker) throws StockNotFoundException {
-        return stockRepository.findById(ticker).orElseThrow(() ->
-                new StockNotFoundException("No Stock Exists with that Ticker symbol"))
-                .getPrice();
+        if(!DoesStockExist.doesStockExistWithTicker(this, ticker)){
+            throw new StockNotFoundException("No stock with ticker symbol " + ticker + " exists");
+        }
+        return getStockByTickerSymbol(ticker).getPrice();
     }
 
-    public void updateStockInDatabase(Stock stock){
+    //Ignore any stocks that do not currently exist
+    public void updateStockInDatabase(Stock stock) {
+        if(!DoesStockExist.doesStockExistWithTicker(this, stock.getTicker())){
+            return;
+        }
         stockRepository.save(stock);
     }
 

@@ -18,12 +18,8 @@ public class StockController {
     private StockService stockService;
 
     @GetMapping(value = "/stock/{ticker}")
-    public Stock getIndividualStockData(@PathVariable String ticker){
-        try{
-            return stockService.getStockByTickerSymbol(ticker);
-        }catch(StockNotFoundException ex){
-            return null;
-        }
+    public Stock getIndividualStockData(@PathVariable String ticker) throws StockNotFoundException {
+        return stockService.getStockByTickerSymbol(ticker);
     }
 
     @GetMapping(value = "/all")
@@ -42,11 +38,11 @@ public class StockController {
     }
 
     @GetMapping(value = "/price/{ticker}")
-    public double getStockPrice(@PathVariable String ticker){
+    public double getStockPrice(@PathVariable String ticker) throws StockNotFoundException {
         try{
             return stockService.getStockPriceWithTickerSymbol(ticker);
         }catch(StockNotFoundException ex){
-            return 0.0;
+            throw new StockNotFoundException(ex.getMessage());
         }
     }
 }
