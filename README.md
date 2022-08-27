@@ -22,4 +22,3 @@ Default stocks are based on real world companies, however their prices do not re
 * MySQL
 * Lombok
 * JUNIT
-* HTML/CSS for documentation
