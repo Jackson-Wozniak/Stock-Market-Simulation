@@ -4,5 +4,5 @@ target/
 HELP.md
 mvnw
 mvnw.cmd
-src/main/resources/application.properties
+Backend/main/resources/application.properties
 Documentation/

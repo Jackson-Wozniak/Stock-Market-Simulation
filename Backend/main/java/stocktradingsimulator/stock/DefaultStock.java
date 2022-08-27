@@ -22,8 +22,8 @@ public class DefaultStock extends Stock{
     private String sector;
     private String marketCap;
     private Double price;
-    private final Double lastDayPrice = 0.0;
-    private final Integer optimism = 0;
+    private Double lastDayPrice;
+    private Integer optimism;
     private Boolean volatileStock;
 
     public DefaultStock(String ticker,
@@ -37,5 +37,7 @@ public class DefaultStock extends Stock{
         this.marketCap = marketCap;
         this.volatileStock = volatileStock;
         this.price = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
+        this.lastDayPrice = 0.0;
+        this.optimism = 0;
     }
 }

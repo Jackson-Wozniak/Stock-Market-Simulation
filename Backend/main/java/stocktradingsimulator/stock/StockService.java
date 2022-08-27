@@ -46,7 +46,7 @@ public class StockService {
 
     //Ignore any stocks that do not currently exist
     public void updateStockInDatabase(Stock stock) {
-        if(DoesStockExist.stockExistsWithTicker(this, stock.getTicker())){
+        if(!DoesStockExist.stockExistsWithTicker(this, stock.getTicker())){
             return;
         }
         stockRepository.save(stock);
