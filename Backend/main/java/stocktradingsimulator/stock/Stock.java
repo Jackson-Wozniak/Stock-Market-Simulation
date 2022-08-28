@@ -3,7 +3,6 @@ package stocktradingsimulator.stock;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import stocktradingsimulator.stock.utils.DefaultStockPrices;
 
 import javax.persistence.*;
 

@@ -1,10 +1,5 @@
 package stocktradingsimulator.stock.utils;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.Entity;
-
 public class DefaultStockPrices {
 
     public static final double DEFAULT_LARGE_CAP_PRICE = 100.0;

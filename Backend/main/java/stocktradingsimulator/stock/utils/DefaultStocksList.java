@@ -1,11 +1,7 @@
 package stocktradingsimulator.stock.utils;
 
-import lombok.Getter;
-import lombok.Setter;
 import stocktradingsimulator.stock.DefaultStock;
-import stocktradingsimulator.stock.Stock;
 
-import javax.persistence.Entity;
 import java.util.List;
 
 /*
