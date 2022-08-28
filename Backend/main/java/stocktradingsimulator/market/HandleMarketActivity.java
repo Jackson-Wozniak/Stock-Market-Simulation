@@ -30,7 +30,6 @@ public class HandleMarketActivity {
     }
 
     public int updateOptimism(Stock stock){
-        //stock.setLastDayPrice(stock.getPrice());
         if(stock.getPrice() > stock.getLastDayPrice()){
             return 1;
         }

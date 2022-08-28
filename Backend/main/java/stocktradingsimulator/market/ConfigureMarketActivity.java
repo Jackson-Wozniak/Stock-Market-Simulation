@@ -6,19 +6,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.time.LocalDateTime;
-
 @Configuration
 @EnableScheduling
+@AllArgsConstructor
+@SuppressWarnings("unused")
 public class ConfigureMarketActivity {
 
     @Autowired
     private final HandleMarketActivity handleMarketActivity;
-    private int marketHour = 0;
-
-    public ConfigureMarketActivity(HandleMarketActivity handleMarketActivity){
-        this.handleMarketActivity = handleMarketActivity;
-    }
+    private static int marketHour = 0;
 
     @Scheduled(fixedDelay = 10000L)
     public void marketActivity(){

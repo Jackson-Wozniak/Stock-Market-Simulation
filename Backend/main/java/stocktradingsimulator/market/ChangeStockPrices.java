@@ -38,10 +38,28 @@ public class ChangeStockPrices {
     }
 
     private String changeMidCapPrice(Stock stock){
-        return decimalFormat.format(stock.getPrice() + (stock.getPrice() * .001));
+        //if volatile, price changes twice
+        if(stock.getVolatileStock()){
+            return decimalFormat.format(stock.getPrice() +
+                    (stock.getPrice() * getRandomNumber.getRandomNumberForMidCap()) +
+                    (stock.getPrice() * getRandomNumber.getRandomNumberForMidCap()) +
+                    (stock.getOptimism() * getRandomNumber.getRandomPositiveNumberForMidCap()));
+        }
+        return decimalFormat.format(stock.getPrice() +
+                (stock.getPrice() * getRandomNumber.getRandomNumberForMidCap()) +
+                (stock.getOptimism() * getRandomNumber.getRandomPositiveNumberForMidCap()));
     }
 
     private String changeSmallCapPrice(Stock stock){
-        return decimalFormat.format(stock.getPrice() + (stock.getPrice() * .0005));
+        //if volatile, price changes twice
+        if(stock.getVolatileStock()){
+            return decimalFormat.format(stock.getPrice() +
+                    (stock.getPrice() * getRandomNumber.getRandomNumberForSmallCap()) +
+                    (stock.getPrice() * getRandomNumber.getRandomNumberForSmallCap()) +
+                    (stock.getOptimism() * getRandomNumber.getRandomPositiveNumberForSmallCap()));
+        }
+        return decimalFormat.format(stock.getPrice() +
+                (stock.getPrice() * getRandomNumber.getRandomNumberForSmallCap()) +
+                (stock.getOptimism() * getRandomNumber.getRandomPositiveNumberForSmallCap()));
     }
 }
