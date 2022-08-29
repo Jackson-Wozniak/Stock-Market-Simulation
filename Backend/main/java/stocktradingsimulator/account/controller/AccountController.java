@@ -2,13 +2,12 @@ package stocktradingsimulator.account.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import stocktradingsimulator.account.exception.AccountBalanceException;
 import stocktradingsimulator.account.exception.AccountNotFoundException;
 import stocktradingsimulator.account.exception.InvalidAccountException;
 import stocktradingsimulator.account.model.entity.Account;
+import stocktradingsimulator.account.model.payload.AccountTransaction;
 import stocktradingsimulator.account.service.AccountService;
 
 @RestController
@@ -27,5 +26,10 @@ public class AccountController {
     @PostMapping(value = "create/{username}")
     public void createAccount(@PathVariable String username) throws InvalidAccountException {
         accountService.createNewAccount(username);
+    }
+
+    @PostMapping(value = "/deposit")
+    public void depositToAccount(@RequestBody AccountTransaction accountTransaction) throws AccountNotFoundException, AccountBalanceException {
+        accountService.updateAccountBalance(accountTransaction);
     }
 }
