@@ -2,13 +2,11 @@
 
 UNFINISHED
 
-# Overview
-
 A server side implementation for a stock market and stock trading simulator
 
 ---
 
-## Future or In Progress Features
+## Features
 * User accounts can be used to view current stock prices and trade stocks
 * Stock Prices change dynamically on a time interval. Price changes are largely random but are affected by certain stock attributes
 * Each individual stock can be tracked, and prices/attributes change dynamically
@@ -30,6 +28,19 @@ Default stocks are based on real world companies, however their prices do not re
 
 ### Stocks
 
+```JSON
+{
+  "ticker" : "AAPL",
+  "companyName" : "Apple",
+  "sector" : "Technology",
+  "marketCap" : "Large",
+  "price" : 99.742,
+  "lastDayPrice" : 99.457,
+  "optimism" : -1,
+  "volatileStock" : false
+}
+```
+
 ```diff
 
 Note: {___} in url represents path variable
@@ -46,50 +57,23 @@ Note: {___} in url represents path variable
 
 ```
 
-```JSON
-[ {
-  "ticker" : "AAPL",
-  "companyName" : "Apple",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 99.742,
-  "lastDayPrice" : 99.457,
-  "optimism" : -1,
-  "volatileStock" : false
-}, {
-  "ticker" : "AMZN",
-  "companyName" : "Amazon",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 99.298,
-  "lastDayPrice" : 99.065,
-  "optimism" : 1,
-  "volatileStock" : true
-}, {
-  "ticker" : "BRK.B",
-  "companyName" : "Berkshire Hathaway",
-  "sector" : "Insurance",
-  "marketCap" : "Large",
-  "price" : 100.85,
-  "lastDayPrice" : 101.274,
-  "optimism" : 1,
-  "volatileStock" : false
-}, {
-  "ticker" : "COST",
-  "companyName" : "Costco Wholesale",
-  "sector" : "Consumer Discretionary",
-  "marketCap" : "Large",
-  "price" : 98.023,
-  "lastDayPrice" : 97.999,
-  "optimism" : -1,
-  "volatileStock" : false
-} ]
-
-```
-
 ---
 
 ### Accounts
+
+```JSON
+{
+  "username" : "username",
+  "accountBalance" : "1000",
+  "stocksOwned" : [ {
+    "ticker" : "AMZN" ,
+    "amountOwned" : 2
+  }, {
+    "ticker" : "GOOG",
+    "amountOwned" : 5
+  } ]
+}
+```
 
 ```diff
 
