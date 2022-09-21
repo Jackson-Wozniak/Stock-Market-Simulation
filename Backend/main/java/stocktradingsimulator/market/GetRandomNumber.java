@@ -1,35 +1,26 @@
 package stocktradingsimulator.market;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Random;
 
-@Component
 public class GetRandomNumber {
 
     private static final Random random = new Random();
 
-    public double getRandomNumberForLargeCap(){
-        return random.nextDouble(-.002, .002);
+    public static double getRandomNumberForStocks(String marketCap){
+        return switch (marketCap.toLowerCase()){
+          case "large" -> random.nextDouble(-.002, .002);
+          case "mid" -> random.nextDouble(-.001, .001);
+          case "small" -> random.nextDouble(-.002, .003);
+          default -> 0;
+        };
     }
 
-    public double getRandomPositiveNumberForLargeCap(){
-        return random.nextDouble(0, .002);
-    }
-
-    public double getRandomNumberForMidCap(){
-        return random.nextDouble(-.001, .001);
-    }
-
-    public double getRandomPositiveNumberForMidCap(){
-        return random.nextDouble(0, .001);
-    }
-
-    public double getRandomNumberForSmallCap(){
-        return random.nextDouble(-.003, .003);
-    }
-
-    public double getRandomPositiveNumberForSmallCap(){
-        return random.nextDouble(0, .003);
+    public static double getRandomPositiveNumberForStocks(String marketCap){
+        return switch (marketCap.toLowerCase()){
+            case "large" -> random.nextDouble(0, .002);
+            case "mid" -> random.nextDouble(0, .001);
+            case "small" -> random.nextDouble(0, .003);
+            default -> 0;
+        };
     }
 }

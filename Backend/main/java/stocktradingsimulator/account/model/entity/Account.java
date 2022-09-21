@@ -34,6 +34,5 @@ public class Account implements Serializable {
     public Account(String username){
         this.username = username;
         this.accountBalance = 0.0;
-        //this.stocksOwned = Set.of();
     }
 }

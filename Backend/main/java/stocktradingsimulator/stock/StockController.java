@@ -17,7 +17,7 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
-    @GetMapping(value = "/stock/{ticker}")
+    @GetMapping(value = "/{ticker}")
     public Stock getIndividualStockData(@PathVariable String ticker) throws StockNotFoundException {
         return stockService.getStockByTickerSymbol(ticker);
     }

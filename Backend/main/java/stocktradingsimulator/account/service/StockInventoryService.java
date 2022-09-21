@@ -50,12 +50,14 @@ public class StockInventoryService {
     }
 
     public void sellStock(SellStockRequest sellStock) throws AccountNotFoundException, AccountInventoryException {
-        Account account =  accountService.getAccountByName(sellStock.getUsername());
+        Account account = accountService.getAccountByName(sellStock.getUsername());
         StockInventory stockInventory = FindStockInventory.findOwnedStockByTicker(
                 account.getStocksOwned(), sellStock.getTicker());
+
         if(!ValidateStockTransaction.doesAccountHaveEnoughStocks(account, sellStock)){
             throw new AccountInventoryException("Account does not own enough stocks");
         }
+
         stockInventory.setAmountOwned(stockInventory.getAmountOwned() - sellStock.getAmountToSell());
         saveNewStockOwned(sellStock, account);
     }

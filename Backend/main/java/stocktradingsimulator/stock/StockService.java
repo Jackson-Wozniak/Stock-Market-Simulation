@@ -22,13 +22,13 @@ public class StockService {
     public List<Stock> getAllStocksByMarketCap(String marketCap){
         return stockRepository.findAll().stream()
                 .filter(stock -> stock.getMarketCap()
-                        .equals(marketCap)).collect(Collectors.toList());
+                        .equalsIgnoreCase(marketCap)).collect(Collectors.toList());
     }
 
     public List<Stock> getAllStocksBySector(String sector){
         return stockRepository.findAll().stream()
                 .filter(stock -> stock.getSector()
-                        .equals(sector)).collect(Collectors.toList());
+                        .equalsIgnoreCase(sector)).collect(Collectors.toList());
     }
 
     public Stock getStockByTickerSymbol(String ticker) throws StockNotFoundException {
@@ -38,7 +38,7 @@ public class StockService {
     }
 
     public double getStockPriceWithTickerSymbol(String ticker) throws StockNotFoundException {
-        if(DoesStockExist.stockExistsWithTicker(this, ticker)){
+        if(!DoesStockExist.stockExistsWithTicker(this, ticker)){
             throw new StockNotFoundException("No stock with ticker symbol " + ticker + " exists");
         }
         return getStockByTickerSymbol(ticker).getPrice();
