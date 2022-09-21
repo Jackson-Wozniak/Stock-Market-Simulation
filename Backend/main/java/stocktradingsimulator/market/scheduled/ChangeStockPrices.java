@@ -1,6 +1,7 @@
-package stocktradingsimulator.market;
+package stocktradingsimulator.market.scheduled;
 
 import org.springframework.stereotype.Component;
+import stocktradingsimulator.market.utils.GetRandomNumber;
 import stocktradingsimulator.stock.Stock;
 
 import java.text.DecimalFormat;

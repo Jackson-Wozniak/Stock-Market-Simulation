@@ -1,4 +1,4 @@
-package stocktradingsimulator.market;
+package stocktradingsimulator.market.utils;
 
 import java.util.Random;
 

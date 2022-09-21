@@ -1,8 +1,9 @@
-package stocktradingsimulator.market;
+package stocktradingsimulator.market.scheduled;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import stocktradingsimulator.market.scheduled.ChangeStockPrices;
 import stocktradingsimulator.stock.Stock;
 import stocktradingsimulator.stock.StockService;
 
