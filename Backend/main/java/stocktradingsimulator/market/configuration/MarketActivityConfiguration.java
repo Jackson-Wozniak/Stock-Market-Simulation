@@ -7,32 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import stocktradingsimulator.market.entity.Market;
+import stocktradingsimulator.market.constants.MarketIntervals;
 import stocktradingsimulator.market.scheduled.HandleMarketActivity;
-import stocktradingsimulator.stock.StockService;
 
 @Configuration
 @EnableScheduling
 @AllArgsConstructor
-@SuppressWarnings("unused")
 public class MarketActivityConfiguration {
 
     @Autowired
     private final HandleMarketActivity handleMarketActivity;
-    @Autowired
-    private final StockService stockService;
 
     private final Logger logger = LoggerFactory.getLogger(MarketActivityConfiguration.class);
     private static int marketHour = 0;
+    private static int marketDay = 0;
 
-    @Scheduled(fixedDelay = 10000L)
-    public void marketActivity(){
+    @Scheduled(fixedDelay = MarketIntervals.TEN_SECONDS)
+    @SuppressWarnings("unused")
+    public void dailyMarketActivity(){
         marketHour++;
         if(marketHour >= 24){
-            logger.info("End of day");
+            logger.info("End of day " + marketDay);
             //boolean value confirms that it is the end of day
             handleMarketActivity.updateNewStockPrices(true);
             marketHour = 0;
+
+            if(marketDay >= 30){
+                logger.info("End of month");
+                handleMarketActivity.updateMarketMonthlyValues();
+                marketDay = 0;
+            }
+            marketDay++;
             return;
         }
         handleMarketActivity.updateNewStockPrices(false);

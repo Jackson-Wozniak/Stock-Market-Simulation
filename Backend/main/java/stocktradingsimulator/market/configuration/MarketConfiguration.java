@@ -1,31 +1,28 @@
 package stocktradingsimulator.market.configuration;
 
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import stocktradingsimulator.market.entity.Market;
-import stocktradingsimulator.market.enums.MarketTrajectory;
-import stocktradingsimulator.market.repository.MarketRepository;
+import stocktradingsimulator.market.service.MarketService;
+
+import javax.annotation.PostConstruct;
 
 @Configuration
 @AllArgsConstructor
 public class MarketConfiguration {
 
     @Autowired
-    private final MarketRepository marketRepository;
+    private final MarketService marketService;
+    private final Logger logger = LoggerFactory.getLogger(MarketConfiguration.class);
 
-    /*
-        Create bean for a single market entity.
-        This entity acts as the decider of the trajectory of
-        the total market by saving and comparing average prices of stocks
-        across all sectors/caps.
-        Visit MarketTrajectory.java for specifics on % changes
-     */
-    @Bean
-    public Market market() throws Exception {
-        return marketRepository.findById(1)
-                .orElse(marketRepository.save(
-                        new Market(100.0, MarketTrajectory.NORMAL)));
+    @PostConstruct
+    public void configureBaselineMarket(){
+        //Calling this method will automatically create a new Market Entity if one doesn't exist
+        //This happens because only a single market entity should exist, with ID 1
+        Market market = marketService.findMarketEntity();
+        logger.info("Current Market Conditions: " + market.toString());
     }
 }

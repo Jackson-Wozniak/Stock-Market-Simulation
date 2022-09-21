@@ -2,8 +2,12 @@ package stocktradingsimulator.market.scheduled;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.DefaultSingletonBeanRegistry;
 import org.springframework.stereotype.Component;
+import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.market.scheduled.ChangeStockPrices;
+import stocktradingsimulator.market.service.MarketService;
+import stocktradingsimulator.market.utils.MarketTrajectoryUtils;
 import stocktradingsimulator.stock.Stock;
 import stocktradingsimulator.stock.StockService;
 
@@ -17,6 +21,8 @@ public class HandleMarketActivity {
     private final StockService stockService;
     @Autowired
     private final ChangeStockPrices changeStockPrices;
+    @Autowired
+    private final MarketService marketService;
 
     public void updateNewStockPrices(boolean endOfDay){
         List<Stock> stocks = stockService.getAllStocks();
@@ -30,7 +36,16 @@ public class HandleMarketActivity {
         });
     }
 
-    public int updateOptimism(Stock stock){
+    public void updateMarketMonthlyValues(){
+        Market market = marketService.findMarketEntity();
+        market.setMarketTrajectory(MarketTrajectoryUtils.getNewMarketTrajectory(
+                market, stockService.getAllStocks()));
+        market.setLastMonthAveragePrice(MarketTrajectoryUtils.stockPricesAverage(
+                stockService.getAllStocks()));
+        marketService.saveMarketEntity(market);
+    }
+
+    private int updateOptimism(Stock stock){
         if(stock.getPrice() > stock.getLastDayPrice()){
             return 1;
         }
