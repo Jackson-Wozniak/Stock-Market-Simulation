@@ -16,8 +16,8 @@ public class MarketService {
 
     public Market findMarketEntity(){
         Market market = marketRepository.findById(1).orElse(null);
-        if(market == null){
-            market = new Market(100.0, MarketTrajectory.NORMAL);
+        if(market == null || checkMarketForNullValues(market)){
+            market = new Market("1/1/1" ,100.0, MarketTrajectory.NORMAL);
             saveMarketEntity(market);
             return market;
         }
@@ -27,5 +27,13 @@ public class MarketService {
     public void saveMarketEntity(Market market){
         if(market == null) return;
         marketRepository.save(market);
+    }
+
+    private static boolean checkMarketForNullValues(Market market){
+        if(market.getDate() == null) return true;
+        if(market.getMarketTrajectory() == null) return true;
+        if(market.getLastMonthAveragePrice() == null) return true;
+        if(market.getId() == null) return true;
+        return false;
     }
 }

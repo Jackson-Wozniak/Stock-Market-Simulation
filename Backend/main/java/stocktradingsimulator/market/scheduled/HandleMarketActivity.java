@@ -34,6 +34,13 @@ public class HandleMarketActivity {
         });
     }
 
+    public String incrementMarketDay(){
+        Market market = marketService.findMarketEntity();
+        market.incrementDay();
+        marketService.saveMarketEntity(market);
+        return market.getDate();
+    }
+
     public void updateMarketMonthlyValues(){
         Market market = marketService.findMarketEntity();
         market.setMarketTrajectory(MarketTrajectoryUtils.getNewMarketTrajectory(

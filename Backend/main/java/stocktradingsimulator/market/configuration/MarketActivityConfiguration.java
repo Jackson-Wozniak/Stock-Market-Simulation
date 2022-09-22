@@ -27,9 +27,10 @@ public class MarketActivityConfiguration {
     public void dailyMarketActivity(){
         marketHour++;
         if(marketHour >= 24){
-            logger.info("End of day " + marketDay);
             //boolean value confirms that it is the end of day
             handleMarketActivity.updateNewStockPrices(true);
+            String date = handleMarketActivity.incrementMarketDay();
+            logger.info("End of day " + date);
             marketHour = 0;
 
             if(marketDay >= 30){
