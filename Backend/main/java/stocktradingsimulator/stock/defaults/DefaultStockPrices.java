@@ -1,4 +1,4 @@
-package stocktradingsimulator.stock.utils;
+package stocktradingsimulator.stock.defaults;
 
 public class DefaultStockPrices {
 

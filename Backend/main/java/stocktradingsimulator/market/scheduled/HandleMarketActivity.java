@@ -2,14 +2,12 @@ package stocktradingsimulator.market.scheduled;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.DefaultSingletonBeanRegistry;
 import org.springframework.stereotype.Component;
 import stocktradingsimulator.market.entity.Market;
-import stocktradingsimulator.market.scheduled.ChangeStockPrices;
 import stocktradingsimulator.market.service.MarketService;
 import stocktradingsimulator.market.utils.MarketTrajectoryUtils;
-import stocktradingsimulator.stock.Stock;
-import stocktradingsimulator.stock.StockService;
+import stocktradingsimulator.stock.model.entity.Stock;
+import stocktradingsimulator.stock.service.StockService;
 
 import java.util.List;
 

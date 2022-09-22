@@ -3,7 +3,8 @@ package stocktradingsimulator.stock.utils;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import stocktradingsimulator.stock.StockService;
+import stocktradingsimulator.stock.service.StockService;
+import stocktradingsimulator.stock.defaults.DefaultStocksList;
 
 @Configuration
 @AllArgsConstructor

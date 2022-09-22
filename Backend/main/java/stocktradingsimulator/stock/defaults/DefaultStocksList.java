@@ -1,6 +1,6 @@
-package stocktradingsimulator.stock.utils;
+package stocktradingsimulator.stock.defaults;
 
-import stocktradingsimulator.stock.DefaultStock;
+import stocktradingsimulator.stock.model.object.DefaultStock;
 
 import java.util.List;
 

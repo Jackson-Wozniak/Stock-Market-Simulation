@@ -3,8 +3,8 @@ package stocktradingsimulator.market.utils;
 import org.junit.jupiter.api.Test;
 import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.market.enums.MarketTrajectory;
-import stocktradingsimulator.stock.DefaultStock;
-import stocktradingsimulator.stock.Stock;
+import stocktradingsimulator.stock.model.object.DefaultStock;
+import stocktradingsimulator.stock.model.entity.Stock;
 
 import java.util.Collections;
 import java.util.List;

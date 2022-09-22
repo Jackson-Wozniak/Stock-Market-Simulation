@@ -1,9 +1,10 @@
-package stocktradingsimulator.stock;
+package stocktradingsimulator.stock.model.object;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import stocktradingsimulator.stock.utils.DefaultStockPrices;
+import stocktradingsimulator.stock.defaults.DefaultStockPrices;
+import stocktradingsimulator.stock.model.entity.Stock;
 
 import javax.persistence.Entity;
 
@@ -15,7 +16,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DefaultStock extends Stock{
+public class DefaultStock extends Stock {
 
     private String ticker;
     private String companyName;

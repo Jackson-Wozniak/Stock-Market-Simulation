@@ -1,8 +1,12 @@
-package stocktradingsimulator.stock;
+package stocktradingsimulator.stock.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stocktradingsimulator.stock.exception.StockNotFoundException;
+import stocktradingsimulator.stock.model.object.DefaultStock;
+import stocktradingsimulator.stock.model.entity.Stock;
+import stocktradingsimulator.stock.repository.StockRepository;
 import stocktradingsimulator.stock.utils.DoesStockExist;
 
 import java.util.List;

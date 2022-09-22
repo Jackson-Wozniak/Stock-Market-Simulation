@@ -3,7 +3,6 @@ package stocktradingsimulator.account.utils;
 import org.junit.jupiter.api.Test;
 import stocktradingsimulator.account.model.entity.Account;
 import stocktradingsimulator.account.model.entity.StockInventory;
-import stocktradingsimulator.stock.Stock;
 
 import java.util.Set;
 

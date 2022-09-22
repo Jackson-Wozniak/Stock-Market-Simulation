@@ -1,5 +1,6 @@
 package stocktradingsimulator.market.service;
 
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
+@AllArgsConstructor
 class MarketServiceTest {
 
     @Autowired
-    private MarketService marketService;
+    private final MarketService marketService;
 
     @Test
     void marketEntityIsNotNull(){

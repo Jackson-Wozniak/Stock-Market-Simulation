@@ -13,7 +13,7 @@ import stocktradingsimulator.account.model.payload.SellStockRequest;
 import stocktradingsimulator.account.repository.StockInventoryRepository;
 import stocktradingsimulator.account.utils.FindStockInventory;
 import stocktradingsimulator.account.utils.ValidateStockTransaction;
-import stocktradingsimulator.stock.StockService;
+import stocktradingsimulator.stock.service.StockService;
 
 @Service
 @AllArgsConstructor

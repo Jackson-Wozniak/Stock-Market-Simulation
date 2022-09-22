@@ -1,10 +1,13 @@
-package stocktradingsimulator.stock;
+package stocktradingsimulator.stock.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import stocktradingsimulator.stock.model.entity.News;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "stock")
 @Table(name = "stock")
@@ -37,4 +40,8 @@ public class Stock {
 
     @Column(name = "volatile")
     private Boolean volatileStock;
+
+    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<News> newsHistory;
 }

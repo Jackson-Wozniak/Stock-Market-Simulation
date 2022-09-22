@@ -1,12 +1,9 @@
 package stocktradingsimulator.market.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.market.enums.MarketTrajectory;
-import stocktradingsimulator.stock.Stock;
+import stocktradingsimulator.stock.model.entity.Stock;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class MarketTrajectoryUtils {
