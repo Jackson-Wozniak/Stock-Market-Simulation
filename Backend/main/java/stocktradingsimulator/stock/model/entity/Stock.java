@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import stocktradingsimulator.stock.model.entity.News;
 
 import javax.persistence.*;
 import java.util.List;
@@ -41,7 +40,7 @@ public class Stock {
     @Column(name = "volatile")
     private Boolean volatileStock;
 
-    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<News> newsHistory;
 }

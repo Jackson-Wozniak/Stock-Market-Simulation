@@ -5,8 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import stocktradingsimulator.account.model.entity.StockInventory;
+import stocktradingsimulator.account.service.StockInventoryService;
 import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.market.service.MarketService;
+import stocktradingsimulator.stock.service.NewsService;
+import stocktradingsimulator.stock.service.StockService;
 
 import javax.annotation.PostConstruct;
 

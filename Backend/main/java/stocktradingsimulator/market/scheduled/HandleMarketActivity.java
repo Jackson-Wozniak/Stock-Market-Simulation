@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.market.service.MarketService;
+import stocktradingsimulator.market.utils.GetRandomNumber;
 import stocktradingsimulator.market.utils.MarketTrajectoryUtils;
 import stocktradingsimulator.stock.model.entity.Stock;
 import stocktradingsimulator.stock.service.StockService;
@@ -21,6 +22,8 @@ public class HandleMarketActivity {
     private final ChangeStockPrices changeStockPrices;
     @Autowired
     private final MarketService marketService;
+    @Autowired
+    private final RandomNewsEvents randomNewsEvents;
 
     public void updateNewStockPrices(boolean endOfDay){
         List<Stock> stocks = stockService.getAllStocks();
@@ -48,6 +51,16 @@ public class HandleMarketActivity {
         market.setLastMonthAveragePrice(MarketTrajectoryUtils.stockPricesAverage(
                 stockService.getAllStocks()));
         marketService.saveMarketEntity(market);
+    }
+
+    public void createRandomNewsEvents(){
+        if(GetRandomNumber.drawRandomNumberToThirty() == 10){
+            randomNewsEvents.processPositiveNewsEvent(marketService.findMarketEntity().getDate());
+            System.out.println("Positive News");
+        }else if(GetRandomNumber.drawRandomNumberToThirty() == 20){
+            randomNewsEvents.processNegativeNewsEvents(marketService.findMarketEntity().getDate());
+            System.out.println("Negative News");
+        }
     }
 
     private int updateOptimism(Stock stock){

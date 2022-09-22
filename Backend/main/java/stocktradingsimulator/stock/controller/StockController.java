@@ -44,4 +44,9 @@ public class StockController {
     public double getStockPrice(@PathVariable String ticker) throws StockNotFoundException {
         return stockService.getStockPriceWithTickerSymbol(ticker);
     }
+
+    @GetMapping(value = "/random")
+    public Stock getRandomStock() {
+        return stockService.getRandomStock();
+    }
 }

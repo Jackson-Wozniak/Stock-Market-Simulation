@@ -1,17 +1,24 @@
 package stocktradingsimulator.stock.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table
 @NoArgsConstructor
-public class News {
+@Getter
+@Setter
+public class News implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -9,6 +9,7 @@ import stocktradingsimulator.stock.model.entity.Stock;
 import stocktradingsimulator.stock.repository.StockRepository;
 import stocktradingsimulator.stock.utils.DoesStockExist;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,13 @@ public class StockService {
 
     public List<Stock> getAllStocks(){
         return stockRepository.findAll();
+    }
+
+    //this method is used to generate random news events
+    public Stock getRandomStock(){
+        List<Stock> stocks = getAllStocks();
+        Collections.shuffle(stocks);
+        return stocks.get(0);
     }
 
     public List<Stock> getAllStocksByMarketCap(String marketCap){

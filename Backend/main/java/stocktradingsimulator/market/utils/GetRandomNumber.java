@@ -23,4 +23,8 @@ public class GetRandomNumber {
             default -> -1;
         };
     }
+
+    public static int drawRandomNumberToThirty(){
+        return random.nextInt(30);
+    }
 }

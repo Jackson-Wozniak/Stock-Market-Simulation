@@ -6,12 +6,13 @@ import lombok.Setter;
 import stocktradingsimulator.stock.model.entity.News;
 import stocktradingsimulator.stock.model.entity.Stock;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class StockDto {
+public class StockDto implements Serializable {
 
     private String ticker;
     private String companyName;
