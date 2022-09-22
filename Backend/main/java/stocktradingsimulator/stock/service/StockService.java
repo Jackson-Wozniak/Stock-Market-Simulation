@@ -64,7 +64,17 @@ public class StockService {
         stockRepository.save(stock);
     }
 
+    public int findStockRowCount(){
+        return (int) stockRepository.count();
+    }
+
     public void saveDefaultStockToDatabase(List<DefaultStock> defaultStocks){
-        defaultStocks.forEach(stock -> stockRepository.save((Stock) stock));
+        defaultStocks.forEach(stock -> {
+            if(DoesStockExist.stockExistsWithTicker(this, stock.getTicker())){
+                return;
+            }
+            System.out.println(stock.getTicker() + " saved");
+            stockRepository.save((Stock) stock);
+        });
     }
 }

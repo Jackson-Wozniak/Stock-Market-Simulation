@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DefaultStocksList {
 
-    public static final List<DefaultStock> largeCapStocks = List.of(
+    private static final List<DefaultStock> allStocks = List.of(
             new DefaultStock("AMZN", "Amazon", "Technology", "Large", true),
             new DefaultStock("AAPL","Apple","Technology","Large", false),
             new DefaultStock("GOOG","Google","Technology","Large", false),
@@ -25,6 +25,18 @@ public class DefaultStocksList {
             new DefaultStock("Disney", "Walt Disney Co", "Consumer Discretionary", "Large", false),
             new DefaultStock("WMT", "Walmart Inc", "Consumer Staples", "Large", false),
             new DefaultStock("WFC", "Wells Fargo & Co", "Finance", "Large", false),
-            new DefaultStock("SCHW", "Charles Schwab Corporation", "Finance", "Large", false)
+            new DefaultStock("SCHW", "Charles Schwab Corporation", "Finance", "Large", false),
+
+            new DefaultStock("SLAB", "Silicon Laboratories", "Technology", "Mid", false),
+            new DefaultStock("GME", "GameStop Corp", "Technology", "Mid", true),
+            new DefaultStock("OWL", "Big Owl Capital", "Finance", "Mid", false)
     );
+
+    public static int getCountForDefaultStocks(){
+        return allStocks.size();
+    }
+
+    public static List<DefaultStock> getAllDefaultStocks(){
+        return allStocks;
+    }
 }
