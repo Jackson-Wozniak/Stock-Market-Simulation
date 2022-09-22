@@ -29,7 +29,9 @@ public class DefaultStocksList {
 
             new DefaultStock("SLAB", "Silicon Laboratories", "Technology", "Mid", false),
             new DefaultStock("GME", "GameStop Corp", "Technology", "Mid", true),
-            new DefaultStock("OWL", "Big Owl Capital", "Finance", "Mid", false)
+            new DefaultStock("OWL", "Big Owl Capital", "Finance", "Mid", false),
+
+            new DefaultStock("NVAX", "Novavax Inc.", "BioTech", "Small", true)
     );
 
     public static int getCountForDefaultStocks(){

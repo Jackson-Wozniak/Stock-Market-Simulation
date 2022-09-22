@@ -28,6 +28,10 @@ public class HandleMarketActivity {
     public void updateNewStockPrices(boolean endOfDay){
         List<Stock> stocks = stockService.getAllStocks();
         stocks.forEach(stock -> {
+            if(stock.getPrice() < 1){
+                randomNewsEvents.stockBankruptNews(stock, marketService.findMarketEntity().getDate());
+                return;
+            }
             stock.setPrice(changeStockPrices.automaticPriceChange(stock));
             if(endOfDay){
                 stock.setOptimism(updateOptimism(stock));
