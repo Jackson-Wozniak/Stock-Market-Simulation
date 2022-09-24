@@ -43,6 +43,12 @@ public class StockService {
                         .equalsIgnoreCase(sector)).collect(Collectors.toList());
     }
 
+    public List<Stock> getAllStocksByVolatility(boolean volatility){
+        return stockRepository.findAll().stream()
+                .filter(stock -> stock.getVolatileStock() == volatility)
+                .collect(Collectors.toList());
+    }
+
     public Stock getStockByTickerSymbol(String ticker) throws StockNotFoundException {
         return stockRepository.findById(ticker)
                 .orElseThrow(() -> new StockNotFoundException(
