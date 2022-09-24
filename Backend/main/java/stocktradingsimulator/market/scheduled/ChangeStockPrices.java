@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 @Component
 public class ChangeStockPrices {
 
-    private static final DecimalFormat decimalFormat = new DecimalFormat("0.000");
+    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     public double automaticPriceChange(Stock stock){
         return switch (stock.getMarketCap().toLowerCase()){

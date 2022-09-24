@@ -25,6 +25,7 @@ public class DefaultStock extends Stock {
     private Double price;
     private Double lastDayPrice;
     private Integer optimism;
+    private Integer dayStreak;
     private Boolean volatileStock;
 
     public DefaultStock(String ticker,
@@ -40,5 +41,6 @@ public class DefaultStock extends Stock {
         this.price = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
         this.lastDayPrice = 0.0;
         this.optimism = 0;
+        this.dayStreak = 0;
     }
 }

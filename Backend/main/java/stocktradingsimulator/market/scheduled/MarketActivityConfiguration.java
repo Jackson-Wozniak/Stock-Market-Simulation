@@ -1,4 +1,4 @@
-package stocktradingsimulator.market.configuration;
+package stocktradingsimulator.market.scheduled;
 
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import stocktradingsimulator.market.constants.MarketIntervals;
-import stocktradingsimulator.market.scheduled.HandleMarketActivity;
 
 @Configuration
 @EnableScheduling

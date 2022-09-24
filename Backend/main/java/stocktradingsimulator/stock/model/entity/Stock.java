@@ -37,6 +37,9 @@ public class Stock {
     @Column(name = "optimism")
     private Integer optimism;
 
+    @Column(name = "day_streak")
+    private Integer dayStreak;
+
     @Column(name = "volatile")
     private Boolean volatileStock;
 

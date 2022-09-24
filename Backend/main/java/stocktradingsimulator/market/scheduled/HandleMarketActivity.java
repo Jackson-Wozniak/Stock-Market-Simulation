@@ -28,12 +28,15 @@ public class HandleMarketActivity {
     public void updateNewStockPrices(boolean endOfDay){
         List<Stock> stocks = stockService.getAllStocks();
         stocks.forEach(stock -> {
-            if(stock.getPrice() < 1){
-                randomNewsEvents.stockBankruptNews(stock, marketService.findMarketEntity().getDate());
-                return;
-            }
             stock.setPrice(changeStockPrices.automaticPriceChange(stock));
             if(endOfDay){
+                //avoid stocks going to zero with bankruptcy event
+                if(stock.getPrice() < 1){
+                    randomNewsEvents.stockBankruptNews(
+                            stock, marketService.findMarketEntity().getDate());
+                    return;
+                }
+                stock.setDayStreak(updateDayStreak(stock));
                 stock.setOptimism(updateOptimism(stock));
                 stock.setLastDayPrice(stock.getPrice());
             }
@@ -67,11 +70,28 @@ public class HandleMarketActivity {
         }
     }
 
-    private int updateOptimism(Stock stock){
+    private int updateDayStreak(Stock stock){
+        if(stock.getDayStreak() == null) return 0;
         if(stock.getPrice() > stock.getLastDayPrice()){
-            return 1;
+            return stock.getDayStreak() + 1;
         }
         if(stock.getPrice() < stock.getLastDayPrice()){
+            return stock.getDayStreak() - 1;
+        }
+        return stock.getDayStreak();
+    }
+
+    private int updateOptimism(Stock stock){
+        if(stock.getDayStreak() >= 3){
+            if(stock.getDayStreak() >= 7){
+                return 2;
+            }
+            return 1;
+        }
+        if(stock.getDayStreak() <= -3){
+            if(stock.getDayStreak() <= 7){
+                return -2;
+            }
             return -1;
         }
         return 0;
