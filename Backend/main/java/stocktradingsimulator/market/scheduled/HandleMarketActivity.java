@@ -36,8 +36,8 @@ public class HandleMarketActivity {
                             stock, marketService.findMarketEntity().getDate());
                     return;
                 }
-                stock.setDayStreak(updateDayStreak(stock));
-                stock.setOptimism(updateOptimism(stock));
+                stock.setMomentumStreakInDays(updateMomentumStreak(stock));
+                stock.setMomentum(updateMomentum(stock));
                 stock.setLastDayPrice(stock.getPrice());
             }
             stockService.updateStockInDatabase(stock);
@@ -70,26 +70,26 @@ public class HandleMarketActivity {
         }
     }
 
-    private int updateDayStreak(Stock stock){
-        if(stock.getDayStreak() == null) return 0;
+    private int updateMomentumStreak(Stock stock){
+        if(stock.getMomentumStreakInDays() == null) return 0;
         if(stock.getPrice() > stock.getLastDayPrice()){
-            return stock.getDayStreak() + 1;
+            return stock.getMomentumStreakInDays() + 1;
         }
         if(stock.getPrice() < stock.getLastDayPrice()){
-            return stock.getDayStreak() - 1;
+            return stock.getMomentumStreakInDays() - 1;
         }
-        return stock.getDayStreak();
+        return stock.getMomentumStreakInDays();
     }
 
-    private int updateOptimism(Stock stock){
-        if(stock.getDayStreak() >= 3){
-            if(stock.getDayStreak() >= 7){
+    private int updateMomentum(Stock stock){
+        if(stock.getMomentumStreakInDays() >= 3){
+            if(stock.getMomentumStreakInDays() >= 7){
                 return 2;
             }
             return 1;
         }
-        if(stock.getDayStreak() <= -3){
-            if(stock.getDayStreak() <= 7){
+        if(stock.getMomentumStreakInDays() <= -3){
+            if(stock.getMomentumStreakInDays() <= 7){
                 return -2;
             }
             return -1;

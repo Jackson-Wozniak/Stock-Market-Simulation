@@ -31,7 +31,7 @@ public class StockDto implements Serializable {
         this.marketCap = stock.getMarketCap();
         this.price = stock.getPrice();
         this.lastDayPrice = stock.getLastDayPrice();
-        this.optimism = stock.getOptimism();
+        this.optimism = stock.getMomentum();
         this.volatileStock = stock.getVolatileStock();
         this.newsHistory = stock.getNewsHistory();
     }

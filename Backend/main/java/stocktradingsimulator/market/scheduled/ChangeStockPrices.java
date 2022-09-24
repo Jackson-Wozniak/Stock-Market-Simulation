@@ -26,10 +26,10 @@ public class ChangeStockPrices {
             return decimalFormat.format(stock.getPrice() +
                     (stock.getPrice() * GetRandomNumber.getRandomNumberForStocks(marketCap)) +
                     (stock.getPrice() * GetRandomNumber.getRandomNumberForStocks(marketCap)) +
-                    (stock.getOptimism() * GetRandomNumber.getRandomPositiveNumberForStocks(marketCap)));
+                    (stock.getMomentum() * GetRandomNumber.getRandomPositiveNumberForStocks(marketCap)));
         }
         return decimalFormat.format(stock.getPrice() +
                 (stock.getPrice() * GetRandomNumber.getRandomNumberForStocks(marketCap)) +
-                (stock.getOptimism() * GetRandomNumber.getRandomPositiveNumberForStocks(marketCap)));
+                (stock.getMomentum() * GetRandomNumber.getRandomPositiveNumberForStocks(marketCap)));
     }
 }

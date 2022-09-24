@@ -34,11 +34,11 @@ public class Stock {
     @Column(name = "last_day_price")
     private Double lastDayPrice;
 
-    @Column(name = "optimism")
-    private Integer optimism;
+    @Column(name = "momentum")
+    private Integer momentum;
 
-    @Column(name = "day_streak")
-    private Integer dayStreak;
+    @Column(name = "momentum_streak")
+    private Integer momentumStreakInDays;
 
     @Column(name = "volatile")
     private Boolean volatileStock;

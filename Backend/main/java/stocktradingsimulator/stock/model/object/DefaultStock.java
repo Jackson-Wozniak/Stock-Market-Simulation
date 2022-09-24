@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 
 /*
     Entity To save Default Stocks to database
-    Sets prices and optimism to default values
+    Sets prices and momentum to default values
  */
 @Entity
 @Getter
@@ -24,8 +24,8 @@ public class DefaultStock extends Stock {
     private String marketCap;
     private Double price;
     private Double lastDayPrice;
-    private Integer optimism;
-    private Integer dayStreak;
+    private Integer momentum;
+    private Integer momentumStreakInDays;
     private Boolean volatileStock;
 
     public DefaultStock(String ticker,
@@ -40,7 +40,7 @@ public class DefaultStock extends Stock {
         this.volatileStock = volatileStock;
         this.price = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
         this.lastDayPrice = 0.0;
-        this.optimism = 0;
-        this.dayStreak = 0;
+        this.momentum = 0;
+        this.momentumStreakInDays = 0;
     }
 }
