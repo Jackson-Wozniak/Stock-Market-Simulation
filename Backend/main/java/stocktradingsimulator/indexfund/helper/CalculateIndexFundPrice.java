@@ -1,4 +1,4 @@
-package stocktradingsimulator.indexfund.utils;
+package stocktradingsimulator.indexfund.helper;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

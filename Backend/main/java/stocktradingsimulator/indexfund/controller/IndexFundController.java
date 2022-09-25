@@ -11,7 +11,7 @@ import stocktradingsimulator.indexfund.model.subclass.MarketCapIndexFund;
 import stocktradingsimulator.indexfund.model.subclass.SectorIndexFund;
 import stocktradingsimulator.indexfund.model.subclass.TotalMarketIndexFund;
 import stocktradingsimulator.indexfund.model.subclass.VolatilityIndexFund;
-import stocktradingsimulator.indexfund.utils.CalculateIndexFundPrice;
+import stocktradingsimulator.indexfund.helper.CalculateIndexFundPrice;
 
 @RestController
 @RequestMapping(value = "/api/v1/funds")
