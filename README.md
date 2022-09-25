@@ -1,8 +1,8 @@
-# StockMarketSimulator
+# Stock Market Simulator
 
 A server side implementation for a stock market and stock trading simulator
 
-## Table of Contents
+# Table of Contents
 
 1. [Features](#Features)
 
@@ -15,9 +15,10 @@ A server side implementation for a stock market and stock trading simulator
 5. [Index Funds](#Index-Funds)
 
 6. [Accounts](#Accounts)
----
 
-## Features <a name="Features"></a>
+<br/>
+
+# Features <a name="Features"></a>
 * User accounts can be used to view current stock prices and trade stocks
 * Individual stock information can be viewed in JSON format
 * Stock Prices change dynamically on a time interval. Price changes are largely random but are affected by certain stock attributes, such as market cap
@@ -25,20 +26,20 @@ and optimism
 
 Default stocks are based on real world companies, however their prices do not reflect real world data
 
----
+<br/>
 
-## Technologies <a name="Technologies"></a>
+# Technologies <a name="Technologies"></a>
 * Java Spring Boot
 * Spring Data JPA
 * MySQL
 * Lombok
 * JUNIT
 
----
+<br/>
 
-## Overview
+# API Overview
 
-### Market <a name="Market"></a>
+## Market <a name="Market"></a>
 
 * The market date is tracked on intervals that can be altered. The default "day" is 24 intervals of 10 seconds, and 30 "days" is a month
 * The date is formatted as month/day/year
@@ -46,7 +47,7 @@ Default stocks are based on real world companies, however their prices do not re
 * There are 3 market types; Bear, Bull and Normal. Bear markets occur if the average stock price falls 10% in a month, while 
 bull markets happen if prices rise 10% monthly. Normal market conditions cover all scenarios in between
 
-#### Market Endpoints
+### Market Endpoints
 
 * Market Conditions: GET | http://localhost:8080/api/v1/market
 ```JSON
@@ -57,9 +58,10 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
   "marketTrajectory" : "NORMAL"
 }
 ```
----
 
-### Stocks <a name="Stocks"></a>
+<br/>
+
+## Stocks <a name="Stocks"></a>
 
 * Stock prices change on an interval (10 seconds)
 * Stock prices change based on three factors: market cap, momentum, and volatility
@@ -67,7 +69,7 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
 * Momentum: When stock prices rise for 3 days, they experience positive momentum, while they experience negative momentum if they fall for 3 days
 * Volatility: Each stock is judged on whether it is volatile or not. This is an unchangeable boolean value, and is based on the nature of the real world company. Volatile stocks receive a slight increase in movement each time their prices change
 
-#### Stock Endpoints
+### Stock Endpoints
 
 Note: {___} in url represents path variable
 
@@ -245,14 +247,14 @@ The data below doesn't show all stocks, but shows the general format
 } ]
 ```
 
----
+<br/>
 
-### Index Funds <a name="Index-Funds"></a>
+## Index Funds <a name="Index-Funds"></a>
  
 * Index funds track the average price of a specific category of stocks
 * These cannot be traded, but only serve to estimate the total market trajectory
 
-#### Index Fund Endpoints
+### Index Fund Endpoints
 
 Note: {___} in url represents path variable
 
@@ -300,7 +302,10 @@ Note: {___} in url represents path variable
   "volatility" : true
 }
 ```
-### Accounts <a name="Accounts"></a>
+
+<br/>
+
+## Accounts <a name="Accounts"></a>
 
 * Get Account By Name : GET | http://localhost:8080/api/v1/account/get/{username}
 
