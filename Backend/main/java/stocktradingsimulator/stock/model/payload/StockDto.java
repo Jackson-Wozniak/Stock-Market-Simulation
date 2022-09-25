@@ -3,6 +3,7 @@ package stocktradingsimulator.stock.model.payload;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import stocktradingsimulator.stock.enums.MarketCap;
 import stocktradingsimulator.stock.model.entity.News;
 import stocktradingsimulator.stock.model.entity.Stock;
 
@@ -17,7 +18,7 @@ public class StockDto implements Serializable {
     private String ticker;
     private String companyName;
     private String sector;
-    private String marketCap;
+    private MarketCap marketCap;
     private Double price;
     private Double lastDayPrice;
     private Integer optimism;

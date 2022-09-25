@@ -3,7 +3,9 @@ package stocktradingsimulator.stock.model.object;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.stock.defaults.DefaultStockPrices;
+import stocktradingsimulator.stock.enums.MarketCap;
 import stocktradingsimulator.stock.model.entity.Stock;
 
 import javax.persistence.Entity;
@@ -21,7 +23,7 @@ public class DefaultStock extends Stock {
     private String ticker;
     private String companyName;
     private String sector;
-    private String marketCap;
+    private MarketCap marketCap;
     private Double price;
     private Double lastDayPrice;
     private Integer momentum;
@@ -31,7 +33,7 @@ public class DefaultStock extends Stock {
     public DefaultStock(String ticker,
                  String companyName,
                  String sector,
-                 String marketCap,
+                 MarketCap marketCap,
                  boolean volatileStock){
         this.ticker = ticker;
         this.companyName = companyName;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import stocktradingsimulator.stock.enums.MarketCap;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Stock {
     private String sector;
 
     @Column(name = "cap")
-    private String marketCap;
+    private MarketCap marketCap;
 
     @Column(name = "price")
     private Double price;
@@ -46,4 +47,18 @@ public class Stock {
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<News> newsHistory;
+
+    public Stock(
+            String ticker,
+            String companyName,
+            String sector,
+            MarketCap marketCap,
+            double price
+    ){
+        this.ticker = ticker;
+        this.companyName = companyName;
+        this.sector = sector;
+        this.marketCap = marketCap;
+        this.price = price;
+    }
 }

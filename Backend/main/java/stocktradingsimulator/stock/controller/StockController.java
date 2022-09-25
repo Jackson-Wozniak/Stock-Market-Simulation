@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import stocktradingsimulator.indexfund.utils.Capitalize;
+import stocktradingsimulator.market.entity.Market;
+import stocktradingsimulator.stock.enums.MarketCap;
 import stocktradingsimulator.stock.model.entity.Stock;
 import stocktradingsimulator.stock.exception.StockNotFoundException;
 import stocktradingsimulator.stock.service.StockService;
@@ -32,7 +35,8 @@ public class StockController {
 
     @GetMapping(value = "/marketCap/{marketCap}")
     public List<Stock> getAllStocksByMarketCap(@PathVariable String marketCap){
-        return stockService.getAllStocksByMarketCap(marketCap);
+        MarketCap cap = MarketCap.valueOf(Capitalize.capitalize(marketCap));
+        return stockService.getAllStocksByMarketCap(cap);
     }
 
     @GetMapping(value = "/sector/{sector}")

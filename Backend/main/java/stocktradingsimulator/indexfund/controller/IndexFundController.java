@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import stocktradingsimulator.indexfund.exception.IndexFundException;
 import stocktradingsimulator.indexfund.model.*;
-import stocktradingsimulator.indexfund.model.subclass.MarketCapIndexFund;
-import stocktradingsimulator.indexfund.model.subclass.SectorIndexFund;
-import stocktradingsimulator.indexfund.model.subclass.TotalMarketIndexFund;
-import stocktradingsimulator.indexfund.model.subclass.VolatilityIndexFund;
+import stocktradingsimulator.indexfund.model.subclass.*;
 import stocktradingsimulator.indexfund.helper.CalculateIndexFundPrice;
+import stocktradingsimulator.indexfund.utils.Capitalize;
+import stocktradingsimulator.stock.enums.MarketCap;
 
 @RestController
 @RequestMapping(value = "/api/v1/funds")
@@ -28,16 +27,17 @@ public class IndexFundController {
 
     @RequestMapping(value = "/cap/{marketCap}")
     public IndexFund getMarketCapFund(@PathVariable String marketCap){
-        switch (marketCap.toLowerCase()){
-            case "large":
-            case "mid":
-            case "small":
+        MarketCap enumMarketCap = MarketCap.valueOf(Capitalize.capitalize(marketCap));
+        switch (enumMarketCap){
+            case Large:
+            case Mid:
+            case Small:
                 break;
             default :
                 throw new IndexFundException();
         }
         return new MarketCapIndexFund(
-                marketCap ,calculateIndexFundPrice.findPriceOfMarketCapFund(marketCap));
+                marketCap ,calculateIndexFundPrice.findPriceOfMarketCapFund(enumMarketCap));
     }
 
     @RequestMapping(value = "/sector/{sector}")
@@ -54,7 +54,7 @@ public class IndexFundController {
 
     @RequestMapping(value = "/stable")
     public IndexFund getStableIndexFund(){
-        return new VolatilityIndexFund(
+        return new StableIndexFund(
                 calculateIndexFundPrice.findPriceOfVolatileFunds(false));
     }
 }
