@@ -1,7 +1,7 @@
 package stocktradingsimulator.market.utils;
 
 import org.junit.jupiter.api.Test;
-import stocktradingsimulator.stock.enums.MarketCap;
+import stocktradingsimulator.stocks.stock.enums.MarketCap;
 
 import static org.junit.jupiter.api.Assertions.*;
 

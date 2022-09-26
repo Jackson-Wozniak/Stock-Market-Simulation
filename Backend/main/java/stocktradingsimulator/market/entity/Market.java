@@ -1,5 +1,6 @@
 package stocktradingsimulator.market.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import stocktradingsimulator.market.enums.MarketTrajectory;
 import stocktradingsimulator.market.utils.DateConversion;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 public class Market {
 
     @Id
+    @JsonIgnore
     private final Integer id = 1;
 
     //formatted as month/day/year, starts at 1 for each

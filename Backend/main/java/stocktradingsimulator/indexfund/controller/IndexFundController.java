@@ -10,7 +10,7 @@ import stocktradingsimulator.indexfund.model.*;
 import stocktradingsimulator.indexfund.model.subclass.*;
 import stocktradingsimulator.indexfund.helper.CalculateIndexFundPrice;
 import stocktradingsimulator.indexfund.utils.Capitalize;
-import stocktradingsimulator.stock.enums.MarketCap;
+import stocktradingsimulator.stocks.stock.enums.MarketCap;
 
 @RestController
 @RequestMapping(value = "/api/v1/funds")
@@ -27,17 +27,13 @@ public class IndexFundController {
 
     @RequestMapping(value = "/cap/{marketCap}")
     public IndexFund getMarketCapFund(@PathVariable String marketCap){
-        MarketCap enumMarketCap = MarketCap.valueOf(Capitalize.capitalize(marketCap));
-        switch (enumMarketCap){
-            case Large:
-            case Mid:
-            case Small:
-                break;
-            default :
-                throw new IndexFundException();
+        try{
+            MarketCap enumMarketCap = MarketCap.valueOf(Capitalize.capitalize(marketCap));
+            return new MarketCapIndexFund(
+                    marketCap ,calculateIndexFundPrice.findPriceOfMarketCapFund(enumMarketCap));
+        }catch (EnumConstantNotPresentException | IllegalArgumentException ex){
+            throw new IndexFundException();
         }
-        return new MarketCapIndexFund(
-                marketCap ,calculateIndexFundPrice.findPriceOfMarketCapFund(enumMarketCap));
     }
 
     @RequestMapping(value = "/sector/{sector}")

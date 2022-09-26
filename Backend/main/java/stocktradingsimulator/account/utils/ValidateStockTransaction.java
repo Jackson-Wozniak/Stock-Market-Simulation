@@ -6,9 +6,9 @@ import stocktradingsimulator.account.model.entity.Account;
 import stocktradingsimulator.account.model.entity.StockInventory;
 import stocktradingsimulator.account.model.payload.BuyStockRequest;
 import stocktradingsimulator.account.model.payload.SellStockRequest;
-import stocktradingsimulator.stock.model.entity.Stock;
-import stocktradingsimulator.stock.exception.StockNotFoundException;
-import stocktradingsimulator.stock.service.StockService;
+import stocktradingsimulator.stocks.stock.model.entity.Stock;
+import stocktradingsimulator.stocks.stock.exception.StockNotFoundException;
+import stocktradingsimulator.stocks.stock.service.StockService;
 
 @Component
 @AllArgsConstructor

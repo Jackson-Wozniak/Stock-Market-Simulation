@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import stocktradingsimulator.market.utils.MarketTrajectoryUtils;
-import stocktradingsimulator.stock.enums.MarketCap;
-import stocktradingsimulator.stock.service.StockService;
+import stocktradingsimulator.stocks.stock.enums.MarketCap;
+import stocktradingsimulator.stocks.stock.service.StockService;
 
 @Component
 @AllArgsConstructor

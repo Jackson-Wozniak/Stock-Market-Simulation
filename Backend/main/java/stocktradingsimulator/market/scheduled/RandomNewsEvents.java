@@ -3,12 +3,11 @@ package stocktradingsimulator.market.scheduled;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import stocktradingsimulator.market.entity.Market;
-import stocktradingsimulator.stock.defaults.DefaultNewsEvents;
-import stocktradingsimulator.stock.defaults.DefaultStockPrices;
-import stocktradingsimulator.stock.model.entity.Stock;
-import stocktradingsimulator.stock.service.NewsService;
-import stocktradingsimulator.stock.service.StockService;
+import stocktradingsimulator.stocks.news.DefaultNewsEvents;
+import stocktradingsimulator.stocks.stock.defaults.DefaultStockPrices;
+import stocktradingsimulator.stocks.stock.model.entity.Stock;
+import stocktradingsimulator.stocks.news.NewsService;
+import stocktradingsimulator.stocks.stock.service.StockService;
 
 @Component
 @AllArgsConstructor

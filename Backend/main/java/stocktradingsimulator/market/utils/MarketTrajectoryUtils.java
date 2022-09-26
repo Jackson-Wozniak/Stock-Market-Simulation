@@ -2,7 +2,7 @@ package stocktradingsimulator.market.utils;
 
 import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.market.enums.MarketTrajectory;
-import stocktradingsimulator.stock.model.entity.Stock;
+import stocktradingsimulator.stocks.stock.model.entity.Stock;
 
 import java.util.List;
 

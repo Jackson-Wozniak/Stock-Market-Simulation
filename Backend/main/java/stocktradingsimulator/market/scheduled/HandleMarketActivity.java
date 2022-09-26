@@ -7,8 +7,9 @@ import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.market.service.MarketService;
 import stocktradingsimulator.market.utils.GetRandomNumber;
 import stocktradingsimulator.market.utils.MarketTrajectoryUtils;
-import stocktradingsimulator.stock.model.entity.Stock;
-import stocktradingsimulator.stock.service.StockService;
+import stocktradingsimulator.stocks.earnings.ReleaseEarningsReport;
+import stocktradingsimulator.stocks.stock.model.entity.Stock;
+import stocktradingsimulator.stocks.stock.service.StockService;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class HandleMarketActivity {
     private final MarketService marketService;
     @Autowired
     private final RandomNewsEvents randomNewsEvents;
+    @Autowired
+    private final ReleaseEarningsReport releaseEarningsReport;
 
     public void updateNewStockPrices(boolean endOfDay){
         List<Stock> stocks = stockService.getAllStocks();
@@ -61,10 +64,11 @@ public class HandleMarketActivity {
     }
 
     public void createRandomNewsEvents(){
-        if(GetRandomNumber.drawRandomNumberToThirty() == 10){
+        int randomNumber = GetRandomNumber.drawRandomNumberToThirty();
+        if(randomNumber == 10){
             randomNewsEvents.processPositiveNewsEvent(marketService.findMarketEntity().getDate());
             System.out.println("Positive News");
-        }else if(GetRandomNumber.drawRandomNumberToThirty() == 20){
+        }else if(randomNumber == 20){
             randomNewsEvents.processNegativeNewsEvents(marketService.findMarketEntity().getDate());
             System.out.println("Negative News");
         }
@@ -72,28 +76,40 @@ public class HandleMarketActivity {
 
     private int updateMomentumStreak(Stock stock){
         if(stock.getMomentumStreakInDays() == null) return 0;
+
         if(stock.getPrice() > stock.getLastDayPrice()){
             return stock.getMomentumStreakInDays() + 1;
         }
+
         if(stock.getPrice() < stock.getLastDayPrice()){
             return stock.getMomentumStreakInDays() - 1;
         }
+
         return stock.getMomentumStreakInDays();
     }
 
     private int updateMomentum(Stock stock){
+
         if(stock.getMomentumStreakInDays() >= 3){
             if(stock.getMomentumStreakInDays() >= 7){
                 return 2;
             }
             return 1;
         }
+
         if(stock.getMomentumStreakInDays() <= -3){
             if(stock.getMomentumStreakInDays() <= 7){
                 return -2;
             }
             return -1;
         }
+
         return 0;
+    }
+
+    private boolean timeForQuarterlyEarnings(){
+       String[] marketDate = marketService.findMarketEntity().getDate().split("/");
+       //earnings report released on first day of 3rd, 6th, 9th and 12th month
+       return Integer.parseInt(marketDate[0]) % 3 == 0 && Integer.parseInt(marketDate[1]) == 1;
     }
 }

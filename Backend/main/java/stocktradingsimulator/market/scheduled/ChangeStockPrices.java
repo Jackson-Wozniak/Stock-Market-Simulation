@@ -2,8 +2,8 @@ package stocktradingsimulator.market.scheduled;
 
 import org.springframework.stereotype.Component;
 import stocktradingsimulator.market.utils.GetRandomNumber;
-import stocktradingsimulator.stock.enums.MarketCap;
-import stocktradingsimulator.stock.model.entity.Stock;
+import stocktradingsimulator.stocks.stock.enums.MarketCap;
+import stocktradingsimulator.stocks.stock.model.entity.Stock;
 
 import java.text.DecimalFormat;
 

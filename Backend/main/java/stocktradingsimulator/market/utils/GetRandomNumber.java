@@ -1,6 +1,6 @@
 package stocktradingsimulator.market.utils;
 
-import stocktradingsimulator.stock.enums.MarketCap;
+import stocktradingsimulator.stocks.stock.enums.MarketCap;
 
 import java.util.Random;
 
