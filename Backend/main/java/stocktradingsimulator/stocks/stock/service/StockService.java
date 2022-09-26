@@ -51,7 +51,7 @@ public class StockService {
     }
 
     public Stock getStockByTickerSymbol(String ticker) throws StockNotFoundException {
-        return stockRepository.findById(ticker)
+        return stockRepository.findById(ticker.toUpperCase())
                 .orElseThrow(() -> new StockNotFoundException(
                         "No stock with ticker symbol " + ticker + " exists"));
     }

@@ -18,9 +18,9 @@ public class EarningsService {
         return earningsRepository.findAll();
     }
 
-    public List<EarningsReport> findAllEarningsReportsByTicker(String ticker){
+    public List<EarningsReport> findAllEarningsByDate(String date){
         return earningsRepository.findAll().stream()
-                .filter(earnings -> earnings.getStock().getTicker().equalsIgnoreCase(ticker))
+                .filter(earnings -> earnings.getDateOfRelease().equalsIgnoreCase(date))
                 .collect(Collectors.toList());
     }
 

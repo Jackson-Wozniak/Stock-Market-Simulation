@@ -26,4 +26,18 @@ public class DateConversion {
     public static String formatDateIntegersAsString(int month, int day, int year){
         return month + "/" + day + "/" + year;
     }
+
+    public static boolean dateIsFormattedCorrectly(String date){
+        String[] dateArray = date.split("/");
+        int month, day;
+        try{
+            month = Integer.parseInt(dateArray[0]);
+            day = Integer.parseInt(dateArray[1]);
+            Integer.parseInt(dateArray[2]);
+        }catch(Exception ex){
+            return false;
+        }
+
+        return day <= 30 && month <= 12;
+    }
 }
