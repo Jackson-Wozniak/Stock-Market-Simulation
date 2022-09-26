@@ -1,6 +1,12 @@
 # Stock Market Simulator
 
-A server side implementation for a stock market and stock trading simulator
+A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
+with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
+
+All stock prices, news, earnings etc. are completely simulated and are not 
+reflective of real world market activity. 
+
+Default stock data, such as the name, ticker symbol, market cap and sector are based on real world companies
 
 # Table of Contents
 
