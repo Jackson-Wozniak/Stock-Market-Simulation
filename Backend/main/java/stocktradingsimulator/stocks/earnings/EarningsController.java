@@ -20,14 +20,6 @@ public class EarningsController {
     @Autowired
     private final MarketService marketService;
     @Autowired
-    private final ReleaseEarningsReport releaseEarningsReport;
-    @Autowired
     private final EarningsService earningsService;
 
-    @RequestMapping
-    public List<EarningsReport> random(){
-        releaseEarningsReport.handleQuarterlyEarningsReports(
-                stockService.getAllStocks(), marketService.findMarketEntity().getDate());
-        return earningsService.findAllEarningsReports();
-    }
 }

@@ -28,7 +28,18 @@ public class HandleMarketActivity {
     @Autowired
     private final ReleaseEarningsReport releaseEarningsReport;
 
-    public void updateNewStockPrices(boolean endOfDay){
+    public String dailyMarketActivity(){
+        updateNewStockInformation(true);
+        createRandomNewsEvents();
+        String marketDate = incrementMarketDay();
+        if(timeForQuarterlyEarnings(marketDate)){
+            releaseEarningsReport.handleQuarterlyEarningsReports(
+                    stockService.getAllStocks(), marketDate);
+        }
+        return marketDate;
+    }
+
+    public void updateNewStockInformation(boolean endOfDay){
         List<Stock> stocks = stockService.getAllStocks();
         stocks.forEach(stock -> {
             stock.setPrice(changeStockPrices.automaticPriceChange(stock));
@@ -39,15 +50,15 @@ public class HandleMarketActivity {
                             stock, marketService.findMarketEntity().getDate());
                     return;
                 }
-                stock.setMomentumStreakInDays(updateMomentumStreak(stock));
-                stock.setMomentum(updateMomentum(stock));
+                stock.updateMomentumStreak();
+                stock.updateMomentum();
                 stock.setLastDayPrice(stock.getPrice());
             }
             stockService.updateStockInDatabase(stock);
         });
     }
 
-    public String incrementMarketDay(){
+    private String incrementMarketDay(){
         Market market = marketService.findMarketEntity();
         market.incrementDay();
         marketService.saveMarketEntity(market);
@@ -63,7 +74,7 @@ public class HandleMarketActivity {
         marketService.saveMarketEntity(market);
     }
 
-    public void createRandomNewsEvents(){
+    private void createRandomNewsEvents(){
         int randomNumber = GetRandomNumber.drawRandomNumberToThirty();
         if(randomNumber == 10){
             randomNewsEvents.processPositiveNewsEvent(marketService.findMarketEntity().getDate());
@@ -74,42 +85,9 @@ public class HandleMarketActivity {
         }
     }
 
-    private int updateMomentumStreak(Stock stock){
-        if(stock.getMomentumStreakInDays() == null) return 0;
-
-        if(stock.getPrice() > stock.getLastDayPrice()){
-            return stock.getMomentumStreakInDays() + 1;
-        }
-
-        if(stock.getPrice() < stock.getLastDayPrice()){
-            return stock.getMomentumStreakInDays() - 1;
-        }
-
-        return stock.getMomentumStreakInDays();
-    }
-
-    private int updateMomentum(Stock stock){
-
-        if(stock.getMomentumStreakInDays() >= 3){
-            if(stock.getMomentumStreakInDays() >= 7){
-                return 2;
-            }
-            return 1;
-        }
-
-        if(stock.getMomentumStreakInDays() <= -3){
-            if(stock.getMomentumStreakInDays() <= 7){
-                return -2;
-            }
-            return -1;
-        }
-
-        return 0;
-    }
-
-    private boolean timeForQuarterlyEarnings(){
-       String[] marketDate = marketService.findMarketEntity().getDate().split("/");
+    private boolean timeForQuarterlyEarnings(String marketDate){
+       String[] dateArray = marketDate.split("/");
        //earnings report released on first day of 3rd, 6th, 9th and 12th month
-       return Integer.parseInt(marketDate[0]) % 3 == 0 && Integer.parseInt(marketDate[1]) == 1;
+       return Integer.parseInt(dateArray[0]) % 3 == 0 && Integer.parseInt(dateArray[1]) == 1;
     }
 }

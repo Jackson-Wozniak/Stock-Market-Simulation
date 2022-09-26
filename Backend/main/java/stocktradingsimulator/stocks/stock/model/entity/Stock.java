@@ -67,4 +67,40 @@ public class Stock {
         this.marketCap = marketCap;
         this.price = price;
     }
+
+    public void updateMomentum(){
+        int momentumStreak = getMomentumStreakInDays();
+        if(momentumStreak >= 7){
+            setMomentum(2);
+            return;
+        }
+        if(momentumStreak >= 3){
+            setMomentum(1);
+            return;
+        }
+        if(momentumStreak <= -7){
+            setMomentum(-2);
+            return;
+        }
+        if(momentumStreak <= -3){
+            setMomentum(-1);
+            return;
+        }
+        setMomentum(0);
+    }
+
+    public void updateMomentumStreak(){
+        if(getMomentumStreakInDays() == null){
+            setMomentumStreakInDays(0);
+            return;
+        }
+        if(getPrice() > getLastDayPrice()){
+            setMomentumStreakInDays(getMomentumStreakInDays() + 1);
+            return;
+        }
+        if(getPrice() < getLastDayPrice()){
+            setMomentumStreakInDays(getMomentumStreakInDays() - 1);
+        }
+    }
+
 }
