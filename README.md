@@ -12,11 +12,16 @@ A server side implementation for a stock market and stock trading simulator
 
 4. [Stocks](#Stocks)
 
-5. [Index Funds](#Index-Funds)
+5. [Stock News](#Stock-News)
 
-6. [Accounts](#Accounts)
+6. [Stock Earnings Reports](#Stock-Earnings)
 
-<br/>
+7. [Index Funds](#Index-Funds)
+
+8. [Accounts](#Accounts)
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 # Features <a name="Features"></a>
 * User accounts can be used to view current stock prices and trade stocks
@@ -26,7 +31,8 @@ and optimism
 
 Default stocks are based on real world companies, however their prices do not reflect real world data
 
-<br/>
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 # Technologies <a name="Technologies"></a>
 * Java Spring Boot
@@ -59,7 +65,8 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
 }
 ```
 
-<br/>
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 ## Stocks <a name="Stocks"></a>
 
@@ -247,7 +254,116 @@ The data below doesn't show all stocks, but shows the general format
 } ]
 ```
 
-<br/>
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+## Stock News <a name="Stock-News"></a>
+
+* At the end of each day, there is a chance that a specific stock will release a news story, which will have a large effect on their price
+* Positive news, such as buyouts, will increase the stocks by around price 10%
+* Negative news, such as lawsuits or management shakeups will decrease stock price by around 10%
+* Bankruptcies will occur if a stock price dips below $1, where a buyout will occur and the stocks price will reset back to the default
+
+### News Endpoints
+
+Note: {___} in url represents path variable
+
+* All News On The Market: GET | http://localhost:8080/api/v1/news/all
+```JSON
+[ {
+  "event" : "Charles Schwab Corporation announces buyout of small Finance company. There price soared as a result",
+  "dateReleased" : "1/2/1"
+}, {
+  "event" : "Lawsuit announced against GameStop today. Investigations are ongoing.",
+  "dateReleased" : "2/15/1"
+} ]
+```
+
+* All News On A Specific Stock: GET | http://localhost:8080/api/v1/news/{ticker}
+```JSON
+[ {
+  "event" : "Charles Schwab Corporation announces buyout of small Finance company. There price soared as a result",
+  "dateReleased" : "1/2/1"
+} ]
+```
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+## Stock Earnings Reports <a name="Stock-Earnings"></a>
+
+* Stocks release earnings reports on the first day of every 3rd month (3rd, 6th, 9th, 12th)
+* Earnings reports effect stock prices and optimism, and are also affected by previous optimism
+
+### Earnings Reports Endpoints
+
+Note: {___} in url represents path variable
+
+* All Earnings Report History: GET | http://http://localhost:8080/api/v1/earnings/all
+```JSON
+[ {
+  "estimatedEPS" : 2.03,
+  "actualEPS" : 3.3,
+  "reportMessage" : "Date: 1/1/1. Apple announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 3.3 exceeded expectations of 2.03 EPS.",
+  "dateOfRelease" : "3/1/1"
+}, {
+  "estimatedEPS" : 2.84,
+  "actualEPS" : 4.16,
+  "reportMessage" : "Date: 1/1/1. Amazon announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.16 exceeded expectations of 2.84 EPS.",
+  "dateOfRelease" : "6/1/1"
+}, {
+  "estimatedEPS" : 2.68,
+  "actualEPS" : 4.06,
+  "reportMessage" : "Date: 1/1/1. Berkshire Hathaway announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.06 exceeded expectations of 2.68 EPS.",
+  "dateOfRelease" : "3/1/1"
+}, {
+  "estimatedEPS" : 2.72,
+  "actualEPS" : 3.09,
+  "reportMessage" : "Date: 1/1/1. Costco Wholesale announces stable profits in new earnings report today. Their EPS of 3.09 fell in line with expectations of 2.72 EPS.",
+  "dateOfRelease" : "12/1/1"
+}]
+```
+
+* All Earnings Report History Of A Specific Stock: GET | http://http://localhost:8080/api/v1/earnings/stock/{ticker}
+```JSON
+[ {
+  "estimatedEPS" : 2.84,
+  "actualEPS" : 4.16,
+  "reportMessage" : "Date: 1/1/1. Amazon announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.16 exceeded expectations of 2.84 EPS.",
+  "dateOfRelease" : "3/1/1"
+}, {
+  "estimatedEPS" : 2.72,
+  "actualEPS" : 3.09,
+  "reportMessage" : "Date: 1/1/1. Amazon announces stable profits in new earnings report today. Their EPS of 3.09 fell in line with expectations of 2.72 EPS.",
+  "dateOfRelease" : "6/1/1"
+} ]
+```
+
+* All Earnings Report History On A Date: GET | http://http://localhost:8080/api/v1/earnings/date/{date}
+Date is formatted as month_day_year and will return an error if incorrectly formatted
+```JSON
+[ {
+  "estimatedEPS" : 2.03,
+  "actualEPS" : 3.3,
+  "reportMessage" : "Date: 1/1/1. Apple announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 3.3 exceeded expectations of 2.03 EPS.",
+  "dateOfRelease" : "3/1/1"
+}, {
+  "estimatedEPS" : 2.84,
+  "actualEPS" : 4.16,
+  "reportMessage" : "Date: 1/1/1. Amazon announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.16 exceeded expectations of 2.84 EPS.",
+  "dateOfRelease" : "3/1/1"
+}, {
+  "estimatedEPS" : 2.68,
+  "actualEPS" : 4.06,
+  "reportMessage" : "Date: 1/1/1. Berkshire Hathaway announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.06 exceeded expectations of 2.68 EPS.",
+  "dateOfRelease" : "3/1/1"
+} ]
+```
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 
 ## Index Funds <a name="Index-Funds"></a>
  
@@ -303,7 +419,8 @@ Note: {___} in url represents path variable
 }
 ```
 
-<br/>
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 ## Accounts <a name="Accounts"></a>
 
