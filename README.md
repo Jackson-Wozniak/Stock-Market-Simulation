@@ -61,7 +61,10 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
 
 ### Market Endpoints
 
-* Market Conditions: GET | http://localhost:8080/api/v1/market
+<details>
+  <summary>Market Conditions: GET | http://localhost:8080/api/v1/market</summary>
+  <p>
+    
 ```JSON
 {
   "id" : 1,
@@ -70,7 +73,9 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
   "marketTrajectory" : "NORMAL"
 }
 ```
-
+  </p>
+  
+</details>
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -86,8 +91,10 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
 
 Note: {___} in url represents path variable
 
-* Specific Stock By Name: GET | http://localhost:8080/api/v1/stocks/{ticker}
-
+<details>
+<summary>Specific Stock By Name: GET | http://localhost:8080/api/v1/stocks/{ticker}</summary>
+  <p>
+    
 ```JSON
 {
   "ticker" : "AAPL",
@@ -100,18 +107,28 @@ Note: {___} in url represents path variable
   "volatileStock" : false
 }
 ```
+    
+  </p>
+</details>
 
-* Specific Stock Price: GET | http://localhost:8080/api/v1/stocks/price/{ticker}
-
+<details>
+  <summary>Specific Stock Price: GET | http://localhost:8080/api/v1/stocks/price/{ticker}</summary>
+  <p>
+    
 ```JSON
 {
   104.36
 }
 ```
-
-* All Stocks: GET | http://localhost:8080/api/v1/stocks/all
+  
+  </p>
+</details>
+  
+<details>  
+  <summary>All Stocks: GET | http://localhost:8080/api/v1/stocks/all</summary>
 The data below doesn't show all stocks, but shows the general format
-
+  <p>
+  
 ```JSON
 [ {
   "ticker" : "AAPL",
@@ -149,7 +166,12 @@ The data below doesn't show all stocks, but shows the general format
 }]
 ```
 
-* Stocks By Sector: GET | http://localhost:8080/api/v1/stocks/sector/{sector}
+  </p>
+</details>  
+
+<details>
+  <summary>Stocks By Sector: GET | http://localhost:8080/api/v1/stocks/sector/{sector}</summary>
+  <p>
 
 ```JSON
 [ {
@@ -221,7 +243,12 @@ The data below doesn't show all stocks, but shows the general format
 } ]
 ```
 
-* Stocks By Market Cap: GET | http://localhost:8080/api/v1/stocks/marketCap/{marketCap}
+  </p>
+</details>
+
+<details>
+  <summary>Stocks By Market Cap: GET | http://localhost:8080/api/v1/stocks/marketCap/{marketCap}</summary>
+  <p>
 
 ```JSON
 [ {
@@ -259,6 +286,9 @@ The data below doesn't show all stocks, but shows the general format
   "newsHistory" : [ ]
 } ]
 ```
+    
+  </p>
+</details>  
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
@@ -274,7 +304,10 @@ The data below doesn't show all stocks, but shows the general format
 
 Note: {___} in url represents path variable
 
-* All News On The Market: GET | http://localhost:8080/api/v1/news/all
+<details>
+  <summary>All News On The Market: GET | http://localhost:8080/api/v1/news/all</summary>
+  <p>
+    
 ```JSON
 [ {
   "event" : "Charles Schwab Corporation announces buyout of small Finance company. There price soared as a result",
@@ -285,13 +318,21 @@ Note: {___} in url represents path variable
 } ]
 ```
 
-* All News On A Specific Stock: GET | http://localhost:8080/api/v1/news/{ticker}
+  </p>
+</details>
+<details>
+  <summary>All News On A Specific Stock: GET | http://localhost:8080/api/v1/news/{ticker}</summary>
+  <p>
+    
 ```JSON
 [ {
   "event" : "Charles Schwab Corporation announces buyout of small Finance company. There price soared as a result",
   "dateReleased" : "1/2/1"
 } ]
 ```
+    
+  </p>
+</details>  
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
@@ -306,7 +347,11 @@ Note: {___} in url represents path variable
 
 Note: {___} in url represents path variable
 
-* All Earnings Report History: GET | http://http://localhost:8080/api/v1/earnings/all
+
+<details>
+  <summary>All Earnings Reports History: GET | http://localhost:8080/api/v1/earnings/all</summary>
+  <p>
+  
 ```JSON
 [ {
   "estimatedEPS" : 2.03,
@@ -329,9 +374,16 @@ Note: {___} in url represents path variable
   "reportMessage" : "Date: 1/1/1. Costco Wholesale announces stable profits in new earnings report today. Their EPS of 3.09 fell in line with expectations of 2.72 EPS.",
   "dateOfRelease" : "12/1/1"
 }]
-```
+```    
+    
+  </p>
+</details>
 
-* All Earnings Report History Of A Specific Stock: GET | http://http://localhost:8080/api/v1/earnings/stock/{ticker}
+  
+<details>
+  <summary>All Earnings Report History Of A Specific Stock: GET | http://http://localhost:8080/api/v1/earnings/stock/{ticker}</summary>
+    <p>
+    
 ```JSON
 [ {
   "estimatedEPS" : 2.84,
@@ -345,8 +397,14 @@ Note: {___} in url represents path variable
   "dateOfRelease" : "6/1/1"
 } ]
 ```
+    
+   </p>
+</details>  
 
-* All Earnings Report History On A Date: GET | http://http://localhost:8080/api/v1/earnings/date/{date}
+<details>
+  <summary>All Earnings Report History On A Date: GET | http://http://localhost:8080/api/v1/earnings/date/{date}</summary>
+  <p>
+    
 Date is formatted as month_day_year and will return an error if incorrectly formatted
 ```JSON
 [ {
@@ -366,6 +424,9 @@ Date is formatted as month_day_year and will return an error if incorrectly form
   "dateOfRelease" : "3/1/1"
 } ]
 ```
+    
+  </p>
+</details>  
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
@@ -380,7 +441,10 @@ Date is formatted as month_day_year and will return an error if incorrectly form
 
 Note: {___} in url represents path variable
 
-* Total Market Fund: GET | http://localhost:8080/api/v1/funds/total-market
+<details>
+  <summary>Total Market Fund: GET | http://localhost:8080/api/v1/funds/total-market</summary>
+  <p>
+    
 ```JSON
 {
   "name" : "Total Market ETF",
@@ -388,7 +452,14 @@ Note: {___} in url represents path variable
   "fundTracking" : "TOTAL_MARKET"
 }
 ```
-* Index Fund By Market Cap: GET | http://localhost:8080/api/v1/funds/cap/{marketCap}
+    
+  </p>
+</details>
+
+<details>
+  <summaryIndex Fund By Market Cap: GET | http://localhost:8080/api/v1/funds/cap/{marketCap}</summary>
+  <p>
+    
 ```JSON
 {
   "name" : "Large Cap Index Fund",
@@ -397,7 +468,14 @@ Note: {___} in url represents path variable
   "marketCap" : "large"
 }
 ```
-* Index Fund By Sector: GET | http://localhost:8080/api/v1/funds/sector/{sector}
+    
+  </p>
+</details>
+
+<details>
+  <summary>Index Fund By Sector: GET | http://localhost:8080/api/v1/funds/sector/{sector}</summary>
+  <p>
+    
 ```JSON
 {
   "name" : "Technology Fund",
@@ -406,7 +484,14 @@ Note: {___} in url represents path variable
   "sector" : "technology"
 }
 ```
-* Stable Fund (Non Volatile): GET | http://localhost:8080/api/v1/funds/stable
+    
+  </p>
+</details>
+
+<details>
+  <summary>Stable Fund (Non Volatile): GET | http://localhost:8080/api/v1/funds/stable</summary>
+  <p>
+    
 ```JSON
 {
   "name" : "Stable Index Fund",
@@ -415,7 +500,14 @@ Note: {___} in url represents path variable
   "volatility" : false
 }
 ```
-* Volatile Fund: GET | http://localhost:8080/api/v1/fund/volatile
+    
+  </p>
+</details>
+
+<details>
+  <summary>Volatile Fund: GET | http://localhost:8080/api/v1/fund/volatile</summary>
+  <p>
+    
 ```JSON
 {
   "name" : "Volatile Index Fund",
@@ -424,13 +516,18 @@ Note: {___} in url represents path variable
   "volatility" : true
 }
 ```
+    
+  </p>
+</details>  
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 ## Accounts <a name="Accounts"></a>
 
-* Get Account By Name : GET | http://localhost:8080/api/v1/account/get/{username}
+<details>
+  <summary>Get Account By Name : GET | http://localhost:8080/api/v1/account/get/{username}</summary>
+  <p>
 
 ```JSON
 {
@@ -445,7 +542,14 @@ Note: {___} in url represents path variable
   } ]
 }
 ```
+    
+  </p>
+</details>  
 
-* Create Account : POST | http://localhost:8080/api/v1/account/create/{username}
+<details>
+  <summary>Create Account : POST | http://localhost:8080/api/v1/account/create/{username}</summary>
+</details>
 
-* Deposit Funds To Account: POST | http://localhost:8080/api/v1/account/deposit
+<details>
+  <summary>Deposit Funds To Account: POST | http://localhost:8080/api/v1/account/deposit</summary>
+</details>
