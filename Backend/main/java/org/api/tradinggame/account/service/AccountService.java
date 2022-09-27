@@ -43,7 +43,8 @@ public class AccountService {
         }
     }
 
-    public void updateAccountBalance(AccountTransaction accountTransaction) throws AccountNotFoundException, AccountBalanceException {
+    public void updateAccountBalance(AccountTransaction accountTransaction)
+            throws AccountNotFoundException, AccountBalanceException {
         Account account = getAccountByName(accountTransaction.getUsername());
         SetAccountBalance.setAccountBalance(account, accountTransaction.getAmountToAdd());
         saveAccount(account);

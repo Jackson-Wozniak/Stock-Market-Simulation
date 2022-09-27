@@ -40,10 +40,10 @@ public class LimitOrderService {
         limitOrderRepository.findAll().forEach(order -> {
             if(order.getLimitPrice() < order.getStock().getPrice()){
                 try {
-                    stockInventoryService.saveNewStockOwned(new BuyStockRequest(
+                    stockInventoryService.buyStock(new BuyStockRequest(
                             order.getAccount().getUsername(),
                             order.getStock().getTicker(),
-                            order.getSharesToBuy()), order.getAccount());
+                            order.getSharesToBuy()));
 
                     System.out.println(order.getStock().getTicker() + " processed");
                     clearAndDeleteLimitOrder(order);

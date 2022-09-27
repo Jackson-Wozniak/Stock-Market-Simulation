@@ -12,7 +12,7 @@ public class FindStockInventory {
     public static StockInventory findOwnedStockByTicker(Set<StockInventory> stocksOwned, String ticker){
         return stocksOwned.stream()
                 .findFirst()
-                .filter(stock -> stock.getTicker().equals(ticker))
+                .filter(stock -> stock.getTicker().equalsIgnoreCase(ticker))
                 .orElse(null);
     }
 }

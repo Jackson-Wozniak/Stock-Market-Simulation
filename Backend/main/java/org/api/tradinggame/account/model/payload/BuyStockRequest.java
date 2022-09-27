@@ -16,5 +16,5 @@ public class BuyStockRequest {
 
     private String username;
     private String ticker;
-    private Integer amountToBuy;
+    private int sharesToBuy;
 }

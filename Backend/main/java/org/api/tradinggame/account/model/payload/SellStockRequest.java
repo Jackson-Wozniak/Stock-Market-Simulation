@@ -16,5 +16,5 @@ public class SellStockRequest {
 
     private String username;
     private String ticker;
-    private Integer amountToSell;
+    private int sharesToSell;
 }

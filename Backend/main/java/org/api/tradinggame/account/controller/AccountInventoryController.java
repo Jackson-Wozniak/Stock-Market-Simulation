@@ -33,7 +33,7 @@ public class AccountInventoryController {
     @Autowired
     private final StockService stockService;
 
-    @PostMapping(value = "/buy")
+    @PostMapping(value = "/buy/market")
     public void buyNewStock(@RequestBody BuyStockRequest buyStock)
             throws AccountNotFoundException, AccountBalanceException {
         stockInventoryService.buyStock(buyStock);
@@ -45,7 +45,7 @@ public class AccountInventoryController {
         stockInventoryService.sellStock(sellStock);
     }
 
-    @PostMapping(value = "/limit/buy")
+    @PostMapping(value = "/buy/limit")
     public List<LimitOrder> limitOrder(@RequestBody LimitOrderRequest request){
         limitOrderService.saveLimitOrder(new LimitOrder(
                 accountService.getAccountByName(request.getUsername()),
@@ -56,7 +56,7 @@ public class AccountInventoryController {
                 accountService.getAccountByName("default"));
     }
 
-    @RequestMapping(value = "/limit/get/{username}")
+    @RequestMapping(value = "/orders/get/{username}")
     public List<LimitOrder> getAllLimitOrdersByUsername(@PathVariable String username){
         return limitOrderService.findLimitOrdersByAccount(accountService.getAccountByName(username));
     }

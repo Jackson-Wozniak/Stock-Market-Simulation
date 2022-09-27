@@ -25,13 +25,14 @@ public class ValidateStockTransaction {
         }catch (StockNotFoundException ex){
             return false;
         }
-        return balance > (stock.getPrice() * buyStockRequest.getAmountToBuy());
+        return balance > (stock.getPrice() * buyStockRequest.getSharesToBuy());
     }
 
     public static boolean doesAccountHaveEnoughStocks(Account account,
                                                      SellStockRequest sellStock){
         StockInventory stock = FindStockInventory.findOwnedStockByTicker(
                 account.getStocksOwned(), sellStock.getTicker());
-        return stock.getAmountOwned() >= sellStock.getAmountToSell();
+        if(stock == null) return false;
+        return stock.getAmountOwned() >= sellStock.getSharesToSell();
     }
 }
