@@ -2,6 +2,7 @@ package org.api.stockmarket.market.configuration;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.scheduled.HandleMarketActivity;
+import org.api.tradinggame.account.service.LimitOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class MarketActivityConfiguration {
 
     @Autowired
     private final HandleMarketActivity handleMarketActivity;
+    @Autowired
+    private final LimitOrderService limitOrderService;
 
     private final Logger logger = LoggerFactory.getLogger(MarketActivityConfiguration.class);
     private static int marketHour = 0;
@@ -26,8 +29,10 @@ public class MarketActivityConfiguration {
     @SuppressWarnings("unused")
     public void dailyMarketActivity(){
         marketHour++;
+        limitOrderService.processAllLimitOrders();
         if(marketHour >= 24){
             logger.info("End of day " + handleMarketActivity.dailyMarketActivity());
+            limitOrderService.truncateLimitOrders();
             marketHour = 0;
 
             if(marketDay >= 30){

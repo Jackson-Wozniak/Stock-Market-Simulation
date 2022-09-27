@@ -26,7 +26,7 @@ public class StockInventoryService {
     @Autowired
     private final StockService stockService;
 
-    public void buyStock(BuyStockRequest buyStock) throws AccountNotFoundException, AccountBalanceException {
+    public void buyStock(BuyStockRequest buyStock){
         Account account =  accountService.getAccountByName(buyStock.getUsername());
         StockInventory stockInventory = FindStockInventory.findOwnedStockByTicker(
                 account.getStocksOwned(), buyStock.getTicker());
