@@ -1,9 +1,9 @@
 package org.api.stockmarket.market.scheduled;
 
-import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.springframework.stereotype.Component;
 import org.api.stockmarket.market.utils.GetRandomNumber;
+import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 

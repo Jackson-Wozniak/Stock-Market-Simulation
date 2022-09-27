@@ -1,6 +1,7 @@
 package org.api.stockmarket.market.configuration;
 
 import lombok.AllArgsConstructor;
+import org.api.stockmarket.market.constants.MarketIntervals;
 import org.api.stockmarket.market.scheduled.HandleMarketActivity;
 import org.api.tradinggame.account.service.LimitOrderService;
 import org.slf4j.Logger;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.api.stockmarket.market.constants.MarketIntervals;
 
 @Configuration
 @EnableScheduling

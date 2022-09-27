@@ -1,11 +1,11 @@
 package org.api.stockmarket.indexfund.helper;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.service.StockService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor

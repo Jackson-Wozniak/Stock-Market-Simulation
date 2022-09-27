@@ -2,8 +2,8 @@ package org.api.stockmarket.market.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.api.stockmarket.market.utils.DateConversion;
 import org.api.stockmarket.market.enums.MarketTrajectory;
+import org.api.stockmarket.market.utils.DateConversion;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -3,13 +3,13 @@ package org.api.stockmarket.stocks.earnings.controller;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.exception.DateFormatException;
 import org.api.stockmarket.market.utils.DateConversion;
+import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.earnings.service.EarningsService;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
 package org.api.stockmarket.stocks.stock.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.model.object.DefaultStock;
 import org.api.stockmarket.stocks.stock.repository.StockRepository;
 import org.api.stockmarket.stocks.stock.utils.DoesStockExist;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;

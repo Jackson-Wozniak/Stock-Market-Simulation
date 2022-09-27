@@ -2,11 +2,11 @@ package org.api.stockmarket.market.configuration;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.entity.Market;
+import org.api.stockmarket.market.service.MarketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.api.stockmarket.market.service.MarketService;
 
 import javax.annotation.PostConstruct;
 

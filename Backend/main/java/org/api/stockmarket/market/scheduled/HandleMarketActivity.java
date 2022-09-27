@@ -1,8 +1,6 @@
 package org.api.stockmarket.market.scheduled;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.service.MarketService;
 import org.api.stockmarket.market.utils.GetRandomNumber;
@@ -11,6 +9,8 @@ import org.api.stockmarket.stocks.earnings.helpers.ReleaseEarningsReport;
 import org.api.stockmarket.stocks.news.helpers.RandomNewsEvents;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

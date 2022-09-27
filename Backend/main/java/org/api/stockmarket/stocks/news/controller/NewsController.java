@@ -1,6 +1,7 @@
 package org.api.stockmarket.stocks.news.controller;
 
 import lombok.AllArgsConstructor;
+import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.news.service.NewsService;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
 import org.api.stockmarket.stocks.stock.model.payload.StockDto;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.api.stockmarket.stocks.news.entity.News;
 
 import java.util.List;
 

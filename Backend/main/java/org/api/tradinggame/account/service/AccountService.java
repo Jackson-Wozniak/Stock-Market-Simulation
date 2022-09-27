@@ -1,15 +1,15 @@
 package org.api.tradinggame.account.service;
 
 import lombok.AllArgsConstructor;
-import org.api.tradinggame.account.repository.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.api.tradinggame.account.exception.AccountBalanceException;
 import org.api.tradinggame.account.exception.AccountNotFoundException;
 import org.api.tradinggame.account.exception.InvalidAccountException;
 import org.api.tradinggame.account.model.entity.Account;
 import org.api.tradinggame.account.model.payload.AccountTransaction;
+import org.api.tradinggame.account.repository.AccountRepository;
 import org.api.tradinggame.account.utils.SetAccountBalance;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor

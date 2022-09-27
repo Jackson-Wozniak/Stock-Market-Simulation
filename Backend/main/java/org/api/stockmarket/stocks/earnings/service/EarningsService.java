@@ -1,10 +1,10 @@
 package org.api.stockmarket.stocks.earnings.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.earnings.repository.EarningsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;

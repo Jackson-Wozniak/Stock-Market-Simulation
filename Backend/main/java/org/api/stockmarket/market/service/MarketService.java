@@ -3,9 +3,9 @@ package org.api.stockmarket.market.service;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.enums.MarketTrajectory;
+import org.api.stockmarket.market.repository.MarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.api.stockmarket.market.repository.MarketRepository;
 
 @Service
 @AllArgsConstructor

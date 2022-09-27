@@ -1,16 +1,16 @@
 package org.api.stockmarket.indexfund.controller;
 
 import lombok.AllArgsConstructor;
+import org.api.stockmarket.indexfund.exception.IndexFundException;
 import org.api.stockmarket.indexfund.helper.CalculateIndexFundPrice;
+import org.api.stockmarket.indexfund.model.IndexFund;
 import org.api.stockmarket.indexfund.model.subclass.*;
+import org.api.stockmarket.indexfund.utils.Capitalize;
+import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.api.stockmarket.indexfund.exception.IndexFundException;
-import org.api.stockmarket.indexfund.model.IndexFund;
-import org.api.stockmarket.indexfund.utils.Capitalize;
-import org.api.stockmarket.stocks.stock.enums.MarketCap;
 
 @RestController
 @RequestMapping(value = "/api/v1/funds")

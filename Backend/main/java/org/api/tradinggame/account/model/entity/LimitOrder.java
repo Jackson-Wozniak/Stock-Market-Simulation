@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.tradinggame.account.exception.AccountBalanceException;
-import org.api.tradinggame.account.model.payload.LimitOrderRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
