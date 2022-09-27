@@ -31,6 +31,13 @@ public class DefaultStocksList {
             new DefaultStock("SLAB", "Silicon Laboratories", "Technology", MarketCap.Mid, false),
             new DefaultStock("GME", "GameStop Corp", "Technology", MarketCap.Mid, true),
             new DefaultStock("OWL", "Big Owl Capital", "Finance", MarketCap.Mid, false),
+            new DefaultStock("IDXX", "Idexx Laboratories", "Health Care", MarketCap.Mid, false),
+            new DefaultStock("DOCU", "DocuSign inc", "Technology", MarketCap.Mid, false),
+            new DefaultStock("CMG", "Chipotle Mexican Grill", "Consumer Discretionary", MarketCap.Mid, false),
+            new DefaultStock("MCHP", "Microchip Technology Inc", "Semiconductors", MarketCap.Mid, true),
+            new DefaultStock("CGNX", "Cognex Corp", "Technology", MarketCap.Mid, false),
+            new DefaultStock("TTD", "The Trade Desk Inc", "Technology", MarketCap.Mid, true),
+            new DefaultStock("X", "United States Steel Corporation", "Industrials", MarketCap.Mid, false),
 
             new DefaultStock("NVAX", "Novavax Inc.", "BioTech", MarketCap.Small, true)
     );

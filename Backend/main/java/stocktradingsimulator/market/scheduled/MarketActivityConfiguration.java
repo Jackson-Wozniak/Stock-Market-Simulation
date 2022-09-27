@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import stocktradingsimulator.market.constants.MarketIntervals;
 
 @Configuration
 @EnableScheduling
@@ -20,7 +21,7 @@ public class MarketActivityConfiguration {
     private static int marketHour = 0;
     private static int marketDay = 0;
 
-    @Scheduled(fixedDelay = 1000L)//MarketIntervals.TEN_SECONDS)
+    @Scheduled(fixedDelay = MarketIntervals.TEN_SECONDS)
     @SuppressWarnings("unused")
     public void dailyMarketActivity(){
         marketHour++;

@@ -1,4 +1,4 @@
-package stocktradingsimulator.market.scheduled;
+package stocktradingsimulator.stocks.news;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

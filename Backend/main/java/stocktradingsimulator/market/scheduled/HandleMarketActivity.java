@@ -8,6 +8,7 @@ import stocktradingsimulator.market.service.MarketService;
 import stocktradingsimulator.market.utils.GetRandomNumber;
 import stocktradingsimulator.market.utils.MarketTrajectoryUtils;
 import stocktradingsimulator.stocks.earnings.ReleaseEarningsReport;
+import stocktradingsimulator.stocks.news.RandomNewsEvents;
 import stocktradingsimulator.stocks.stock.model.entity.Stock;
 import stocktradingsimulator.stocks.stock.service.StockService;
 
@@ -46,8 +47,7 @@ public class HandleMarketActivity {
             if(endOfDay){
                 //avoid stocks going to zero with bankruptcy event
                 if(stock.getPrice() < 1){
-                    randomNewsEvents.stockBankruptNews(
-                            stock, marketService.findMarketEntity().getDate());
+                    randomNewsEvents.stockBankruptNews(stock, marketService.findMarketEntity().getDate());
                     return;
                 }
                 stock.updateMomentumStreak();
