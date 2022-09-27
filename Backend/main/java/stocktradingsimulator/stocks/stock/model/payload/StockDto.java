@@ -3,9 +3,9 @@ package stocktradingsimulator.stocks.stock.model.payload;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import stocktradingsimulator.stocks.earnings.EarningsReport;
+import stocktradingsimulator.stocks.earnings.entity.EarningsReport;
 import stocktradingsimulator.stocks.stock.enums.MarketCap;
-import stocktradingsimulator.stocks.news.News;
+import stocktradingsimulator.stocks.news.entity.News;
 import stocktradingsimulator.stocks.stock.model.entity.Stock;
 
 import java.io.Serializable;

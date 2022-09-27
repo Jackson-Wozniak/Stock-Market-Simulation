@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import stocktradingsimulator.stocks.earnings.EarningsReport;
-import stocktradingsimulator.stocks.news.News;
+import stocktradingsimulator.stocks.earnings.entity.EarningsReport;
+import stocktradingsimulator.stocks.news.entity.News;
 import stocktradingsimulator.stocks.stock.enums.MarketCap;
 
 import javax.persistence.*;

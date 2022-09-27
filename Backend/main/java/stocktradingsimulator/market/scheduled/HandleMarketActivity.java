@@ -7,8 +7,8 @@ import stocktradingsimulator.market.entity.Market;
 import stocktradingsimulator.market.service.MarketService;
 import stocktradingsimulator.market.utils.GetRandomNumber;
 import stocktradingsimulator.market.utils.MarketTrajectoryUtils;
-import stocktradingsimulator.stocks.earnings.ReleaseEarningsReport;
-import stocktradingsimulator.stocks.news.RandomNewsEvents;
+import stocktradingsimulator.stocks.earnings.helpers.ReleaseEarningsReport;
+import stocktradingsimulator.stocks.news.helpers.RandomNewsEvents;
 import stocktradingsimulator.stocks.stock.model.entity.Stock;
 import stocktradingsimulator.stocks.stock.service.StockService;
 

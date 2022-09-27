@@ -1,4 +1,4 @@
-package stocktradingsimulator.stocks.earnings;
+package stocktradingsimulator.stocks.earnings.defaults;
 
 import stocktradingsimulator.stocks.stock.model.entity.Stock;
 

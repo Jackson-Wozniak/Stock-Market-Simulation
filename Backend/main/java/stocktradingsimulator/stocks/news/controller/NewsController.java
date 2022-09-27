@@ -1,10 +1,12 @@
-package stocktradingsimulator.stocks.news;
+package stocktradingsimulator.stocks.news.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import stocktradingsimulator.stocks.news.entity.News;
+import stocktradingsimulator.stocks.news.service.NewsService;
 import stocktradingsimulator.stocks.stock.exception.StockNotFoundException;
 import stocktradingsimulator.stocks.stock.model.payload.StockDto;
 import stocktradingsimulator.stocks.stock.service.StockService;

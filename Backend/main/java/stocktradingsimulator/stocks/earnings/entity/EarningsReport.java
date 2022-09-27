@@ -1,4 +1,4 @@
-package stocktradingsimulator.stocks.earnings;
+package stocktradingsimulator.stocks.earnings.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -1,4 +1,4 @@
-package stocktradingsimulator.stocks.news;
+package stocktradingsimulator.stocks.news.defaults;
 
 import stocktradingsimulator.stocks.stock.model.entity.Stock;
 

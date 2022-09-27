@@ -1,8 +1,10 @@
-package stocktradingsimulator.stocks.earnings;
+package stocktradingsimulator.stocks.earnings.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stocktradingsimulator.stocks.earnings.entity.EarningsReport;
+import stocktradingsimulator.stocks.earnings.repository.EarningsRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

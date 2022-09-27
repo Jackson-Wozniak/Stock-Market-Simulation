@@ -1,4 +1,4 @@
-package stocktradingsimulator.stocks.earnings;
+package stocktradingsimulator.stocks.earnings.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import stocktradingsimulator.market.exception.DateFormatException;
-import stocktradingsimulator.market.service.MarketService;
 import stocktradingsimulator.market.utils.DateConversion;
-import stocktradingsimulator.stocks.stock.model.entity.Stock;
+import stocktradingsimulator.stocks.earnings.entity.EarningsReport;
+import stocktradingsimulator.stocks.earnings.service.EarningsService;
 import stocktradingsimulator.stocks.stock.service.StockService;
 
 import java.util.List;

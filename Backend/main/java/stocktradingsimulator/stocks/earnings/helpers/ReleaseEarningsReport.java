@@ -1,10 +1,13 @@
-package stocktradingsimulator.stocks.earnings;
+package stocktradingsimulator.stocks.earnings.helpers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import stocktradingsimulator.stocks.earnings.defaults.DefaultEarningsMessages;
+import stocktradingsimulator.stocks.earnings.entity.EarningsReport;
+import stocktradingsimulator.stocks.earnings.service.EarningsService;
+import stocktradingsimulator.stocks.earnings.utils.FindEarningsPerShare;
 import stocktradingsimulator.stocks.stock.model.entity.Stock;
-import stocktradingsimulator.stocks.stock.service.StockService;
 
 import java.util.List;
 

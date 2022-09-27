@@ -1,12 +1,12 @@
-package stocktradingsimulator.stocks.news;
+package stocktradingsimulator.stocks.news.helpers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import stocktradingsimulator.stocks.news.DefaultNewsEvents;
+import stocktradingsimulator.stocks.news.defaults.DefaultNewsEvents;
 import stocktradingsimulator.stocks.stock.defaults.DefaultStockPrices;
 import stocktradingsimulator.stocks.stock.model.entity.Stock;
-import stocktradingsimulator.stocks.news.NewsService;
+import stocktradingsimulator.stocks.news.service.NewsService;
 import stocktradingsimulator.stocks.stock.service.StockService;
 
 @Component
