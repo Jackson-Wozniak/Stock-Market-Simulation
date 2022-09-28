@@ -30,6 +30,6 @@ public class AccountController {
 
     @PostMapping(value = "/deposit")
     public void depositToAccount(@RequestBody AccountTransaction accountTransaction) throws AccountNotFoundException, AccountBalanceException {
-        accountService.updateAccountBalance(accountTransaction);
+        accountService.updateAccountBalanceAndSave(accountTransaction);
     }
 }

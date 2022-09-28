@@ -39,9 +39,13 @@ public class StockInventory implements Serializable {
     @Column(name = "owned")
     private Integer amountOwned;
 
-    public StockInventory(Account account, String ticker){
+    @Column(name = "cost_basis")
+    private Double costBasis;
+
+    public StockInventory(Account account, String ticker, int amountOwned, double costBasis){
         this.account = account;
         this.ticker = ticker;
-        this.amountOwned = 1;
+        this.amountOwned = amountOwned;
+        this.costBasis = costBasis;
     }
 }

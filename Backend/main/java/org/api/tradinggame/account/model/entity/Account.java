@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,6 +28,9 @@ public class Account implements Serializable {
     @Column(name = "balance")
     private Double accountBalance;
 
+    @Column(name = "total_profits")
+    private Double totalProfits;
+
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<StockInventory> stocksOwned;
@@ -34,5 +38,13 @@ public class Account implements Serializable {
     public Account(String username){
         this.username = username;
         this.accountBalance = 10_000.0;
+        this.totalProfits = 0.0;
+    }
+
+    public void updateTotalProfits(double costBasis, int sharesToSell, double currentPrice){
+        if(this.totalProfits == null) this.totalProfits = 0.0;
+        setTotalProfits(CalculateCostBasisAndProfits.findProfitsAfterSelling(
+                this.totalProfits, costBasis, sharesToSell, currentPrice
+        ));
     }
 }

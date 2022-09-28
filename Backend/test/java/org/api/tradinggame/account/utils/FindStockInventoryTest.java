@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FindStockInventoryTest {
 
     private static final Set<StockInventory> stocksOwned = Set.of(
-            new StockInventory(new Account("test"), "AMZN"));
+            new StockInventory(new Account("test"), "AMZN", 1, 0.0));
     private static final Set<StockInventory> emptyStocksOwned = Set.of();
 
     @Test

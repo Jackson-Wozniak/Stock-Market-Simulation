@@ -12,6 +12,7 @@ import org.api.tradinggame.account.model.payload.AccountTransaction;
 import org.api.tradinggame.account.model.payload.BuyStockRequest;
 import org.api.tradinggame.account.model.payload.SellStockRequest;
 import org.api.tradinggame.account.repository.StockInventoryRepository;
+import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 import org.api.tradinggame.account.utils.ValidateStockTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,41 +38,50 @@ public class StockInventoryService {
             throw new AccountBalanceException("Account does not have funds for this purchase");
         }
         if(stockInventory == null) {
-            saveNewStockOwned(buyStock, account);
+            saveNewStockOwned(buyStock, account, stock.getPrice());
         }else{
             //subtract transaction value from account balance
-            accountService.updateAccountBalance(new AccountTransaction(account.getUsername(),
+            accountService.updateAccountBalanceAndSave(new AccountTransaction(account.getUsername(),
                     (stock.getPrice() * buyStock.getSharesToBuy()) * -1
             ));
+            stockInventory.setCostBasis(CalculateCostBasisAndProfits.newCostBasis(
+                    stockInventory.getAmountOwned(),
+                    buyStock.getSharesToBuy(),
+                    stockInventory.getCostBasis(),
+                    stock.getPrice()));
             stockInventory.setAmountOwned(stockInventory.getAmountOwned() + buyStock.getSharesToBuy());
             stockOwnedRepository.save(stockInventory);
         }
     }
 
-    public void saveNewStockOwned(BuyStockRequest buyStock, Account account){
-        stockOwnedRepository.save(new StockInventory(account, buyStock.getTicker()));
-    }
-
-    public void saveNewStockOwned(SellStockRequest sellStock, Account account){
-        stockOwnedRepository.save(new StockInventory(account, sellStock.getTicker()));
+    public void saveNewStockOwned(BuyStockRequest buyStock, Account account, double stockPrice){
+        stockOwnedRepository.save(new StockInventory(
+                account, buyStock.getTicker(), buyStock.getSharesToBuy(), stockPrice));
     }
 
     public void sellStock(SellStockRequest sellStock) throws AccountNotFoundException, AccountInventoryException {
         Account account = accountService.getAccountByName(sellStock.getUsername());
-        Stock stock = stockService.getStockByTickerSymbol(sellStock.getTicker().toUpperCase());
-        StockInventory stockInventory = findStockInventory(
-                account, stock);
-
+        Stock stock = stockService.getStockByTickerSymbol(sellStock.getTicker());
+        StockInventory stockInventory = findStockInventory(account, stock);
         if(!ValidateStockTransaction.doesAccountHaveEnoughStocks(account, sellStock)){
             throw new AccountInventoryException("Account does not own enough stocks");
         }
+        account.updateTotalProfits(
+                stockInventory.getCostBasis(), sellStock.getSharesToSell(), stock.getPrice());
 
-        accountService.updateAccountBalance(new AccountTransaction(account.getUsername(),
-                stock.getPrice() * sellStock.getSharesToSell()
-        ));
+        account.setTotalProfits(CalculateCostBasisAndProfits.findProfitsAfterSelling(
+                account.getTotalProfits(), stockInventory.getCostBasis(),
+                sellStock.getSharesToSell(), stock.getPrice()));
 
-        stockInventory.setAmountOwned(stockInventory.getAmountOwned() - sellStock.getSharesToSell());
-        stockOwnedRepository.save(stockInventory);
+        accountService.updateAccountBalanceAndSave(new AccountTransaction(
+                account.getUsername(), stock.getPrice() * sellStock.getSharesToSell()));
+
+        if(sellStock.getSharesToSell() - stockInventory.getAmountOwned() == 0){
+            clearAndDeleteStockInventory(stockInventory);
+        }else{
+            stockInventory.setAmountOwned(stockInventory.getAmountOwned() - sellStock.getSharesToSell());
+            stockOwnedRepository.save(stockInventory);
+        }
     }
 
     public StockInventory findStockInventory(Account account, Stock stock){
@@ -80,5 +90,10 @@ public class StockInventoryService {
                 .filter(stockOwned -> stockOwned.getAccount().getUsername().equals(account.getUsername()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void clearAndDeleteStockInventory(StockInventory stockInventory){
+        //stockInventory.setAccount(null);
+        stockOwnedRepository.delete(stockInventory);
     }
 }
