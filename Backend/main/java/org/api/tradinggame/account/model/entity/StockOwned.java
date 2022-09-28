@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class StockInventory implements Serializable {
+public class StockOwned implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,10 +43,16 @@ public class StockInventory implements Serializable {
     @Column(name = "cost_basis")
     private Double costBasis;
 
-    public StockInventory(Account account, String ticker, int amountOwned, double costBasis){
+    public StockOwned(Account account, String ticker, int amountOwned, double costBasis){
         this.account = account;
         this.ticker = ticker;
         this.amountOwned = amountOwned;
         this.costBasis = costBasis;
+    }
+
+    public void updateCostBasisAndAmountOwned(int amountToBuy, double currentStockPrice){
+        this.setCostBasis(CalculateCostBasisAndProfits.newCostBasis(
+                this.amountOwned, amountToBuy, this.costBasis, currentStockPrice));
+        this.setAmountOwned(this.amountOwned + amountToBuy);
     }
 }

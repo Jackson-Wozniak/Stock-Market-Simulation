@@ -11,7 +11,7 @@ import org.api.tradinggame.account.model.payload.LimitOrderRequest;
 import org.api.tradinggame.account.model.payload.SellStockRequest;
 import org.api.tradinggame.account.service.AccountService;
 import org.api.tradinggame.account.service.LimitOrderService;
-import org.api.tradinggame.account.service.StockInventoryService;
+import org.api.tradinggame.account.service.StockOwnedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ import java.util.List;
 public class AccountInventoryController {
 
     @Autowired
-    private final StockInventoryService stockInventoryService;
+    private final StockOwnedService stockOwnedService;
     @Autowired
     private final LimitOrderService limitOrderService;
     @Autowired
@@ -34,13 +34,13 @@ public class AccountInventoryController {
     @PostMapping(value = "/buy/market")
     public void buyNewStock(@RequestBody BuyStockRequest buyStock)
             throws AccountNotFoundException, AccountBalanceException {
-        stockInventoryService.buyStock(buyStock);
+        stockOwnedService.buyStock(buyStock);
     }
 
     @PostMapping(value = "/sell")
     public void sellStockInInventory(@RequestBody SellStockRequest sellStock)
             throws AccountNotFoundException, AccountBalanceException, AccountInventoryException {
-        stockInventoryService.sellStock(sellStock);
+        stockOwnedService.sellStock(sellStock);
     }
 
     @PostMapping(value = "/buy/limit")

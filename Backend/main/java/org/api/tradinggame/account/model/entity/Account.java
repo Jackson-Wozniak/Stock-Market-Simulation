@@ -33,7 +33,7 @@ public class Account implements Serializable {
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Set<StockInventory> stocksOwned;
+    private Set<StockOwned> stocksOwned;
 
     public Account(String username){
         this.username = username;

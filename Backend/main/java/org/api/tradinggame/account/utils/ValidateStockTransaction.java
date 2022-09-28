@@ -5,7 +5,7 @@ import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.api.tradinggame.account.model.entity.Account;
-import org.api.tradinggame.account.model.entity.StockInventory;
+import org.api.tradinggame.account.model.entity.StockOwned;
 import org.api.tradinggame.account.model.payload.BuyStockRequest;
 import org.api.tradinggame.account.model.payload.SellStockRequest;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class ValidateStockTransaction {
 
     public static boolean doesAccountHaveEnoughStocks(Account account,
                                                      SellStockRequest sellStock){
-        StockInventory stock = FindStockInventory.findOwnedStockByTicker(
+        StockOwned stock = FindStockOwned.findOwnedStockByTicker(
                 account.getStocksOwned(), sellStock.getTicker());
         if(stock == null) return false;
         return stock.getAmountOwned() >= sellStock.getSharesToSell();

@@ -20,7 +20,7 @@ public class LimitOrderService {
     @Autowired
     private final LimitOrderRepository limitOrderRepository;
     @Autowired
-    private final StockInventoryService stockInventoryService;
+    private final StockOwnedService stockOwnedService;
 
     public void saveLimitOrder(LimitOrder limitOrder){
         limitOrderRepository.save(limitOrder);
@@ -40,7 +40,7 @@ public class LimitOrderService {
         limitOrderRepository.findAll().forEach(order -> {
             if(order.getLimitPrice() < order.getStock().getPrice()){
                 try {
-                    stockInventoryService.buyStock(new BuyStockRequest(
+                    stockOwnedService.buyStock(new BuyStockRequest(
                             order.getAccount().getUsername(),
                             order.getStock().getTicker(),
                             order.getSharesToBuy()));

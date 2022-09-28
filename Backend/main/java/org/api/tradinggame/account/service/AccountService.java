@@ -28,13 +28,13 @@ public class AccountService {
     }
 
     public void createNewAccount(String username) throws InvalidAccountException {
-        if(doesAccountExist(username)){
+        if(accountExists(username)){
             throw new InvalidAccountException("Account already exists with that username");
         }
         accountRepository.save(new Account(username));
     }
 
-    public boolean doesAccountExist(String username){
+    public boolean accountExists(String username){
         try{
             getAccountByName(username);
             return true;
@@ -43,10 +43,15 @@ public class AccountService {
         }
     }
 
-    public void updateAccountBalanceAndSave(AccountTransaction accountTransaction)
+    public void updateBalanceAndSave(AccountTransaction accountTransaction)
             throws AccountNotFoundException, AccountBalanceException {
         Account account = getAccountByName(accountTransaction.getUsername());
         SetAccountBalance.setAccountBalance(account, accountTransaction.getAmountToAdd());
+        saveAccount(account);
+    }
+
+    public void updateBalanceAndSave(Account account, double amountToAdd){
+        account.setAccountBalance(account.getAccountBalance() + amountToAdd);
         saveAccount(account);
     }
 }
