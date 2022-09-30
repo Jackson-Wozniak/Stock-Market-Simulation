@@ -1,11 +1,13 @@
 package org.api.tradinggame.account.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.api.tradinggame.account.exception.AccountBalanceException;
 import org.api.tradinggame.account.exception.AccountNotFoundException;
 import org.api.tradinggame.account.exception.InvalidAccountException;
 import org.api.tradinggame.account.model.entity.Account;
 import org.api.tradinggame.account.model.payload.AccountTransaction;
+import org.api.tradinggame.account.service.AccountHistoryService;
 import org.api.tradinggame.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ public class AccountController {
 
     @Autowired
     private final AccountService accountService;
+    @Autowired
+    private final AccountHistoryService accountHistoryService;
 
     @RequestMapping(value = "get/{username}")
     public Account getAccountByUsername(@PathVariable String username) throws AccountNotFoundException {

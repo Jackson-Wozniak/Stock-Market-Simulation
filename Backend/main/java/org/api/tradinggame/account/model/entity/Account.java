@@ -8,6 +8,7 @@ import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /*
@@ -34,6 +35,10 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<StockOwned> stocksOwned;
+
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<AccountHistory> accountHistory;
 
     public Account(String username){
         this.username = username;

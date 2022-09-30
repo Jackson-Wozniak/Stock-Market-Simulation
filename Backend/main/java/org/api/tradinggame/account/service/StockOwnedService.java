@@ -35,11 +35,13 @@ public class StockOwnedService {
         }
         if(stockOwned != null) {
             //subtract transaction value from account balance
-            accountService.updateBalanceAndSave(account, buyStock.getSharesToBuy() * stock.getPrice());
+            accountService.updateBalanceAndSave(account, -1 * (buyStock.getSharesToBuy() * stock.getPrice()));
             stockOwned.updateCostBasisAndAmountOwned(buyStock.getSharesToBuy(), stock.getPrice());
             stockOwnedRepository.save(stockOwned);
             return;
         }
+        accountService.updateBalanceAndSave(
+                account, -1 * (buyStock.getSharesToBuy() * stock.getPrice()));
         saveNewStockOwned(buyStock, account, stock.getPrice());
     }
 
@@ -59,10 +61,7 @@ public class StockOwnedService {
                 stockOwned.getCostBasis(),
                 sellStock.getSharesToSell(),
                 stock.getPrice());
-        accountService.updateBalanceAndSave(
-                new AccountTransaction(
-                        account.getUsername(),
-                        stock.getPrice() * sellStock.getSharesToSell()));
+        accountService.updateBalanceAndSave(account, stock.getPrice() * sellStock.getSharesToSell());
         if(sellStock.getSharesToSell() - stockOwned.getAmountOwned() == 0){
             clearAndDeleteStockOwned(stockOwned);
         }else{
