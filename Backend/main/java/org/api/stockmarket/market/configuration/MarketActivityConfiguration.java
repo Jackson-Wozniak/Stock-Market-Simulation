@@ -3,6 +3,7 @@ package org.api.stockmarket.market.configuration;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.constants.MarketIntervals;
 import org.api.stockmarket.market.scheduled.HandleMarketActivity;
+import org.api.stockmarket.stocks.stock.service.StockHistoryService;
 import org.api.tradinggame.account.service.AccountHistoryService;
 import org.api.tradinggame.account.service.LimitOrderService;
 import org.slf4j.Logger;
@@ -23,6 +24,8 @@ public class MarketActivityConfiguration {
     private final LimitOrderService limitOrderService;
     @Autowired
     private final AccountHistoryService accountHistoryService;
+    @Autowired
+    private final StockHistoryService stockHistoryService;
 
     private final Logger logger = LoggerFactory.getLogger(MarketActivityConfiguration.class);
     private static int marketHour = 0;
@@ -38,10 +41,12 @@ public class MarketActivityConfiguration {
 
             limitOrderService.truncateLimitOrders();
             accountHistoryService.saveDailyAccountHistory();
+            stockHistoryService.saveStockHistoryDaily();
 
             marketHour = 0;
             if(marketDay >= 30){
-                handleMarketActivity.updateMarketMonthlyValues();
+                handleMarketActivity.updateMarketMonthlyValues(
+                        accountHistoryService);
                 marketDay = 0;
             }
             marketDay++;

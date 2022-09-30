@@ -29,8 +29,6 @@ public class HandleMarketActivity {
     private final RandomNewsEvents randomNewsEvents;
     @Autowired
     private final ReleaseEarningsReport releaseEarningsReport;
-    @Autowired
-    private final AccountHistoryService accountHistoryService;
 
     public String dailyMarketActivity(){
         updateNewStockInformation(true);
@@ -68,7 +66,8 @@ public class HandleMarketActivity {
         return market.getDate();
     }
 
-    public void updateMarketMonthlyValues(){
+    public void updateMarketMonthlyValues(
+            AccountHistoryService accountHistoryService){
         Market market = marketService.findMarketEntity();
         market.setMarketTrajectory(MarketTrajectoryUtils.getNewMarketTrajectory(
                 market, stockService.getAllStocks()));

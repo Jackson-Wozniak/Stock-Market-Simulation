@@ -9,6 +9,7 @@ import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "stock")
@@ -17,7 +18,7 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
-public class Stock {
+public class Stock implements Serializable {
 
     @Id
     private String ticker;
