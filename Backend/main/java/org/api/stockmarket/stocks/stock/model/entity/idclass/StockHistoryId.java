@@ -12,7 +12,9 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class StockHistoryId implements Serializable{
 
+    @Column(name = "market_date")
     private String marketDate;
 
-    private String stockTicker;
+    @Column(name = "stock_ticker")
+    private String ticker;
 }

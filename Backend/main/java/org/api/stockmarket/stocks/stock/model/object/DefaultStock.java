@@ -25,6 +25,7 @@ public class DefaultStock extends Stock {
     private MarketCap marketCap;
     private Double price;
     private Double lastDayPrice;
+    private Double percentChange;
     private Integer momentum;
     private Integer momentumStreakInDays;
     private Boolean volatileStock;
@@ -43,5 +44,6 @@ public class DefaultStock extends Stock {
         this.lastDayPrice = 0.0;
         this.momentum = 0;
         this.momentumStreakInDays = 0;
+        this.percentChange = 0.0;
     }
 }

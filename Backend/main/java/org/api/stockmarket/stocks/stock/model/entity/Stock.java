@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
-public class Stock implements Serializable {
+public class Stock{
 
     @Id
     private String ticker;

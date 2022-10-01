@@ -26,7 +26,7 @@ public class StockHistory implements Serializable{
     private String marketDate;
 
     @Id
-    private String stockTicker;
+    private String ticker;
 
     @Column(name = "price")
     private Double stockPrice;
