@@ -18,13 +18,17 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 
 4. [Stocks](#Stocks)
 
-5. [Stock News](#Stock-News)
+5. [Stock History](#Stock-History)
 
-6. [Stock Earnings Reports](#Stock-Earnings)
+6. [Stock News](#Stock-News)
 
-7. [Index Funds](#Index-Funds)
+7. [Stock Earnings Reports](#Stock-Earnings)
 
-8. [Accounts](#Accounts)
+8. [Index Funds](#Index-Funds)
+
+9. [Trading](#Trading)
+
+10. [Leaderboard](#Leaderboard)
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
@@ -293,6 +297,71 @@ The data below doesn't show all stocks, but shows the general format
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
+## Stock History <a name="Stock-History"></a>
+
+* Stock prices are saved each day, and the history of a stocks price can be viewed
+* Price history is reset at the end of each year
+
+### Stock History Endpoints
+
+<details>
+  <summary>Stock History By Ticker Symbol: GET | http://localhost:8080/api/v1/stocks/history/{ticker}</summary>
+  <p>
+  
+  ```JSON
+  [ {
+  "marketDate" : "7/7/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 97.8
+}, {
+  "marketDate" : "7/8/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 98.66
+}, {
+  "marketDate" : "7/9/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 101.1
+}, {
+  "marketDate" : "7/10/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 101.79
+}, {
+  "marketDate" : "7/11/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 102.92
+}, {
+  "marketDate" : "7/12/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 101.48
+}, {
+  "marketDate" : "7/13/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 102.53
+}, {
+  "marketDate" : "7/14/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 102.04
+}, {
+  "marketDate" : "7/15/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 102.59
+}, {
+  "marketDate" : "7/16/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 100.57
+}, {
+  "marketDate" : "7/17/1",
+  "ticker" : "AMZN",
+  "stockPrice" : 100.79
+} ]
+  ```
+  
+  </p>
+</details>  
+  
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 ## Stock News <a name="Stock-News"></a>
 
 * At the end of each day, there is a chance that a specific stock will release a news story, which will have a large effect on their price
@@ -523,7 +592,7 @@ Note: {___} in url represents path variable
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## Accounts <a name="Accounts"></a>
+## Trading <a name="Trading"></a>
 
 <details>
   <summary>Get Account By Name : GET | http://localhost:8080/api/v1/account/get/{username}</summary>
@@ -547,9 +616,149 @@ Note: {___} in url represents path variable
 </details>  
 
 <details>
+  <summary>Get Account History  By Name : GET | http://localhost:8080/api/v1/account/history/{username}</summary>
+  <p>
+
+```JSON
+[ {
+  "date" : "3/20/1",
+  "balance" : -8.06
+}, {
+  "date" : "3/21/1",
+  "balance" : -8.06
+}, {
+  "date" : "3/22/1",
+  "balance" : -8.06
+}, {
+  "date" : "3/23/1",
+  "balance" : 3.4
+}, {
+  "date" : "3/24/1",
+  "balance" : 4.3
+}, {
+  "date" : "3/25/1",
+  "balance" : 4.3
+}, {
+  "date" : "3/26/1",
+  "balance" : 4.3
+}, {
+  "date" : "3/27/1",
+  "balance" : 4.3
+}, {
+  "date" : "3/28/1",
+  "balance" : 4.3
+} ]
+```
+
+
+<details>
+  <summary>Get Active Limit Orders By Name : GET | http://localhost:8080/api/v1/inventory/orders/get/{username}</summary>
+</details> 
+    
+  </p>
+</details>  
+
+<details>
   <summary>Create Account : POST | http://localhost:8080/api/v1/account/create/{username}</summary>
 </details>
 
 <details>
   <summary>Deposit Funds To Account: POST | http://localhost:8080/api/v1/account/deposit</summary>
 </details>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+## Leaderboard <a name="Leaderboard"></a>
+
+* A leaderboard tracks total user profits for each account, sorting them by how much each account earns
+* Trading stocks for a profit will push you up the leaderboard, with the goal of beating a trading bot
+
+<details>
+  <summary>Get Top 10 User Accounts On Leaderboard | http://localhost:8080/api/v1/leaderboard</summary>
+  <p>
+  
+  ```JSON
+ [ {
+  "ranking" : 1,
+  "username" : "user2",
+  "totalProfits" : 4.5
+}, {
+  "ranking" : 2,
+  "username" : "user3",
+  "totalProfits" : 4.3
+}, {
+  "ranking" : 3,
+  "username" : "user1",
+  "totalProfits" : 1.23
+}, {
+  "ranking" : 4,
+  "username" : "user4",
+  "totalProfits" : -2.00
+}, {
+  "ranking" : 5,
+  "username" : "user6",
+  "totalProfits" : -4.3
+}, {
+  "ranking" : 6,
+  "username" : "user6",
+  "totalProfits" : -12.64
+}, {
+  "ranking" : 7,
+  "username" : "user8",
+  "totalProfits" : -16.23
+}, {
+  "ranking" : 8,
+  "username" : "user7",
+  "totalProfits" : -20.00
+}, {
+  "ranking" : 9,
+  "username" : "user10",
+  "totalProfits" : -40.3
+}, {
+  "ranking" : 10,
+  "username" : "user9",
+  "totalProfits" : -122.64
+} ]
+
+```
+  
+  </p>
+</details>
+
+<details>
+  <summary>Get Top 3 User Accounts On Leaderboard | http://localhost:8080/api/v1/leaderboard</summary>
+  <p>
+  
+  ```JSON
+[ {
+  "ranking" : 1,
+  "username" : "user2",
+  "totalProfits" : 4.5
+}, {
+  "ranking" : 2,
+  "username" : "user3",
+  "totalProfits" : 4.3
+}, {
+  "ranking" : 3,
+  "username" : "user1",
+  "totalProfits" : 1.23
+} ]
+  ```
+  
+  </p>
+</details>
+
+<details>
+  <summary>Get Ranking By Account: GET | http://localhost:8080/api/v1/leaderboard/ranking/{username}</summary>
+  <p>
+  
+  ```JSON
+  {
+    "ranking" : 2,
+    "username" : "user3",
+    "totalProfits" : 4.3
+  }
+  ```
+  
+  </p>
+</default>  
