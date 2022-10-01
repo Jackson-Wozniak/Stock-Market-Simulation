@@ -15,7 +15,7 @@ public class MarketController {
     @Autowired
     private final MarketService marketService;
 
-    @RequestMapping(value = "")
+    @RequestMapping()
     public Market findMarketEntity() {
         return marketService.findMarketEntity();
     }

@@ -50,13 +50,13 @@ public class StockService {
                 .collect(Collectors.toList());
     }
 
-    public Stock getStockByTickerSymbol(String ticker) throws StockNotFoundException {
+    public Stock getStockByTickerSymbol(String ticker) {
         return stockRepository.findById(ticker.toUpperCase())
                 .orElseThrow(() -> new StockNotFoundException(
                         "No stock with ticker symbol " + ticker + " exists"));
     }
 
-    public double getStockPriceWithTickerSymbol(String ticker) throws StockNotFoundException {
+    public double getStockPriceWithTickerSymbol(String ticker) {
         if (!DoesStockExist.stockExistsWithTicker(this, ticker)) {
             throw new StockNotFoundException("No stock with ticker symbol " + ticker + " exists");
         }
@@ -80,7 +80,6 @@ public class StockService {
             if (DoesStockExist.stockExistsWithTicker(this, stock.getTicker())) {
                 return;
             }
-            System.out.println(stock.getTicker() + " saved");
             stockRepository.save((Stock) stock);
         });
     }

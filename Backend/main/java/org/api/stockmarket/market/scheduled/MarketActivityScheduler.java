@@ -1,8 +1,7 @@
-package org.api.stockmarket.market.configuration;
+package org.api.stockmarket.market.scheduled;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.constants.MarketIntervals;
-import org.api.stockmarket.market.scheduled.HandleMarketActivity;
 import org.api.stockmarket.stocks.stock.service.StockHistoryService;
 import org.api.tradinggame.account.service.AccountHistoryService;
 import org.api.tradinggame.account.service.LimitOrderService;
@@ -16,7 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Configuration
 @EnableScheduling
 @AllArgsConstructor
-public class MarketActivityConfiguration {
+public class MarketActivityScheduler {
 
     @Autowired
     private final HandleMarketActivity handleMarketActivity;
@@ -27,7 +26,7 @@ public class MarketActivityConfiguration {
     @Autowired
     private final StockHistoryService stockHistoryService;
 
-    private final Logger logger = LoggerFactory.getLogger(MarketActivityConfiguration.class);
+    private final Logger logger = LoggerFactory.getLogger(MarketActivityScheduler.class);
     private static int marketHour = 0;
     private static int marketDay = 0;
 

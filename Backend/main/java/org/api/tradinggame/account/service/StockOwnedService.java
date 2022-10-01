@@ -40,8 +40,7 @@ public class StockOwnedService {
             stockOwnedRepository.save(stockOwned);
             return;
         }
-        accountService.updateBalanceAndSave(
-                account, -1 * (buyStock.getSharesToBuy() * stock.getPrice()));
+        accountService.updateBalanceAndSave(account, -1 * (buyStock.getSharesToBuy() * stock.getPrice()));
         saveNewStockOwned(buyStock, account, stock.getPrice());
     }
 
@@ -79,7 +78,6 @@ public class StockOwnedService {
     }
 
     public void clearAndDeleteStockOwned(StockOwned stockOwned) {
-        //stockInventory.setAccount(null);
         stockOwnedRepository.delete(stockOwned);
     }
 }

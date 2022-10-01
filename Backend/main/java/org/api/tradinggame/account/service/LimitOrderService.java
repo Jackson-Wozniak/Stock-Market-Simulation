@@ -44,8 +44,6 @@ public class LimitOrderService {
                             order.getAccount().getUsername(),
                             order.getStock().getTicker(),
                             order.getSharesToBuy()));
-
-                    System.out.println(order.getStock().getTicker() + " processed");
                     clearAndDeleteLimitOrder(order);
                 } catch (AccountNotFoundException e) {
                     e.printStackTrace();
@@ -57,7 +55,6 @@ public class LimitOrderService {
     @Transactional
     public void truncateLimitOrders() {
         limitOrderRepository.truncateTable();
-        System.out.println("orders truncated");
     }
 
     private void clearAndDeleteLimitOrder(LimitOrder limitOrder) {

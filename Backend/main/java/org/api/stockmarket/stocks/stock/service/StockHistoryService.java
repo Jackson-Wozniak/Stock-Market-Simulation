@@ -1,28 +1,27 @@
 package org.api.stockmarket.stocks.stock.service;
 
+import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.service.MarketService;
-import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
 import org.api.stockmarket.stocks.stock.repository.StockHistoryRepository;
 import org.api.stockmarket.stocks.stock.utils.SortStockHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class StockHistoryService {
 
     @Autowired
-    private StockHistoryRepository stockHistoryRepository;
+    private final StockHistoryRepository stockHistoryRepository;
     @Autowired
-    private StockService stockService;
+    private final StockService stockService;
     @Autowired
-    private MarketService marketService;
+    private final MarketService marketService;
 
     public void saveStockHistoryDaily() {
         Market market = marketService.findMarketEntity();
@@ -34,7 +33,7 @@ public class StockHistoryService {
         });
     }
 
-    public List<StockHistory> findStockHistory(String ticker) {
+    public List<StockHistory> findStockHistoryByTicker(String ticker) {
         List<StockHistory> stockHistory = stockHistoryRepository.findAll().stream()
                 .filter(history -> history.getTicker().equalsIgnoreCase(ticker))
                 .collect(Collectors.toList());

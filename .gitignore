@@ -6,3 +6,4 @@ mvnw
 mvnw.cmd
 Backend/main/resources/application.properties
 Documentation/
+Frontend/

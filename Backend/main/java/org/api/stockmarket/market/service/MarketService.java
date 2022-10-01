@@ -19,7 +19,6 @@ public class MarketService {
         if (market == null) {
             market = new Market("1/1/1", 41.0, MarketTrajectory.NORMAL);
             saveMarketEntity(market);
-            return market;
         }
         return market;
     }
