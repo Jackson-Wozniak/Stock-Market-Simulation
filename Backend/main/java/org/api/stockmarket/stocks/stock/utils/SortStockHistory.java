@@ -13,7 +13,7 @@ public class SortStockHistory {
 
     private static final DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
-    public static List<StockHistory> sortStockHistoryByDate(List<StockHistory> stockHistory){
+    public static void sortStockHistoryByDate(List<StockHistory> stockHistory){
         stockHistory.sort(new Comparator<StockHistory>() {
             @Override
             public int compare(StockHistory history1, StockHistory history2) {
@@ -26,6 +26,5 @@ public class SortStockHistory {
                 return 0;
             }
         });
-        return stockHistory;
     }
 }
