@@ -27,37 +27,37 @@ class MarketTrajectoryUtilsTest {
     private static final List<Stock> emptyListOfStocks = Collections.emptyList();
 
     @Test
-    void bearMarketTrajectoryTracksCorrectly(){
+    void bearMarketTrajectoryTracksCorrectly() {
         assertEquals(MarketTrajectory.BEAR,
                 MarketTrajectoryUtils.getNewMarketTrajectory(
-                        new Market( "" ,100.0, MarketTrajectory.NORMAL), listOfStocks));
+                        new Market("", 100.0, MarketTrajectory.NORMAL), listOfStocks));
     }
 
     @Test
-    void normalMarketTrajectoryTracksCorrectly(){
+    void normalMarketTrajectoryTracksCorrectly() {
         assertEquals(MarketTrajectory.NORMAL,
                 MarketTrajectoryUtils.getNewMarketTrajectory(
-                        new Market("" ,100.0, MarketTrajectory.NORMAL), listOfLargeCapStocks));
+                        new Market("", 100.0, MarketTrajectory.NORMAL), listOfLargeCapStocks));
         assertEquals(MarketTrajectory.NORMAL,
                 MarketTrajectoryUtils.getNewMarketTrajectory(
-                        new Market("" ,100.0, MarketTrajectory.NORMAL), emptyListOfStocks));
+                        new Market("", 100.0, MarketTrajectory.NORMAL), emptyListOfStocks));
     }
 
     @Test
-    void bullMarketTrajectoryTracksCorrectly(){
+    void bullMarketTrajectoryTracksCorrectly() {
         assertEquals(MarketTrajectory.BULL,
                 MarketTrajectoryUtils.getNewMarketTrajectory(
-                        new Market("" ,50.0, MarketTrajectory.NORMAL), listOfLargeCapStocks));
+                        new Market("", 50.0, MarketTrajectory.NORMAL), listOfLargeCapStocks));
     }
 
     @Test
-    void priceSumTracksCorrectly(){
+    void priceSumTracksCorrectly() {
         assertEquals(120, MarketTrajectoryUtils.stockPricesSum(listOfStocks));
         assertEquals(0, MarketTrajectoryUtils.stockPricesSum(emptyListOfStocks));
     }
 
     @Test
-    void averagePriceTracksCorrectly(){
+    void averagePriceTracksCorrectly() {
         assertEquals(60, MarketTrajectoryUtils.stockPricesAverage(listOfStocks));
         assertEquals(0, MarketTrajectoryUtils.stockPricesAverage(emptyListOfStocks));
     }

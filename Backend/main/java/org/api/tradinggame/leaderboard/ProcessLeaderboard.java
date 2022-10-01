@@ -16,19 +16,19 @@ public class ProcessLeaderboard {
     @Autowired
     private final AccountService accountService;
 
-    public List<Leaderboard> topTenAccounts(){
+    public List<Leaderboard> topTenAccounts() {
         List<Account> accounts =
                 SortAccountProfits.sortAccountByProfits(accountService.findAllAccounts());
         return accounts.stream()
                 .map(account -> new Leaderboard(
-                                accounts.indexOf(account) + 1,
-                                account.getUsername(),
-                                account.getTotalProfits()))
+                        accounts.indexOf(account) + 1,
+                        account.getUsername(),
+                        account.getTotalProfits()))
                 .limit(10)
                 .collect(Collectors.toList());
     }
 
-    public List<Leaderboard> topThreeAccounts(){
+    public List<Leaderboard> topThreeAccounts() {
         List<Account> accounts =
                 SortAccountProfits.sortAccountByProfits(accountService.findAllAccounts());
         return accounts.stream()
@@ -40,7 +40,7 @@ public class ProcessLeaderboard {
                 .collect(Collectors.toList());
     }
 
-    public Leaderboard findAccountRanking(String username){
+    public Leaderboard findAccountRanking(String username) {
         List<Account> accounts =
                 SortAccountProfits.sortAccountByProfits(accountService.findAllAccounts());
         return accounts.stream()

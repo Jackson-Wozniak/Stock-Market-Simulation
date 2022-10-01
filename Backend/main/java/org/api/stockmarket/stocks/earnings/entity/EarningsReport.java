@@ -43,7 +43,7 @@ public class EarningsReport implements Serializable {
                           double estimatedEPS,
                           double actualEPS,
                           String reportMessage,
-                          String dateOfRelease){
+                          String dateOfRelease) {
         this.stock = stock;
         this.estimatedEPS = estimatedEPS;
         this.actualEPS = actualEPS;

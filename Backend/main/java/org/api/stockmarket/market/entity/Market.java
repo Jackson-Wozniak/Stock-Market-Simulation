@@ -33,7 +33,7 @@ public class Market {
     @Column
     private MarketTrajectory marketTrajectory;
 
-    public void incrementDay(){
+    public void incrementDay() {
         String date = DateConversion.incrementMarketDay(getDate());
         setDate(date);
     }

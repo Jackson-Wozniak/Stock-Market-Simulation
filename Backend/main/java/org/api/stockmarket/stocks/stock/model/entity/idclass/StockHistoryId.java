@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class StockHistoryId implements Serializable{
+public class StockHistoryId implements Serializable {
 
     @Column(name = "market_date")
     private String marketDate;

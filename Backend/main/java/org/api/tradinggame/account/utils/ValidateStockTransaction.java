@@ -17,22 +17,22 @@ public class ValidateStockTransaction {
 
     public static boolean doesAccountHaveEnoughMoney(Account account,
                                                      BuyStockRequest buyStockRequest,
-                                                     StockService stockService){
+                                                     StockService stockService) {
         double balance = account.getAccountBalance();
         Stock stock;
-        try{
-            stock =  stockService.getStockByTickerSymbol(buyStockRequest.getTicker());
-        }catch (StockNotFoundException ex){
+        try {
+            stock = stockService.getStockByTickerSymbol(buyStockRequest.getTicker());
+        } catch (StockNotFoundException ex) {
             return false;
         }
         return balance > (stock.getPrice() * buyStockRequest.getSharesToBuy());
     }
 
     public static boolean doesAccountHaveEnoughStocks(Account account,
-                                                     SellStockRequest sellStock){
+                                                      SellStockRequest sellStock) {
         StockOwned stock = FindStockOwned.findOwnedStockByTicker(
                 account.getStocksOwned(), sellStock.getTicker());
-        if(stock == null) return false;
+        if (stock == null) return false;
         return stock.getAmountOwned() >= sellStock.getSharesToSell();
     }
 }

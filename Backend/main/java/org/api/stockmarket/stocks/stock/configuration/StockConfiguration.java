@@ -20,8 +20,8 @@ public class StockConfiguration {
     private final Logger logger = LoggerFactory.getLogger(StockConfiguration.class);
 
     @PostConstruct
-    public void saveStocksToDatabaseOnStartup(){
-        if(DefaultStocksList.getCountForDefaultStocks() != stockService.findStockRowCount()){
+    public void saveStocksToDatabaseOnStartup() {
+        if (DefaultStocksList.getCountForDefaultStocks() != stockService.findStockRowCount()) {
             logger.info("Saving Default Stocks");
             stockService.saveDefaultStockToDatabase(DefaultStocksList.getAllDefaultStocks());
         }

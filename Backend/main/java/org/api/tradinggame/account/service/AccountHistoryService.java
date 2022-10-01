@@ -22,19 +22,19 @@ public class AccountHistoryService {
     @Autowired
     private final MarketService marketService;
 
-    public void saveDailyAccountHistory(){
+    public void saveDailyAccountHistory() {
         Market market = marketService.findMarketEntity();
         accountService.findAllAccounts().forEach(account -> accountHistoryRepository.save(
                 new AccountHistory(market.getDate(), account, account.getTotalProfits()
-        )));
+                )));
     }
 
-    public List<AccountHistory> findHistoryOfAccount(String username){
+    public List<AccountHistory> findHistoryOfAccount(String username) {
         return accountService.getAccountByName(username).getAccountHistory();
     }
 
     @Transactional
-    public void truncateAccountHistoryAtEndOfYear(){
+    public void truncateAccountHistoryAtEndOfYear() {
         accountHistoryRepository.truncateTable();
     }
 }

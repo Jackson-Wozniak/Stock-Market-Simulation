@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class CapitalizeTest {
 
     @Test
-    void stringIsCapitalized(){
+    void stringIsCapitalized() {
         assertEquals("String", Capitalize.capitalize("string"));
     }
 
     @Test
-    void onlyFirstLetterIsCapitalized(){
+    void onlyFirstLetterIsCapitalized() {
         assertEquals("String", Capitalize.capitalize("String"));
         assertEquals("String", Capitalize.capitalize("STRing"));
         assertEquals("String", Capitalize.capitalize("sTrInG"));

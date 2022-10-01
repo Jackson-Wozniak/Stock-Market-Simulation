@@ -5,11 +5,11 @@ import org.api.stockmarket.stocks.stock.service.StockService;
 
 public class DoesStockExist {
 
-    public static boolean stockExistsWithTicker(StockService stockService, String ticker){
-        try{
+    public static boolean stockExistsWithTicker(StockService stockService, String ticker) {
+        try {
             stockService.getStockByTickerSymbol(ticker);
             return true;
-        }catch(StockNotFoundException ex){
+        } catch (StockNotFoundException ex) {
             return false;
         }
     }

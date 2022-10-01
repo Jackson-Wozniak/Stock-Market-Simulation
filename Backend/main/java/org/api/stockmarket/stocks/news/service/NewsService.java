@@ -16,11 +16,11 @@ public class NewsService {
     @Autowired
     private NewsRepository newsRepository;
 
-    public List<News> findAllNews(){
+    public List<News> findAllNews() {
         return newsRepository.findAll();
     }
 
-    public void saveNewsForStock(Stock stock, String newsEvent, String date){
+    public void saveNewsForStock(Stock stock, String newsEvent, String date) {
         newsRepository.save(new News(stock, newsEvent, date));
     }
 }

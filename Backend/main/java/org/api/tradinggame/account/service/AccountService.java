@@ -21,7 +21,7 @@ public class AccountService {
     @Autowired
     private final AccountRepository accountRepository;
 
-    public List<Account> findAllAccounts(){
+    public List<Account> findAllAccounts() {
         return accountRepository.findAll();
     }
 
@@ -30,22 +30,22 @@ public class AccountService {
                 .orElseThrow(() -> new AccountNotFoundException("No account with that username"));
     }
 
-    public void saveAccount(Account account){
+    public void saveAccount(Account account) {
         accountRepository.save(account);
     }
 
     public void createNewAccount(String username) throws InvalidAccountException {
-        if(accountExists(username)){
+        if (accountExists(username)) {
             throw new InvalidAccountException("Account already exists with that username");
         }
         accountRepository.save(new Account(username));
     }
 
-    public boolean accountExists(String username){
-        try{
+    public boolean accountExists(String username) {
+        try {
             getAccountByName(username);
             return true;
-        }catch(AccountNotFoundException ex){
+        } catch (AccountNotFoundException ex) {
             return false;
         }
     }
@@ -57,7 +57,7 @@ public class AccountService {
         saveAccount(account);
     }
 
-    public void updateBalanceAndSave(Account account, double amountToAdd){
+    public void updateBalanceAndSave(Account account, double amountToAdd) {
         account.setAccountBalance(
                 Math.round((account.getAccountBalance() + amountToAdd) * 100.00) / 100.00);
         saveAccount(account);

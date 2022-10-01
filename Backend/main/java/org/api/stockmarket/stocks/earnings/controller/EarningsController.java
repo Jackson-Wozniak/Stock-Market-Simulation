@@ -24,20 +24,20 @@ public class EarningsController {
     private final StockService stockService;
 
     @RequestMapping(value = "/all")
-    public List<EarningsReport> getAllEarningsReportHistory(){
+    public List<EarningsReport> getAllEarningsReportHistory() {
         return earningsService.findAllEarningsReports();
     }
 
     @RequestMapping(value = "/stock/{ticker}")
-    public List<EarningsReport> getAllEarningsHistoryFromStock(@PathVariable String ticker){
+    public List<EarningsReport> getAllEarningsHistoryFromStock(@PathVariable String ticker) {
         return stockService.getStockByTickerSymbol(ticker).getEarningsHistory();
     }
 
     //date is formatted as month_day_year here instead of month/day/year
     @RequestMapping(value = "/date/{date}")
-    public List<EarningsReport> getEarningsOnDate(@PathVariable String date){
+    public List<EarningsReport> getEarningsOnDate(@PathVariable String date) {
         date = date.replace("_", "/");
-        if(!DateConversion.dateIsFormattedCorrectly(date)){
+        if (!DateConversion.dateIsFormattedCorrectly(date)) {
             throw new DateFormatException();
         }
         return earningsService.findAllEarningsByDate(date);

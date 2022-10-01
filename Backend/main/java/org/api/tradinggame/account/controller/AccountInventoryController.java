@@ -44,7 +44,7 @@ public class AccountInventoryController {
     }
 
     @PostMapping(value = "/buy/limit")
-    public List<LimitOrder> limitOrder(@RequestBody LimitOrderRequest request){
+    public List<LimitOrder> limitOrder(@RequestBody LimitOrderRequest request) {
         limitOrderService.saveLimitOrder(new LimitOrder(
                 accountService.getAccountByName(request.getUsername()),
                 stockService.getStockByTickerSymbol(request.getTicker()),
@@ -55,7 +55,7 @@ public class AccountInventoryController {
     }
 
     @RequestMapping(value = "/orders/get/{username}")
-    public List<LimitOrder> getAllLimitOrdersByUsername(@PathVariable String username){
+    public List<LimitOrder> getAllLimitOrdersByUsername(@PathVariable String username) {
         return limitOrderService.findLimitOrdersByAccount(accountService.getAccountByName(username));
     }
 

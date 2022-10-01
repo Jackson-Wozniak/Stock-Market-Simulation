@@ -17,10 +17,10 @@ public class DefaultStocksList {
 
     private static final List<DefaultStock> allStocks = List.of(
             new DefaultStock("AMZN", "Amazon", "Technology", MarketCap.Large, true),
-            new DefaultStock("AAPL","Apple","Technology",MarketCap.Large, false),
-            new DefaultStock("GOOG","Google","Technology",MarketCap.Large, false),
-            new DefaultStock("TSLA","Tesla","Technology",MarketCap.Large, true),
-            new DefaultStock("BRK.B","Berkshire Hathaway","Insurance",MarketCap.Large, false),
+            new DefaultStock("AAPL", "Apple", "Technology", MarketCap.Large, false),
+            new DefaultStock("GOOG", "Google", "Technology", MarketCap.Large, false),
+            new DefaultStock("TSLA", "Tesla", "Technology", MarketCap.Large, true),
+            new DefaultStock("BRK.B", "Berkshire Hathaway", "Insurance", MarketCap.Large, false),
             new DefaultStock("KO", "Coca Cola", "Consumer Staples", MarketCap.Large, false),
             new DefaultStock("COST", "Costco Wholesale", "Consumer Discretionary", MarketCap.Large, false),
             new DefaultStock("Disney", "Walt Disney Co", "Consumer Discretionary", MarketCap.Large, false),
@@ -42,11 +42,11 @@ public class DefaultStocksList {
             new DefaultStock("NVAX", "Novavax Inc.", "BioTech", MarketCap.Small, true)
     );
 
-    public static int getCountForDefaultStocks(){
+    public static int getCountForDefaultStocks() {
         return allStocks.size();
     }
 
-    public static List<DefaultStock> getAllDefaultStocks(){
+    public static List<DefaultStock> getAllDefaultStocks() {
         return allStocks;
     }
 }

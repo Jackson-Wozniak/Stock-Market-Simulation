@@ -14,7 +14,7 @@ public class SetAccountBalance {
         String formattedAmount = decimalFormat.format(
                 account.getAccountBalance() + amountToAdd);
         account.setAccountBalance(Double.parseDouble(formattedAmount));
-        if(account.getAccountBalance() < 0 ){
+        if (account.getAccountBalance() < 0) {
             throw new AccountBalanceException("Must have more money in account");
         }
     }

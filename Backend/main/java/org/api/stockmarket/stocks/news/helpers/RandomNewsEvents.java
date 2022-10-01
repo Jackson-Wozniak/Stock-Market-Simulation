@@ -18,7 +18,7 @@ public class RandomNewsEvents {
     @Autowired
     private final StockService stockService;
 
-    public void processPositiveNewsEvent(String date){
+    public void processPositiveNewsEvent(String date) {
         Stock stock = stockService.getRandomStock();
         stock.setPrice(stock.getPrice() * 1.1);
         stockService.updateStockInDatabase(stock);
@@ -26,7 +26,7 @@ public class RandomNewsEvents {
         newsService.saveNewsForStock(stock, DefaultNewsEvents.positiveNewsEvents(stock), date);
     }
 
-    public void processNegativeNewsEvents(String date){
+    public void processNegativeNewsEvents(String date) {
         Stock stock = stockService.getRandomStock();
         stock.setPrice(stock.getPrice() * .9);
         stockService.updateStockInDatabase(stock);
@@ -35,7 +35,7 @@ public class RandomNewsEvents {
     }
 
     //Method is called if a stock reaches below 1 and has to be reset to avoid going to zero
-    public void stockBankruptNews(Stock stock, String date){
+    public void stockBankruptNews(Stock stock, String date) {
         String eventAnnouncement = stock.getCompanyName() + " declared bankruptcy today. A buyout has " +
                 "been announced, leading to a new start for the company";
         newsService.saveNewsForStock(stock, eventAnnouncement, date);

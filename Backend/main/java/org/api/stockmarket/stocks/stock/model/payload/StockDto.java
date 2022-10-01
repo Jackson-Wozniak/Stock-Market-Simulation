@@ -31,7 +31,7 @@ public class StockDto extends Stock implements Serializable {
     private List<News> newsHistory;
     private List<EarningsReport> earningsHistory;
 
-    public StockDto(Stock stock){
+    public StockDto(Stock stock) {
         this.ticker = stock.getTicker();
         this.companyName = stock.getCompanyName();
         this.sector = stock.getSector();

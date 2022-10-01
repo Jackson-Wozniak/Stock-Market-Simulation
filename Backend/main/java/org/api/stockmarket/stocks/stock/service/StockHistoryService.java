@@ -24,9 +24,9 @@ public class StockHistoryService {
     @Autowired
     private MarketService marketService;
 
-    public void saveStockHistoryDaily(){
+    public void saveStockHistoryDaily() {
         Market market = marketService.findMarketEntity();
-        stockService.getAllStocks().forEach( stock -> {
+        stockService.getAllStocks().forEach(stock -> {
             stockHistoryRepository.save(new StockHistory(
                     market.getDate(),
                     stock.getTicker(),
@@ -34,7 +34,7 @@ public class StockHistoryService {
         });
     }
 
-    public List<StockHistory> findStockHistory(String ticker){
+    public List<StockHistory> findStockHistory(String ticker) {
         List<StockHistory> stockHistory = stockHistoryRepository.findAll().stream()
                 .filter(history -> history.getTicker().equalsIgnoreCase(ticker))
                 .collect(Collectors.toList());

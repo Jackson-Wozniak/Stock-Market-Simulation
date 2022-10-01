@@ -16,17 +16,17 @@ public class EarningsService {
     @Autowired
     private final EarningsRepository earningsRepository;
 
-    public List<EarningsReport> findAllEarningsReports(){
+    public List<EarningsReport> findAllEarningsReports() {
         return earningsRepository.findAll();
     }
 
-    public List<EarningsReport> findAllEarningsByDate(String date){
+    public List<EarningsReport> findAllEarningsByDate(String date) {
         return earningsRepository.findAll().stream()
                 .filter(earnings -> earnings.getDateOfRelease().equalsIgnoreCase(date))
                 .collect(Collectors.toList());
     }
 
-    public void saveEarningsReport(EarningsReport earningsReport){
+    public void saveEarningsReport(EarningsReport earningsReport) {
         earningsRepository.save(earningsReport);
     }
 }

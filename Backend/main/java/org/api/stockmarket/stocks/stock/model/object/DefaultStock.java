@@ -31,10 +31,10 @@ public class DefaultStock extends Stock {
     private Boolean volatileStock;
 
     public DefaultStock(String ticker,
-                 String companyName,
-                 String sector,
-                 MarketCap marketCap,
-                 boolean volatileStock){
+                        String companyName,
+                        String sector,
+                        MarketCap marketCap,
+                        boolean volatileStock) {
         this.ticker = ticker;
         this.companyName = companyName;
         this.sector = sector;

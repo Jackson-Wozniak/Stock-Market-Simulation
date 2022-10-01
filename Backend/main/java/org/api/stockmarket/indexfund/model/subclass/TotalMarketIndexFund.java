@@ -9,7 +9,7 @@ import org.api.stockmarket.indexfund.model.IndexFund;
 @Setter
 public class TotalMarketIndexFund extends IndexFund {
 
-    public TotalMarketIndexFund(double price){
+    public TotalMarketIndexFund(double price) {
         super("Total Market ETF", price, FundTracking.TOTAL_MARKET);
     }
 }

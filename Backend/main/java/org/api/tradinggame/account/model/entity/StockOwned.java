@@ -43,14 +43,14 @@ public class StockOwned implements Serializable {
     @Column(name = "cost_basis")
     private Double costBasis;
 
-    public StockOwned(Account account, String ticker, int amountOwned, double costBasis){
+    public StockOwned(Account account, String ticker, int amountOwned, double costBasis) {
         this.account = account;
         this.ticker = ticker;
         this.amountOwned = amountOwned;
         this.costBasis = costBasis;
     }
 
-    public void updateCostBasisAndAmountOwned(int amountToBuy, double currentStockPrice){
+    public void updateCostBasisAndAmountOwned(int amountToBuy, double currentStockPrice) {
         this.setCostBasis(CalculateCostBasisAndProfits.newCostBasis(
                 this.amountOwned, amountToBuy, this.costBasis, currentStockPrice));
         this.setAmountOwned(this.amountOwned + amountToBuy);

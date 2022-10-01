@@ -22,23 +22,23 @@ public class LimitOrderService {
     @Autowired
     private final StockOwnedService stockOwnedService;
 
-    public void saveLimitOrder(LimitOrder limitOrder){
+    public void saveLimitOrder(LimitOrder limitOrder) {
         limitOrderRepository.save(limitOrder);
     }
 
-    public void deleteLimitOrder(LimitOrder limitOrder){
+    public void deleteLimitOrder(LimitOrder limitOrder) {
         limitOrderRepository.delete(limitOrder);
     }
 
-    public List<LimitOrder> findLimitOrdersByAccount(Account account){
+    public List<LimitOrder> findLimitOrdersByAccount(Account account) {
         return limitOrderRepository.findAll().stream()
                 .filter(order -> order.getAccount().getUsername().equals(account.getUsername()))
                 .collect(Collectors.toList());
     }
 
-    public void processAllLimitOrders(){
+    public void processAllLimitOrders() {
         limitOrderRepository.findAll().forEach(order -> {
-            if(order.getLimitPrice() < order.getStock().getPrice()){
+            if (order.getLimitPrice() < order.getStock().getPrice()) {
                 try {
                     stockOwnedService.buyStock(new BuyStockRequest(
                             order.getAccount().getUsername(),
@@ -55,12 +55,12 @@ public class LimitOrderService {
     }
 
     @Transactional
-    public void truncateLimitOrders(){
+    public void truncateLimitOrders() {
         limitOrderRepository.truncateTable();
         System.out.println("orders truncated");
     }
 
-    private void clearAndDeleteLimitOrder(LimitOrder limitOrder){
+    private void clearAndDeleteLimitOrder(LimitOrder limitOrder) {
         limitOrder.setAccount(null);
         limitOrder.setStock(null);
 

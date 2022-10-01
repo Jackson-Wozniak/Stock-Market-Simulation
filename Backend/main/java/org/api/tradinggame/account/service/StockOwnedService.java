@@ -26,14 +26,14 @@ public class StockOwnedService {
     @Autowired
     private final StockService stockService;
 
-    public void buyStock(BuyStockRequest buyStock){
-        Account account =  accountService.getAccountByName(buyStock.getUsername());
+    public void buyStock(BuyStockRequest buyStock) {
+        Account account = accountService.getAccountByName(buyStock.getUsername());
         Stock stock = stockService.getStockByTickerSymbol(buyStock.getTicker());
         StockOwned stockOwned = findStockOwned(account, stock);
-        if(!ValidateStockTransaction.doesAccountHaveEnoughMoney(account, buyStock, this.stockService)){
+        if (!ValidateStockTransaction.doesAccountHaveEnoughMoney(account, buyStock, this.stockService)) {
             throw new AccountBalanceException("Account does not have funds for this purchase");
         }
-        if(stockOwned != null) {
+        if (stockOwned != null) {
             //subtract transaction value from account balance
             accountService.updateBalanceAndSave(account, -1 * (buyStock.getSharesToBuy() * stock.getPrice()));
             stockOwned.updateCostBasisAndAmountOwned(buyStock.getSharesToBuy(), stock.getPrice());
@@ -45,14 +45,14 @@ public class StockOwnedService {
         saveNewStockOwned(buyStock, account, stock.getPrice());
     }
 
-    public void saveNewStockOwned(BuyStockRequest buyStock, Account account, double stockPrice){
+    public void saveNewStockOwned(BuyStockRequest buyStock, Account account, double stockPrice) {
         stockOwnedRepository.save(new StockOwned(
                 account, buyStock.getTicker(), buyStock.getSharesToBuy(), stockPrice));
     }
 
-    public void sellStock(SellStockRequest sellStock){
+    public void sellStock(SellStockRequest sellStock) {
         Account account = accountService.getAccountByName(sellStock.getUsername());
-        if(!ValidateStockTransaction.doesAccountHaveEnoughStocks(account, sellStock)){
+        if (!ValidateStockTransaction.doesAccountHaveEnoughStocks(account, sellStock)) {
             throw new AccountInventoryException("Account does not own enough stocks");
         }
         Stock stock = stockService.getStockByTickerSymbol(sellStock.getTicker());
@@ -62,15 +62,15 @@ public class StockOwnedService {
                 sellStock.getSharesToSell(),
                 stock.getPrice());
         accountService.updateBalanceAndSave(account, stock.getPrice() * sellStock.getSharesToSell());
-        if(sellStock.getSharesToSell() - stockOwned.getAmountOwned() == 0){
+        if (sellStock.getSharesToSell() - stockOwned.getAmountOwned() == 0) {
             clearAndDeleteStockOwned(stockOwned);
-        }else{
+        } else {
             stockOwned.setAmountOwned(stockOwned.getAmountOwned() - sellStock.getSharesToSell());
             stockOwnedRepository.save(stockOwned);
         }
     }
 
-    public StockOwned findStockOwned(Account account, Stock stock){
+    public StockOwned findStockOwned(Account account, Stock stock) {
         return stockOwnedRepository.findAll().stream()
                 .filter(stockOwned -> stockOwned.getTicker().equalsIgnoreCase(stock.getTicker()))
                 .filter(stockOwned -> stockOwned.getAccount().getUsername().equals(account.getUsername()))
@@ -78,7 +78,7 @@ public class StockOwnedService {
                 .orElse(null);
     }
 
-    public void clearAndDeleteStockOwned(StockOwned stockOwned){
+    public void clearAndDeleteStockOwned(StockOwned stockOwned) {
         //stockInventory.setAccount(null);
         stockOwnedRepository.delete(stockOwned);
     }

@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
-public class Stock{
+public class Stock {
 
     @Id
     private String ticker;
@@ -61,7 +61,7 @@ public class Stock{
             String sector,
             MarketCap marketCap,
             double price
-    ){
+    ) {
         this.ticker = ticker;
         this.companyName = companyName;
         this.sector = sector;
@@ -69,37 +69,37 @@ public class Stock{
         this.price = price;
     }
 
-    public void updateMomentum(){
+    public void updateMomentum() {
         int momentumStreak = getMomentumStreakInDays();
-        if(momentumStreak >= 7){
+        if (momentumStreak >= 7) {
             setMomentum(2);
             return;
         }
-        if(momentumStreak >= 3){
+        if (momentumStreak >= 3) {
             setMomentum(1);
             return;
         }
-        if(momentumStreak <= -7){
+        if (momentumStreak <= -7) {
             setMomentum(-2);
             return;
         }
-        if(momentumStreak <= -3){
+        if (momentumStreak <= -3) {
             setMomentum(-1);
             return;
         }
         setMomentum(0);
     }
 
-    public void updateMomentumStreak(){
-        if(getMomentumStreakInDays() == null){
+    public void updateMomentumStreak() {
+        if (getMomentumStreakInDays() == null) {
             setMomentumStreakInDays(0);
             return;
         }
-        if(getPrice() > getLastDayPrice()){
+        if (getPrice() > getLastDayPrice()) {
             setMomentumStreakInDays(getMomentumStreakInDays() + 1);
             return;
         }
-        if(getPrice() < getLastDayPrice()){
+        if (getPrice() < getLastDayPrice()) {
             setMomentumStreakInDays(getMomentumStreakInDays() - 1);
         }
     }

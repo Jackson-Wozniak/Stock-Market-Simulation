@@ -33,10 +33,10 @@ public class MarketActivityConfiguration {
 
     @Scheduled(fixedDelay = MarketIntervals.TEN_SECONDS)
     @SuppressWarnings("unused")
-    public void dailyMarketActivity(){
+    public void dailyMarketActivity() {
         marketHour++;
         limitOrderService.processAllLimitOrders();
-        if(marketHour >= 24){
+        if (marketHour >= 24) {
             logger.info("End of day " + handleMarketActivity.dailyMarketActivity());
 
             limitOrderService.truncateLimitOrders();
@@ -44,13 +44,13 @@ public class MarketActivityConfiguration {
             stockHistoryService.saveStockHistoryDaily();
 
             marketHour = 0;
-            if(marketDay >= 30){
+            if (marketDay >= 30) {
                 handleMarketActivity.updateMarketMonthlyValues(
                         accountHistoryService);
                 marketDay = 0;
             }
             marketDay++;
-        }else{
+        } else {
             //boolean value means that it is not the end of the day and only prices update
             handleMarketActivity.updateNewStockInformation(false);
         }

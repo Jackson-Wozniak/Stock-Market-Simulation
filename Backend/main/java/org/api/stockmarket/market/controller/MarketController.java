@@ -16,7 +16,7 @@ public class MarketController {
     private final MarketService marketService;
 
     @RequestMapping(value = "")
-    public Market findMarketEntity(){
+    public Market findMarketEntity() {
         return marketService.findMarketEntity();
     }
 }

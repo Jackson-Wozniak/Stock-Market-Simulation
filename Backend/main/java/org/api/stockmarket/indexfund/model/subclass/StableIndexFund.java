@@ -11,7 +11,7 @@ public class StableIndexFund extends IndexFund {
 
     private boolean volatility;
 
-    public StableIndexFund(double price){
+    public StableIndexFund(double price) {
         super("Stable Index Fund", price, FundTracking.VOLATILITY);
         this.volatility = false;
     }

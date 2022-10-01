@@ -21,12 +21,12 @@ public class ReleaseEarningsReport {
     @Autowired
     private final EarningsService earningsService;
 
-    public void handleQuarterlyEarningsReports(List<Stock> stocks, String marketDate){
+    public void handleQuarterlyEarningsReports(List<Stock> stocks, String marketDate) {
         stocks.forEach(stock -> earningsService.saveEarningsReport(
                 createEarningsReport(stock, marketDate)));
     }
 
-    public EarningsReport createEarningsReport(Stock stock, String marketDate){
+    public EarningsReport createEarningsReport(Stock stock, String marketDate) {
         double estimatedEPS = FindEarningsPerShare.getEstimatedEarningsPerShare();
         double actualEPS = FindEarningsPerShare.getActualEarningsPerShare(stock);
         String earningsMessage = getEarningsMessage(stock, estimatedEPS, actualEPS, marketDate);
@@ -36,12 +36,12 @@ public class ReleaseEarningsReport {
     public String getEarningsMessage(Stock stock,
                                      double estimatedEPS,
                                      double actualEPS,
-                                     String marketDate){
-        if(actualEPS - estimatedEPS >= 1){
-           return DefaultEarningsMessages.getPositiveEarningsReport(
-                   stock, estimatedEPS, actualEPS, marketDate);
+                                     String marketDate) {
+        if (actualEPS - estimatedEPS >= 1) {
+            return DefaultEarningsMessages.getPositiveEarningsReport(
+                    stock, estimatedEPS, actualEPS, marketDate);
         }
-        if(actualEPS - estimatedEPS <= -1){
+        if (actualEPS - estimatedEPS <= -1) {
             return DefaultEarningsMessages.getNegativeEarningsReport(
                     stock, estimatedEPS, actualEPS, marketDate);
         }

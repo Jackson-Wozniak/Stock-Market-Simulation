@@ -21,30 +21,30 @@ public class StockService {
     @Autowired
     private final StockRepository stockRepository;
 
-    public List<Stock> getAllStocks(){
+    public List<Stock> getAllStocks() {
         return stockRepository.findAll();
     }
 
     //this method is used to generate random news events
-    public Stock getRandomStock(){
+    public Stock getRandomStock() {
         List<Stock> stocks = getAllStocks();
         Collections.shuffle(stocks);
         return stocks.get(0);
     }
 
-    public List<Stock> getAllStocksByMarketCap(MarketCap marketCap){
+    public List<Stock> getAllStocksByMarketCap(MarketCap marketCap) {
         return stockRepository.findAll().stream()
                 .filter(stock -> stock.getMarketCap()
                         .equals(marketCap)).collect(Collectors.toList());
     }
 
-    public List<Stock> getAllStocksBySector(String sector){
+    public List<Stock> getAllStocksBySector(String sector) {
         return stockRepository.findAll().stream()
                 .filter(stock -> stock.getSector()
                         .equalsIgnoreCase(sector)).collect(Collectors.toList());
     }
 
-    public List<Stock> getAllStocksByVolatility(boolean volatility){
+    public List<Stock> getAllStocksByVolatility(boolean volatility) {
         return stockRepository.findAll().stream()
                 .filter(stock -> stock.getVolatileStock() == volatility)
                 .collect(Collectors.toList());
@@ -57,7 +57,7 @@ public class StockService {
     }
 
     public double getStockPriceWithTickerSymbol(String ticker) throws StockNotFoundException {
-        if(!DoesStockExist.stockExistsWithTicker(this, ticker)){
+        if (!DoesStockExist.stockExistsWithTicker(this, ticker)) {
             throw new StockNotFoundException("No stock with ticker symbol " + ticker + " exists");
         }
         return getStockByTickerSymbol(ticker).getPrice();
@@ -65,19 +65,19 @@ public class StockService {
 
     //Ignore any stocks that do not currently exist
     public void updateStockInDatabase(Stock stock) {
-        if(!DoesStockExist.stockExistsWithTicker(this, stock.getTicker())){
+        if (!DoesStockExist.stockExistsWithTicker(this, stock.getTicker())) {
             return;
         }
         stockRepository.save(stock);
     }
 
-    public int findStockRowCount(){
+    public int findStockRowCount() {
         return (int) stockRepository.count();
     }
 
-    public void saveDefaultStockToDatabase(List<DefaultStock> defaultStocks){
+    public void saveDefaultStockToDatabase(List<DefaultStock> defaultStocks) {
         defaultStocks.forEach(stock -> {
-            if(DoesStockExist.stockExistsWithTicker(this, stock.getTicker())){
+            if (DoesStockExist.stockExistsWithTicker(this, stock.getTicker())) {
                 return;
             }
             System.out.println(stock.getTicker() + " saved");

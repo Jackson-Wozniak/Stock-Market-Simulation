@@ -19,7 +19,7 @@ public class MarketConfiguration {
     private final Logger logger = LoggerFactory.getLogger(MarketConfiguration.class);
 
     @PostConstruct
-    public void configureBaselineMarket(){
+    public void configureBaselineMarket() {
         //Calling this method will automatically create a new Market Entity if one doesn't exist
         //This happens because only a single market entity should exist, with ID 1
         Market market = marketService.findMarketEntity();

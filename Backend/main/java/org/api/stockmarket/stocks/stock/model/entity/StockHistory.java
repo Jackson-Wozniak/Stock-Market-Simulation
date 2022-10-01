@@ -20,7 +20,7 @@ Saves daily stock history for one year.
 @NoArgsConstructor
 @AllArgsConstructor
 @IdClass(StockHistoryId.class)
-public class StockHistory implements Serializable{
+public class StockHistory implements Serializable {
 
     @Id
     private String marketDate;

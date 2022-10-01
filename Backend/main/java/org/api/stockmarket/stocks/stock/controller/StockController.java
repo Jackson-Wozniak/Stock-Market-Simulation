@@ -30,20 +30,20 @@ public class StockController {
     }
 
     @GetMapping(value = "/all")
-    public List<Stock> getAllStockData(){
+    public List<Stock> getAllStockData() {
         return stockService.getAllStocks()
                 .stream().map(StockDto::new).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/marketCap/{marketCap}")
-    public List<Stock> getAllStocksByMarketCap(@PathVariable String marketCap){
+    public List<Stock> getAllStocksByMarketCap(@PathVariable String marketCap) {
         MarketCap cap = MarketCap.valueOf(Capitalize.capitalize(marketCap));
         return stockService.getAllStocksByMarketCap(cap)
                 .stream().map(StockDto::new).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/sector/{sector}")
-    public List<Stock> getAllStocksBySector(@PathVariable String sector){
+    public List<Stock> getAllStocksBySector(@PathVariable String sector) {
         return stockService.getAllStocksBySector(sector)
                 .stream().map(StockDto::new).collect(Collectors.toList());
     }

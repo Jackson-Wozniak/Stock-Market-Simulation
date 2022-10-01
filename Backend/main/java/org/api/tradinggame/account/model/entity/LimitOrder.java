@@ -32,15 +32,15 @@ public class LimitOrder implements Serializable {
     @Column
     private Double limitPrice;
 
-    public LimitOrder(Account account, Stock stock, int sharesToBuy, double limitPrice){
+    public LimitOrder(Account account, Stock stock, int sharesToBuy, double limitPrice) {
         this.account = account;
         this.sharesToBuy = sharesToBuy;
         this.stock = stock;
         this.limitPrice = limitPrice;
-        if(!validOrderRequest()) throw new AccountBalanceException("Cannot Process Order");
+        if (!validOrderRequest()) throw new AccountBalanceException("Cannot Process Order");
     }
 
-    public boolean validOrderRequest(){
+    public boolean validOrderRequest() {
         return !(sharesToBuy * stock.getPrice() > account.getAccountBalance());
     }
 }

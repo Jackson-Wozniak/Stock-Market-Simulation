@@ -15,13 +15,13 @@ class FindStockOwnedTest {
     private static final Set<StockOwned> emptyStocksOwned = Set.of();
 
     @Test
-    void findStockTicker(){
+    void findStockTicker() {
         StockOwned stock = FindStockOwned.findOwnedStockByTicker(stocksOwned, "AMZN");
         assertEquals(stock.getTicker(), "AMZN");
     }
 
     @Test
-    void cannotFindStockReturnsNull(){
+    void cannotFindStockReturnsNull() {
         assertNull(FindStockOwned.findOwnedStockByTicker(emptyStocksOwned, "AMZN"));
     }
 

@@ -12,7 +12,7 @@ public class SectorIndexFund extends IndexFund {
 
     private String sector;
 
-    public SectorIndexFund(String sector, double price){
+    public SectorIndexFund(String sector, double price) {
         super(Capitalize.capitalize(sector) + " Fund",
                 price,
                 FundTracking.SECTOR);

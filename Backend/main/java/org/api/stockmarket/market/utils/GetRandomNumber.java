@@ -8,17 +8,17 @@ public class GetRandomNumber {
 
     private static final Random random = new Random();
 
-    public static double getRandomNumberForStocks(MarketCap marketCap){
-        return switch (marketCap){
-          case Large -> random.nextDouble(-.002, .002);
-          case Mid -> random.nextDouble(-.001, .001);
-          case Small -> random.nextDouble(-.003, .003);
-          default -> -1;
+    public static double getRandomNumberForStocks(MarketCap marketCap) {
+        return switch (marketCap) {
+            case Large -> random.nextDouble(-.002, .002);
+            case Mid -> random.nextDouble(-.001, .001);
+            case Small -> random.nextDouble(-.003, .003);
+            default -> -1;
         };
     }
 
-    public static double getRandomPositiveNumberForStocks(MarketCap marketCap){
-        return switch (marketCap){
+    public static double getRandomPositiveNumberForStocks(MarketCap marketCap) {
+        return switch (marketCap) {
             case Large -> random.nextDouble(0, .002);
             case Mid -> random.nextDouble(0, .001);
             case Small -> random.nextDouble(0, .003);
@@ -26,7 +26,7 @@ public class GetRandomNumber {
         };
     }
 
-    public static int drawRandomNumberToThirty(){
+    public static int drawRandomNumberToThirty() {
         return random.nextInt(30);
     }
 }

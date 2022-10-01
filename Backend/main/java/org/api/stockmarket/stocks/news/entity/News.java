@@ -33,7 +33,7 @@ public class News implements Serializable {
     @Column(name = "date_released")
     private String dateReleased;
 
-    public News(Stock stock, String event, String dateReleased){
+    public News(Stock stock, String event, String dateReleased) {
         this.stock = stock;
         this.event = event;
         this.dateReleased = dateReleased;

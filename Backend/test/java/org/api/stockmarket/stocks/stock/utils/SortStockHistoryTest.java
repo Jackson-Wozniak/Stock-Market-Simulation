@@ -20,7 +20,7 @@ class SortStockHistoryTest {
     private static final ArrayList<StockHistory> stockHistoryList1 = new ArrayList<>();
 
     @Test
-    void stockHistorySorted(){
+    void stockHistorySorted() {
         populateStockHistoryList();
         SortStockHistory.sortStockHistoryByDate(stockHistoryList1);
         assertEquals("1/1/1", stockHistoryList1.get(0).getMarketDate());
@@ -29,7 +29,7 @@ class SortStockHistoryTest {
         assertEquals("2/1/1", stockHistoryList1.get(3).getMarketDate());
     }
 
-    private static void populateStockHistoryList(){
+    private static void populateStockHistoryList() {
         stockHistoryList1.add(new StockHistory("1/1/1", "1", 0.0));
         stockHistoryList1.add(new StockHistory("1/5/1", "2", 0.0));
         stockHistoryList1.add(new StockHistory("2/1/1", "3", 0.0));

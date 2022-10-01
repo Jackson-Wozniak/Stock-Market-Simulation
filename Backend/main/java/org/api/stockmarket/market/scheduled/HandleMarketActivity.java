@@ -30,24 +30,24 @@ public class HandleMarketActivity {
     @Autowired
     private final ReleaseEarningsReport releaseEarningsReport;
 
-    public String dailyMarketActivity(){
+    public String dailyMarketActivity() {
         updateNewStockInformation(true);
         createRandomNewsEvents();
         String marketDate = incrementMarketDay();
-        if(timeForQuarterlyEarnings(marketDate)){
+        if (timeForQuarterlyEarnings(marketDate)) {
             releaseEarningsReport.handleQuarterlyEarningsReports(
                     stockService.getAllStocks(), marketDate);
         }
         return marketDate;
     }
 
-    public void updateNewStockInformation(boolean endOfDay){
+    public void updateNewStockInformation(boolean endOfDay) {
         List<Stock> stocks = stockService.getAllStocks();
         stocks.forEach(stock -> {
             stock.setPrice(changeStockPrices.automaticPriceChange(stock));
-            if(endOfDay){
+            if (endOfDay) {
                 //avoid stocks going to zero with bankruptcy event
-                if(stock.getPrice() < 1){
+                if (stock.getPrice() < 1) {
                     randomNewsEvents.stockBankruptNews(stock, marketService.findMarketEntity().getDate());
                     return;
                 }
@@ -59,7 +59,7 @@ public class HandleMarketActivity {
         });
     }
 
-    private String incrementMarketDay(){
+    private String incrementMarketDay() {
         Market market = marketService.findMarketEntity();
         market.incrementDay();
         marketService.saveMarketEntity(market);
@@ -67,7 +67,7 @@ public class HandleMarketActivity {
     }
 
     public void updateMarketMonthlyValues(
-            AccountHistoryService accountHistoryService){
+            AccountHistoryService accountHistoryService) {
         Market market = marketService.findMarketEntity();
         market.setMarketTrajectory(MarketTrajectoryUtils.getNewMarketTrajectory(
                 market, stockService.getAllStocks()));
@@ -76,29 +76,29 @@ public class HandleMarketActivity {
         marketService.saveMarketEntity(market);
 
         //all daily account records will be removed at the end of each year, creating a clean slate
-        if(endOfYear(market.getDate())){
+        if (endOfYear(market.getDate())) {
             accountHistoryService.truncateAccountHistoryAtEndOfYear();
         }
     }
 
-    private void createRandomNewsEvents(){
+    private void createRandomNewsEvents() {
         int randomNumber = GetRandomNumber.drawRandomNumberToThirty();
-        if(randomNumber == 10){
+        if (randomNumber == 10) {
             randomNewsEvents.processPositiveNewsEvent(marketService.findMarketEntity().getDate());
             System.out.println("Positive News");
-        }else if(randomNumber == 20){
+        } else if (randomNumber == 20) {
             randomNewsEvents.processNegativeNewsEvents(marketService.findMarketEntity().getDate());
             System.out.println("Negative News");
         }
     }
 
-    private boolean timeForQuarterlyEarnings(String marketDate){
-       String[] dateArray = marketDate.split("/");
-       //earnings report released on first day of 3rd, 6th, 9th and 12th month
-       return Integer.parseInt(dateArray[0]) % 3 == 0 && Integer.parseInt(dateArray[1]) == 1;
+    private boolean timeForQuarterlyEarnings(String marketDate) {
+        String[] dateArray = marketDate.split("/");
+        //earnings report released on first day of 3rd, 6th, 9th and 12th month
+        return Integer.parseInt(dateArray[0]) % 3 == 0 && Integer.parseInt(dateArray[1]) == 1;
     }
 
-    private boolean endOfYear(String marketDate){
+    private boolean endOfYear(String marketDate) {
         String[] dateArray = marketDate.split("/");
         return Integer.parseInt(dateArray[0]) == 12 && Integer.parseInt(dateArray[1]) == 30;
     }

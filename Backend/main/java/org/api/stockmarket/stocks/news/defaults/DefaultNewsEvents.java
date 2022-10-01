@@ -12,7 +12,7 @@ These will happen randomly, although I may make earnings reports a regular occur
  */
 public class DefaultNewsEvents {
 
-    public static String negativeNewsEvents(Stock stock){
+    public static String negativeNewsEvents(Stock stock) {
         List<String> events = List.of(
                 "Lawsuit announced against " + stock.getCompanyName()
                         + " today, investigations ongoing.",
@@ -24,7 +24,7 @@ public class DefaultNewsEvents {
         return events.get(random.nextInt(events.size()));
     }
 
-    public static String positiveNewsEvents(Stock stock){
+    public static String positiveNewsEvents(Stock stock) {
         List<String> events = List.of(
                 stock.getCompanyName() + " announces buyout of small " + stock.getSector() + " company." +
                         " There price soared as a result"

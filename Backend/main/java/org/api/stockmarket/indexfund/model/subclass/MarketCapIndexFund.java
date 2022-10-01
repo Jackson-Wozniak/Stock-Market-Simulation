@@ -12,7 +12,7 @@ public class MarketCapIndexFund extends IndexFund {
 
     private String marketCap;
 
-    public MarketCapIndexFund(String marketCap, double price){
+    public MarketCapIndexFund(String marketCap, double price) {
         super(Capitalize.capitalize(marketCap) + " Cap Index Fund",
                 price,
                 FundTracking.MARKET_CAP);

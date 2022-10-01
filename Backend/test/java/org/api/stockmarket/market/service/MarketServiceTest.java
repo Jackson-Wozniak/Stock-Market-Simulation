@@ -20,12 +20,12 @@ class MarketServiceTest {
     private MarketService marketService;
 
     @Test
-    void marketEntityIsNotNull(){
+    void marketEntityIsNotNull() {
         assertNotNull(marketService.findMarketEntity());
     }
 
     @Test
-    void marketEntityReturnsTheSameEachTime(){
+    void marketEntityReturnsTheSameEachTime() {
         Market market = marketService.findMarketEntity();
         assertEquals(1, market.getId());
     }

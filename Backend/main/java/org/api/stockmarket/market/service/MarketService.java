@@ -14,18 +14,18 @@ public class MarketService {
     @Autowired
     private final MarketRepository marketRepository;
 
-    public Market findMarketEntity(){
+    public Market findMarketEntity() {
         Market market = marketRepository.findById(1).orElse(null);
-        if(market == null){
-            market = new Market("1/1/1" ,41.0, MarketTrajectory.NORMAL);
+        if (market == null) {
+            market = new Market("1/1/1", 41.0, MarketTrajectory.NORMAL);
             saveMarketEntity(market);
             return market;
         }
         return market;
     }
 
-    public void saveMarketEntity(Market market){
-        if(market == null) return;
+    public void saveMarketEntity(Market market) {
+        if (market == null) return;
         marketRepository.save(market);
     }
 }

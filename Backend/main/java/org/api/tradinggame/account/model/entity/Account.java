@@ -40,14 +40,14 @@ public class Account implements Serializable {
     @JsonManagedReference
     private List<AccountHistory> accountHistory;
 
-    public Account(String username){
+    public Account(String username) {
         this.username = username;
         this.accountBalance = 10_000.0;
         this.totalProfits = 0.0;
     }
 
-    public void updateTotalProfits(double costBasis, int sharesToSell, double currentPrice){
-        if(this.totalProfits == null) this.totalProfits = 0.0;
+    public void updateTotalProfits(double costBasis, int sharesToSell, double currentPrice) {
+        if (this.totalProfits == null) this.totalProfits = 0.0;
         setTotalProfits(CalculateCostBasisAndProfits.findProfitsAfterSelling(
                 this.totalProfits, costBasis, sharesToSell, currentPrice
         ));

@@ -19,7 +19,7 @@ public class StockHistoryController {
     private final StockHistoryService stockHistoryService;
 
     @RequestMapping(value = "/stock/{ticker}")
-    public List<StockHistory> getStockHistory(@PathVariable String ticker){
+    public List<StockHistory> getStockHistory(@PathVariable String ticker) {
         return stockHistoryService.findStockHistory(ticker);
     }
 }

@@ -21,35 +21,35 @@ public class IndexFundController {
     private CalculateIndexFundPrice calculateIndexFundPrice;
 
     @RequestMapping(value = "/total-market")
-    public IndexFund getTotalMarketFund(){
+    public IndexFund getTotalMarketFund() {
         return new TotalMarketIndexFund(calculateIndexFundPrice.findPriceOfTotalMarketFund());
     }
 
     @RequestMapping(value = "/cap/{marketCap}")
-    public IndexFund getMarketCapFund(@PathVariable String marketCap){
-        try{
+    public IndexFund getMarketCapFund(@PathVariable String marketCap) {
+        try {
             MarketCap enumMarketCap = MarketCap.valueOf(Capitalize.capitalize(marketCap));
             return new MarketCapIndexFund(
-                    marketCap ,calculateIndexFundPrice.findPriceOfMarketCapFund(enumMarketCap));
-        }catch (EnumConstantNotPresentException | IllegalArgumentException ex){
+                    marketCap, calculateIndexFundPrice.findPriceOfMarketCapFund(enumMarketCap));
+        } catch (EnumConstantNotPresentException | IllegalArgumentException ex) {
             throw new IndexFundException();
         }
     }
 
     @RequestMapping(value = "/sector/{sector}")
-    public IndexFund getSectorIndexFund(@PathVariable String sector){
+    public IndexFund getSectorIndexFund(@PathVariable String sector) {
         return new SectorIndexFund(
-                sector ,calculateIndexFundPrice.findPriceOfSectorFund(sector));
+                sector, calculateIndexFundPrice.findPriceOfSectorFund(sector));
     }
 
     @RequestMapping(value = "/volatile")
-    public IndexFund getVolatileIndexFund(){
+    public IndexFund getVolatileIndexFund() {
         return new VolatilityIndexFund(
                 calculateIndexFundPrice.findPriceOfVolatileFunds(true));
     }
 
     @RequestMapping(value = "/stable")
-    public IndexFund getStableIndexFund(){
+    public IndexFund getStableIndexFund() {
         return new StableIndexFund(
                 calculateIndexFundPrice.findPriceOfVolatileFunds(false));
     }

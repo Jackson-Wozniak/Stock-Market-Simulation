@@ -29,7 +29,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/all")
-    public List<News> findAllMarketNews(){
+    public List<News> findAllMarketNews() {
         return newsService.findAllNews();
     }
 }
