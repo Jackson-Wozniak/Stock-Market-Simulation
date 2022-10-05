@@ -24,8 +24,8 @@ public class NewsController {
     private final NewsService newsService;
 
     @RequestMapping(value = "/{ticker}")
-    public StockDto findStockNewsWithTicker(@PathVariable String ticker) throws StockNotFoundException {
-        return new StockDto(stockService.getStockByTickerSymbol(ticker));
+    public List<News> findStockNewsWithTicker(@PathVariable String ticker) throws StockNotFoundException {
+        return stockService.getStockByTickerSymbol(ticker).getNewsHistory();
     }
 
     @RequestMapping(value = "/all")

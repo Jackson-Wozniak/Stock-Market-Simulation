@@ -7,6 +7,7 @@ import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
 import org.api.stockmarket.stocks.stock.utils.PercentChange;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class StockDto extends Stock implements Serializable {
+public class StockDto implements Serializable {
 
     private String ticker;
     private String companyName;
@@ -30,8 +31,9 @@ public class StockDto extends Stock implements Serializable {
     private Boolean volatileStock;
     private List<News> newsHistory;
     private List<EarningsReport> earningsHistory;
+    private List<StockHistory> stockHistory;
 
-    public StockDto(Stock stock) {
+    public StockDto(Stock stock, List<StockHistory> stockHistory) {
         this.ticker = stock.getTicker();
         this.companyName = stock.getCompanyName();
         this.sector = stock.getSector();
@@ -44,5 +46,6 @@ public class StockDto extends Stock implements Serializable {
         this.newsHistory = stock.getNewsHistory();
         this.earningsHistory = stock.getEarningsHistory();
         this.percentChange = PercentChange.percentChange(this.getPrice(), this.getLastDayPrice());
+        this.stockHistory = stockHistory;
     }
 }

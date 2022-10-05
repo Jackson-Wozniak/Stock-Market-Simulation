@@ -13,12 +13,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+/*
+This controller provides the endpoints related to stocks on the market.
+All individual stocks here will be sent using the StockDto class as that class includes
+    news, earnings, and price history.
+All lists of stocks (such as sorting by sector ar cap) will be sent using the default
+stock class, which ignores news, earnings, and price history fields.
+ */
 @RestController
 @RequestMapping(value = "/api/v1/stocks")
 @CrossOrigin(value = "http://127.0.0.1:5500")
 @AllArgsConstructor
+@SuppressWarnings("unused")
 public class StockController {
 
     @Autowired
@@ -27,14 +34,15 @@ public class StockController {
     private final StockHistoryService stockHistoryService;
 
     @GetMapping(value = "/{ticker}")
-    public Stock getIndividualStockData(@PathVariable String ticker) {
-        return new StockDto(stockService.getStockByTickerSymbol(ticker));
+    public StockDto getIndividualStockData(@PathVariable String ticker) {
+        return new StockDto(
+                stockService.getStockByTickerSymbol(ticker),
+                stockHistoryService.findStockHistoryByTicker(ticker));
     }
 
     @GetMapping(value = "/all")
     public List<Stock> getAllStockData() {
-        return stockService.getAllStocks()
-                .stream().map(StockDto::new).collect(Collectors.toList());
+        return stockService.getAllStocks();
     }
 
     @GetMapping(value = "/marketCap/{marketCap}")
@@ -54,8 +62,9 @@ public class StockController {
     }
 
     @GetMapping(value = "/random")
-    public Stock getRandomStock() {
-        return new StockDto(stockService.getRandomStock());
+    public StockDto getRandomStock() {
+        Stock stock = stockService.getRandomStock();
+        return new StockDto(stock, stockHistoryService.findStockHistoryByTicker(stock.getTicker()));
     }
 
     @RequestMapping(value = "/history/{ticker}")

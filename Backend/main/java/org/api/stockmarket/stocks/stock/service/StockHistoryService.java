@@ -5,7 +5,7 @@ import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.service.MarketService;
 import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
 import org.api.stockmarket.stocks.stock.repository.StockHistoryRepository;
-import org.api.stockmarket.stocks.stock.utils.SortStockHistory;
+import org.api.stockmarket.stocks.stock.utils.SortHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class StockHistoryService {
         List<StockHistory> stockHistory = stockHistoryRepository.findAll().stream()
                 .filter(history -> history.getTicker().equalsIgnoreCase(ticker))
                 .collect(Collectors.toList());
-        SortStockHistory.sortStockHistoryByDate(stockHistory);
+        SortHistory.sortStockHistoryByDate(stockHistory);
         return stockHistory;
     }
 }

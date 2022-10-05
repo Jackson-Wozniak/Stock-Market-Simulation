@@ -1,19 +1,15 @@
 package org.api.stockmarket.stocks.stock.utils;
 
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
 import org.junit.jupiter.api.Test;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SortStockHistoryTest {
+class SortHistoryTest {
 
     private static final DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -22,7 +18,7 @@ class SortStockHistoryTest {
     @Test
     void stockHistorySorted() {
         populateStockHistoryList();
-        SortStockHistory.sortStockHistoryByDate(stockHistoryList1);
+        SortHistory.sortStockHistoryByDate(stockHistoryList1);
         assertEquals("1/1/1", stockHistoryList1.get(0).getMarketDate());
         assertEquals("1/3/1", stockHistoryList1.get(1).getMarketDate());
         assertEquals("1/5/1", stockHistoryList1.get(2).getMarketDate());

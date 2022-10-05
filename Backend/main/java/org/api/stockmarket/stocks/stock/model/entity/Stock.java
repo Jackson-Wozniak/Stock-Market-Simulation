@@ -1,5 +1,6 @@
 package org.api.stockmarket.stocks.stock.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
+import org.api.stockmarket.stocks.stock.utils.PercentChange;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -49,10 +51,12 @@ public class Stock {
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
     private List<News> newsHistory;
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
     private List<EarningsReport> earningsHistory;
 
     public Stock(

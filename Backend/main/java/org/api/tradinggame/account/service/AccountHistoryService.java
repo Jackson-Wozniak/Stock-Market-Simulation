@@ -3,6 +3,7 @@ package org.api.tradinggame.account.service;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.service.MarketService;
+import org.api.stockmarket.stocks.stock.utils.SortHistory;
 import org.api.tradinggame.account.model.entity.AccountHistory;
 import org.api.tradinggame.account.repository.AccountHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,10 @@ public class AccountHistoryService {
     }
 
     public List<AccountHistory> findHistoryOfAccount(String username) {
-        return accountService.getAccountByName(username).getAccountHistory();
+        List<AccountHistory> accountHistory =
+                accountService.getAccountByName(username).getAccountHistory();
+        SortHistory.sortAccountHistoryByDate(accountHistory);
+        return accountHistory;
     }
 
     @Transactional
