@@ -30,7 +30,7 @@ public class IndexFundController {
         try {
             MarketCap enumMarketCap = MarketCap.valueOf(Capitalize.capitalize(marketCap));
             return new MarketCapIndexFund(
-                    marketCap, calculateIndexFundPrice.findPriceOfMarketCapFund(enumMarketCap));
+                    enumMarketCap, calculateIndexFundPrice.findPriceOfMarketCapFund(enumMarketCap));
         } catch (EnumConstantNotPresentException | IllegalArgumentException ex) {
             throw new IndexFundException();
         }

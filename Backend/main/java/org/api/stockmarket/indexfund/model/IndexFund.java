@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.api.stockmarket.indexfund.enums.FundTracking;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
