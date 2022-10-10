@@ -10,13 +10,12 @@ import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
 import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class StockDto implements Serializable {
+public class StockDto {
 
     private String ticker;
     private String companyName;

@@ -1,7 +1,6 @@
 package org.api.stockmarket.stocks.stock.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "stock")
@@ -19,7 +17,7 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
-public class Stock {
+public class Stock{
 
     @Id
     private String ticker;
@@ -49,12 +47,10 @@ public class Stock {
     private Boolean volatileStock;
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
     @JsonIgnore
     private List<News> newsHistory;
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
     @JsonIgnore
     private List<EarningsReport> earningsHistory;
 
@@ -106,5 +102,4 @@ public class Stock {
             setMomentumStreakInDays(getMomentumStreakInDays() - 1);
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package org.api.stockmarket.stocks.stock.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class StockHistory implements Serializable {
     private String marketDate;
 
     @Id
+    @JsonIgnore
     private String ticker;
 
     @Column(name = "price")
