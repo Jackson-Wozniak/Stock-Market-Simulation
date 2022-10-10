@@ -8,6 +8,9 @@ import org.api.stockmarket.indexfund.enums.FundTracking;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "index_fund")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,7 +22,12 @@ each day at the end of the day, similar to real world mutual funds
  */
 public class IndexFund {
 
+    @Id
     private String name;
-    private double price;
+
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "fund_tracking")
     private FundTracking fundTracking;
 }

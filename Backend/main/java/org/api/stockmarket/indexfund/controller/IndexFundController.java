@@ -5,12 +5,15 @@ import org.api.stockmarket.indexfund.exception.IndexFundException;
 import org.api.stockmarket.indexfund.helper.CalculateIndexFundPrice;
 import org.api.stockmarket.indexfund.model.IndexFund;
 import org.api.stockmarket.indexfund.model.subclass.*;
+import org.api.stockmarket.indexfund.service.IndexFundService;
 import org.api.stockmarket.indexfund.utils.Capitalize;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/funds")
@@ -19,6 +22,14 @@ public class IndexFundController {
 
     @Autowired
     private CalculateIndexFundPrice calculateIndexFundPrice;
+
+    @Autowired
+    private IndexFundService indexFundService;
+
+    @RequestMapping(value = "/all")
+    public List<IndexFund> getAllFunds() {
+        return indexFundService.findAllIndexFunds();
+    }
 
     @RequestMapping(value = "/total-market")
     public IndexFund getTotalMarketFund() {
