@@ -8,9 +8,8 @@ import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
-import org.api.stockmarket.stocks.stock.utils.PercentChange;
+import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
-import javax.swing.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -45,7 +44,13 @@ public class StockDto implements Serializable {
         this.volatileStock = stock.getVolatileStock();
         this.newsHistory = stock.getNewsHistory();
         this.earningsHistory = stock.getEarningsHistory();
-        this.percentChange = PercentChange.percentChange(this.getPrice(), this.getLastDayPrice());
         this.stockHistory = stockHistory;
+        this.percentChange = getPercentChange(this.getPrice(), this.getLastDayPrice());
+    }
+
+    public double getPercentChange(double currentPrice, double lastDayPrice) {
+        if(lastDayPrice == 0) return 0.0;
+        return CalculateCostBasisAndProfits.roundToTwoDecimalPlaces(
+                (currentPrice - lastDayPrice) / lastDayPrice * 100);
     }
 }

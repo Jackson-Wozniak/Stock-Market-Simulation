@@ -7,8 +7,6 @@ import org.api.tradinggame.account.exception.InvalidAccountException;
 import org.api.tradinggame.account.model.entity.Account;
 import org.api.tradinggame.account.model.payload.AccountTransaction;
 import org.api.tradinggame.account.repository.AccountRepository;
-import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
-import org.api.tradinggame.account.utils.SetAccountBalance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,13 +51,12 @@ public class AccountService {
     public void updateBalanceAndSave(AccountTransaction accountTransaction)
             throws AccountNotFoundException, AccountBalanceException {
         Account account = getAccountByName(accountTransaction.getUsername());
-        SetAccountBalance.setAccountBalance(account, accountTransaction.getAmountToAdd());
+        account.updateAccountBalance(accountTransaction.getAmountToAdd());
         saveAccount(account);
     }
 
     public void updateBalanceAndSave(Account account, double amountToAdd) {
-        account.setAccountBalance(
-                Math.round((account.getAccountBalance() + amountToAdd) * 100.00) / 100.00);
+        account.updateAccountBalance(amountToAdd);
         saveAccount(account);
     }
 }

@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.api.stockmarket.stocks.stock.utils.PercentChange;
 
 import javax.persistence.*;
 import java.io.Serializable;

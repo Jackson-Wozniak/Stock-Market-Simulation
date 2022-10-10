@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.tradinggame.account.exception.AccountBalanceException;
 import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
 import javax.persistence.*;
@@ -51,5 +52,12 @@ public class Account implements Serializable {
         setTotalProfits(CalculateCostBasisAndProfits.findProfitsAfterSelling(
                 this.totalProfits, costBasis, sharesToSell, currentPrice
         ));
+    }
+
+    public void updateAccountBalance(double amountToAdd){
+        if(this.getAccountBalance() + amountToAdd < 0){
+            throw new AccountBalanceException("Must have more money in account");
+        }
+        this.setAccountBalance(Math.round((this.getAccountBalance() + amountToAdd) * 100.00) / 100.00);
     }
 }
