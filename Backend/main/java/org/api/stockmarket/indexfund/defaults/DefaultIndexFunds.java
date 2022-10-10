@@ -1,8 +1,7 @@
 package org.api.stockmarket.indexfund.defaults;
 
 import org.api.stockmarket.indexfund.model.IndexFund;
-import org.api.stockmarket.indexfund.model.subclass.MarketCapIndexFund;
-import org.api.stockmarket.indexfund.model.subclass.SectorIndexFund;
+import org.api.stockmarket.indexfund.model.subclass.*;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 
 import java.util.List;
@@ -18,4 +17,13 @@ public class DefaultIndexFunds {
     public static final List<SectorIndexFund> sectorIndexFunds = List.of(
             new SectorIndexFund("Technology", 0.0)
     );
+
+    public static final TotalMarketIndexFund totalMarketIndexFund = new TotalMarketIndexFund(0.0);
+    public static final VolatilityIndexFund volatilityIndexFund = new VolatilityIndexFund(0.0);
+    public static final StableIndexFund stableIndexFund = new StableIndexFund(0.0);
+
+    public static int getAmountOfIndexFunds(){
+        return marketCapIndexFunds.size() + sectorIndexFunds.size() + 3;
+    }
+
 }

@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import org.api.stockmarket.indexfund.defaults.DefaultIndexFunds;
 import org.api.stockmarket.indexfund.enums.FundTracking;
 import org.api.stockmarket.indexfund.helper.CalculateIndexFundPrice;
+import org.api.stockmarket.indexfund.helper.UpdateIndexFundPrices;
 import org.api.stockmarket.indexfund.model.IndexFund;
-import org.api.stockmarket.indexfund.model.subclass.MarketCapIndexFund;
 import org.api.stockmarket.indexfund.repository.IndexFundRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,14 +20,28 @@ public class IndexFundService {
     @Autowired
     private final IndexFundRepository indexFundRepository;
     @Autowired
-    private final CalculateIndexFundPrice calculateIndexFundPrice;
+    private final UpdateIndexFundPrices updateIndexFundPrices;
 
     public void updatePriceForAllFundsDaily(){
-        calculateIndexFundPrice.updateMarketCapIndexFunds().forEach(indexFundRepository::save);
-        calculateIndexFundPrice.updateSectorIndexFunds().forEach(indexFundRepository::save);
+        updateIndexFundPrices.updateMarketCapIndexFunds().forEach(indexFundRepository::save);
+        updateIndexFundPrices.updateSectorIndexFunds().forEach(indexFundRepository::save);
+        indexFundRepository.save(updateIndexFundPrices.updateStableIndexFund());
+        indexFundRepository.save(updateIndexFundPrices.updateVolatileIndexFund());
+        indexFundRepository.save(updateIndexFundPrices.updateTotalMarketIndexFund());
     }
 
     public List<IndexFund> findAllIndexFunds(){
         return indexFundRepository.findAll();
+    }
+
+    public List<IndexFund> findIndexFundByTracker(FundTracking fundTracking){
+        return indexFundRepository.findAll().stream()
+                .filter(fund -> fund.getFundTracking() == fundTracking)
+                .collect(Collectors.toList());
+    }
+
+    public long findIndexFundRowCount(){
+        System.out.println(indexFundRepository.count());
+        return indexFundRepository.count();
     }
 }
