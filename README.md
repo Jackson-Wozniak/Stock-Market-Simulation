@@ -1,12 +1,32 @@
-# Stock Market Simulator
+<!-- PROJECT SHIELDS -->
+![Commits](https://img.shields.io/github/commit-activity/m/Jackson-Wozniak/Stock-Market-Simulation?style=for-the-badge)
+![Total Lines](https://img.shields.io/tokei/lines/github/Jackson-Wozniak/Stock-Market-Simulation?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/Jackson-Wozniak/Stock-Market-Simulation?style=for-the-badge)
+![License](https://img.shields.io/github/license/Jackson-Wozniak/Stock-Market-Simulation?style=for-the-badge)
+![Languages](https://img.shields.io/github/languages/count/Jackson-Wozniak/Stock-Market-Simulation?color=brightgreen&style=for-the-badge)
 
-A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
-with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://unsplash.com/photos/K5mPtONmpHM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink">
+    <img src="https://user-images.githubusercontent.com/105665813/195911442-19d6aa60-6fb5-4bdb-b380-39299162bb47.jpg" alt="Logo" width="350" height="233">
+  </a>
 
-All stock prices, news, earnings etc. are completely simulated and are not 
-reflective of real world market activity. 
+  <h3 align="center">Stock-Market-Simulator</h3>
 
-Default stock data, such as the name, ticker symbol, market cap and sector are based on real world companies
+  <p align="center">
+    An API that simulates a full stock market environment!
+    <br />
+    <a href="#Features"><strong>Explore Features»</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/Jackson-Wozniak">Github</a>
+    ·
+    <a href="https://github.com/Jackson-Wozniak/Stock-Market-Simulation/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Jackson-Wozniak/Stock-Market-Simulation/issues">Request Feature</a>
+  </p>
+</div>
 
 ## :books: Table of Contents
 
@@ -29,12 +49,15 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :pencil: Features <a name="Features"></a>
-* User accounts can be used to view current stock prices and trade stocks
-* Individual stock information can be viewed in JSON format
-* Stock Prices change dynamically on a time interval. Price changes are largely random but are affected by certain stock attributes, such as market cap
-and optimism
-* Default stocks are based on real world companies, however their prices do not reflect real world data
+## :pencil: Features & Overview <a name="Features"></a>
+
+A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
+with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
+
+All stock prices, news, earnings etc. are completely simulated and are not 
+reflective of real world market activity. 
+
+Default stock data, such as the name, ticker symbol, market cap and sector are based on real world companies
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
