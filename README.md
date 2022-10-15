@@ -1,12 +1,3 @@
-<!-- PROJECT SHIELDS -->
-![Commits](https://img.shields.io/github/commit-activity/m/Jackson-Wozniak/Stock-Market-Simulation?style=for-the-badge)
-![Total Lines](https://img.shields.io/tokei/lines/github/Jackson-Wozniak/Stock-Market-Simulation?style=for-the-badge)
-![Issues](https://img.shields.io/github/issues/Jackson-Wozniak/Stock-Market-Simulation?style=for-the-badge)
-![License](https://img.shields.io/github/license/Jackson-Wozniak/Stock-Market-Simulation?style=for-the-badge)
-![Languages](https://img.shields.io/github/languages/count/Jackson-Wozniak/Stock-Market-Simulation?color=brightgreen&style=for-the-badge)
-
-<!-- PROJECT LOGO -->
-<br />
 <div align="center">
   <a href="https://unsplash.com/photos/K5mPtONmpHM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink">
     <img src="https://user-images.githubusercontent.com/105665813/195911442-19d6aa60-6fb5-4bdb-b380-39299162bb47.jpg" alt="Logo" width="350" height="233">
@@ -14,18 +5,20 @@
 
   <h3 align="center">Stock-Market-Simulator</h3>
 
-  <p align="center">
-    An API that simulates a full stock market environment!
-    <br />
-    <a href="#Features"><strong>Explore Features»</strong></a>
-    <br />
-    <br />
+  <a href="https://github.com/Jackson-Wozniak/Stock-Market-Simulation/edit/main/Backend"><strong>Explore The Code»</strong></a>
+    </br>
+    <p>
+      <img src="https://img.shields.io/github/commit-activity/m/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
+      <img src="https://img.shields.io/tokei/lines/github/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
+      <img src="https://img.shields.io/github/issues/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
+      <img src="https://img.shields.io/github/license/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
+      <img src="https://img.shields.io/github/languages/count/Jackson-Wozniak/Stock-Market-Simulation?color=brightgreen" alt="license" />
+    </p> 
     <a href="https://github.com/Jackson-Wozniak">Github</a>
     ·
     <a href="https://github.com/Jackson-Wozniak/Stock-Market-Simulation/issues">Report Bug</a>
     ·
     <a href="https://github.com/Jackson-Wozniak/Stock-Market-Simulation/issues">Request Feature</a>
-  </p>
 </div>
 
 ## :books: Table of Contents
