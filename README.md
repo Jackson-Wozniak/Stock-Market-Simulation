@@ -1,4 +1,49 @@
-# Stock Market Simulator
+<div align="center">
+  <a href="https://unsplash.com/photos/K5mPtONmpHM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink">
+    <img src="https://user-images.githubusercontent.com/105665813/195911442-19d6aa60-6fb5-4bdb-b380-39299162bb47.jpg" alt="Logo" width="350" height="233">
+  </a>
+
+  <h3 align="center">Stock-Market-Simulator</h3>
+
+  <a href="https://github.com/Jackson-Wozniak/Stock-Market-Simulation/edit/main/Backend"><strong>Explore The Code»</strong></a>
+    </br>
+    <p>
+      <img src="https://img.shields.io/github/commit-activity/m/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
+      <img src="https://img.shields.io/tokei/lines/github/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
+      <img src="https://img.shields.io/github/issues/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
+      <img src="https://img.shields.io/github/license/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
+      <img src="https://img.shields.io/github/languages/count/Jackson-Wozniak/Stock-Market-Simulation?color=brightgreen" alt="license" />
+    </p> 
+    <a href="https://github.com/Jackson-Wozniak">Github</a>
+    ·
+    <a href="https://github.com/Jackson-Wozniak/Stock-Market-Simulation/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Jackson-Wozniak/Stock-Market-Simulation/issues">Request Feature</a>
+</div>
+
+## :books: Table of Contents
+
+<ol>
+    <li><a href="#Features">Features</a></li>
+    <li><a href="#Technologies">Technologies</a></li>
+    <li><a href="#Contributing">Contributing</a></li>
+    <li>
+      <a href="#Market">Api Documentation</a>
+      <ul>
+        <li><a href="#Market">Market</a></li>
+        <li><a href="#Stocks">Stocks</a></li>
+        <li><a href="#Stock-History">Stock History, News & Earnings Reports</a></li>
+        <li><a href="#Index-Funds">Index Funds</a></li>
+        <li><a href="#Trading">Trading</a></li>
+        <li><a href="#Leaderboard">Leaderboards</a></li>
+      </ul>
+    </li>  
+</ol>    
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+## :pencil: Features & Overview <a name="Features"></a>
 
 A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
 with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
@@ -8,54 +53,32 @@ reflective of real world market activity.
 
 Default stock data, such as the name, ticker symbol, market cap and sector are based on real world companies
 
-# Table of Contents
-
-1. [Features](#Features)
-
-2. [Technologies](#Technologies)
-
-3. [Market](#Market)
-
-4. [Stocks](#Stocks)
-
-5. [Stock History](#Stock-History)
-
-6. [Stock News](#Stock-News)
-
-7. [Stock Earnings Reports](#Stock-Earnings)
-
-8. [Index Funds](#Index-Funds)
-
-9. [Trading](#Trading)
-
-10. [Leaderboard](#Leaderboard)
-
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-# Features <a name="Features"></a>
-* User accounts can be used to view current stock prices and trade stocks
-* Individual stock information can be viewed in JSON format
-* Stock Prices change dynamically on a time interval. Price changes are largely random but are affected by certain stock attributes, such as market cap
-and optimism
+## :iphone: Technologies <a name="Technologies"></a>
 
-Default stocks are based on real world companies, however their prices do not reflect real world data
-
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-# Technologies <a name="Technologies"></a>
 * Java Spring Boot
 * Spring Data JPA
 * MySQL
 * Lombok
 * JUNIT
 
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+## :pencil2: Contributing <a name="Contributing"></a>
+
+Contributions of any kind are greatly appreciated. If you have any reccomendations to enhance this project, you can create an issue marked "enhancement"
+
+For those looking to learn/practice Frontend development, this repository could be used to build a UI using the API. Documenation for the API can
+be found here in the README.md file. I plan to create a general blueprint of what a UI could look like with this API, including general layout and endpoints.
+
 <br/>
 
-# API Overview
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## Market <a name="Market"></a>
+## :calendar: Market <a name="Market"></a>
 
 * The market date is tracked on intervals that can be altered. The default "day" is 24 intervals of 10 seconds, and 30 "days" is a month
 * The date is formatted as month/day/year
@@ -63,7 +86,7 @@ Default stocks are based on real world companies, however their prices do not re
 * There are 3 market types; Bear, Bull and Normal. Bear markets occur if the average stock price falls 10% in a month, while 
 bull markets happen if prices rise 10% monthly. Normal market conditions cover all scenarios in between
 
-### Market Endpoints
+#### :arrow_right: Market Endpoints
 
 <details>
   <summary>Market Conditions: GET | http://localhost:8080/api/v1/market</summary>
@@ -83,7 +106,7 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## Stocks <a name="Stocks"></a>
+## :dollar: Stocks <a name="Stocks"></a>
 
 * Stock prices change on an interval (10 seconds)
 * Stock prices change based on three factors: market cap, momentum, and volatility
@@ -91,7 +114,7 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
 * Momentum: When stock prices rise for 3 days, they experience positive momentum, while they experience negative momentum if they fall for 3 days
 * Volatility: Each stock is judged on whether it is volatile or not. This is an unchangeable boolean value, and is based on the nature of the real world company. Volatile stocks receive a slight increase in movement each time their prices change
 
-### Stock Endpoints
+#### :arrow_right: Stock Endpoints
 
 Note: {___} in url represents path variable
 
@@ -297,12 +320,12 @@ The data below doesn't show all stocks, but shows the general format
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## Stock History <a name="Stock-History"></a>
+## :chart_with_upwards_trend: Stock History <a name="Stock-History"></a>
 
 * Stock prices are saved each day, and the history of a stocks price can be viewed
 * Price history is reset at the end of each year
 
-### Stock History Endpoints
+#### :arrow_right: Stock History Endpoints
 
 <details>
   <summary>Stock History By Ticker Symbol: GET | http://localhost:8080/api/v1/stocks/history/{ticker}</summary>
@@ -359,17 +382,17 @@ The data below doesn't show all stocks, but shows the general format
   </p>
 </details>  
   
-
+<br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## Stock News <a name="Stock-News"></a>
+## :newspaper: Stock News <a name="Stock-News"></a>
 
 * At the end of each day, there is a chance that a specific stock will release a news story, which will have a large effect on their price
 * Positive news, such as buyouts, will increase the stocks by around price 10%
 * Negative news, such as lawsuits or management shakeups will decrease stock price by around 10%
 * Bankruptcies will occur if a stock price dips below $1, where a buyout will occur and the stocks price will reset back to the default
 
-### News Endpoints
+#### :arrow_right: News Endpoints
 
 Note: {___} in url represents path variable
 
@@ -407,12 +430,12 @@ Note: {___} in url represents path variable
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-## Stock Earnings Reports <a name="Stock-Earnings"></a>
+## :heavy_dollar_sign: Stock Earnings Reports <a name="Stock-Earnings"></a>
 
 * Stocks release earnings reports on the first day of every 3rd month (3rd, 6th, 9th, 12th)
 * Earnings reports effect stock prices and optimism, and are also affected by previous optimism
 
-### Earnings Reports Endpoints
+#### :arrow_right: Earnings Reports Endpoints
 
 Note: {___} in url represents path variable
 
@@ -501,12 +524,12 @@ Date is formatted as month_day_year and will return an error if incorrectly form
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-## Index Funds <a name="Index-Funds"></a>
+## :bar_chart: Index Funds <a name="Index-Funds"></a>
  
 * Index funds track the average price of a specific category of stocks
 * These cannot be traded, but only serve to estimate the total market trajectory
 
-### Index Fund Endpoints
+#### :arrow_right: Index Fund Endpoints
 
 Note: {___} in url represents path variable
 
@@ -592,8 +615,9 @@ Note: {___} in url represents path variable
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## Trading <a name="Trading"></a>
+## :credit_card: Trading & Accounts <a name="Trading"></a>
 
+#### :arrow_right: Trading & Account Endpoints
 <details>
   <summary>Get Account By Name : GET | http://localhost:8080/api/v1/account/get/{username}</summary>
   <p>
@@ -666,13 +690,15 @@ Note: {___} in url represents path variable
   <summary>Deposit Funds To Account: POST | http://localhost:8080/api/v1/account/deposit</summary>
 </details>
 
+<br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## Leaderboard <a name="Leaderboard"></a>
+## :trophy: Leaderboard <a name="Leaderboard"></a>
 
 * A leaderboard tracks total user profits for each account, sorting them by how much each account earns
 * Trading stocks for a profit will push you up the leaderboard, with the goal of beating a trading bot
 
+#### :arrow_right: Leaderboard Endpoints
 <details>
   <summary>Get Top 10 User Accounts On Leaderboard | http://localhost:8080/api/v1/leaderboard</summary>
   <p>
@@ -761,4 +787,4 @@ Note: {___} in url represents path variable
   ```
   
   </p>
-</default>  
+</details> 
