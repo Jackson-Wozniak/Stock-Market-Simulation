@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
@@ -44,7 +45,7 @@ public class Stock{
     private Integer momentumStreakInDays;
 
     @Column(name = "volatile")
-    private Boolean volatileStock;
+    private Volatility volatileStock;
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore

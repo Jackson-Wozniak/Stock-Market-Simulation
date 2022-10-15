@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
+import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
 import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
@@ -26,7 +27,7 @@ public class StockDto {
     private Double percentChange;
     private Integer momentum;
     private Integer momentumStreakInDays;
-    private Boolean volatileStock;
+    private Volatility volatileStock;
     private List<News> newsHistory;
     private List<EarningsReport> earningsHistory;
     private List<StockHistory> stockHistory;

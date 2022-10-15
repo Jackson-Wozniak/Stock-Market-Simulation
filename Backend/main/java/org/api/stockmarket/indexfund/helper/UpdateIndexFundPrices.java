@@ -5,6 +5,7 @@ import org.api.stockmarket.indexfund.defaults.DefaultIndexFunds;
 import org.api.stockmarket.indexfund.model.subclass.*;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
+import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,13 +35,13 @@ public class UpdateIndexFundPrices {
 
     public VolatilityIndexFund updateVolatileIndexFund(){
         VolatilityIndexFund fund = DefaultIndexFunds.volatilityIndexFund;
-        fund.setPrice(calculateIndexFundPrice.findPriceOfVolatileFunds(true));
+        fund.setPrice(calculateIndexFundPrice.findPriceOfVolatileFunds(Volatility.VOLATILE));
         return fund;
     }
 
     public StableIndexFund updateStableIndexFund(){
         StableIndexFund fund = DefaultIndexFunds.stableIndexFund;
-        fund.setPrice(calculateIndexFundPrice.findPriceOfVolatileFunds(false));
+        fund.setPrice(calculateIndexFundPrice.findPriceOfVolatileFunds(Volatility.STABLE));
         return fund;
     }
 

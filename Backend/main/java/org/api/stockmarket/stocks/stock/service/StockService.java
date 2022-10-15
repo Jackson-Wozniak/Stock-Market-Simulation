@@ -2,6 +2,7 @@ package org.api.stockmarket.stocks.stock.service;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
+import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.model.object.DefaultStock;
@@ -44,9 +45,9 @@ public class StockService {
                         .equalsIgnoreCase(sector)).collect(Collectors.toList());
     }
 
-    public List<Stock> getAllStocksByVolatility(boolean volatility) {
+    public List<Stock> getAllStocksByVolatility(Volatility volatility) {
         return stockRepository.findAll().stream()
-                .filter(stock -> stock.getVolatileStock() == volatility)
+                .filter(stock -> stock.getVolatileStock() .equals(volatility))
                 .collect(Collectors.toList());
     }
 

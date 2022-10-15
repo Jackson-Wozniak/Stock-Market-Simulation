@@ -6,6 +6,7 @@ import org.api.stockmarket.indexfund.model.IndexFund;
 import org.api.stockmarket.indexfund.model.subclass.*;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
+import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class CalculateIndexFundPrice {
         return MarketTrajectoryUtils.stockPricesAverage(stockService.getAllStocksBySector(sector));
     }
 
-    public double findPriceOfVolatileFunds(boolean volatility) {
+    public double findPriceOfVolatileFunds(Volatility volatility) {
         return MarketTrajectoryUtils.stockPricesAverage(
                 stockService.getAllStocksByVolatility(volatility));
     }
