@@ -46,6 +46,8 @@
 
 8. [Leaderboard](#Leaderboard)
 
+9. [Contributing](#Contributing)
+
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -783,4 +785,14 @@ Note: {___} in url represents path variable
   ```
   
   </p>
-</default>  
+</details> 
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+## :pencil2: Contributing <a name="Contributing"></a>
+
+Contributions of any kind are greatly appreciated. If you have any reccomendations to enhance this project, you can create an issue marked "enhancement"
+
+For those looking to learn/practice Frontend development, this repository could be used to build a UI using the API. Documenation for the API can
+be found here in the README.md file. I plan to create a general blueprint of what a UI could look like with this API, including general layout and endpoints.
