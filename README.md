@@ -30,23 +30,22 @@
 
 ## :books: Table of Contents
 
-1. [Features](#Features)
-
-2. [Technologies](#Technologies)
-
-3. [Market](#Market)
-
-4. [Stocks](#Stocks)
-
-5. [Stock History, News & Earnings Reports](#Stock-History)
-
-6. [Index Funds](#Index-Funds)
-
-7. [Trading](#Trading)
-
-8. [Leaderboard](#Leaderboard)
-
-9. [Contributing](#Contributing)
+<ol>
+    <li><a href="#Features">Features</a></li>
+    <li><a href="#Technologies">Technologies</a></li>
+    <li><a href="#Contributing">Contributing</a></li>
+    <li>
+      <a href="#Market">Api Documentation</a>
+      <ul>
+        <li><a href="#Market">Market</a></li>
+        <li><a href="#Stocks">Stocks</a></li>
+        <li><a href="#Stock-History">Stock History, News & Earnings Reports</a></li>
+        <li><a href="#Index-Funds">Index Funds</a></li>
+        <li><a href="#Trading">Trading</a></li>
+        <li><a href="#Leaderboard">Leaderboards</a></li>
+      </ul>
+    </li>  
+</ol>    
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
@@ -71,6 +70,16 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 * MySQL
 * Lombok
 * JUNIT
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+## :pencil2: Contributing <a name="Contributing"></a>
+
+Contributions of any kind are greatly appreciated. If you have any reccomendations to enhance this project, you can create an issue marked "enhancement"
+
+For those looking to learn/practice Frontend development, this repository could be used to build a UI using the API. Documenation for the API can
+be found here in the README.md file. I plan to create a general blueprint of what a UI could look like with this API, including general layout and endpoints.
 
 <br/>
 
@@ -786,13 +795,3 @@ Note: {___} in url represents path variable
   
   </p>
 </details> 
-
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-## :pencil2: Contributing <a name="Contributing"></a>
-
-Contributions of any kind are greatly appreciated. If you have any reccomendations to enhance this project, you can create an issue marked "enhancement"
-
-For those looking to learn/practice Frontend development, this repository could be used to build a UI using the API. Documenation for the API can
-be found here in the README.md file. I plan to create a general blueprint of what a UI could look like with this API, including general layout and endpoints.
