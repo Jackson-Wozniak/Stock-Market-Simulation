@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
 This controller provides the endpoints related to stocks on the market.
@@ -43,6 +44,14 @@ public class StockController {
     @GetMapping(value = "/all")
     public List<Stock> getAllStockData() {
         return stockService.getAllStocks();
+    }
+
+    @GetMapping(value = "/all/detailed")
+    public List<StockDto> getAllDetailedStockData() {
+        return stockService.getAllStocks().stream()
+                .map(stock -> new StockDto(
+                        stock, stockHistoryService.findStockHistoryByTicker(stock.getTicker())))
+                .collect(Collectors.toList());
     }
 
     @GetMapping(value = "/marketCap/{marketCap}")
