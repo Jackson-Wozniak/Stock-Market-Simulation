@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Configuration
 @EnableScheduling
 @AllArgsConstructor
@@ -39,12 +42,12 @@ public class MarketActivityScheduler {
         marketHour++;
         limitOrderService.processAllLimitOrders();
         if (marketHour >= 24) {
-            logger.info("End of day " + handleMarketActivity.dailyMarketActivity());
-
             limitOrderService.truncateLimitOrders();
             accountHistoryService.saveDailyAccountHistory();
             stockHistoryService.saveStockHistoryDaily();
             indexFundService.updatePriceForAllFundsDaily();
+
+            logger.info("New Day: " + handleMarketActivity.dailyMarketActivity());
 
             marketHour = 0;
             if (marketDay >= 30) {

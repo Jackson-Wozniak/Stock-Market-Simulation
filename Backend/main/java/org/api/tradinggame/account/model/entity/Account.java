@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.stocks.options.OptionContract;
 import org.api.tradinggame.account.exception.AccountBalanceException;
 import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
 import javax.persistence.*;
+import javax.swing.text.html.Option;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +42,10 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<AccountHistory> accountHistory;
+
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<OptionContract> optionContracts;
 
     public Account(String username) {
         this.username = username;

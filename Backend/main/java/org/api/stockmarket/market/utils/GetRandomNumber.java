@@ -13,8 +13,11 @@ public class GetRandomNumber {
             case Large -> random.nextDouble(-.002, .002);
             case Mid -> random.nextDouble(-.001, .001);
             case Small -> random.nextDouble(-.003, .003);
-            default -> -1;
         };
+    }
+
+    public static double getRandomSmallNumber() {
+        return random.nextDouble(-.0015, .0015);
     }
 
     public static double getRandomPositiveNumberForStocks(MarketCap marketCap) {

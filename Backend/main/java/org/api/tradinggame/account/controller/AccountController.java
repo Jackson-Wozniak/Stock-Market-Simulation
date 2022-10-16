@@ -32,6 +32,9 @@ public class AccountController {
 
     @PostMapping(value = "create/{username}")
     public void createAccount(@PathVariable String username) throws InvalidAccountException {
+        if(username.equalsIgnoreCase("trading-bot")){
+            throw new InvalidAccountException("Cannot Create Account With Invalid Username");
+        }
         accountService.createNewAccount(username);
     }
 
