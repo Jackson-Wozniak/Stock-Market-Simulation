@@ -9,18 +9,18 @@ function getData(){
             });     
         }
         data.forEach(stock => {
-            if(stock.marketCap != "Large"){
-                return;
-            }
+            // if(stock.marketCap != "Large"){
+            //     return;
+            // }
             stock.stockHistory.forEach(history => {
                 prices.push(history.stockPrice);
             });
-            let randomColor = getRandomColor();
+            //let randomColor = getRandomColor();
             datasets.push({
                 label: stock.ticker,
                 data: prices,
-                borderColor: randomColor,
-                backgroundColor: randomColor
+                borderColor: "#000000",
+                backgroundColor: "#000000"
             });
             prices = [];
         });  
@@ -33,16 +33,6 @@ function getData(){
         return data;
     });
 }
-
-allStockHistory.forEach(stock => {
-    console.log(stock);
-    if(myChart == null){
-        stock.stockHistory.forEach(history => {
-            dates.push(history.marketDate);
-            prices.push(history.stockPrice);
-        });
-    }
-});
 
 let dates = [];
 let prices = [];

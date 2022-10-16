@@ -24,7 +24,8 @@ public class ChangeStockPrices {
         double stockPrice = stock.getPrice();
         return decimalFormat.format(stockPrice +
                 (stockPrice * GetRandomNumber.getRandomNumberForStocks(marketCap)) +
+                (stockPrice * (GetRandomNumber.getRandomSmallPositiveNumber() * stock.getInvestorRating())) +
                 (stockPrice * (GetRandomNumber.getRandomSmallNumber() * stock.getVolatileStock().ordinal()) +
-                (stock.getMomentum() * GetRandomNumber.getRandomPositiveNumberForStocks(marketCap))));
+                (stockPrice * (stock.getMomentum() * GetRandomNumber.getRandomSmallPositiveNumber()))));
     }
 }

@@ -50,4 +50,12 @@ public class EarningsReport implements Serializable {
         this.reportMessage = reportMessage;
         this.dateOfRelease = dateOfRelease;
     }
+
+    public boolean isPositiveEarnings(){
+        return this.actualEPS - this.getEstimatedEPS() >= 1;
+    }
+
+    public boolean isNegativeEarnings(){
+        return this.actualEPS - this.getEstimatedEPS() <= 1;
+    }
 }

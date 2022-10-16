@@ -28,6 +28,7 @@ public class StockDto {
     private Integer momentum;
     private Integer momentumStreakInDays;
     private Volatility volatileStock;
+    private Integer investorRating;
     private List<News> newsHistory;
     private List<EarningsReport> earningsHistory;
     private List<StockHistory> stockHistory;
@@ -42,6 +43,7 @@ public class StockDto {
         this.momentum = stock.getMomentum();
         this.momentumStreakInDays = stock.getMomentumStreakInDays();
         this.volatileStock = stock.getVolatileStock();
+        this.investorRating = stock.getInvestorRating();
         this.newsHistory = stock.getNewsHistory();
         this.earningsHistory = stock.getEarningsHistory();
         this.stockHistory = stockHistory;

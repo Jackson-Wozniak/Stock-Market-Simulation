@@ -47,6 +47,9 @@ public class Stock{
     @Column(name = "volatile")
     private Volatility volatileStock;
 
+    @Column(name = "investor_rating")
+    private Integer investorRating;
+
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<News> newsHistory;
@@ -71,16 +74,8 @@ public class Stock{
 
     public void updateMomentum() {
         int momentumStreak = getMomentumStreakInDays();
-        if (momentumStreak >= 7) {
-            setMomentum(2);
-            return;
-        }
         if (momentumStreak >= 3) {
             setMomentum(1);
-            return;
-        }
-        if (momentumStreak <= -7) {
-            setMomentum(-2);
             return;
         }
         if (momentumStreak <= -3) {
@@ -95,12 +90,34 @@ public class Stock{
             setMomentumStreakInDays(0);
             return;
         }
-        if (getPrice() > getLastDayPrice()) {
+        double price = getPrice();
+        if (price > getLastDayPrice()) {
+            if(getMomentumStreakInDays() <= -1){
+                setMomentumStreakInDays(0);
+                return;
+            }
             setMomentumStreakInDays(getMomentumStreakInDays() + 1);
             return;
         }
-        if (getPrice() < getLastDayPrice()) {
+        if (price < getLastDayPrice()) {
+            if(getMomentum() >= 1){
+                setMomentumStreakInDays(0);
+                return;
+            }
             setMomentumStreakInDays(getMomentumStreakInDays() - 1);
+        }
+    }
+
+    //these two methods are called only on news and earnings report announcements
+    public void increaseInvestorRating(){
+        if(this.getInvestorRating() < 1){
+            this.setInvestorRating(this.getInvestorRating() + 1);
+        }
+    }
+
+    public void decreaseInvestorRating(){
+        if(this.getInvestorRating() > -1){
+            this.setInvestorRating(this.getInvestorRating() - 1);
         }
     }
 }

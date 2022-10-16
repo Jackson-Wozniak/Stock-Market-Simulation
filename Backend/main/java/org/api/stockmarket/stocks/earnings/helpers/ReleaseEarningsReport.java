@@ -6,6 +6,7 @@ import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.earnings.service.EarningsService;
 import org.api.stockmarket.stocks.earnings.utils.FindEarningsPerShare;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +21,21 @@ public class ReleaseEarningsReport {
 
     @Autowired
     private final EarningsService earningsService;
+    @Autowired
+    private final StockService stockService;
 
     public void handleQuarterlyEarningsReports(List<Stock> stocks, String marketDate) {
-        stocks.forEach(stock -> earningsService.saveEarningsReport(
-                createEarningsReport(stock, marketDate)));
+        stocks.forEach(stock -> {
+            EarningsReport earningsReport = createEarningsReport(stock, marketDate);
+            if(earningsReport.isPositiveEarnings()){
+                stock.increaseInvestorRating();
+                stockService.updateStockInDatabase(stock);
+            }else if(earningsReport.isNegativeEarnings()){
+                stock.decreaseInvestorRating();
+                stockService.updateStockInDatabase(stock);
+            }
+            earningsService.saveEarningsReport(earningsReport);
+        });
     }
 
     public EarningsReport createEarningsReport(Stock stock, String marketDate) {

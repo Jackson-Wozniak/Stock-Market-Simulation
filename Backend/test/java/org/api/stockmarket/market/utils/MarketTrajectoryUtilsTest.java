@@ -18,12 +18,12 @@ class MarketTrajectoryUtilsTest {
 
     //average price should be 60
     private static final List<Stock> listOfStocks = List.of(
-            new DefaultStock("One", "One", "One", MarketCap.Mid, Volatility.NORMAL),
-            new DefaultStock("Two", "Two", "Two", MarketCap.Large, Volatility.NORMAL)
+            new DefaultStock("One", "One", "One", MarketCap.Mid, Volatility.NORMAL, 0),
+            new DefaultStock("Two", "Two", "Two", MarketCap.Large, Volatility.NORMAL, 0)
     );
     private static final List<Stock> listOfLargeCapStocks = List.of(
-            new DefaultStock("One", "One", "One", MarketCap.Large, Volatility.VOLATILE),
-            new DefaultStock("Two", "Two", "Two", MarketCap.Large, Volatility.NORMAL)
+            new DefaultStock("One", "One", "One", MarketCap.Large, Volatility.VOLATILE, 0),
+            new DefaultStock("Two", "Two", "Two", MarketCap.Large, Volatility.NORMAL, 0)
     );
     private static final List<Stock> emptyListOfStocks = Collections.emptyList();
 

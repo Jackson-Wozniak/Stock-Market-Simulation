@@ -41,7 +41,6 @@ public class IndexFundService {
     }
 
     public long findIndexFundRowCount(){
-        System.out.println(indexFundRepository.count());
         return indexFundRepository.count();
     }
 }

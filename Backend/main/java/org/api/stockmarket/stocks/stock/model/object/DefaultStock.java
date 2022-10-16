@@ -29,17 +29,20 @@ public class DefaultStock extends Stock {
     private Integer momentum;
     private Integer momentumStreakInDays;
     private Volatility volatileStock;
+    private Integer investorRating;
 
     public DefaultStock(String ticker,
                         String companyName,
                         String sector,
                         MarketCap marketCap,
-                        Volatility volatileStock) {
+                        Volatility volatileStock,
+                        Integer investorRating) {
         this.ticker = ticker;
         this.companyName = companyName;
         this.sector = sector;
         this.marketCap = marketCap;
         this.volatileStock = volatileStock;
+        this.investorRating = investorRating;
         this.price = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
         this.lastDayPrice = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
         this.momentum = 0;

@@ -20,12 +20,15 @@ public class GetRandomNumber {
         return random.nextDouble(-.0015, .0015);
     }
 
+    public static double getRandomSmallPositiveNumber() {
+        return random.nextDouble(0, .0002);
+    }
+
     public static double getRandomPositiveNumberForStocks(MarketCap marketCap) {
         return switch (marketCap) {
-            case Large -> random.nextDouble(0, .002);
-            case Mid -> random.nextDouble(0, .001);
-            case Small -> random.nextDouble(0, .003);
-            default -> -1;
+            case Large -> random.nextDouble(0, .001);
+            case Mid -> random.nextDouble(0, .0005);
+            case Small -> random.nextDouble(0, .0015);
         };
     }
 
