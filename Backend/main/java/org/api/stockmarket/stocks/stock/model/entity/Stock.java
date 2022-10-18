@@ -4,13 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.market.utils.GetRandomNumber;
+import org.api.stockmarket.stocks.stock.defaults.DefaultStockPrices;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 
 import javax.persistence.*;
-import java.util.List;
+import java.text.DecimalFormat;
+import java.util.*;
 
 @Entity(name = "stock")
 @Table(name = "stock")
@@ -58,18 +61,35 @@ public class Stock{
     @JsonIgnore
     private List<EarningsReport> earningsHistory;
 
-    public Stock(
-            String ticker,
-            String companyName,
-            String sector,
-            MarketCap marketCap,
-            double price
-    ) {
+    public Stock(String ticker,
+                        String companyName,
+                        String sector,
+                        MarketCap marketCap,
+                        Volatility volatileStock,
+                        Integer investorRating) {
         this.ticker = ticker;
         this.companyName = companyName;
         this.sector = sector;
         this.marketCap = marketCap;
-        this.price = price;
+        this.volatileStock = volatileStock;
+        this.investorRating = investorRating;
+        this.price = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
+        this.lastDayPrice = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
+        this.momentum = 0;
+        this.momentumStreakInDays = 0;
+    }
+
+    public void updatePriceWithFormula(){
+        double stockPrice = this.getPrice();
+        double randomNumber = GetRandomNumber.getRandomNumberForStocks(this.marketCap);
+        double randomPositiveNumber = GetRandomNumber.getRandomSmallPositiveNumber();
+        this.setPrice(
+                Math.round((stockPrice +
+                        (stockPrice * randomNumber) +
+                        (stockPrice * (randomNumber * this.volatileStock.ordinal())) +
+                        (stockPrice * (randomPositiveNumber * this.investorRating)) +
+                        (stockPrice * (randomPositiveNumber * this.momentum))
+                ) * 100.00) / 100.00);
     }
 
     public void updateMomentum() {
@@ -110,13 +130,13 @@ public class Stock{
 
     //these two methods are called only on news and earnings report announcements
     public void increaseInvestorRating(){
-        if(this.getInvestorRating() < 1){
+        if(this.getInvestorRating() < 2){
             this.setInvestorRating(this.getInvestorRating() + 1);
         }
     }
 
     public void decreaseInvestorRating(){
-        if(this.getInvestorRating() > -1){
+        if(this.getInvestorRating() > -2){
             this.setInvestorRating(this.getInvestorRating() - 1);
         }
     }

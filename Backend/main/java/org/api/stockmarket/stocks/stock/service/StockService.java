@@ -76,12 +76,12 @@ public class StockService {
         return (int) stockRepository.count();
     }
 
-    public void saveDefaultStockToDatabase(List<DefaultStock> defaultStocks) {
+    public void saveDefaultStockToDatabase(List<Stock> defaultStocks) {
         defaultStocks.forEach(stock -> {
             if (DoesStockExist.stockExistsWithTicker(this, stock.getTicker())) {
                 return;
             }
-            stockRepository.save((Stock) stock);
+            stockRepository.save(stock);
         });
     }
 }

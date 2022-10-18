@@ -3,6 +3,7 @@ package org.api.stockmarket.stocks.stock.model.object;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.market.utils.GetRandomNumber;
 import org.api.stockmarket.stocks.stock.defaults.DefaultStockPrices;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
@@ -14,11 +15,11 @@ import javax.persistence.Entity;
     Entity To save Default Stocks to database
     Sets prices and momentum to default values
  */
-@Entity
-@Getter
+//@Entity
+//@Getter
 @Setter
 @NoArgsConstructor
-public class DefaultStock extends Stock {
+public class DefaultStock {
 
     private String ticker;
     private String companyName;
@@ -47,5 +48,8 @@ public class DefaultStock extends Stock {
         this.lastDayPrice = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
         this.momentum = 0;
         this.momentumStreakInDays = 0;
+    }
+
+    public void updatePriceWithFormula(){
     }
 }

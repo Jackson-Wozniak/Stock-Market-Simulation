@@ -51,10 +51,12 @@ public class EarningsReport implements Serializable {
         this.dateOfRelease = dateOfRelease;
     }
 
+    @JsonIgnore
     public boolean isPositiveEarnings(){
         return this.actualEPS - this.getEstimatedEPS() >= 1;
     }
 
+    @JsonIgnore
     public boolean isNegativeEarnings(){
         return this.actualEPS - this.getEstimatedEPS() <= 1;
     }
