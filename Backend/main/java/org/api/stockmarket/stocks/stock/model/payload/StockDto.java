@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
+import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
@@ -28,7 +29,7 @@ public class StockDto {
     private Integer momentum;
     private Integer momentumStreakInDays;
     private Volatility volatileStock;
-    private Integer investorRating;
+    private InvestorRating investorRating;
     private List<News> newsHistory;
     private List<EarningsReport> earningsHistory;
     private List<StockHistory> stockHistory;

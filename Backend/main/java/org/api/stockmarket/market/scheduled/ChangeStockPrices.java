@@ -28,7 +28,7 @@ public class ChangeStockPrices {
         return decimalFormat.format(stockPrice +
                 (stockPrice * randomNumber) +
                 (stockPrice * (randomNumber * stock.getVolatileStock().ordinal())) +
-                (stock.getInvestorRating() * randomPositiveNumber) +
+                (stock.getInvestorRating().investorRatingMultiplier() * randomPositiveNumber) +
                 (stock.getMomentum() * randomPositiveNumber));
     }
 //    private String changeStockPrice(Stock stock, MarketCap marketCap) {

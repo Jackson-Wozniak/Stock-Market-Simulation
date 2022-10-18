@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.api.stockmarket.market.utils.GetRandomNumber;
 import org.api.stockmarket.stocks.stock.defaults.DefaultStockPrices;
+import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
@@ -51,7 +52,7 @@ public class Stock{
     private Volatility volatileStock;
 
     @Column(name = "investor_rating")
-    private Integer investorRating;
+    private InvestorRating investorRating;
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
@@ -66,7 +67,7 @@ public class Stock{
                         String sector,
                         MarketCap marketCap,
                         Volatility volatileStock,
-                        Integer investorRating) {
+                        InvestorRating investorRating) {
         this.ticker = ticker;
         this.companyName = companyName;
         this.sector = sector;
@@ -87,7 +88,7 @@ public class Stock{
                 Math.round((stockPrice +
                         (stockPrice * randomNumber) +
                         (stockPrice * (randomNumber * this.volatileStock.ordinal())) +
-                        (stockPrice * (randomPositiveNumber * this.investorRating)) +
+                        (stockPrice * (randomPositiveNumber * this.investorRating.investorRatingMultiplier())) +
                         (stockPrice * (randomPositiveNumber * this.momentum))
                 ) * 100.00) / 100.00);
     }
@@ -130,14 +131,22 @@ public class Stock{
 
     //these two methods are called only on news and earnings report announcements
     public void increaseInvestorRating(){
-        if(this.getInvestorRating() < 2){
-            this.setInvestorRating(this.getInvestorRating() + 1);
+        switch (this.getInvestorRating()){
+            case Sell -> this.setInvestorRating(InvestorRating.Hold);
+            case Hold -> this.setInvestorRating(InvestorRating.Neutral);
+            case Neutral -> this.setInvestorRating(InvestorRating.Buy);
+            case Buy -> this.setInvestorRating(InvestorRating.StrongBuy);
+            case StrongBuy -> {}
         }
     }
 
     public void decreaseInvestorRating(){
-        if(this.getInvestorRating() > -2){
-            this.setInvestorRating(this.getInvestorRating() - 1);
+        switch (this.getInvestorRating()){
+            case Sell -> {}
+            case Hold -> this.setInvestorRating(InvestorRating.Sell);
+            case Neutral -> this.setInvestorRating(InvestorRating.Hold);
+            case Buy -> this.setInvestorRating(InvestorRating.Neutral);
+            case StrongBuy -> this.setInvestorRating(InvestorRating.Buy);
         }
     }
 }

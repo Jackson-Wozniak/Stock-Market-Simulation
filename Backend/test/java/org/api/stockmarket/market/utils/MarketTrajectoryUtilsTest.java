@@ -1,5 +1,6 @@
 package org.api.stockmarket.market.utils;
 
+import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.junit.jupiter.api.Test;
 import org.api.stockmarket.market.entity.Market;
@@ -18,12 +19,12 @@ class MarketTrajectoryUtilsTest {
 
     //average price should be 60
     private static final List<Stock> listOfStocks = List.of(
-            new Stock("One", "One", "One", MarketCap.Mid, Volatility.NORMAL, 0),
-            new Stock("Two", "Two", "Two", MarketCap.Large, Volatility.NORMAL, 0)
+            new Stock("One", "One", "One", MarketCap.Mid, Volatility.NORMAL, InvestorRating.Neutral),
+            new Stock("Two", "Two", "Two", MarketCap.Large, Volatility.NORMAL, InvestorRating.Neutral)
     );
     private static final List<Stock> listOfLargeCapStocks = List.of(
-            new Stock("One", "One", "One", MarketCap.Large, Volatility.VOLATILE, 0),
-            new Stock("Two", "Two", "Two", MarketCap.Large, Volatility.NORMAL, 0)
+            new Stock("One", "One", "One", MarketCap.Large, Volatility.VOLATILE, InvestorRating.Neutral),
+            new Stock("Two", "Two", "Two", MarketCap.Large, Volatility.NORMAL, InvestorRating.Neutral)
     );
     private static final List<Stock> emptyListOfStocks = Collections.emptyList();
 
