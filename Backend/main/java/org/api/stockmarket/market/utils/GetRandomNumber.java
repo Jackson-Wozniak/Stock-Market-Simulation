@@ -17,7 +17,7 @@ public class GetRandomNumber {
     }
 
     public static double getRandomSmallNumber() {
-        return random.nextDouble(-.0015, .0015);
+        return random.nextDouble(-.001, .001);
     }
 
     public static double getRandomSmallPositiveNumber() {
@@ -26,9 +26,9 @@ public class GetRandomNumber {
 
     public static double getRandomPositiveNumberForStocks(MarketCap marketCap) {
         return switch (marketCap) {
-            case Large -> random.nextDouble(0, .001);
-            case Mid -> random.nextDouble(0, .0005);
-            case Small -> random.nextDouble(0, .0015);
+            case Large -> random.nextDouble(0, .0018);
+            case Mid -> random.nextDouble(0, .0008);
+            case Small -> random.nextDouble(0, .00028);
         };
     }
 
