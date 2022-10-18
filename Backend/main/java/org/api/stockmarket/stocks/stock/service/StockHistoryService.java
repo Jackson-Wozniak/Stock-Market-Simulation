@@ -8,6 +8,7 @@ import org.api.stockmarket.stocks.stock.repository.StockHistoryRepository;
 import org.api.stockmarket.stocks.stock.utils.SortHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,12 +26,11 @@ public class StockHistoryService {
 
     public void saveStockHistoryDaily() {
         Market market = marketService.findMarketEntity();
-        stockService.getAllStocks().forEach(stock -> {
-            stockHistoryRepository.save(new StockHistory(
-                    market.getDate(),
-                    stock.getTicker(),
-                    stock.getPrice()));
-        });
+        stockService.getAllStocks().forEach(stock ->
+                stockHistoryRepository.save(new StockHistory(
+                        market.getDate(),
+                        stock.getTicker(),
+                        stock.getPrice())));
     }
 
     public List<StockHistory> findStockHistoryByTicker(String ticker) {
@@ -39,5 +39,10 @@ public class StockHistoryService {
                 .collect(Collectors.toList());
         SortHistory.sortStockHistoryByDate(stockHistory);
         return stockHistory;
+    }
+
+    @Transactional
+    public void truncateStockHistoryAtEndOfYear() {
+        stockHistoryRepository.truncateTable();
     }
 }

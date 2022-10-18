@@ -8,6 +8,7 @@ import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.earnings.helpers.ReleaseEarningsReport;
 import org.api.stockmarket.stocks.news.helpers.RandomNewsEvents;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.service.StockHistoryService;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.api.tradinggame.account.service.AccountHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class HandleMarketActivity {
     private final RandomNewsEvents randomNewsEvents;
     @Autowired
     private final ReleaseEarningsReport releaseEarningsReport;
+    @Autowired
+    private final StockHistoryService stockHistoryService;
 
     public String dailyMarketActivity() {
         updateNewStockInformation(true);
@@ -78,6 +81,7 @@ public class HandleMarketActivity {
         //all daily account records will be removed at the end of each year, creating a clean slate
         if (endOfYear(market.getDate())) {
             accountHistoryService.truncateAccountHistoryAtEndOfYear();
+            stockHistoryService.truncateStockHistoryAtEndOfYear();
         }
     }
 
@@ -98,7 +102,7 @@ public class HandleMarketActivity {
         return Integer.parseInt(dateArray[0]) % 3 == 0 && Integer.parseInt(dateArray[1]) == 1;
     }
 
-    private boolean endOfYear(String marketDate) {
+    public boolean endOfYear(String marketDate) {
         String[] dateArray = marketDate.split("/");
         return Integer.parseInt(dateArray[0]) == 12 && Integer.parseInt(dateArray[1]) == 30;
     }
