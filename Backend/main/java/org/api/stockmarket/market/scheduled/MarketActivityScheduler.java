@@ -36,7 +36,7 @@ public class MarketActivityScheduler {
     private static int marketHour = 0;
     private static int marketDay = 0;
 
-    @Scheduled(fixedDelay = MarketIntervals.TEN_SECONDS)
+    @Scheduled(fixedRate = MarketIntervals.TEN_SECONDS)
     @SuppressWarnings("unused")
     public void dailyMarketActivity() {
         marketHour++;

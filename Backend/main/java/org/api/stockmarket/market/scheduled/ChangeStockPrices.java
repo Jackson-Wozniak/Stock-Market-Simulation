@@ -23,20 +23,13 @@ public class ChangeStockPrices {
     private String changeStockPrice(Stock stock, MarketCap marketCap) {
         //Volatile stocks change twice to increase market movements
         double randomNumber = GetRandomNumber.getRandomNumberForStocks(marketCap);
+        double randomNumber2 = GetRandomNumber.getRandomSmallNumber();
         double randomPositiveNumber = GetRandomNumber.getRandomPositiveNumberForStocks(marketCap);
         double stockPrice = stock.getPrice();
         return decimalFormat.format(stockPrice +
                 (stockPrice * randomNumber) +
-                (stockPrice * (randomNumber * stock.getVolatileStock().ordinal())) +
+                (stockPrice * (randomNumber2 * stock.getVolatileStock().ordinal())) +
                 (stock.getInvestorRating().investorRatingMultiplier() * randomPositiveNumber) +
                 (stock.getMomentum() * randomPositiveNumber));
     }
-//    private String changeStockPrice(Stock stock, MarketCap marketCap) {
-//        double stockPrice = stock.getPrice();
-//        return decimalFormat.format(stockPrice +
-//                (stockPrice * GetRandomNumber.getRandomNumberForStocks(marketCap)) +
-//                (stockPrice * (GetRandomNumber.getRandomSmallPositiveNumber() * stock.getInvestorRating())) +
-//                (stockPrice * (GetRandomNumber.getRandomSmallNumber() * stock.getVolatileStock().ordinal()) +
-//                (stockPrice * (stock.getMomentum() * GetRandomNumber.getRandomSmallPositiveNumber()))));
-//    }
 }
