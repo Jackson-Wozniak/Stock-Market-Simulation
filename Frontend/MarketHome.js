@@ -1,26 +1,27 @@
-
 function getData(){
     const data = fetch('http://localhost:8080/api/v1/stocks/all/detailed')
     .then(res => res.json())
     .then(data => {
+        let dataSize = Math.round(((new TextEncoder().encode(data).length) / 1024) * 100.000) /100.000 + "kb";
+        console.log(dataSize);
         if(myChart == null){
             data[0].stockHistory.forEach(history => {
                 dates.push(history.marketDate);
             });     
         }
         data.forEach(stock => {
-            // if(stock.marketCap != "Large"){
-            //     return;
-            // }
+            if(stock.marketCap != "Large"){
+                return;
+            }
             stock.stockHistory.forEach(history => {
                 prices.push(history.stockPrice);
             });
-            //let randomColor = getRandomColor();
+            let randomColor = getRandomColor();
             datasets.push({
                 label: stock.ticker,
                 data: prices,
-                borderColor: "#000000",
-                backgroundColor: "#000000"
+                borderColor: randomColor,
+                backgroundColor: randomColor
             });
             prices = [];
         });  
@@ -50,11 +51,17 @@ function createChart(){
             datasets: datasets
         },
         options: {
+            elements: {
+                point:{
+                    radius: 0
+                }
+            },
+            animation : false,
             borderWidth : 2,
             scales: {
                 y: {
-                    suggestedMin: min,
-                    suggestedMax: max,
+                    min: 60,
+                    max: 140,
                     grid: {
                         borderColor: '#FF4500',
                         borderWidth : 3
@@ -67,8 +74,6 @@ function createChart(){
                     }  
                 },
                 x: {
-                    suggestedMin: min,
-                    suggestedMax: max,
                     grid: {
                         borderColor: '#FF4500',
                         borderWidth : 3
