@@ -7,7 +7,6 @@ import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.enums.MarketTrajectory;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.api.stockmarket.stocks.stock.model.object.DefaultStock;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 
 import java.util.Collections;

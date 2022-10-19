@@ -3,7 +3,6 @@ package org.api.stockmarket.stocks.stock.service;
 import org.api.stockmarket.stocks.stock.defaults.DefaultStocksList;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
-import org.api.stockmarket.stocks.stock.model.object.DefaultStock;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

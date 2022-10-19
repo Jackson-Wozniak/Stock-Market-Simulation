@@ -14,7 +14,6 @@ import org.api.tradinggame.account.service.AccountHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 @Component
@@ -24,8 +23,6 @@ public class HandleMarketActivity {
     @Autowired
     private final StockService stockService;
     @Autowired
-    private final ChangeStockPrices changeStockPrices;
-    @Autowired
     private final MarketService marketService;
     @Autowired
     private final RandomNewsEvents randomNewsEvents;
@@ -33,7 +30,6 @@ public class HandleMarketActivity {
     private final ReleaseEarningsReport releaseEarningsReport;
     @Autowired
     private final StockHistoryService stockHistoryService;
-    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     public String dailyMarketActivity() {
         updateNewStockInformation(true);
@@ -49,7 +45,7 @@ public class HandleMarketActivity {
     public void updateNewStockInformation(boolean endOfDay) {
         List<Stock> stocks = stockService.getAllStocks();
         stocks.forEach(stock -> {
-            stock.updatePriceWithFormula();
+            stock.updatePriceWithFormula(stock.getMarketCap());
             if (endOfDay) {
                 //avoid stocks going to zero with bankruptcy event
                 if (stock.getPrice() < 1) {
