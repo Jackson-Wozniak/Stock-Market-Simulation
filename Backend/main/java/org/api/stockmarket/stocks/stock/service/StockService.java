@@ -71,6 +71,11 @@ public class StockService {
         stockRepository.save(stock);
     }
 
+    //Ignore any stocks that do not currently exist
+    public void updateAllStocksInDatabase(List<Stock> stocks) {
+        stockRepository.saveAll(stocks);
+    }
+
     public int findStockRowCount() {
         return (int) stockRepository.count();
     }

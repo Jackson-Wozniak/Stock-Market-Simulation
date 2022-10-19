@@ -56,8 +56,8 @@ public class HandleMarketActivity {
                 stock.updateMomentum();
                 stock.setLastDayPrice(stock.getPrice());
             }
-            stockService.updateStockInDatabase(stock);
         });
+        stockService.updateAllStocksInDatabase(stocks);
     }
 
     private String incrementMarketDay() {
