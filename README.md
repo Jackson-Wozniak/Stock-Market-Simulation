@@ -72,14 +72,14 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 
 to run locally, run the following steps & commands:
 
-<code>
+```
   -create database named stock_trading_simulator in MySQL
   -Rename application-sample.txt to application.properties and fill in your username/password in the fields required
   -Command: mvn clean spring-boot:run
   -Command: mvn install (to generate jar file)
   -Command: docker build -t stock-market-simulator/market .
   -Command: docker run -p 8000:8080 stock-market-simulator/market.
-</code>
+  ```
 
 <br/>
 
