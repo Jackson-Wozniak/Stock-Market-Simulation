@@ -73,6 +73,7 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 to run locally, run the following steps & commands:
 
 ```
+  -git clone https://github.com/Jackson-Wozniak/Stock-Market-Simulation.git
   -create database named stock_trading_simulator in MySQL
   -Rename application-sample.txt to application.properties and fill in your username/password in the fields required
   -Command: mvn clean spring-boot:run
