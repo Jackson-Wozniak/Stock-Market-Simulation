@@ -4,9 +4,10 @@ target/
 HELP.md
 mvnw
 mvnw.cmd
-Backend/main/resources/application.properties
+src/main/resources/application.properties
 Documentation/
-Backend/main/java/org/api/stockmarket/stocks/options/
+src/main/java/org/api/stockmarket/stocks/options/
+.env
 Frontend/Data.js
 Frontend/.vscode
 text.txt
