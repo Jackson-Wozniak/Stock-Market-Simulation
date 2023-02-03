@@ -26,7 +26,7 @@
 <ol>
     <li><a href="#Features">Features</a></li>
     <li><a href="#Technologies">Technologies</a></li>
-    <li><a href="#Contributing">Contributing</a></li>
+    <li><a href="#Local-Dev">Local Deployment</a></li>
     <li>
       <a href="#Market">Api Documentation</a>
       <ul>
@@ -68,12 +68,18 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :pencil2: Contributing <a name="Contributing"></a>
+## :pencil2: Local Deployment <a name="Local-Dev"></a>
 
-Contributions of any kind are greatly appreciated. If you have any reccomendations to enhance this project, you can create an issue marked "enhancement"
+to run locally, run the following steps & commands:
 
-For those looking to learn/practice Frontend development, this repository could be used to build a UI using the API. Documenation for the API can
-be found here in the README.md file. I plan to create a general blueprint of what a UI could look like with this API, including general layout and endpoints.
+<code>
+  -create database named stock_trading_simulator in MySQL
+  -Rename application-sample.txt to application.properties and fill in your username/password in the fields required
+  -Command: mvn clean spring-boot:run
+  -Command: mvn install (to generate jar file)
+  -Command: docker build -t stock-market-simulator/market .
+  -Command: docker run -p 8000:8080 stock-market-simulator/market.
+</code>
 
 <br/>
 
