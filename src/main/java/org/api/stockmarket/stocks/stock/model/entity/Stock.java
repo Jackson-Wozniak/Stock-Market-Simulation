@@ -79,10 +79,10 @@ public class Stock{
         this.momentumStreakInDays = 0;
     }
 
-    public void updatePriceWithFormula(MarketCap marketCap){
+    public void updatePriceWithFormula(){
         //Volatile stocks change twice to increase market movements
-        double randomNumber = GetRandomNumber.getRandomNumberForStocks(marketCap);
-        double randomPositiveNumber = GetRandomNumber.getRandomPositiveNumberForStocks(marketCap);
+        double randomNumber = GetRandomNumber.getRandomNumberForStocks(this.marketCap);
+        double randomPositiveNumber = GetRandomNumber.getRandomPositiveNumberForStocks(this.marketCap);
         double stockPrice = this.getPrice();
         double newPrice = Math.round((stockPrice +
                 (stockPrice * randomNumber) +

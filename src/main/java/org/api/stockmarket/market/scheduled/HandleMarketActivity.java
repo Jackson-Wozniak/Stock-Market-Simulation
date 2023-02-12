@@ -45,7 +45,7 @@ public class HandleMarketActivity {
     public void updateNewStockInformation(boolean endOfDay) {
         List<Stock> stocks = stockService.getAllStocks();
         stocks.forEach(stock -> {
-            stock.updatePriceWithFormula(stock.getMarketCap());
+            stock.updatePriceWithFormula();
             if (endOfDay) {
                 //avoid stocks going to zero with bankruptcy event
                 if (stock.getPrice() < 1) {
