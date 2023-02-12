@@ -7,6 +7,7 @@ import org.api.stockmarket.indexfund.helper.CalculateIndexFundPrice;
 import org.api.stockmarket.indexfund.model.IndexFund;
 import org.api.stockmarket.indexfund.service.IndexFundService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class IndexFundController {
     @Autowired
     private IndexFundService indexFundService;
 
-    @RequestMapping(value = "/all")
+    @GetMapping
     public List<IndexFund> getAllFunds() {
         return indexFundService.findAllIndexFunds();
     }

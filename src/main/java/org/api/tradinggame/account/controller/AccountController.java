@@ -24,12 +24,12 @@ public class AccountController {
     @Autowired
     private final AccountHistoryService accountHistoryService;
 
-    @RequestMapping(value = "get/{username}")
+    @RequestMapping(value = "{username}")
     public Account getAccountByUsername(@PathVariable String username) throws AccountNotFoundException {
         return accountService.getAccountByName(username);
     }
 
-    @PostMapping(value = "create/{username}")
+    @PostMapping(value = "{username}")
     public void createAccount(@PathVariable String username) throws InvalidAccountException {
         if(username.equalsIgnoreCase("trading-bot")){
             throw new InvalidAccountException("Cannot Create Account With Invalid Username");

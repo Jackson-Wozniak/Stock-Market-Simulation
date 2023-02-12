@@ -41,12 +41,12 @@ public class StockController {
                 stockHistoryService.findStockHistoryByTicker(ticker));
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public List<Stock> getAllStockData() {
         return stockService.getAllStocks();
     }
 
-    @GetMapping(value = "/all/detailed")
+    @GetMapping(value = "/detailed")
     public List<StockDto> getAllDetailedStockData() {
         return stockService.getAllStocks().stream()
                 .map(stock -> new StockDto(

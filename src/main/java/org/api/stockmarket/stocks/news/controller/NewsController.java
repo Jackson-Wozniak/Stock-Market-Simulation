@@ -6,6 +6,7 @@ import org.api.stockmarket.stocks.news.service.NewsService;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ public class NewsController {
         return stockService.getStockByTickerSymbol(ticker).getNewsHistory();
     }
 
-    @RequestMapping(value = "/all")
+    @GetMapping
     public List<News> findAllMarketNews() {
         return newsService.findAllNews();
     }
