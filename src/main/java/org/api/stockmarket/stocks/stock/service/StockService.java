@@ -6,10 +6,10 @@ import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.stockmarket.stocks.stock.repository.StockRepository;
-import org.api.stockmarket.stocks.stock.utils.DoesStockExist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,7 +57,7 @@ public class StockService {
     }
 
     public double getStockPriceWithTickerSymbol(String ticker) {
-        if (!DoesStockExist.stockExistsWithTicker(this, ticker)) {
+        if (stockTickerExists(ticker)) {
             throw new StockNotFoundException("No stock with ticker symbol " + ticker + " exists");
         }
         return getStockByTickerSymbol(ticker).getPrice();
@@ -65,7 +65,7 @@ public class StockService {
 
     //Ignore any stocks that do not currently exist
     public void updateStockInDatabase(Stock stock) {
-        if (!DoesStockExist.stockExistsWithTicker(this, stock.getTicker())) {
+        if (stockTickerExists(stock.getTicker())) {
             return;
         }
         stockRepository.save(stock);
@@ -81,11 +81,24 @@ public class StockService {
     }
 
     public void saveDefaultStockToDatabase(List<Stock> defaultStocks) {
+        List<Stock> currentStocks = stockRepository.findAll();
+        List<Stock> unsavedStocks = new ArrayList<>();
         defaultStocks.forEach(stock -> {
-            if (DoesStockExist.stockExistsWithTicker(this, stock.getTicker())) {
-                return;
+            if (!stockTickerExistsInList(currentStocks, stock.getTicker())) {
+                unsavedStocks.add(stock);
             }
-            stockRepository.save(stock);
         });
+        stockRepository.saveAll(unsavedStocks);
+    }
+
+    //Used for searching which default stocks do not exist and should be saved on startup
+    public static boolean stockTickerExistsInList(List<Stock> stocks, String ticker) {
+        return stocks.stream()
+                .map(Stock::getTicker)
+                .anyMatch(stockTicker -> stockTicker.equals(ticker));
+    }
+
+    public boolean stockTickerExists(String ticker){
+        return stockRepository.findById(ticker).isPresent();
     }
 }

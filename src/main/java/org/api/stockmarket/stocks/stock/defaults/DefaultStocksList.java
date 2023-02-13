@@ -41,7 +41,8 @@ public class DefaultStocksList {
             new Stock("TTD", "The Trade Desk Inc", "Technology", MarketCap.Mid, Volatility.NORMAL, InvestorRating.Neutral),
             new Stock("X", "United States Steel Corporation", "Industrials", MarketCap.Mid, Volatility.STABLE, InvestorRating.Buy),
 
-            new Stock("NVAX", "Novavax Inc.", "BioTech", MarketCap.Small, Volatility.EXTRA_VOLATILE, InvestorRating.Neutral)
+            new Stock("NVAX", "Novavax Inc.", "BioTech", MarketCap.Small, Volatility.EXTRA_VOLATILE, InvestorRating.Neutral),
+            new Stock("PRTS", "CarParts.com Inc", "Consumer Discretionary", MarketCap.Small, Volatility.VOLATILE, InvestorRating.Neutral)
     );
 
     public static int getCountForDefaultStocks() {
