@@ -5,10 +5,7 @@ import lombok.*;
 import org.api.stockmarket.market.enums.MarketTrajectory;
 import org.api.stockmarket.market.utils.DateConversion;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -31,6 +28,7 @@ public class Market {
     private Double lastMonthAveragePrice;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private MarketTrajectory marketTrajectory;
 
     public void incrementDay() {

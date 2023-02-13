@@ -33,6 +33,7 @@ public class Stock{
     private String sector;
 
     @Column(name = "cap")
+    @Enumerated(EnumType.STRING)
     private MarketCap marketCap;
 
     @Column(name = "price")
@@ -48,9 +49,11 @@ public class Stock{
     private Integer momentumStreakInDays;
 
     @Column(name = "volatile")
+    @Enumerated(EnumType.STRING)
     private Volatility volatileStock;
 
     @Column(name = "investor_rating")
+    @Enumerated(EnumType.STRING)
     private InvestorRating investorRating;
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

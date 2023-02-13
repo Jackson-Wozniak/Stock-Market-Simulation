@@ -29,5 +29,6 @@ public class IndexFund {
     private Double price;
 
     @Column(name = "fund_tracking")
+    @Enumerated(EnumType.STRING)
     private FundTracking fundTracking;
 }
