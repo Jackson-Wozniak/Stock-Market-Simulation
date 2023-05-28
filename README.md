@@ -70,17 +70,19 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 
 ## :pencil2: Local Deployment <a name="Local-Dev"></a>
 
-to run locally, run the following steps & commands:
+To run locally, first ensure that Docker Desktop is downloaded to your system. Then run the following commands:
 
 ```
-  -git clone https://github.com/Jackson-Wozniak/Stock-Market-Simulation.git
-  -create database named stock_trading_simulator in MySQL
-  -Rename application-sample.txt to application.properties and fill in your username/password in the fields required
-  -Command: mvn clean spring-boot:run
-  -Command: mvn install (to generate jar file)
-  -Command: docker build -t stock-market-simulator/market .
-  -Command: docker run -p 8000:8080 stock-market-simulator/market.
-  ```
+  - git clone https://github.com/Jackson-Wozniak/Stock-Market-Simulation.git
+  - mvn clean package -DskipTests
+  - docker-compose up
+  
+  To update docker-compose after changes to code, run:
+  - docker-compose up --build
+  
+  To remove created containers after you are done, run:
+  - docker-compose down
+```
 
 <br/>
 
