@@ -4,7 +4,6 @@ target/
 HELP.md
 mvnw
 mvnw.cmd
-src/main/resources/application.properties
 Documentation/
 src/main/java/org/api/stockmarket/stocks/options/
 .env
