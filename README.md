@@ -70,7 +70,7 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 
 ## :pencil2: Local Deployment <a name="Local-Dev"></a>
 
-To run locally, first ensure that Docker Desktop is downloaded to your system. Then run the following commands:
+To run locally, first ensure that Docker Desktop & Maven is downloaded to your system. Then run the following commands:
 
 ```
   - git clone https://github.com/Jackson-Wozniak/Stock-Market-Simulation.git
