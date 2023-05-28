@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  stock-market-api:
+    build: .
+    image: stock-market-api
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: stock_trading_simulator
+      MYSQL_PORT: 3306
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/stock_trading_simulator?createDatabaseIfNotExist=true
+    depends_on:
+      - mysqldb
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: password
