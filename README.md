@@ -78,6 +78,7 @@ To run locally, first ensure that Docker Desktop is downloaded to your system. T
   - docker-compose up
   
   To update docker-compose after changes to code, run:
+  - mvn clean package -DskipTests
   - docker-compose up --build
   
   To remove created containers after you are done, run:
