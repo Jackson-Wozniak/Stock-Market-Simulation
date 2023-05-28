@@ -1,12 +1,11 @@
 package org.api.stockmarket.indexfund.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.api.stockmarket.indexfund.enums.FundTracking;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "index_fund")

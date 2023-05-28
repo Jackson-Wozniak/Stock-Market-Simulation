@@ -7,9 +7,7 @@ import org.api.stockmarket.indexfund.enums.FundTracking;
 import org.api.stockmarket.indexfund.model.IndexFund;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "market_cap_index_fund")

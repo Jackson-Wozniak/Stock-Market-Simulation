@@ -6,9 +6,7 @@ import lombok.Setter;
 import org.api.stockmarket.indexfund.enums.FundTracking;
 import org.api.stockmarket.indexfund.model.IndexFund;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "volatile_index_fund")

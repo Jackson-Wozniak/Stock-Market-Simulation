@@ -12,7 +12,7 @@ import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity(name = "stock")

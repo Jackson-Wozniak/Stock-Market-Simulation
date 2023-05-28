@@ -7,9 +7,7 @@ import org.api.stockmarket.indexfund.enums.FundTracking;
 import org.api.stockmarket.indexfund.model.IndexFund;
 import org.api.stockmarket.indexfund.utils.Capitalize;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "sector_index_fund")

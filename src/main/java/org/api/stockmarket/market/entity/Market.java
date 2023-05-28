@@ -5,7 +5,7 @@ import lombok.*;
 import org.api.stockmarket.market.enums.MarketTrajectory;
 import org.api.stockmarket.market.utils.DateConversion;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table

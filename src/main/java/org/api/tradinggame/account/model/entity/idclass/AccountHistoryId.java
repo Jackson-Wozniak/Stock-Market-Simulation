@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.api.tradinggame.account.model.entity.Account;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Getter

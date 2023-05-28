@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.api.stockmarket.stocks.stock.model.entity.Stock;
 import org.api.tradinggame.account.exception.AccountBalanceException;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
