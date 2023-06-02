@@ -2,11 +2,12 @@ package org.api.stockmarket.stocks.stock.controller;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.indexfund.utils.Capitalize;
+import org.api.stockmarket.stocks.stock.dto.StockSummaryDTO;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
-import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
-import org.api.stockmarket.stocks.stock.model.payload.StockDto;
+import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.StockHistory;
+import org.api.stockmarket.stocks.stock.dto.StockDTO;
 import org.api.stockmarket.stocks.stock.service.StockHistoryService;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,21 +36,23 @@ public class StockController {
     private final StockHistoryService stockHistoryService;
 
     @GetMapping(value = "/{ticker}")
-    public StockDto getIndividualStockData(@PathVariable String ticker) {
-        return new StockDto(
+    public StockDTO getIndividualStockData(@PathVariable String ticker) {
+        return new StockDTO(
                 stockService.getStockByTickerSymbol(ticker),
                 stockHistoryService.findStockHistoryByTicker(ticker));
     }
 
     @GetMapping
-    public List<Stock> getAllStockData() {
-        return stockService.getAllStocks();
+    public List<StockSummaryDTO> getAllStockData() {
+        return stockService.getAllStocks().stream()
+                .map(StockSummaryDTO::new)
+                .collect(Collectors.toList());
     }
 
     @GetMapping(value = "/detailed")
-    public List<StockDto> getAllDetailedStockData() {
+    public List<StockDTO> getAllDetailedStockData() {
         return stockService.getAllStocks().stream()
-                .map(stock -> new StockDto(
+                .map(stock -> new StockDTO(
                         stock, stockHistoryService.findStockHistoryByTicker(stock.getTicker())))
                 .collect(Collectors.toList());
     }
@@ -71,9 +74,9 @@ public class StockController {
     }
 
     @GetMapping(value = "/random")
-    public StockDto getRandomStock() {
+    public StockDTO getRandomStock() {
         Stock stock = stockService.getRandomStock();
-        return new StockDto(stock, stockHistoryService.findStockHistoryByTicker(stock.getTicker()));
+        return new StockDTO(stock, stockHistoryService.findStockHistoryByTicker(stock.getTicker()));
     }
 
     @RequestMapping(value = "/history/{ticker}")

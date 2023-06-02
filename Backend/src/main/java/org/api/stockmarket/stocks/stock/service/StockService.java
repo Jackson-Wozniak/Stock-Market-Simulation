@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

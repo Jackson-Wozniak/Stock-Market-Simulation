@@ -5,7 +5,7 @@ import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

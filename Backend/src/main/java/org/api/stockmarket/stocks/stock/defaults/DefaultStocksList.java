@@ -3,7 +3,7 @@ package org.api.stockmarket.stocks.stock.defaults;
 import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import java.util.List;
 

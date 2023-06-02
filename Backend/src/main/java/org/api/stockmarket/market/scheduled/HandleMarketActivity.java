@@ -7,7 +7,7 @@ import org.api.stockmarket.market.utils.GetRandomNumber;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.earnings.helpers.ReleaseEarningsReport;
 import org.api.stockmarket.stocks.news.helpers.RandomNewsEvents;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockHistoryService;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.api.tradinggame.account.service.AccountHistoryService;

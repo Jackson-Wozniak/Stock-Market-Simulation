@@ -1,6 +1,6 @@
 package org.api.stockmarket.stocks.stock.utils;
 
-import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
+import org.api.stockmarket.stocks.stock.entity.StockHistory;
 import org.junit.jupiter.api.Test;
 
 import java.text.DateFormat;

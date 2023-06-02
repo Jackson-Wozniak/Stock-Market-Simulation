@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.tradinggame.account.exception.AccountBalanceException;
 
 import jakarta.persistence.*;

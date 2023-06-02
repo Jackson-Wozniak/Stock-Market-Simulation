@@ -1,6 +1,6 @@
 package org.api.stockmarket.stocks.earnings.defaults;
 
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 
 public class DefaultEarningsMessages {
 

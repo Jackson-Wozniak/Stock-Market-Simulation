@@ -5,9 +5,8 @@ import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.junit.jupiter.api.Test;
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.enums.MarketTrajectory;
-import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import java.util.Collections;
 import java.util.List;

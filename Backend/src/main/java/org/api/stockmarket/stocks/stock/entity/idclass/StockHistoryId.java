@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.stock.model.entity.idclass;
+package org.api.stockmarket.stocks.stock.entity.idclass;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

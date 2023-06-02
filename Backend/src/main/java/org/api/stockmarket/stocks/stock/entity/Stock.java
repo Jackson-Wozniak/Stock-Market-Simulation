@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.stock.model.entity;
+package org.api.stockmarket.stocks.stock.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

@@ -2,7 +2,7 @@ package org.api.stockmarket.market.utils;
 
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.enums.MarketTrajectory;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import java.util.List;
 

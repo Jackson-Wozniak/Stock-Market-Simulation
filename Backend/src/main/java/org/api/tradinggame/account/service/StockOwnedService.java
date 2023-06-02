@@ -1,7 +1,7 @@
 package org.api.tradinggame.account.service;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.api.tradinggame.account.exception.AccountBalanceException;
 import org.api.tradinggame.account.exception.AccountInventoryException;

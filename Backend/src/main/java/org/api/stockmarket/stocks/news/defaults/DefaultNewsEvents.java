@@ -1,6 +1,6 @@
 package org.api.stockmarket.stocks.news.defaults;
 
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import java.util.List;
 import java.util.Random;

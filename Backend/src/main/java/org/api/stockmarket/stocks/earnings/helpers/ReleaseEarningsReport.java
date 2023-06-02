@@ -5,7 +5,7 @@ import org.api.stockmarket.stocks.earnings.defaults.DefaultEarningsMessages;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.earnings.service.EarningsService;
 import org.api.stockmarket.stocks.earnings.utils.FindEarningsPerShare;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

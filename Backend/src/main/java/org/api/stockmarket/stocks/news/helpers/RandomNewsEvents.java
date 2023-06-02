@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.api.stockmarket.stocks.news.defaults.DefaultNewsEvents;
 import org.api.stockmarket.stocks.news.service.NewsService;
 import org.api.stockmarket.stocks.stock.defaults.DefaultStockPrices;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

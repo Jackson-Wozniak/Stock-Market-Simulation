@@ -1,7 +1,7 @@
 package org.api.tradinggame.account.utils;
 
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.api.tradinggame.account.model.entity.Account;
 import org.api.tradinggame.account.model.entity.StockOwned;

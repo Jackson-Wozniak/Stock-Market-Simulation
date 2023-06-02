@@ -1,11 +1,11 @@
-package org.api.stockmarket.stocks.stock.model.entity;
+package org.api.stockmarket.stocks.stock.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.model.entity.idclass.StockHistoryId;
+import org.api.stockmarket.stocks.stock.entity.idclass.StockHistoryId;
 
 import jakarta.persistence.*;
 import java.io.Serializable;

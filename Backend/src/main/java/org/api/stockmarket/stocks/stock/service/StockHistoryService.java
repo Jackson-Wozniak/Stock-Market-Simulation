@@ -3,7 +3,7 @@ package org.api.stockmarket.stocks.stock.service;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.service.MarketService;
-import org.api.stockmarket.stocks.stock.model.entity.StockHistory;
+import org.api.stockmarket.stocks.stock.entity.StockHistory;
 import org.api.stockmarket.stocks.stock.repository.StockHistoryRepository;
 import org.api.stockmarket.stocks.stock.utils.SortHistory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package org.api.stockmarket.stocks.earnings.utils;
 
-import org.api.stockmarket.stocks.stock.model.entity.Stock;
+import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import java.text.DecimalFormat;
 import java.util.Random;

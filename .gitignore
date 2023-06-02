@@ -1,6 +1,6 @@
 Backend/.idea/
-.mvn/
-target/
+Backend/.mvn/
+Backend/target/
 HELP.md
 mvnw
 mvnw.cmd
