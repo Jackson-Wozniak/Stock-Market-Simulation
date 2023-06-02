@@ -24,7 +24,7 @@
 ## :books: Table of Contents
 
 <ol>
-    <li><a href="#Features">Features</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#Technologies">Technologies</a></li>
     <li><a href="#Local-Dev">Local Deployment</a></li>
     <li>
@@ -44,7 +44,7 @@
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :pencil: Features & Overview <a id="Features"></a>
+## :pencil: Features & Overview <a id="features"></a>
 
 A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
 with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
