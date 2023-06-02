@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   stock-market-api:
-    build: .
+    build: ./Backend/.
     image: stock-market-api
     restart: always
     ports:
