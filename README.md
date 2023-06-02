@@ -44,7 +44,7 @@
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :pencil: Features & Overview <a name="Features"></a>
+## :pencil: Features & Overview <a id="Features"></a>
 
 A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
 with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
@@ -57,7 +57,7 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :iphone: Technologies <a name="Technologies"></a>
+## :iphone: Technologies <a id="Technologies"></a>
 
 * Java Spring Boot
 * Spring Data JPA
@@ -68,7 +68,7 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :pencil2: Local Deployment <a name="Local-Dev"></a>
+## :pencil2: Local Deployment <a id="Local-Dev"></a>
 
 To run locally, first ensure that Docker Desktop & Maven is downloaded to your system. Then run the following commands:
 
@@ -90,10 +90,10 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <details>
 <summary>
-  <h2> :pencil2: API Endpoints <a name="API-Endpoints"></a></h2><p>(click to see details)</p>
+  <h2> :pencil2: API Endpoints <a id="API-Endpoints"></a></h2><p>(click to see details)</p>
 </summary>
 
-  ## :calendar: Market <a name="Market"></a>
+  ## :calendar: Market <a id="Market"></a>
 
 * The market date is tracked on intervals that can be altered. The default "day" is 24 intervals of 10 seconds, and 30 "days" is a month
 * The date is formatted as month/day/year
@@ -101,7 +101,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 * There are 3 market types; Bear, Bull and Normal. Bear markets occur if the average stock price falls 10% in a month, while 
 bull markets happen if prices rise 10% monthly. Normal market conditions cover all scenarios in between
 
-#### :arrow_right: Market Endpoints <a name="Market"></a>
+#### :arrow_right: Market Endpoints <a id="Market"></a>
 
 <details>
   <summary>Market Conditions: GET | http://localhost:8080/api/v1/market</summary>
@@ -121,7 +121,7 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :dollar: Stocks <a name="Stocks"></a>
+## :dollar: Stocks <a id="Stocks"></a>
 
 * Stock prices change on an interval (10 seconds)
 * Stock prices change based on three factors: market cap, momentum, and volatility
@@ -335,7 +335,7 @@ The data below doesn't show all stocks, but shows the general format
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :chart_with_upwards_trend: Stock History <a name="Stock-History"></a>
+## :chart_with_upwards_trend: Stock History <a id="Stock-History"></a>
 
 * Stock prices are saved each day, and the history of a stocks price can be viewed
 * Price history is reset at the end of each year
@@ -400,7 +400,7 @@ The data below doesn't show all stocks, but shows the general format
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :newspaper: Stock News <a name="Stock-News"></a>
+## :newspaper: Stock News <a id="Stock-News"></a>
 
 * At the end of each day, there is a chance that a specific stock will release a news story, which will have a large effect on their price
 * Positive news, such as buyouts, will increase the stocks by around price 10%
@@ -445,7 +445,7 @@ Note: {___} in url represents path variable
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-## :heavy_dollar_sign: Stock Earnings Reports <a name="Stock-Earnings"></a>
+## :heavy_dollar_sign: Stock Earnings Reports <a id="Stock-Earnings"></a>
 
 * Stocks release earnings reports on the first day of every 3rd month (3rd, 6th, 9th, 12th)
 * Earnings reports effect stock prices and optimism, and are also affected by previous optimism
@@ -539,7 +539,7 @@ Date is formatted as month_day_year and will return an error if incorrectly form
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-## :bar_chart: Index Funds <a name="Index-Funds"></a>
+## :bar_chart: Index Funds <a id="Index-Funds"></a>
  
 * Index funds track the average price of a specific category of stocks
 * These cannot be traded, but only serve to estimate the total market trajectory
@@ -630,7 +630,7 @@ Note: {___} in url represents path variable
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :credit_card: Trading & Accounts <a name="Trading"></a>
+## :credit_card: Trading & Accounts <a id="Trading"></a>
 
 #### :arrow_right: Trading & Account Endpoints
 <details>
@@ -708,7 +708,7 @@ Note: {___} in url represents path variable
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :trophy: Leaderboard <a name="Leaderboard"></a>
+## :trophy: Leaderboard <a id="Leaderboard"></a>
 
 * A leaderboard tracks total user profits for each account, sorting them by how much each account earns
 * Trading stocks for a profit will push you up the leaderboard, with the goal of beating a trading bot
@@ -810,7 +810,7 @@ Note: {___} in url represents path variable
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :notebook: Results & Data From Simulation <a name="Results"></a>
+## :notebook: Results & Data From Simulation <a id="Results"></a>
 
 ### Current Stock Price Simulation
 
