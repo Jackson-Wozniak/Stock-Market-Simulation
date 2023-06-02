@@ -28,7 +28,7 @@
     <li><a href="#Technologies">Technologies</a></li>
     <li><a href="#Local-Dev">Local Deployment</a></li>
     <li>
-      <a href="#Market">Api Documentation</a>
+      <a href="#API-Endpoints">Api Documentation</a>
       <ul>
         <li><a href="#Market">Market</a></li>
         <li><a href="#Stocks">Stocks</a></li>
@@ -87,9 +87,13 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 
 <br/>
 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<details>
+<summary>
+  <h2> :pencil2: API Endpoints <a name="API-Endpoints"></a></h2><p>(click to see details)</p>
+</summary>
 
-## :calendar: Market <a name="Market"></a>
+  ## :calendar: Market <a name="Market"></a>
 
 * The market date is tracked on intervals that can be altered. The default "day" is 24 intervals of 10 seconds, and 30 "days" is a month
 * The date is formatted as month/day/year
@@ -97,7 +101,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 * There are 3 market types; Bear, Bull and Normal. Bear markets occur if the average stock price falls 10% in a month, while 
 bull markets happen if prices rise 10% monthly. Normal market conditions cover all scenarios in between
 
-#### :arrow_right: Market Endpoints
+#### :arrow_right: Market Endpoints <a name="Market"></a>
 
 <details>
   <summary>Market Conditions: GET | http://localhost:8080/api/v1/market</summary>
@@ -799,7 +803,9 @@ Note: {___} in url represents path variable
   
   </p>
 </details> 
+</details>
 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
