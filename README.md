@@ -27,6 +27,7 @@
     <li><a href="#features">Features</a></li>
     <li><a href="#technologies">Technologies</a></li>
     <li><a href="#local-dev">Local Deployment</a></li>
+    <li><a href="#contributing">Contributing</a></li>
     <li>
       <a href="#api-endpoints">Api Documentation</a>
       <ul>
@@ -44,7 +45,7 @@
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :pencil: Features & Overview <a id="features"></a>
+## :notebook: Features & Overview <a id="features"></a>
 
 A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
 with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
@@ -66,7 +67,16 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 * JUNIT
 
 <br/> 
+
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+## 📝: Contributing <a id="contributing"></a>
+
+For all info on contributing, please head to [this](https://github.com/Jackson-Wozniak/Stock-Market-Simulation/blob/main/CONTRIBUTING.md) document
+
+<br/>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 ## :pencil2: Local Deployment <a id="local-dev"></a>
 
@@ -90,7 +100,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <details>
 <summary>
-  <h2> :pencil2: API Endpoints <a id="api-endpoints"></a></h2><p>(click to see details)</p>
+  <h2> :electric_plug: API Endpoints <a id="api-endpoints"></a></h2><p>(click to see details)</p>
 </summary>
 
   ## :calendar: Market <a id="market"></a>
