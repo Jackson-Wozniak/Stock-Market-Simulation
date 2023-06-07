@@ -2,14 +2,8 @@ package org.api.stockmarket.stocks.stock.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.stockmarket.stocks.earnings.dto.EarningsDTO;
-import org.api.stockmarket.stocks.news.dto.NewsDTO;
 import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.entity.StockHistory;
 import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 //This class is used when getting a list of stocks, where fields such as earnings and price history is not needed
 @Getter

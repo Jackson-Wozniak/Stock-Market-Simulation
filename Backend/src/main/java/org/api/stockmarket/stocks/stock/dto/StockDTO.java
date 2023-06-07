@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.api.stockmarket.stocks.earnings.dto.EarningsDTO;
-import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.dto.NewsDTO;
-import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.entity.StockHistory;
 import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
 import java.util.List;
@@ -32,9 +29,9 @@ public class StockDTO {
     private String investorRating;
     private List<NewsDTO> newsHistory;
     private List<EarningsDTO> earningsHistory;
-    private List<StockHistoryDTO> stockHistory;
+    private List<StockPriceHistoryDTO> priceHistory;
 
-    public StockDTO(Stock stock, List<StockHistory> stockHistory) {
+    public StockDTO(Stock stock) {
         this.ticker = stock.getTicker();
         this.companyName = stock.getCompanyName();
         this.sector = stock.getSector();
@@ -51,8 +48,8 @@ public class StockDTO {
         this.earningsHistory = stock.getEarningsHistory().stream()
                 .map(EarningsDTO::new)
                 .collect(Collectors.toList());
-        this.stockHistory = stockHistory.stream()
-                .map(StockHistoryDTO::new)
+        this.priceHistory = stock.getPriceHistory().stream()
+                .map(StockPriceHistoryDTO::new)
                 .collect(Collectors.toList());
         this.percentChange = getPercentChange(this.getPrice(), this.getLastDayPrice());
     }

@@ -21,6 +21,11 @@ import java.util.List;
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
+/*
+TODO:
+    - refactor stock price history (called StockHistory now) to be included in the stock instead of
+        a separate entity that must be queried for separately, will be OneToMany relationship
+ */
 public class Stock{
 
     @Id
@@ -63,6 +68,10 @@ public class Stock{
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<EarningsReport> earningsHistory;
+
+    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<StockPriceHistory> priceHistory;
 
     public Stock(String ticker,
                         String companyName,
@@ -114,12 +123,13 @@ public class Stock{
             return;
         }
         double price = getPrice();
+        int momentumStreakDays = getMomentumStreakInDays();
         if (price > getLastDayPrice()) {
-            if(getMomentumStreakInDays() <= -1){
+            if(momentumStreakDays <= -1){
                 setMomentumStreakInDays(0);
                 return;
             }
-            setMomentumStreakInDays(getMomentumStreakInDays() + 1);
+            setMomentumStreakInDays(momentumStreakDays + 1);
             return;
         }
         if (price < getLastDayPrice()) {
@@ -127,7 +137,7 @@ public class Stock{
                 setMomentumStreakInDays(0);
                 return;
             }
-            setMomentumStreakInDays(getMomentumStreakInDays() - 1);
+            setMomentumStreakInDays(momentumStreakDays - 1);
         }
     }
 

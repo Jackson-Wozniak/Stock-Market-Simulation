@@ -3,7 +3,7 @@ package org.api.stockmarket.market.scheduled;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.indexfund.service.IndexFundService;
 import org.api.stockmarket.market.constants.MarketIntervals;
-import org.api.stockmarket.stocks.stock.service.StockHistoryService;
+import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
 import org.api.tradinggame.account.service.AccountHistoryService;
 import org.api.tradinggame.account.service.LimitOrderService;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class MarketActivityScheduler {
     @Autowired
     private final AccountHistoryService accountHistoryService;
     @Autowired
-    private final StockHistoryService stockHistoryService;
+    private final StockPriceHistoryService stockPriceHistoryService;
     @Autowired
     private final IndexFundService indexFundService;
 
@@ -41,7 +41,7 @@ public class MarketActivityScheduler {
         if (marketHour >= 24) {
             limitOrderService.truncateLimitOrders();
             accountHistoryService.saveDailyAccountHistory();
-            stockHistoryService.saveStockHistoryDaily();
+            stockPriceHistoryService.saveStockHistoryDaily();
             indexFundService.updatePriceForAllFundsDaily();
 
             logger.info("New Day: " + handleMarketActivity.dailyMarketActivity());

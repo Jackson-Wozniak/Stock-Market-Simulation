@@ -1,11 +1,10 @@
 package org.api.stockmarket.stocks.stock.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.entity.idclass.StockHistoryId;
+import org.api.stockmarket.stocks.stock.entity.idclass.StockPriceHistoryId;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -19,15 +18,14 @@ Saves daily stock history for one year.
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(StockHistoryId.class)
-public class StockHistory implements Serializable {
+public class StockPriceHistory implements Serializable {
 
-    @Id
-    private String marketDate;
+    @EmbeddedId
+    private StockPriceHistoryId id;
 
-    @Id
-    @JsonIgnore
-    private String ticker;
+    @MapsId(value = "ticker")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Stock stock;
 
     @Column(name = "price")
     private Double stockPrice;

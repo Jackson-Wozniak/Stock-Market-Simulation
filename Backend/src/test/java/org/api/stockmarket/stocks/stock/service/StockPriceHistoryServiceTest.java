@@ -1,6 +1,6 @@
 package org.api.stockmarket.stocks.stock.service;
 
-import org.api.stockmarket.stocks.stock.entity.StockHistory;
+import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -12,15 +12,15 @@ import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class StockHistoryServiceTest {
+class StockPriceHistoryServiceTest {
 
     @Autowired
-    private StockHistoryService stockHistoryService;
+    private StockPriceHistoryService stockPriceHistoryService;
 
     @Test
     void stockHistoryOnlyHappensOnThirdMonths(){
-        List<StockHistory> stockHistory = stockHistoryService.findStockHistoryByTicker("GOOG");
-        stockHistory.forEach(Assertions::assertNotNull);
+        List<StockPriceHistory> stockPriceHistory = stockPriceHistoryService.findStockHistoryByTicker("GOOG");
+        stockPriceHistory.forEach(Assertions::assertNotNull);
     }
 
 }
