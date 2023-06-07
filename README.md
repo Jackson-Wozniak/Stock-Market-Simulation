@@ -24,27 +24,28 @@
 ## :books: Table of Contents
 
 <ol>
-    <li><a href="#Features">Features</a></li>
-    <li><a href="#Technologies">Technologies</a></li>
-    <li><a href="#Local-Dev">Local Deployment</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#technologies">Technologies</a></li>
+    <li><a href="#local-dev">Local Deployment</a></li>
+    <li><a href="#contributing">Contributing</a></li>
     <li>
-      <a href="#Market">Api Documentation</a>
+      <a href="#api-endpoints">Api Documentation</a>
       <ul>
-        <li><a href="#Market">Market</a></li>
-        <li><a href="#Stocks">Stocks</a></li>
-        <li><a href="#Stock-History">Stock History, News & Earnings Reports</a></li>
-        <li><a href="#Index-Funds">Index Funds</a></li>
-        <li><a href="#Trading">Trading</a></li>
-        <li><a href="#Leaderboard">Leaderboards</a></li>
+        <li><a href="#market">Market</a></li>
+        <li><a href="#stocks">Stocks</a></li>
+        <li><a href="#stock-history">Stock History, News & Earnings Reports</a></li>
+        <li><a href="#index-funds">Index Funds</a></li>
+        <li><a href="#trading">Trading</a></li>
+        <li><a href="#leaderboard">Leaderboards</a></li>
       </ul>
     </li>  
-    <li><a href="#Results">Results & Data From Simulations</a></li>
+    <li><a href="#results">Results & Data From Simulations</a></li>
 </ol>    
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :pencil: Features & Overview <a name="Features"></a>
+## :notebook: Features & Overview <a id="features"></a>
 
 A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
 with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
@@ -57,7 +58,7 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :iphone: Technologies <a name="Technologies"></a>
+## :iphone: Technologies <a id="technologies"></a>
 
 * Java Spring Boot
 * Spring Data JPA
@@ -66,9 +67,18 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 * JUNIT
 
 <br/> 
+
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :pencil2: Local Deployment <a name="Local-Dev"></a>
+## 📝: Contributing <a id="contributing"></a>
+
+For all info on contributing, please head to [this](https://github.com/Jackson-Wozniak/Stock-Market-Simulation/blob/main/CONTRIBUTING.md) document
+
+<br/>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+## :pencil2: Local Deployment <a id="local-dev"></a>
 
 To run locally, first ensure that Docker Desktop & Maven is downloaded to your system. Then run the following commands:
 
@@ -87,9 +97,13 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 
 <br/>
 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<details>
+<summary>
+  <h2> :electric_plug: API Endpoints <a id="api-endpoints"></a></h2><p>(click to see details)</p>
+</summary>
 
-## :calendar: Market <a name="Market"></a>
+  ## :calendar: Market <a id="market"></a>
 
 * The market date is tracked on intervals that can be altered. The default "day" is 24 intervals of 10 seconds, and 30 "days" is a month
 * The date is formatted as month/day/year
@@ -117,7 +131,7 @@ bull markets happen if prices rise 10% monthly. Normal market conditions cover a
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :dollar: Stocks <a name="Stocks"></a>
+## :dollar: Stocks <a id="stocks"></a>
 
 * Stock prices change on an interval (10 seconds)
 * Stock prices change based on three factors: market cap, momentum, and volatility
@@ -331,7 +345,7 @@ The data below doesn't show all stocks, but shows the general format
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :chart_with_upwards_trend: Stock History <a name="Stock-History"></a>
+## :chart_with_upwards_trend: Stock History <a id="stock-history"></a>
 
 * Stock prices are saved each day, and the history of a stocks price can be viewed
 * Price history is reset at the end of each year
@@ -396,7 +410,7 @@ The data below doesn't show all stocks, but shows the general format
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :newspaper: Stock News <a name="Stock-News"></a>
+## :newspaper: Stock News <a id="Stock-News"></a>
 
 * At the end of each day, there is a chance that a specific stock will release a news story, which will have a large effect on their price
 * Positive news, such as buyouts, will increase the stocks by around price 10%
@@ -441,7 +455,7 @@ Note: {___} in url represents path variable
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-## :heavy_dollar_sign: Stock Earnings Reports <a name="Stock-Earnings"></a>
+## :heavy_dollar_sign: Stock Earnings Reports <a id="Stock-Earnings"></a>
 
 * Stocks release earnings reports on the first day of every 3rd month (3rd, 6th, 9th, 12th)
 * Earnings reports effect stock prices and optimism, and are also affected by previous optimism
@@ -535,7 +549,7 @@ Date is formatted as month_day_year and will return an error if incorrectly form
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-## :bar_chart: Index Funds <a name="Index-Funds"></a>
+## :bar_chart: Index Funds <a id="index-funds"></a>
  
 * Index funds track the average price of a specific category of stocks
 * These cannot be traded, but only serve to estimate the total market trajectory
@@ -626,7 +640,7 @@ Note: {___} in url represents path variable
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :credit_card: Trading & Accounts <a name="Trading"></a>
+## :credit_card: Trading & Accounts <a id="trading"></a>
 
 #### :arrow_right: Trading & Account Endpoints
 <details>
@@ -704,7 +718,7 @@ Note: {___} in url represents path variable
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :trophy: Leaderboard <a name="Leaderboard"></a>
+## :trophy: Leaderboard <a id="leaderboard"></a>
 
 * A leaderboard tracks total user profits for each account, sorting them by how much each account earns
 * Trading stocks for a profit will push you up the leaderboard, with the goal of beating a trading bot
@@ -799,12 +813,14 @@ Note: {___} in url represents path variable
   
   </p>
 </details> 
+</details>
 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :notebook: Results & Data From Simulation <a name="Results"></a>
+## :notebook: Results & Data From Simulation <a id="results"></a>
 
 ### Current Stock Price Simulation
 
