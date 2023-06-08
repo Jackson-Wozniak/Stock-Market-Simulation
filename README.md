@@ -84,11 +84,15 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 
 ```
   - git clone https://github.com/Jackson-Wozniak/Stock-Market-Simulation.git
+  - cd Backend/
   - mvn clean package -DskipTests
+  - cd ../
   - docker-compose up
   
   To update docker-compose after changes to code, run:
+  - cd Backend/
   - mvn clean package -DskipTests
+  - cd ../
   - docker-compose up --build
   
   To remove created containers after you are done, run:
