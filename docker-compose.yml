@@ -1,7 +1,8 @@
 version: "3.8"
 services:
   stock-market-api:
-    build: ./Backend/.
+    build: 
+      context: ./Backend        
     image: stock-market-api
     restart: always
     ports:
@@ -14,7 +15,9 @@ services:
       MYSQL_PORT: 3306
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/stock_trading_simulator?createDatabaseIfNotExist=true
     depends_on:
-      - mysqldb
+      mysqldb: 
+        condition: service_healthy
+
   mysqldb:
     container_name: mysqldb
     image: mysql
@@ -23,3 +26,7 @@ services:
     environment:
       MYSQL_DATABASE: test
       MYSQL_ROOT_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10      
