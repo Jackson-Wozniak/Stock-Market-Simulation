@@ -2,6 +2,14 @@ package org.api.stockmarket.market.utils;
 
 public class DateConversion {
 
+    public static String datePlusNDays(int n, String marketDate){
+        String copy = String.valueOf(marketDate);
+        for(int i = 0; i < n; i++){
+            copy = incrementMarketDay(copy);
+        }
+        return copy;
+    }
+
     public static String incrementMarketDay(String date) {
         String[] dateAsArray = date.split("/");
 
