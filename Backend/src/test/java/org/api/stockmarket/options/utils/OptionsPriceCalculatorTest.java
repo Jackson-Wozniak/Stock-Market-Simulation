@@ -21,10 +21,10 @@ class OptionsPriceCalculatorTest {
                 105
         );
         optionContract.getStock().setPrice(100.0);
-        assertEquals(.11, OptionsPriceCalculator.blackSholesFormula(optionContract, "1/1/1"));
+        assertEquals(.11, OptionsPriceCalculator.blackScholesFormula(optionContract, "1/1/1"));
 
         optionContract.getStock().setVolatileStock(Volatility.VOLATILE);
-        assertEquals(.03, OptionsPriceCalculator.blackSholesFormula(optionContract, "1/1/1"));
+        assertEquals(.03, OptionsPriceCalculator.blackScholesFormula(optionContract, "1/1/1"));
     }
 
     @Test
@@ -36,10 +36,10 @@ class OptionsPriceCalculatorTest {
                 105
         );
         optionContract.getStock().setPrice(100.0);
-        assertEquals(5.07, OptionsPriceCalculator.blackSholesFormula(optionContract, "1/1/1"));
+        assertEquals(5.07, OptionsPriceCalculator.blackScholesFormula(optionContract, "1/1/1"));
 
         optionContract.getStock().setVolatileStock(Volatility.VOLATILE);
-        assertEquals(4.99, OptionsPriceCalculator.blackSholesFormula(optionContract, "1/1/1"));
+        assertEquals(4.99, OptionsPriceCalculator.blackScholesFormula(optionContract, "1/1/1"));
     }
 
     public static Stock defaultStock(){

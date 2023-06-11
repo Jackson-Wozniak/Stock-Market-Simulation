@@ -5,17 +5,8 @@ import org.api.stockmarket.options.enums.OptionType;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 
 public class OptionsPriceCalculator {
@@ -33,7 +24,7 @@ public class OptionsPriceCalculator {
         - Normal Distribution
 
      */
-    public static double blackSholesFormula(OptionContract option, String marketDate){
+    public static double blackScholesFormula(OptionContract option, String marketDate){
 //        double impliedVolatility = .18;//findStockVolatility(option.getStock());
 //        System.out.println((double) daysTillExpiration(marketDate, option.getExpirationDate()) / 365.0);
 //        double yearsToExpiration = (double) daysTillExpiration(marketDate, option.getExpirationDate()) / 365.0;
