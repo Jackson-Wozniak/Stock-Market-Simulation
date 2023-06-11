@@ -23,6 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.api.stockmarket.options.enums.OptionType;
+import org.api.stockmarket.options.utils.OptionsPriceCalculator;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 
 @Entity(name = "option")
@@ -58,5 +59,9 @@ public class OptionContract {
         this.optionType = optionType;
         this.expirationDate = expirationDate;
         this.strikePrice = strikePrice;
+    }
+
+    public double getOptionPremium(String marketDate){
+        return OptionsPriceCalculator.blackScholesFormula(this, marketDate);
     }
 }
