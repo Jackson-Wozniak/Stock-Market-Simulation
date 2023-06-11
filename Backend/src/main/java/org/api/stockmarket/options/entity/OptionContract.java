@@ -46,12 +46,17 @@ public class OptionContract {
     @Column(name = "expirationDate")
     private String expirationDate;
 
+    @Column(name = "strike_price")
+    private Double strikePrice;
+
     public OptionContract(
             Stock stock,
             OptionType optionType,
-            String expirationDate){
+            String expirationDate,
+            double strikePrice){
         this.stock = stock;
         this.optionType = optionType;
         this.expirationDate = expirationDate;
+        this.strikePrice = strikePrice;
     }
 }

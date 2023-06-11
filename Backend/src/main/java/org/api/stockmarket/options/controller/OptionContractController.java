@@ -21,5 +21,5 @@ public class OptionContractController {
     private final OptionContractService optionsService;
     @Autowired
     private final StockService stockService;
-    
+
 }
