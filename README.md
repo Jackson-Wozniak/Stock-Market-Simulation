@@ -181,7 +181,7 @@ Note: {___} in url represents path variable
 </details>
   
 <details>  
-  <summary>All Stocks: GET | http://localhost:8080/api/v1/stocks/all</summary>
+  <summary>All Stocks: GET | http://localhost:8080/api/v1/stocks</summary>
 The data below doesn't show all stocks, but shows the general format
   <p>
   
@@ -224,6 +224,51 @@ The data below doesn't show all stocks, but shows the general format
 
   </p>
 </details>  
+
+<details>  
+  <summary>Detailed Stock Data: GET | http://localhost:8080/api/v1/stocks/detailed</summary>
+The data below doesn't show all stocks, but shows the general format
+  <p>
+  
+```JSON
+[ {
+  "ticker" : "AAPL",
+  "companyName" : "Apple",
+  "sector" : "Technology",
+  "marketCap" : "Large",
+  "price" : 104.2,
+  "lastDayPrice" : 103.01,
+  "momentum" : 1,
+  "momentumStreakInDays" : 5,
+  "volatileStock" : false,
+  "newsHistory" : [ ]
+}, {
+  "ticker" : "AMZN",
+  "companyName" : "Amazon",
+  "sector" : "Technology",
+  "marketCap" : "Large",
+  "price" : 104.66,
+  "lastDayPrice" : 105.63,
+  "momentum" : 1,
+  "momentumStreakInDays" : 3,
+  "volatileStock" : true,
+  "newsHistory" : [ ]
+}, {
+  "ticker" : "BRK.B",
+  "companyName" : "Berkshire Hathaway",
+  "sector" : "Insurance",
+  "marketCap" : "Large",
+  "price" : 100.62,
+  "lastDayPrice" : 100.87,
+  "momentum" : 1,
+  "momentumStreakInDays" : 3,
+  "volatileStock" : false,
+  "newsHistory" : [ ]
+}]
+```
+
+  </p>
+</details> 
 
 <details>
   <summary>Stocks By Sector: GET | http://localhost:8080/api/v1/stocks/sector/{sector}</summary>
@@ -426,7 +471,7 @@ The data below doesn't show all stocks, but shows the general format
 Note: {___} in url represents path variable
 
 <details>
-  <summary>All News On The Market: GET | http://localhost:8080/api/v1/news/all</summary>
+  <summary>All News On The Market: GET | http://localhost:8080/api/v1/news</summary>
   <p>
     
 ```JSON
@@ -470,7 +515,7 @@ Note: {___} in url represents path variable
 
 
 <details>
-  <summary>All Earnings Reports History: GET | http://localhost:8080/api/v1/earnings/all</summary>
+  <summary>All Earnings Reports History: GET | http://localhost:8080/api/v1/earnings</summary>
   <p>
   
 ```JSON
@@ -648,7 +693,7 @@ Note: {___} in url represents path variable
 
 #### :arrow_right: Trading & Account Endpoints
 <details>
-  <summary>Get Account By Name : GET | http://localhost:8080/api/v1/account/get/{username}</summary>
+  <summary>Get Account By Name : GET | http://localhost:8080/api/v1/account/{username}</summary>
   <p>
 
 ```JSON
@@ -712,7 +757,7 @@ Note: {___} in url represents path variable
 </details>  
 
 <details>
-  <summary>Create Account : POST | http://localhost:8080/api/v1/account/create/{username}</summary>
+  <summary>Create Account : POST | http://localhost:8080/api/v1/account/{username}</summary>
 </details>
 
 <details>
