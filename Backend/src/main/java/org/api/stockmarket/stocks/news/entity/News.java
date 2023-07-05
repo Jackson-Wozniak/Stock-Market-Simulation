@@ -9,6 +9,7 @@ import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table
@@ -31,9 +32,10 @@ public class News implements Serializable {
     private String event;
 
     @Column(name = "date_released")
-    private String dateReleased;
+    @Temporal(TemporalType.TIMESTAMP)
+    private ZonedDateTime dateReleased;
 
-    public News(Stock stock, String event, String dateReleased) {
+    public News(Stock stock, String event, ZonedDateTime dateReleased) {
         this.stock = stock;
         this.event = event;
         this.dateReleased = dateReleased;

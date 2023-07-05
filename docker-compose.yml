@@ -24,7 +24,7 @@ services:
     ports:
       - 3307:3306
     environment:
-      MYSQL_DATABASE: test
+      MYSQL_DATABASE: stock_trading_simulator
       MYSQL_ROOT_PASSWORD: password
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]

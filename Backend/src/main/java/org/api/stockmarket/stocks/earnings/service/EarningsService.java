@@ -6,6 +6,7 @@ import org.api.stockmarket.stocks.earnings.repository.EarningsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +21,9 @@ public class EarningsService {
         return earningsRepository.findAll();
     }
 
-    public List<EarningsReport> findAllEarningsByDate(String date) {
+    public List<EarningsReport> findAllEarningsByDate(ZonedDateTime date) {
         return earningsRepository.findAll().stream()
-                .filter(earnings -> earnings.getDateOfRelease().equalsIgnoreCase(date))
+                .filter(earnings -> earnings.getDateOfRelease().equals(date))
                 .collect(Collectors.toList());
     }
 

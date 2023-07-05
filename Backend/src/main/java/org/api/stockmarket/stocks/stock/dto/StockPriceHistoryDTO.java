@@ -1,14 +1,18 @@
 package org.api.stockmarket.stocks.stock.dto;
 
+import java.time.ZonedDateTime;
+
+import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
 
 @Getter
 @Setter
 public class StockPriceHistoryDTO {
 
-    private String marketDate;
+    
+    private ZonedDateTime  marketDate;
     private double stockPrice;
 
     public StockPriceHistoryDTO(StockPriceHistory history){

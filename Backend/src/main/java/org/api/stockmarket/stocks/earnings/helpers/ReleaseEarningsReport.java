@@ -10,6 +10,7 @@ import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /*
@@ -24,7 +25,7 @@ public class ReleaseEarningsReport {
     @Autowired
     private final StockService stockService;
 
-    public void handleQuarterlyEarningsReports(List<Stock> stocks, String marketDate) {
+    public void handleQuarterlyEarningsReports(List<Stock> stocks, ZonedDateTime marketDate) {
         stocks.forEach(stock -> {
             EarningsReport earningsReport = createEarningsReport(stock, marketDate);
             if(earningsReport.isPositiveEarnings()){
@@ -38,7 +39,7 @@ public class ReleaseEarningsReport {
         });
     }
 
-    public EarningsReport createEarningsReport(Stock stock, String marketDate) {
+    public EarningsReport createEarningsReport(Stock stock, ZonedDateTime marketDate) {
         double estimatedEPS = FindEarningsPerShare.getEstimatedEarningsPerShare();
         double actualEPS = FindEarningsPerShare.getActualEarningsPerShare(stock);
         String earningsMessage = getEarningsMessage(stock, estimatedEPS, actualEPS, marketDate);
@@ -48,7 +49,7 @@ public class ReleaseEarningsReport {
     public String getEarningsMessage(Stock stock,
                                      double estimatedEPS,
                                      double actualEPS,
-                                     String marketDate) {
+                                     ZonedDateTime marketDate) {
         if (actualEPS - estimatedEPS >= 1) {
             return DefaultEarningsMessages.getPositiveEarningsReport(
                     stock, estimatedEPS, actualEPS, marketDate);

@@ -1,8 +1,8 @@
 package org.api.stockmarket.stocks.earnings.controller;
 
-import lombok.AllArgsConstructor;
-import org.api.stockmarket.market.exception.DateFormatException;
-import org.api.stockmarket.market.utils.DateConversion;
+import java.time.ZonedDateTime;
+import java.util.List;
+
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.earnings.service.EarningsService;
 import org.api.stockmarket.stocks.stock.service.StockService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(value = "/api/v1/earnings")
@@ -37,11 +37,8 @@ public class EarningsController {
     //date is formatted as month_day_year here instead of month/day/year
     @RequestMapping(value = "/date/{date}")
     public List<EarningsReport> getEarningsOnDate(@PathVariable String date) {
-        date = date.replace("_", "/");
-        if (!DateConversion.dateIsFormattedCorrectly(date)) {
-            throw new DateFormatException();
-        }
-        return earningsService.findAllEarningsByDate(date);
+        ZonedDateTime parsedDate = ZonedDateTime.parse(date);
+        return earningsService.findAllEarningsByDate(parsedDate);
     }
 
 }

@@ -1,11 +1,24 @@
 package org.api.stockmarket.market.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-import org.api.stockmarket.market.enums.MarketTrajectory;
-import org.api.stockmarket.market.utils.DateConversion;
+import java.time.ZonedDateTime;
 
-import jakarta.persistence.*;
+import org.api.stockmarket.market.enums.MarketTrajectory;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table
@@ -20,10 +33,11 @@ public class Market {
     @JsonIgnore
     private final Integer id = 1;
 
-    //formatted as month/day/year, starts at 1 for each
+    
     @Column
-    private String date;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    private ZonedDateTime date;
+    
     @Column
     private Double lastMonthAveragePrice;
 
@@ -31,8 +45,8 @@ public class Market {
     @Enumerated(EnumType.STRING)
     private MarketTrajectory marketTrajectory;
 
-    public void incrementDay() {
-        String date = DateConversion.incrementMarketDay(getDate());
-        setDate(date);
+    public void increment() {
+        ZonedDateTime newDate = getDate().plusHours(1);
+        setDate(newDate);
     }
 }

@@ -1,14 +1,23 @@
 package org.api.tradinggame.account.model.entity;
 
+import java.io.Serializable;
+import java.time.ZonedDateTime;
+
+import org.api.tradinggame.account.model.entity.idclass.AccountHistoryId;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.tradinggame.account.model.entity.idclass.AccountHistoryId;
-
-import jakarta.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "account_history")
@@ -19,8 +28,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class AccountHistory implements Serializable {
 
-    @Id
-    private String date;
+    @Id        
+    @Temporal(TemporalType.TIMESTAMP)
+    private ZonedDateTime date;   
 
     @Id
     @JsonBackReference
