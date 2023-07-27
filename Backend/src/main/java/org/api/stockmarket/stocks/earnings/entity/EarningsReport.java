@@ -9,6 +9,7 @@ import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "earnings_reports")
@@ -37,13 +38,13 @@ public class EarningsReport implements Serializable {
     private String reportMessage;
 
     @Column(name = "date_of_release")
-    private String dateOfRelease;
+    private ZonedDateTime dateOfRelease;
 
     public EarningsReport(Stock stock,
                           double estimatedEPS,
                           double actualEPS,
                           String reportMessage,
-                          String dateOfRelease) {
+                          ZonedDateTime dateOfRelease) {
         this.stock = stock;
         this.estimatedEPS = estimatedEPS;
         this.actualEPS = actualEPS;

@@ -1,15 +1,16 @@
 package org.api.stockmarket.stocks.stock.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.api.stockmarket.stocks.earnings.dto.EarningsDTO;
 import org.api.stockmarket.stocks.news.dto.NewsDTO;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter

@@ -8,6 +8,7 @@ import org.api.stockmarket.market.enums.MarketTrajectory;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,24 +31,24 @@ class MarketTrajectoryUtilsTest {
     void bearMarketTrajectoryTracksCorrectly() {
         assertEquals(MarketTrajectory.BEAR,
                 MarketTrajectoryUtils.getNewMarketTrajectory(
-                        new Market("", 100.0, MarketTrajectory.NORMAL), listOfStocks));
+                        new Market(ZonedDateTime.now(), 100.0, MarketTrajectory.NORMAL), listOfStocks));
     }
 
     @Test
     void normalMarketTrajectoryTracksCorrectly() {
         assertEquals(MarketTrajectory.NORMAL,
                 MarketTrajectoryUtils.getNewMarketTrajectory(
-                        new Market("", 100.0, MarketTrajectory.NORMAL), listOfLargeCapStocks));
+                        new Market(ZonedDateTime.now(), 100.0, MarketTrajectory.NORMAL), listOfLargeCapStocks));
         assertEquals(MarketTrajectory.NORMAL,
                 MarketTrajectoryUtils.getNewMarketTrajectory(
-                        new Market("", 100.0, MarketTrajectory.NORMAL), emptyListOfStocks));
+                        new Market(ZonedDateTime.now(), 100.0, MarketTrajectory.NORMAL), emptyListOfStocks));
     }
 
     @Test
     void bullMarketTrajectoryTracksCorrectly() {
         assertEquals(MarketTrajectory.BULL,
                 MarketTrajectoryUtils.getNewMarketTrajectory(
-                        new Market("", 50.0, MarketTrajectory.NORMAL), listOfLargeCapStocks));
+                        new Market(ZonedDateTime.now(), 50.0, MarketTrajectory.NORMAL), listOfLargeCapStocks));
     }
 
     @Test

@@ -7,6 +7,7 @@ import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
-    public void saveNewsForStock(Stock stock, String newsEvent, String date) {
+    public void saveNewsForStock(Stock stock, String newsEvent, ZonedDateTime date) {
         newsRepository.save(new News(stock, newsEvent, date));
     }
 }

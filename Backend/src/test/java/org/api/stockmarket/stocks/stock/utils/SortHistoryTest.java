@@ -1,19 +1,16 @@
 package org.api.stockmarket.stocks.stock.utils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
 import org.api.stockmarket.stocks.stock.entity.idclass.StockPriceHistoryId;
 import org.junit.jupiter.api.Test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class SortHistoryTest {
-
-    private static final DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
     private static final ArrayList<StockPriceHistory> STOCK_PRICE_HISTORY_LIST_1 = new ArrayList<>();
 
@@ -28,10 +25,10 @@ class SortHistoryTest {
     }
 
     private static void populateStockHistoryList() {
-        STOCK_PRICE_HISTORY_LIST_1.add(new StockPriceHistory(new StockPriceHistoryId("1/1/1","1"),new Stock(),0.0));
-        STOCK_PRICE_HISTORY_LIST_1.add(new StockPriceHistory(new StockPriceHistoryId("1/5/1","1"),new Stock(),0.0));
-        STOCK_PRICE_HISTORY_LIST_1.add(new StockPriceHistory(new StockPriceHistoryId("1/3/1","1"),new Stock(),0.0));
-        STOCK_PRICE_HISTORY_LIST_1.add(new StockPriceHistory(new StockPriceHistoryId("2/1/1","1"),new Stock(),0.0));
+        STOCK_PRICE_HISTORY_LIST_1.add(new StockPriceHistory(new StockPriceHistoryId(ZonedDateTime.now(),"1"),new Stock(),0.0));
+        STOCK_PRICE_HISTORY_LIST_1.add(new StockPriceHistory(new StockPriceHistoryId(ZonedDateTime.now(),"1"),new Stock(),0.0));
+        STOCK_PRICE_HISTORY_LIST_1.add(new StockPriceHistory(new StockPriceHistoryId(ZonedDateTime.now(),"1"),new Stock(),0.0));
+        STOCK_PRICE_HISTORY_LIST_1.add(new StockPriceHistory(new StockPriceHistoryId(ZonedDateTime.now(),"1"),new Stock(),0.0));
     }
 
 }

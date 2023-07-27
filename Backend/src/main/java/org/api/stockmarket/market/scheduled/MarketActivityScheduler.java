@@ -1,8 +1,14 @@
 package org.api.stockmarket.market.scheduled;
 
 import lombok.AllArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 import org.api.stockmarket.indexfund.service.IndexFundService;
 import org.api.stockmarket.market.constants.MarketIntervals;
+import org.api.stockmarket.market.entity.Market;
+import org.api.stockmarket.market.utils.DateConversion;
 import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
 import org.api.tradinggame.account.service.AccountHistoryService;
 import org.api.tradinggame.account.service.LimitOrderService;
@@ -30,15 +36,25 @@ public class MarketActivityScheduler {
     private final IndexFundService indexFundService;
 
     private final Logger logger = LoggerFactory.getLogger(MarketActivityScheduler.class);
-    private static int marketHour = 0;
-    private static int marketDay = 0;
 
-    @Scheduled(fixedRate = MarketIntervals.TEN_SECONDS)
+
+    @Scheduled(fixedRate = MarketIntervals.ONE_SECOND)
     @SuppressWarnings("unused")
     public void dailyMarketActivity() {
-        marketHour++;
+        
+        // dev note: the function here feels like it should move into the 
+        // market itself - so the market has responsibility for it's own
+        // logic on timekeeping. This class is still needed however
+        // to provide the 'tick' impoteus
+
+        // "tick" move forward the time in the market
+        var now = handleMarketActivity.incrementMarket();
         limitOrderService.processAllLimitOrders();
-        if (marketHour >= 24) {
+        logger.info("Market Time: " + now);
+
+        // check if this is the start of the day i.e. 00 h
+        // need to the daily processing
+        if (now.getHour()==0){
             limitOrderService.truncateLimitOrders();
             accountHistoryService.saveDailyAccountHistory();
             stockPriceHistoryService.saveStockHistoryDaily();
@@ -46,16 +62,16 @@ public class MarketActivityScheduler {
 
             logger.info("New Day: " + handleMarketActivity.dailyMarketActivity());
 
-            marketHour = 0;
-            if (marketDay >= 30) {
+            // if as well as being the start of the day, it 'today' is 
+            // the last day of the month other processing needs to take place    
+            if (DateConversion.isLastDayMonth(now)){
                 handleMarketActivity.updateMarketMonthlyValues(
                         accountHistoryService);
-                marketDay = 0;
             }
-            marketDay++;
         } else {
-            //boolean value means that it is not the end of the day and only prices update
+            // boolean value means that it is not the end of the day and only prices update
             handleMarketActivity.updateNewStockInformation(false);
         }
     }
+
 }

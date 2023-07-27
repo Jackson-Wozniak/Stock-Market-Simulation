@@ -2,6 +2,9 @@ package org.api.stockmarket.stocks.earnings.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.ZonedDateTime;
+
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 
 @Getter
@@ -11,7 +14,7 @@ public class EarningsDTO {
     private double estimatedEPS;
     private double actualEPS;
     private String reportMessage;
-    private String dateOfRelease;
+    private ZonedDateTime dateOfRelease;
 
     public EarningsDTO(EarningsReport earnings){
         this.estimatedEPS = earnings.getEstimatedEPS();
