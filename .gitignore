@@ -1,11 +1,14 @@
 stock-market-service/.idea/
 stock-market-service/.mvn/
 stock-market-service/target/
+stock-trading-service/.idea/
+stock-trading-service/.mvn/
+stock-trading-service/target/
+.idea/
 HELP.md
 mvnw
 mvnw.cmd
 Documentation/
-stock-market-service/src/main/java/org/api/stockmarket/stocks/options/
 .env
 frontend/Data.js
 frontend/.vscode
