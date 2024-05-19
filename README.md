@@ -25,7 +25,7 @@
 
 <ol>
     <li><a href="#features">Features</a></li>
-    <li><a href="#technologies">Technologies</a></li>
+    <li><a href="#design">Design Choices</a></li>
     <li><a href="#local-dev">Local Deployment</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li>
@@ -58,16 +58,29 @@ Default stock data, such as the name, ticker symbol, market cap and sector are b
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :iphone: Technologies <a id="technologies"></a>
+## 📝: Design Choices <a id="design"></a>
 
-* Java Spring Boot
-* Spring Data JPA
-* MySQL
-* Lombok
-* JUNIT
+### Microservices
+
+I am currently in the process of migrating the current backend server to multiple microservices.
+The three microservices will be:
+  1. Stock Market API
+  2. Trading API
+  3. Trading Bots
+
+Here are the main justifications for doing this:
+- Learn microservices & gain experience building applications that talk to other services
+
+- Implement Spring Security, but isolate its features only to the trading API. The market is a publically available API, and so
+  its endpoints do not require any authorization/authentication. Likewise, the trading bot service has no endpoints, and so requires
+  minimal security measures, at least in the context of APIs. This means Spring Security is only relevant for 1/3 functions
+
+- Although this is a simulation, and there are no plans for deployment, the idea here is that each of the 3 services would be seperate "companies."
+  The trading API acts a brokerage firm, the market API simulated a countries stock market, and the trading bot service acts a quant firm that interacts
+  with its domestic market through publically-unavailable bots. Seperating the server into these 3 services means that it more closely follows the goal
+  of having 3 seperate "companies" that all work together to build a stock market simulation
 
 <br/> 
-
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 ## 📝: Contributing <a id="contributing"></a>
