@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.api</groupId>
-	<artifactId>stocktradingsimulator</artifactId>
+	<artifactId>stock-market-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>stocktradingsimulator</name>
+	<name>stock-market-service</name>
 	<description>View and Trade stocks based on auto generated stock prices</description>
 	<properties>
 		<java.version>17</java.version>
@@ -68,7 +68,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>org.api.StockTradingSimulatorApplication</mainClass>
+					<mainClass>org.api.StockMarketApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

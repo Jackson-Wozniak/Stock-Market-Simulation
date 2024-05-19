@@ -1,30 +1,30 @@
 version: "3.8"
 services:
-  stock-market-api:
+  stock-market-service:
     build: 
-      context: ./Backend        
-    image: stock-market-api
+      context: stock-market-service
+    image: stock-market-service
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8000"
     environment:
-      MYSQL_HOST: mysqldb
+      MYSQL_HOST: stock_market_db
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: password
-      MYSQL_DATABASE: stock_trading_simulator
+      MYSQL_DATABASE: stock_market
       MYSQL_PORT: 3306
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/stock_trading_simulator?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://stock_market_db:3306/stock_market?createDatabaseIfNotExist=true
     depends_on:
-      mysqldb: 
+      stock_market_db:
         condition: service_healthy
 
-  mysqldb:
-    container_name: mysqldb
+  stock_market_db:
+    container_name: stock_market_db
     image: mysql
     ports:
-      - 3307:3306
+      - "3307:3306"
     environment:
-      MYSQL_DATABASE: stock_trading_simulator
+      MYSQL_DATABASE: stock_market
       MYSQL_ROOT_PASSWORD: password
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]

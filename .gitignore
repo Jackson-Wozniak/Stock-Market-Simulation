@@ -1,11 +1,11 @@
-Backend/.idea/
-Backend/.mvn/
-Backend/target/
+stock-market-service/.idea/
+stock-market-service/.mvn/
+stock-market-service/target/
 HELP.md
 mvnw
 mvnw.cmd
 Documentation/
-Backend/src/main/java/org/api/stockmarket/stocks/options/
+stock-market-service/src/main/java/org/api/stockmarket/stocks/options/
 .env
 Frontend/Data.js
 Frontend/.vscode
