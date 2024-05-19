@@ -7,7 +7,7 @@ mvnw.cmd
 Documentation/
 stock-market-service/src/main/java/org/api/stockmarket/stocks/options/
 .env
-Frontend/Data.js
-Frontend/.vscode
+frontend/Data.js
+frontend/.vscode
 text.txt
 .vscode
