@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.market.utils.GetRandomNumber;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.defaults.DefaultStockPrices;
@@ -19,14 +18,10 @@ import java.util.List;
 @Table(name = "stock")
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "STOCK_TYPE", discriminatorType = DiscriminatorType.STRING)
 @NoArgsConstructor
-/*
-TODO:
-    - refactor stock price history (called StockHistory now) to be included in the stock instead of
-        a separate entity that must be queried for separately, will be OneToMany relationship
- */
-public class Stock{
+public abstract class Stock{
 
     @Id
     private String ticker;
@@ -91,20 +86,18 @@ public class Stock{
         this.momentumStreakInDays = 0;
     }
 
-    public void updatePriceWithFormula(){
-        //Volatile stocks change twice to increase market movements
-        double randomNumber = GetRandomNumber.getRandomNumberForStocks(this.marketCap);
-        double randomPositiveNumber = GetRandomNumber.getRandomPositiveNumberForStocks(this.marketCap);
-        double stockPrice = this.getPrice();
-        double newPrice = Math.round((stockPrice +
-                (stockPrice * randomNumber) +
-                (stockPrice * (randomNumber * this.getVolatileStock().ordinal())) +
-                (this.getInvestorRating().investorRatingMultiplier() * randomPositiveNumber) +
-                (this.getMomentum() * randomPositiveNumber)) * 100.00 ) / 100.00;
-        setPrice(newPrice);
+    public abstract void updatePrice();
+
+    /*
+    I wanted to separate this to be able to call momentum change methods
+    so that I could make those private to avoid being called in other classes.
+     */
+    public void momentumChange(){
+        updateMomentumStreak();
+        updateMomentum();
     }
 
-    public void updateMomentum() {
+    private void updateMomentum() {
         int momentumStreak = getMomentumStreakInDays();
         if (momentumStreak >= 3) {
             setMomentum(1);
@@ -117,7 +110,7 @@ public class Stock{
         setMomentum(0);
     }
 
-    public void updateMomentumStreak() {
+    private void updateMomentumStreak() {
         if (getMomentumStreakInDays() == null) {
             setMomentumStreakInDays(0);
             return;
@@ -141,8 +134,19 @@ public class Stock{
         }
     }
 
-    //these two methods are called only on news and earnings report announcements
-    public void increaseInvestorRating(){
+    /*
+    I wanted to seperate this to be able to call increase/decreaseInvestor rating
+    so that I could make those private to avoid being called in other classes.
+     */
+    public void newsEvent(boolean isPositive){
+        if(isPositive){
+            increaseInvestorRating();
+            return;
+        }
+        decreaseInvestorRating();
+    }
+
+    private void increaseInvestorRating(){
         switch (this.getInvestorRating()){
             case Sell -> this.setInvestorRating(InvestorRating.Hold);
             case Hold -> this.setInvestorRating(InvestorRating.Neutral);
@@ -152,7 +156,7 @@ public class Stock{
         }
     }
 
-    public void decreaseInvestorRating(){
+    private void decreaseInvestorRating(){
         switch (this.getInvestorRating()){
             case Sell -> {}
             case Hold -> this.setInvestorRating(InvestorRating.Sell);

@@ -6,11 +6,11 @@ import org.api.stockmarket.market.service.MarketService;
 import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
 import org.api.stockmarket.stocks.stock.entity.idclass.StockPriceHistoryId;
 import org.api.stockmarket.stocks.stock.repository.StockPriceHistoryRepository;
-import org.api.stockmarket.stocks.stock.utils.SortHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,11 +35,10 @@ public class StockPriceHistoryService {
     }
 
     public List<StockPriceHistory> findStockHistoryByTicker(String ticker) {
-        List<StockPriceHistory> stockPriceHistory = stockPriceHistoryRepository.findAll().stream()
+        return stockPriceHistoryRepository.findAll().stream()
                 .filter(history -> history.getStock().getTicker().equalsIgnoreCase(ticker))
+                .sorted(Comparator.comparing(history -> history.getId().getMarketDate()))
                 .collect(Collectors.toList());
-        SortHistory.sortStockHistoryByDate(stockPriceHistory);
-        return stockPriceHistory;
     }
 
     @Transactional
