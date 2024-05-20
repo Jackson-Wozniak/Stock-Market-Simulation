@@ -56,8 +56,7 @@ public class HandleMarketActivity {
                     randomNewsEvents.stockBankruptNews(stock, marketService.findMarketEntity().getDate());
                     return;
                 }
-                stock.updateMomentumStreak();
-                stock.updateMomentum();
+                stock.momentumChange();
                 stock.setLastDayPrice(stock.getPrice());
             }
         });

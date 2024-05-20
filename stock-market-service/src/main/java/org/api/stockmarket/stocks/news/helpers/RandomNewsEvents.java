@@ -24,7 +24,7 @@ public class RandomNewsEvents {
     public void processPositiveNewsEvent(ZonedDateTime date) {
         Stock stock = stockService.getRandomStock();
         stock.setPrice(stock.getPrice() * 1.1);
-        stock.increaseInvestorRating();
+        stock.newsEvent(true);
         stockService.updateStockInDatabase(stock);
 
         newsService.saveNewsForStock(stock, DefaultNewsEvents.positiveNewsEvents(stock), date);
@@ -33,7 +33,7 @@ public class RandomNewsEvents {
     public void processNegativeNewsEvents(ZonedDateTime date) {
         Stock stock = stockService.getRandomStock();
         stock.setPrice(stock.getPrice() * .9);
-        stock.decreaseInvestorRating();
+        stock.newsEvent(false);
         stockService.updateStockInDatabase(stock);
 
         newsService.saveNewsForStock(stock, DefaultNewsEvents.negativeNewsEvents(stock), date);
@@ -47,7 +47,7 @@ public class RandomNewsEvents {
         newsService.saveNewsForStock(stock, eventAnnouncement, date);
 
         stock.setPrice(DefaultStockPrices.getDefaultPriceWithCap(stock.getMarketCap()));
-        stock.decreaseInvestorRating();
+        stock.newsEvent(false);
         stockService.updateStockInDatabase(stock);
     }
 }

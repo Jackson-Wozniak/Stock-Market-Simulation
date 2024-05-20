@@ -88,7 +88,16 @@ public abstract class Stock{
 
     public abstract void updatePrice();
 
-    public void updateMomentum() {
+    /*
+    I wanted to separate this to be able to call momentum change methods
+    so that I could make those private to avoid being called in other classes.
+     */
+    public void momentumChange(){
+        updateMomentumStreak();
+        updateMomentum();
+    }
+
+    private void updateMomentum() {
         int momentumStreak = getMomentumStreakInDays();
         if (momentumStreak >= 3) {
             setMomentum(1);
@@ -101,7 +110,7 @@ public abstract class Stock{
         setMomentum(0);
     }
 
-    public void updateMomentumStreak() {
+    private void updateMomentumStreak() {
         if (getMomentumStreakInDays() == null) {
             setMomentumStreakInDays(0);
             return;
@@ -125,10 +134,19 @@ public abstract class Stock{
         }
     }
 
-    //these two methods are called only on news and earnings report announcements
-    //TODO: make method newsEvent(boolean isPositive) as interface for this so that they cannot be
-    //  called in any other situation
-    public void increaseInvestorRating(){
+    /*
+    I wanted to seperate this to be able to call increase/decreaseInvestor rating
+    so that I could make those private to avoid being called in other classes.
+     */
+    public void newsEvent(boolean isPositive){
+        if(isPositive){
+            increaseInvestorRating();
+            return;
+        }
+        decreaseInvestorRating();
+    }
+
+    private void increaseInvestorRating(){
         switch (this.getInvestorRating()){
             case Sell -> this.setInvestorRating(InvestorRating.Hold);
             case Hold -> this.setInvestorRating(InvestorRating.Neutral);
@@ -138,7 +156,7 @@ public abstract class Stock{
         }
     }
 
-    public void decreaseInvestorRating(){
+    private void decreaseInvestorRating(){
         switch (this.getInvestorRating()){
             case Sell -> {}
             case Hold -> this.setInvestorRating(InvestorRating.Sell);

@@ -29,10 +29,10 @@ public class ReleaseEarningsReport {
         stocks.forEach(stock -> {
             EarningsReport earningsReport = createEarningsReport(stock, marketDate);
             if(earningsReport.isPositiveEarnings()){
-                stock.increaseInvestorRating();
+                stock.newsEvent(true);
                 stockService.updateStockInDatabase(stock);
             }else if(earningsReport.isNegativeEarnings()){
-                stock.decreaseInvestorRating();
+                stock.newsEvent(false);
                 stockService.updateStockInDatabase(stock);
             }
             earningsService.saveEarningsReport(earningsReport);
