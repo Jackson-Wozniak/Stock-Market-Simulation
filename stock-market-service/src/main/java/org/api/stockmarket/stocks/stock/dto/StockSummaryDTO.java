@@ -3,7 +3,6 @@ package org.api.stockmarket.stocks.stock.dto;
 import lombok.Getter;
 import lombok.Setter;
 import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
 //This class is used when getting a list of stocks, where fields such as earnings and price history is not needed
 @Getter
@@ -26,7 +25,7 @@ public class StockSummaryDTO {
 
     public double getPercentChange() {
         if(this.lastDayPrice == 0) return 0.0;
-        return CalculateCostBasisAndProfits.roundToTwoDecimalPlaces(
-                (this.price - this.lastDayPrice) / this.lastDayPrice * 100);
+        //TODO: add 2 decimal place rounding
+        return (this.price - this.lastDayPrice) / this.lastDayPrice * 100;
     }
 }

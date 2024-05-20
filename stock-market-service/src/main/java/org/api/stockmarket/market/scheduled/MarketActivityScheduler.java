@@ -6,8 +6,6 @@ import org.api.stockmarket.indexfund.service.IndexFundService;
 import org.api.stockmarket.market.constants.MarketIntervals;
 import org.api.stockmarket.market.utils.DateConversion;
 import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
-import org.api.tradinggame.account.service.AccountHistoryService;
-import org.api.tradinggame.account.service.LimitOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +20,6 @@ public class MarketActivityScheduler {
 
     @Autowired
     private final HandleMarketActivity handleMarketActivity;
-    @Autowired
-    private final LimitOrderService limitOrderService;
-    @Autowired
-    private final AccountHistoryService accountHistoryService;
     @Autowired
     private final StockPriceHistoryService stockPriceHistoryService;
     @Autowired
@@ -45,14 +39,11 @@ public class MarketActivityScheduler {
 
         // "tick" move forward the time in the market
         var now = handleMarketActivity.incrementMarket();
-        limitOrderService.processAllLimitOrders();
         logger.info("Market Time: " + now);
 
         // check if this is the start of the day i.e. 00 h
         // need to the daily processing
         if (now.getHour()==0){
-            limitOrderService.truncateLimitOrders();
-            accountHistoryService.saveDailyAccountHistory();
             stockPriceHistoryService.saveStockHistoryDaily();
             indexFundService.updatePriceForAllFundsDaily();
 
@@ -61,8 +52,7 @@ public class MarketActivityScheduler {
             // if as well as being the start of the day, it 'today' is 
             // the last day of the month other processing needs to take place    
             if (DateConversion.isLastDayMonth(now)){
-                handleMarketActivity.updateMarketMonthlyValues(
-                        accountHistoryService);
+                handleMarketActivity.updateMarketMonthlyValues();
             }
         } else {
             // boolean value means that it is not the end of the day and only prices update

@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.api.stockmarket.stocks.earnings.dto.EarningsDTO;
 import org.api.stockmarket.stocks.news.dto.NewsDTO;
 import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.tradinggame.account.utils.CalculateCostBasisAndProfits;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -57,7 +56,7 @@ public class StockDTO {
 
     public double getPercentChange(double currentPrice, double lastDayPrice) {
         if(lastDayPrice == 0) return 0.0;
-        return CalculateCostBasisAndProfits.roundToTwoDecimalPlaces(
-                (currentPrice - lastDayPrice) / lastDayPrice * 100);
+        //TODO: add rounding to 2 decimal places
+        return (currentPrice - lastDayPrice) / lastDayPrice * 100;
     }
 }

@@ -13,7 +13,6 @@ import org.api.stockmarket.stocks.news.helpers.RandomNewsEvents;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
 import org.api.stockmarket.stocks.stock.service.StockService;
-import org.api.tradinggame.account.service.AccountHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -76,8 +75,7 @@ public class HandleMarketActivity {
         return market.getDate();
     }
 
-    public void updateMarketMonthlyValues(
-            AccountHistoryService accountHistoryService) {
+    public void updateMarketMonthlyValues() {
         Market market = marketService.findMarketEntity();
         market.setMarketTrajectory(MarketTrajectoryUtils.getNewMarketTrajectory(
                 market, stockService.getAllStocks()));
@@ -88,7 +86,6 @@ public class HandleMarketActivity {
         // all daily account records will be removed at the end of each year, creating a
         // clean slate
         if (endOfYear(market.getDate())) {
-            accountHistoryService.truncateAccountHistoryAtEndOfYear();
             stockPriceHistoryService.truncateStockHistoryAtEndOfYear();
         }
     }
