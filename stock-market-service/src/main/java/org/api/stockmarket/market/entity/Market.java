@@ -19,6 +19,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.api.stockmarket.market.enums.TimeStamp;
+import org.api.stockmarket.market.utils.DateConversion;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Entity
 @Table
@@ -45,8 +49,20 @@ public class Market {
     @Enumerated(EnumType.STRING)
     private MarketTrajectory marketTrajectory;
 
-    public void increment() {
+    private static final Logger logger = LoggerFactory.getLogger(Market.class);
+
+    public TimeStamp increment() {
         ZonedDateTime newDate = getDate().plusHours(1);
         setDate(newDate);
+
+        if(newDate.getHour() == 0 && DateConversion.isLastDayMonth(newDate)){
+            logger.info("Start of new day. Today's date is {}", DateConversion.toFormattedString(newDate));
+            return TimeStamp.EndOfMonth;
+        }
+        if(newDate.getHour() == 0){
+            logger.info("Start of new day. Today's date is {}", DateConversion.toFormattedString(newDate));
+            return TimeStamp.EndOfDay;
+        }
+        return TimeStamp.MiddleOfDay;
     }
 }

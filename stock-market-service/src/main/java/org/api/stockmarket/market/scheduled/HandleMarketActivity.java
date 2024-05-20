@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.api.stockmarket.market.entity.Market;
+import org.api.stockmarket.market.enums.TimeStamp;
 import org.api.stockmarket.market.service.MarketService;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.earnings.helpers.ReleaseEarningsReport;
@@ -63,11 +64,11 @@ public class HandleMarketActivity {
         stockService.updateAllStocksInDatabase(stocks);
     }
 
-    public ZonedDateTime incrementMarket() {
+    public TimeStamp incrementMarket() {
         Market market = marketService.findMarketEntity();
-        market.increment();
+        TimeStamp timeStamp = market.increment();
         marketService.saveMarketEntity(market);
-        return market.getDate();
+        return timeStamp;
     }
 
     public ZonedDateTime getMarketDateTime(){
