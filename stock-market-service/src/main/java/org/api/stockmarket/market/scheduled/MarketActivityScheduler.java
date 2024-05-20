@@ -2,12 +2,8 @@ package org.api.stockmarket.market.scheduled;
 
 import lombok.AllArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-
 import org.api.stockmarket.indexfund.service.IndexFundService;
 import org.api.stockmarket.market.constants.MarketIntervals;
-import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.utils.DateConversion;
 import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
 import org.api.tradinggame.account.service.AccountHistoryService;
