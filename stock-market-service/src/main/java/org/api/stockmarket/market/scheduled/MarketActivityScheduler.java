@@ -17,12 +17,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @AllArgsConstructor
 public class MarketActivityScheduler {
 
-    @Autowired
     private final MarketManager marketManager;
-    @Autowired
-    private final StockPriceHistoryService stockPriceHistoryService;
-    @Autowired
-    private final IndexFundService indexFundService;
     private final MarketService marketService;
 
     @Scheduled(fixedRate = MarketIntervals.ONE_SECOND)
