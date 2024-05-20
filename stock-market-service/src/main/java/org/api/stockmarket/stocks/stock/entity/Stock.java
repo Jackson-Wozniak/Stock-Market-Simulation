@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.market.utils.GetRandomNumber;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.defaults.DefaultStockPrices;
@@ -19,14 +18,10 @@ import java.util.List;
 @Table(name = "stock")
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "STOCK_TYPE", discriminatorType = DiscriminatorType.STRING)
 @NoArgsConstructor
-/*
-TODO:
-    - refactor stock price history (called StockHistory now) to be included in the stock instead of
-        a separate entity that must be queried for separately, will be OneToMany relationship
- */
-public class Stock{
+public abstract class Stock{
 
     @Id
     private String ticker;
@@ -91,18 +86,7 @@ public class Stock{
         this.momentumStreakInDays = 0;
     }
 
-    public void updatePriceWithFormula(){
-        //Volatile stocks change twice to increase market movements
-        double randomNumber = GetRandomNumber.getRandomNumberForStocks(this.marketCap);
-        double randomPositiveNumber = GetRandomNumber.getRandomPositiveNumberForStocks(this.marketCap);
-        double stockPrice = this.getPrice();
-        double newPrice = Math.round((stockPrice +
-                (stockPrice * randomNumber) +
-                (stockPrice * (randomNumber * this.getVolatileStock().ordinal())) +
-                (this.getInvestorRating().investorRatingMultiplier() * randomPositiveNumber) +
-                (this.getMomentum() * randomPositiveNumber)) * 100.00 ) / 100.00;
-        setPrice(newPrice);
-    }
+    public abstract void updatePrice();
 
     public void updateMomentum() {
         int momentumStreak = getMomentumStreakInDays();
@@ -142,6 +126,8 @@ public class Stock{
     }
 
     //these two methods are called only on news and earnings report announcements
+    //TODO: make method newsEvent(boolean isPositive) as interface for this so that they cannot be
+    //  called in any other situation
     public void increaseInvestorRating(){
         switch (this.getInvestorRating()){
             case Sell -> this.setInvestorRating(InvestorRating.Hold);

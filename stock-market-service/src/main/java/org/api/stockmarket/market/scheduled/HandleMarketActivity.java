@@ -3,10 +3,10 @@ package org.api.stockmarket.market.scheduled;
 import java.time.Month;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Random;
 
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.service.MarketService;
-import org.api.stockmarket.market.utils.GetRandomNumber;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.earnings.helpers.ReleaseEarningsReport;
 import org.api.stockmarket.stocks.news.helpers.RandomNewsEvents;
@@ -32,6 +32,7 @@ public class HandleMarketActivity {
     private final ReleaseEarningsReport releaseEarningsReport;
     @Autowired
     private final StockPriceHistoryService stockPriceHistoryService;
+    private static final Random random = new Random();
 
     public ZonedDateTime dailyMarketActivity() {
         updateNewStockInformation(true);
@@ -48,7 +49,7 @@ public class HandleMarketActivity {
     public void updateNewStockInformation(boolean endOfDay) {
         List<Stock> stocks = stockService.getAllStocks();
         stocks.forEach(stock -> {
-            stock.updatePriceWithFormula();
+            stock.updatePrice();
             if (endOfDay) {
                 // avoid stocks going to zero with bankruptcy event
                 if (stock.getPrice() < 1) {
@@ -91,7 +92,7 @@ public class HandleMarketActivity {
     }
 
     private void createRandomNewsEvents() {
-        int randomNumber = GetRandomNumber.drawRandomNumberToThirty();
+        int randomNumber = random.nextInt(30);
         if (randomNumber == 10) {
             randomNewsEvents.processPositiveNewsEvent(marketService.findMarketEntity().getDate());
             System.out.println("Positive News");
