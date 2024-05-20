@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.enums.MarketTrajectory;
+import org.api.stockmarket.market.enums.TimeStamp;
 import org.api.stockmarket.market.repository.MarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,17 @@ public class MarketService {
 
     @Autowired
     private final MarketRepository marketRepository;
+
+    public TimeStamp incrementAndSave(){
+        Market market = findMarketEntity();
+        TimeStamp time = market.increment();
+        saveMarketEntity(market);
+        return time;
+    }
+
+    public ZonedDateTime getMarketDate(){
+        return findMarketEntity().getDate();
+    }
 
     public Market findMarketEntity() {
         Market market = marketRepository.findById(1).orElse(null);

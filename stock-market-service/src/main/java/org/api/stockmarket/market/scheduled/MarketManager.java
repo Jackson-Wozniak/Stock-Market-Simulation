@@ -1,12 +1,10 @@
 package org.api.stockmarket.market.scheduled;
 
-import java.time.Month;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Random;
 
+import org.api.stockmarket.indexfund.service.IndexFundService;
 import org.api.stockmarket.market.entity.Market;
-import org.api.stockmarket.market.enums.TimeStamp;
 import org.api.stockmarket.market.service.MarketService;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.earnings.helpers.ReleaseEarningsReport;
@@ -14,69 +12,48 @@ import org.api.stockmarket.stocks.news.helpers.RandomNewsEvents;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
 import org.api.stockmarket.stocks.stock.service.StockService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
-public class HandleMarketActivity {
+public class MarketManager {
 
-    @Autowired
     private final StockService stockService;
-    @Autowired
     private final MarketService marketService;
-    @Autowired
     private final RandomNewsEvents randomNewsEvents;
-    @Autowired
     private final ReleaseEarningsReport releaseEarningsReport;
-    @Autowired
     private final StockPriceHistoryService stockPriceHistoryService;
+    private final IndexFundService indexFundService;
     private static final Random random = new Random();
 
-    public ZonedDateTime dailyMarketActivity() {
-        updateNewStockInformation(true);
+    public void dailyMarketActivity() {
+        stockPriceHistoryService.saveStockHistoryDaily();
+        indexFundService.updatePriceForAllFundsDaily();
+
+        hourlyMarketActivity();
         createRandomNewsEvents();
-        // ZonedDateTime marketDate = incrementMarketDay();
-        var marketDate = getMarketDateTime();
-        if (timeForQuarterlyEarnings(marketDate)) {
+
+        Market market = marketService.findMarketEntity();
+        if (market.isEndOfQuarter()) {
             releaseEarningsReport.handleQuarterlyEarningsReports(
-                    stockService.getAllStocks(), marketDate);
+                    stockService.getAllStocks(), market.getDate());
         }
-        return marketDate;
     }
 
-    public void updateNewStockInformation(boolean endOfDay) {
+    public void hourlyMarketActivity(){
         List<Stock> stocks = stockService.getAllStocks();
-        stocks.forEach(stock -> {
-            stock.updatePrice();
-            if (endOfDay) {
-                // avoid stocks going to zero with bankruptcy event
-                if (stock.getPrice() < 1) {
-                    randomNewsEvents.stockBankruptNews(stock, marketService.findMarketEntity().getDate());
-                    return;
-                }
-                stock.momentumChange();
-                stock.setLastDayPrice(stock.getPrice());
-            }
-        });
+        stocks.forEach(Stock::updatePrice);
         stockService.updateAllStocksInDatabase(stocks);
     }
 
-    public TimeStamp incrementMarket() {
-        Market market = marketService.findMarketEntity();
-        TimeStamp timeStamp = market.increment();
-        marketService.saveMarketEntity(market);
-        return timeStamp;
+    public void monthlyMarketActivity(){
+        dailyMarketActivity();
+        updateMarketMonthlyValues();
     }
 
-    public ZonedDateTime getMarketDateTime(){
-        Market market = marketService.findMarketEntity();
-        return market.getDate();
-    }
-
-    public void updateMarketMonthlyValues() {
+    private void updateMarketMonthlyValues() {
         Market market = marketService.findMarketEntity();
         market.setMarketTrajectory(MarketTrajectoryUtils.getNewMarketTrajectory(
                 market, stockService.getAllStocks()));
@@ -84,9 +61,8 @@ public class HandleMarketActivity {
                 stockService.getAllStocks()));
         marketService.saveMarketEntity(market);
 
-        // all daily account records will be removed at the end of each year, creating a
-        // clean slate
-        if (endOfYear(market.getDate())) {
+        // all daily account records will be removed at the end of each year, creating a clean slate
+        if (market.isEndOfYear()) {
             stockPriceHistoryService.truncateStockHistoryAtEndOfYear();
         }
     }
@@ -100,14 +76,5 @@ public class HandleMarketActivity {
             randomNewsEvents.processNegativeNewsEvents(marketService.findMarketEntity().getDate());
             System.out.println("Negative News");
         }
-    }
-
-    // earnings report released on first day of 3rd, 6th, 9th and 12th month
-    private boolean timeForQuarterlyEarnings(ZonedDateTime marketDate) {
-        return marketDate.getDayOfMonth() == 1 && marketDate.getMonthValue() % 3 == 0;
-    }
-
-    public boolean endOfYear(ZonedDateTime marketDate) {
-        return marketDate.getMonth().equals(Month.DECEMBER) && marketDate.getDayOfMonth() == 31;
     }
 }

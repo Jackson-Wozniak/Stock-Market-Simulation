@@ -1,5 +1,6 @@
 package org.api.stockmarket.market.entity;
 
+import java.time.Month;
 import java.time.ZonedDateTime;
 
 import org.api.stockmarket.market.enums.MarketTrajectory;
@@ -64,5 +65,14 @@ public class Market {
             return TimeStamp.EndOfDay;
         }
         return TimeStamp.MiddleOfDay;
+    }
+
+    // earnings report released on first day of 3rd, 6th, 9th and 12th month
+    public boolean isEndOfQuarter(){
+        return date.getDayOfMonth() == 1 && date.getMonthValue() % 3 == 0;
+    }
+
+    public boolean isEndOfYear(){
+        return date.getMonth().equals(Month.DECEMBER) && date.getDayOfMonth() == 31;
     }
 }
