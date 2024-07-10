@@ -8,15 +8,17 @@ import org.api.stocktradingservice.account.exception.AccountNotFoundException;
 import org.api.stocktradingservice.account.model.entity.Account;
 import org.api.stocktradingservice.account.model.payload.AccountTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class AccountService {
+public class AccountService implements UserDetailsService {
 
-    @Autowired
     private final AccountRepository accountRepository;
 
     public List<Account> findAllAccounts() {
@@ -58,5 +60,11 @@ public class AccountService {
     public void updateBalanceAndSave(Account account, double amountToAdd) {
         account.updateAccountBalance(amountToAdd);
         saveAccount(account);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return accountRepository.findById(username)
+                .orElseThrow(() -> new AccountNotFoundException("Cannot find " + username));
     }
 }

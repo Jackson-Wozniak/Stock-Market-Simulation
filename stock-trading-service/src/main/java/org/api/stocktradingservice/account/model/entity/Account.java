@@ -8,7 +8,11 @@ import org.api.stocktradingservice.account.exception.AccountBalanceException;
 import org.api.stocktradingservice.account.utils.CalculateCostBasisAndProfits;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -22,10 +26,13 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Account implements Serializable {
+public class Account implements Serializable, UserDetails {
 
     @Id
     private String username;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "balance")
     private Double accountBalance;
@@ -59,5 +66,30 @@ public class Account implements Serializable {
             throw new AccountBalanceException("Must have more money in account");
         }
         this.setAccountBalance(Math.round((this.getAccountBalance() + amountToAdd) * 100.00) / 100.00);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
