@@ -30,7 +30,6 @@ public class StockOwnedService {
             throw new AccountBalanceException("Account does not have funds for this purchase");
         }
         if (stockOwned != null) {
-            //subtract transaction value from account balance
             accountService.updateBalanceAndSave(account, -1 * (buyStock.getSharesToBuy() * stock.getPrice()));
             stockOwned.updateCostBasisAndAmountOwned(buyStock.getSharesToBuy(), stock.getPrice());
             stockOwnedRepository.save(stockOwned);

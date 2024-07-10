@@ -34,11 +34,11 @@ public class AccountService implements UserDetailsService {
         accountRepository.save(account);
     }
 
-    public void createNewAccount(String username) throws InvalidAccountException {
+    public void createNewAccount(String username, String password) throws InvalidAccountException {
         if (accountExists(username)) {
             throw new InvalidAccountException("Account already exists with that username");
         }
-        accountRepository.save(new Account(username));
+        accountRepository.save(new Account(username, password));
     }
 
     public boolean accountExists(String username) {

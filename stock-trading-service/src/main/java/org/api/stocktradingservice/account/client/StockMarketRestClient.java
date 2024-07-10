@@ -9,11 +9,11 @@ import org.springframework.web.client.RestTemplate;
 public class StockMarketRestClient {
 
     private final RestTemplate restTemplate;
-    private static final String ROOT_URL = "http://localhost:8000/ap1/v1";
-    private static final String GET_STOCK_PATH = "/stocks";
+    private static final String ROOT_URL = "http://localhost:8000/api/v1";
+    private static final String STOCK_PATH = ROOT_URL + "/stocks";
 
     public StockResponse retrieveStockInfo(String ticker){
-        return null;
+        return restTemplate.getForObject(STOCK_PATH + "/" + ticker, StockResponse.class);
     }
 
     public MarketResponse retrieveMarketInfo(){

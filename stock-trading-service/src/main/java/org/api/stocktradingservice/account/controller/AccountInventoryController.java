@@ -5,6 +5,7 @@ import org.api.stocktradingservice.account.client.StockMarketRestClient;
 import org.api.stocktradingservice.account.exception.AccountBalanceException;
 import org.api.stocktradingservice.account.exception.AccountInventoryException;
 import org.api.stocktradingservice.account.exception.AccountNotFoundException;
+import org.api.stocktradingservice.account.model.entity.Account;
 import org.api.stocktradingservice.account.model.entity.LimitOrder;
 import org.api.stocktradingservice.account.model.payload.BuyStockRequest;
 import org.api.stocktradingservice.account.model.payload.LimitOrderRequest;
@@ -12,6 +13,9 @@ import org.api.stocktradingservice.account.model.payload.SellStockRequest;
 import org.api.stocktradingservice.account.service.AccountService;
 import org.api.stocktradingservice.account.service.LimitOrderService;
 import org.api.stocktradingservice.account.service.StockOwnedService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,12 +28,13 @@ public class AccountInventoryController {
     private final StockOwnedService stockOwnedService;
     private final LimitOrderService limitOrderService;
     private final AccountService accountService;
-    private final StockMarketRestClient stockMarketRestClient;
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping(value = "/buy/market")
-    public void buyNewStock(@RequestBody BuyStockRequest buyStock)
+    public String buyNewStock(@RequestBody BuyStockRequest buyStock)
             throws AccountNotFoundException, AccountBalanceException {
         stockOwnedService.buyStock(buyStock);
+        return "working";
     }
 
     @PostMapping(value = "/sell")

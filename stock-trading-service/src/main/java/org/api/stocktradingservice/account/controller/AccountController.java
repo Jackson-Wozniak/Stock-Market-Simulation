@@ -1,6 +1,7 @@
 package org.api.stocktradingservice.account.controller;
 
 import lombok.AllArgsConstructor;
+import org.api.stocktradingservice.account.client.StockMarketRestClient;
 import org.api.stocktradingservice.account.exception.InvalidAccountException;
 import org.api.stocktradingservice.account.service.AccountHistoryService;
 import org.api.stocktradingservice.account.service.AccountService;
@@ -19,22 +20,20 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountController {
 
-    @Autowired
     private final AccountService accountService;
-    @Autowired
     private final AccountHistoryService accountHistoryService;
 
-    @RequestMapping(value = "{username}")
+    @RequestMapping(value = "/{username}")
     public Account getAccountByUsername(@PathVariable String username) throws AccountNotFoundException {
         return accountService.getAccountByName(username);
     }
 
-    @PostMapping(value = "{username}")
-    public void createAccount(@PathVariable String username) throws InvalidAccountException {
+    @PostMapping(value = "/{username}/{password}")
+    public void createAccount(@PathVariable String username, @PathVariable String password) throws InvalidAccountException {
         if(username.equalsIgnoreCase("trading-bot")){
             throw new InvalidAccountException("Cannot Create Account With Invalid Username");
         }
-        accountService.createNewAccount(username);
+        accountService.createNewAccount(username, password);
     }
 
     @PostMapping(value = "/deposit")

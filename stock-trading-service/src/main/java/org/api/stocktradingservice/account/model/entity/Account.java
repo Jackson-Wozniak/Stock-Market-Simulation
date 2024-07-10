@@ -48,8 +48,9 @@ public class Account implements Serializable, UserDetails {
     @JsonManagedReference
     private List<AccountHistory> accountHistory;
 
-    public Account(String username) {
+    public Account(String username, String password) {
         this.username = username;
+        this.password = password;
         this.accountBalance = 10_000.0;
         this.totalProfits = 0.0;
     }

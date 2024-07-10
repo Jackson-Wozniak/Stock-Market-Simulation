@@ -42,6 +42,7 @@ public class LimitOrderService {
                 try {
                     stockOwnedService.buyStock(new BuyStockRequest(
                             order.getAccount().getUsername(),
+                            order.getAccount().getPassword(),
                             order.getTicker(),
                             order.getSharesToBuy()));
                     clearAndDeleteLimitOrder(order);

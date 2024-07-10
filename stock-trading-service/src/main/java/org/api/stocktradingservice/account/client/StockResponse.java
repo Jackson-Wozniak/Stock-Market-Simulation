@@ -1,5 +1,6 @@
 package org.api.stocktradingservice.account.client;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -14,14 +15,29 @@ import lombok.Setter;
 @NoArgsConstructor
 public class StockResponse {
 
+    @JsonAlias("ticker")
     private String ticker;
+
+    @JsonAlias("companyName")
     private String company;
-    private String sector;
-    private String marketCap;
+
+    @JsonAlias("price")
     private double price;
+
+    @JsonAlias("lastDayPrice")
     private double lastDayPrice;
-    private int momentum;
-    private int momentumStreakInDays;
-    private String volatileStock;
-    private String investorRating;
+
+    @JsonAlias("percentChange")
+    private double percentChange;
+
+    @Override
+    public String toString() {
+        return "StockResponse{" +
+                "ticker='" + ticker + '\'' +
+                ", company='" + company + '\'' +
+                ", price=" + price +
+                ", lastDayPrice=" + lastDayPrice +
+                ", percentChange=" + percentChange + '\'' +
+                '}';
+    }
 }

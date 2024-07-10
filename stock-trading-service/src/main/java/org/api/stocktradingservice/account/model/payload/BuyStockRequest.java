@@ -15,6 +15,7 @@ import lombok.Setter;
 public class BuyStockRequest {
 
     private String username;
+    private String password;
     private String ticker;
     private int sharesToBuy;
 }
