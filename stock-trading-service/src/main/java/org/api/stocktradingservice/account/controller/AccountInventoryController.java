@@ -1,7 +1,7 @@
 package org.api.stocktradingservice.account.controller;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.stock.service.StockService;
+import org.api.stocktradingservice.account.client.StockMarketRestClient;
 import org.api.stocktradingservice.account.exception.AccountBalanceException;
 import org.api.stocktradingservice.account.exception.AccountInventoryException;
 import org.api.stocktradingservice.account.exception.AccountNotFoundException;
@@ -12,7 +12,6 @@ import org.api.stocktradingservice.account.model.payload.SellStockRequest;
 import org.api.stocktradingservice.account.service.AccountService;
 import org.api.stocktradingservice.account.service.LimitOrderService;
 import org.api.stocktradingservice.account.service.StockOwnedService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,14 +21,10 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountInventoryController {
 
-    @Autowired
     private final StockOwnedService stockOwnedService;
-    @Autowired
     private final LimitOrderService limitOrderService;
-    @Autowired
     private final AccountService accountService;
-    @Autowired
-    private final StockService stockService;
+    private final StockMarketRestClient stockMarketRestClient;
 
     @PostMapping(value = "/buy/market")
     public void buyNewStock(@RequestBody BuyStockRequest buyStock)
@@ -47,7 +42,7 @@ public class AccountInventoryController {
     public List<LimitOrder> limitOrder(@RequestBody LimitOrderRequest request) {
         limitOrderService.saveLimitOrder(new LimitOrder(
                 accountService.getAccountByName(request.getUsername()),
-                stockService.getStockByTickerSymbol(request.getTicker()),
+                request.getTicker(),
                 request.getSharesToBuy(), request.getLimitPrice()));
 
         return limitOrderService.findLimitOrdersByAccount(

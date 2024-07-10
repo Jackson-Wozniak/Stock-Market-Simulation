@@ -1,8 +1,8 @@
 package org.api.stocktradingservice.account.service;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.service.StockService;
+import org.api.stocktradingservice.account.client.StockMarketRestClient;
+import org.api.stocktradingservice.account.client.StockResponse;
 import org.api.stocktradingservice.account.repository.StockOwnedRepository;
 import org.api.stocktradingservice.account.exception.AccountBalanceException;
 import org.api.stocktradingservice.account.exception.AccountInventoryException;
@@ -18,18 +18,15 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class StockOwnedService {
 
-    @Autowired
     private final StockOwnedRepository stockOwnedRepository;
-    @Autowired
     private final AccountService accountService;
-    @Autowired
-    private final StockService stockService;
+    private final StockMarketRestClient stockMarketRestClient;
 
     public void buyStock(BuyStockRequest buyStock) {
         Account account = accountService.getAccountByName(buyStock.getUsername());
-        Stock stock = stockService.getStockByTickerSymbol(buyStock.getTicker());
+        StockResponse stock = stockMarketRestClient.retrieveStockInfo(buyStock.getTicker());
         StockOwned stockOwned = findStockOwned(account, stock);
-        if (!ValidateStockTransaction.doesAccountHaveEnoughMoney(account, buyStock, this.stockService)) {
+        if (!ValidateStockTransaction.doesAccountHaveEnoughMoney(account, buyStock, stock)) {
             throw new AccountBalanceException("Account does not have funds for this purchase");
         }
         if (stockOwned != null) {
@@ -53,7 +50,7 @@ public class StockOwnedService {
         if (!ValidateStockTransaction.doesAccountHaveEnoughStocks(account, sellStock)) {
             throw new AccountInventoryException("Account does not own enough stocks");
         }
-        Stock stock = stockService.getStockByTickerSymbol(sellStock.getTicker());
+        StockResponse stock = stockMarketRestClient.retrieveStockInfo(sellStock.getTicker());
         StockOwned stockOwned = findStockOwned(account, stock);
         account.updateTotalProfits(
                 stockOwned.getCostBasis(),
@@ -68,7 +65,7 @@ public class StockOwnedService {
         }
     }
 
-    public StockOwned findStockOwned(Account account, Stock stock) {
+    public StockOwned findStockOwned(Account account, StockResponse stock) {
         return stockOwnedRepository.findAll().stream()
                 .filter(stockOwned -> stockOwned.getTicker().equalsIgnoreCase(stock.getTicker()))
                 .filter(stockOwned -> stockOwned.getAccount().getUsername().equals(account.getUsername()))

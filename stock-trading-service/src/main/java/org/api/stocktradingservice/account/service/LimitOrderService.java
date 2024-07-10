@@ -38,11 +38,11 @@ public class LimitOrderService {
 
     public void processAllLimitOrders() {
         limitOrderRepository.findAll().forEach(order -> {
-            if (order.getLimitPrice() < order.getStock().getPrice()) {
+            if (order.getLimitPrice() < 100.0) {
                 try {
                     stockOwnedService.buyStock(new BuyStockRequest(
                             order.getAccount().getUsername(),
-                            order.getStock().getTicker(),
+                            order.getTicker(),
                             order.getSharesToBuy()));
                     clearAndDeleteLimitOrder(order);
                 } catch (AccountNotFoundException e) {
@@ -59,7 +59,7 @@ public class LimitOrderService {
 
     private void clearAndDeleteLimitOrder(LimitOrder limitOrder) {
         limitOrder.setAccount(null);
-        limitOrder.setStock(null);
+        limitOrder.setTicker(null);
 
         saveLimitOrder(limitOrder);
         deleteLimitOrder(limitOrder);

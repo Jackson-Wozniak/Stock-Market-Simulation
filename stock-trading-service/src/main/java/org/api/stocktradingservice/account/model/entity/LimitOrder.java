@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stocktradingservice.account.exception.AccountBalanceException;
 
 import jakarta.persistence.*;
@@ -25,8 +24,8 @@ public class LimitOrder implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Stock stock;
+    @Column(name = "ticker")
+    private String ticker;
 
     @Column
     private Integer sharesToBuy;
@@ -34,15 +33,17 @@ public class LimitOrder implements Serializable {
     @Column
     private Double limitPrice;
 
-    public LimitOrder(Account account, Stock stock, int sharesToBuy, double limitPrice) {
+    public LimitOrder(Account account, String ticker, int sharesToBuy, double limitPrice) {
         this.account = account;
         this.sharesToBuy = sharesToBuy;
-        this.stock = stock;
+        this.ticker = ticker;
         this.limitPrice = limitPrice;
         if (!validOrderRequest()) throw new AccountBalanceException("Cannot Process Order");
     }
 
     public boolean validOrderRequest() {
-        return !(sharesToBuy * stock.getPrice() > account.getAccountBalance());
+        //TODO: implement
+        //return !(sharesToBuy * stock.getPrice() > account.getAccountBalance());
+        return false;
     }
 }
