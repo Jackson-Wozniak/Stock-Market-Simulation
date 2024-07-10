@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.stock.defaults;
+package org.api.stockmarket.stocks.stock.properties;
 
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 
@@ -8,9 +8,9 @@ public class DefaultStockPrices {
 
     private static final Random random = new Random();
 
-    private static final double DEFAULT_LARGE_CAP_PRICE = 100.0;
-    private static final double DEFAULT_MID_CAP_PRICE = 20.0;
-    private static final double DEFAULT_SMALL_CAP_PRICE = 5.0;
+    public static final double DEFAULT_LARGE_CAP_PRICE = 100.0;
+    public static final double DEFAULT_MID_CAP_PRICE = 20.0;
+    public static final double DEFAULT_SMALL_CAP_PRICE = 5.0;
 
     public static double getDefaultPriceWithCap(MarketCap marketCap) {
         return switch (marketCap) {

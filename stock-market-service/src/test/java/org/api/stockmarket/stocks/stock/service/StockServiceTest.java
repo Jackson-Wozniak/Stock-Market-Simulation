@@ -1,6 +1,6 @@
 package org.api.stockmarket.stocks.stock.service;
 
-import org.api.stockmarket.stocks.stock.defaults.DefaultStocksList;
+import org.api.stockmarket.stocks.stock.properties.DefaultStocksList;
 import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;

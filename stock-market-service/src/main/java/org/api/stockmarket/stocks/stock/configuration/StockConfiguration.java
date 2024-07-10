@@ -1,7 +1,7 @@
 package org.api.stockmarket.stocks.stock.configuration;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.stock.defaults.DefaultStocksList;
+import org.api.stockmarket.stocks.stock.properties.DefaultStocksList;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

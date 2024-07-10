@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.entity.News;
-import org.api.stockmarket.stocks.stock.defaults.DefaultStockPrices;
 import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
@@ -68,10 +67,11 @@ public abstract class Stock{
     @JsonIgnore
     private List<StockPriceHistory> priceHistory;
 
-    public Stock(String ticker,
+    protected Stock(String ticker,
                         String companyName,
                         String sector,
                         MarketCap marketCap,
+                        double defaultPrice,
                         Volatility volatileStock,
                         InvestorRating investorRating) {
         this.ticker = ticker;
@@ -80,8 +80,8 @@ public abstract class Stock{
         this.marketCap = marketCap;
         this.volatileStock = volatileStock;
         this.investorRating = investorRating;
-        this.price = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
-        this.lastDayPrice = DefaultStockPrices.getDefaultPriceWithCap(marketCap);
+        this.price = defaultPrice;
+        this.lastDayPrice = defaultPrice;
         this.momentum = 0;
         this.momentumStreakInDays = 0;
     }
@@ -164,5 +164,29 @@ public abstract class Stock{
             case Buy -> this.setInvestorRating(InvestorRating.Neutral);
             case StrongBuy -> this.setInvestorRating(InvestorRating.Buy);
         }
+    }
+
+    public static SmallCapStock smallCap(String ticker,
+                                 String companyName,
+                                 String sector,
+                                 Volatility volatileStock,
+                                 InvestorRating investorRating){
+        return new SmallCapStock(ticker, companyName, sector, volatileStock, investorRating);
+    }
+
+    public static MidCapStock midCap(String ticker,
+                                         String companyName,
+                                         String sector,
+                                         Volatility volatileStock,
+                                         InvestorRating investorRating){
+        return new MidCapStock(ticker, companyName, sector, volatileStock, investorRating);
+    }
+
+    public static LargeCapStock largeCap(String ticker,
+                                         String companyName,
+                                         String sector,
+                                         Volatility volatileStock,
+                                         InvestorRating investorRating){
+        return new LargeCapStock(ticker, companyName, sector, volatileStock, investorRating);
     }
 }

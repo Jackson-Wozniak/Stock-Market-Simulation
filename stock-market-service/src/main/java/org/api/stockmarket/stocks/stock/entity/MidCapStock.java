@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
+import org.api.stockmarket.stocks.stock.properties.DefaultStockPrices;
 
 import java.util.Random;
 
@@ -17,10 +18,10 @@ public class MidCapStock extends Stock{
     public MidCapStock(String ticker,
                          String companyName,
                          String sector,
-                         MarketCap marketCap,
                          Volatility volatileStock,
                          InvestorRating investorRating) {
-        super(ticker, companyName, sector, marketCap, volatileStock, investorRating);
+        super(ticker, companyName, sector, MarketCap.Mid,
+                DefaultStockPrices.DEFAULT_MID_CAP_PRICE, volatileStock, investorRating);
     }
 
     public MidCapStock() {

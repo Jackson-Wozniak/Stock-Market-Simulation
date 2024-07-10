@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
+import org.api.stockmarket.stocks.stock.properties.DefaultStockPrices;
 
 import java.util.Random;
 
@@ -14,13 +15,13 @@ public class SmallCapStock extends Stock{
 
     private static final Random random = new Random();
 
-    public SmallCapStock(String ticker,
+    protected SmallCapStock(String ticker,
                  String companyName,
                  String sector,
-                 MarketCap marketCap,
                  Volatility volatileStock,
                  InvestorRating investorRating) {
-        super(ticker, companyName, sector, marketCap, volatileStock, investorRating);
+        super(ticker, companyName, sector, MarketCap.Small,
+                DefaultStockPrices.DEFAULT_SMALL_CAP_PRICE, volatileStock, investorRating);
     }
 
     public SmallCapStock() {

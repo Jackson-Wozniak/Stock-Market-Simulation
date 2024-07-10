@@ -36,8 +36,8 @@ public class StockController {
     private final StockPriceHistoryService stockPriceHistoryService;
 
     @GetMapping(value = "/{ticker}")
-    public StockDTO getIndividualStockData(@PathVariable String ticker) {
-        return new StockDTO(stockService.getStockByTickerSymbol(ticker));
+    public StockSummaryDTO getIndividualStockData(@PathVariable String ticker) {
+        return new StockSummaryDTO(stockService.getStockByTickerSymbol(ticker));
     }
 
     @GetMapping
