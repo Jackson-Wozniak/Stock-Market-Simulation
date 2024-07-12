@@ -2,7 +2,7 @@ package org.api.stocktradingservice.account.service;
 
 import lombok.AllArgsConstructor;
 import org.api.stocktradingservice.account.exception.AccountNotFoundException;
-import org.api.stocktradingservice.account.model.payload.BuyStockRequest;
+import org.api.stocktradingservice.account.model.payload.StockTransactionRequest;
 import org.api.stocktradingservice.account.repository.LimitOrderRepository;
 import org.api.stocktradingservice.account.model.entity.Account;
 import org.api.stocktradingservice.account.model.entity.LimitOrder;
@@ -40,7 +40,7 @@ public class LimitOrderService {
         limitOrderRepository.findAll().forEach(order -> {
             if (order.getLimitPrice() < 100.0) {
                 try {
-                    stockOwnedService.buyStock(new BuyStockRequest(
+                    stockOwnedService.buyStock(new StockTransactionRequest(
                             order.getAccount().getUsername(),
                             order.getAccount().getPassword(),
                             order.getTicker(),

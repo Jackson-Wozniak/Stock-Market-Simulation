@@ -1,21 +1,16 @@
 package org.api.stocktradingservice.account.controller;
 
 import lombok.AllArgsConstructor;
-import org.api.stocktradingservice.account.client.StockMarketRestClient;
 import org.api.stocktradingservice.account.exception.AccountBalanceException;
 import org.api.stocktradingservice.account.exception.AccountInventoryException;
 import org.api.stocktradingservice.account.exception.AccountNotFoundException;
-import org.api.stocktradingservice.account.model.entity.Account;
 import org.api.stocktradingservice.account.model.entity.LimitOrder;
-import org.api.stocktradingservice.account.model.payload.BuyStockRequest;
 import org.api.stocktradingservice.account.model.payload.LimitOrderRequest;
-import org.api.stocktradingservice.account.model.payload.SellStockRequest;
+import org.api.stocktradingservice.account.model.payload.StockTransactionRequest;
 import org.api.stocktradingservice.account.service.AccountService;
 import org.api.stocktradingservice.account.service.LimitOrderService;
 import org.api.stocktradingservice.account.service.StockOwnedService;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,16 +26,15 @@ public class AccountInventoryController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping(value = "/buy/market")
-    public String buyNewStock(@RequestBody BuyStockRequest buyStock)
+    public void buyNewStock(@RequestBody StockTransactionRequest request)
             throws AccountNotFoundException, AccountBalanceException {
-        stockOwnedService.buyStock(buyStock);
-        return "working";
+        stockOwnedService.buyStock(request);
     }
 
     @PostMapping(value = "/sell")
-    public void sellStockInInventory(@RequestBody SellStockRequest sellStock)
+    public void sellStockInInventory(@RequestBody StockTransactionRequest request)
             throws AccountNotFoundException, AccountBalanceException, AccountInventoryException {
-        stockOwnedService.sellStock(sellStock);
+        stockOwnedService.sellStock(request);
     }
 
     @PostMapping(value = "/buy/limit")

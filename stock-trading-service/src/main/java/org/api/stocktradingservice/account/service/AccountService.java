@@ -2,12 +2,11 @@ package org.api.stocktradingservice.account.service;
 
 import lombok.AllArgsConstructor;
 import org.api.stocktradingservice.account.exception.InvalidAccountException;
+import org.api.stocktradingservice.account.model.payload.DepositRequest;
 import org.api.stocktradingservice.account.repository.AccountRepository;
 import org.api.stocktradingservice.account.exception.AccountBalanceException;
 import org.api.stocktradingservice.account.exception.AccountNotFoundException;
 import org.api.stocktradingservice.account.model.entity.Account;
-import org.api.stocktradingservice.account.model.payload.AccountTransaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -50,10 +49,10 @@ public class AccountService implements UserDetailsService {
         }
     }
 
-    public void updateBalanceAndSave(AccountTransaction accountTransaction)
+    public void updateBalanceAndSave(DepositRequest request)
             throws AccountNotFoundException, AccountBalanceException {
-        Account account = getAccountByName(accountTransaction.getUsername());
-        account.updateAccountBalance(accountTransaction.getAmountToAdd());
+        Account account = getAccountByName(request.getUsername());
+        account.updateAccountBalance(request.getValue());
         saveAccount(account);
     }
 

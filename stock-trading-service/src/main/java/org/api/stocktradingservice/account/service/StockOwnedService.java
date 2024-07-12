@@ -3,15 +3,13 @@ package org.api.stocktradingservice.account.service;
 import lombok.AllArgsConstructor;
 import org.api.stocktradingservice.account.client.StockMarketRestClient;
 import org.api.stocktradingservice.account.client.StockResponse;
+import org.api.stocktradingservice.account.model.payload.StockTransactionRequest;
 import org.api.stocktradingservice.account.repository.StockOwnedRepository;
 import org.api.stocktradingservice.account.exception.AccountBalanceException;
 import org.api.stocktradingservice.account.exception.AccountInventoryException;
 import org.api.stocktradingservice.account.model.entity.Account;
 import org.api.stocktradingservice.account.model.entity.StockOwned;
-import org.api.stocktradingservice.account.model.payload.BuyStockRequest;
-import org.api.stocktradingservice.account.model.payload.SellStockRequest;
 import org.api.stocktradingservice.account.utils.ValidateStockTransaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,44 +20,44 @@ public class StockOwnedService {
     private final AccountService accountService;
     private final StockMarketRestClient stockMarketRestClient;
 
-    public void buyStock(BuyStockRequest buyStock) {
-        Account account = accountService.getAccountByName(buyStock.getUsername());
-        StockResponse stock = stockMarketRestClient.retrieveStockInfo(buyStock.getTicker());
+    public void buyStock(StockTransactionRequest request) {
+        Account account = accountService.getAccountByName(request.getUsername());
+        StockResponse stock = stockMarketRestClient.retrieveStockInfo(request.getTicker());
         StockOwned stockOwned = findStockOwned(account, stock);
-        if (!ValidateStockTransaction.doesAccountHaveEnoughMoney(account, buyStock, stock)) {
+        if (!ValidateStockTransaction.doesAccountHaveEnoughMoney(account, request, stock)) {
             throw new AccountBalanceException("Account does not have funds for this purchase");
         }
         if (stockOwned != null) {
-            accountService.updateBalanceAndSave(account, -1 * (buyStock.getSharesToBuy() * stock.getPrice()));
-            stockOwned.updateCostBasisAndAmountOwned(buyStock.getSharesToBuy(), stock.getPrice());
+            accountService.updateBalanceAndSave(account, -1 * (request.getCount() * stock.getPrice()));
+            stockOwned.updateCostBasisAndAmountOwned(request.getCount(), stock.getPrice());
             stockOwnedRepository.save(stockOwned);
             return;
         }
-        accountService.updateBalanceAndSave(account, -1 * (buyStock.getSharesToBuy() * stock.getPrice()));
-        saveNewStockOwned(buyStock, account, stock.getPrice());
+        accountService.updateBalanceAndSave(account, -1 * (request.getCount() * stock.getPrice()));
+        saveNewStockOwned(request, account, stock.getPrice());
     }
 
-    public void saveNewStockOwned(BuyStockRequest buyStock, Account account, double stockPrice) {
+    public void saveNewStockOwned(StockTransactionRequest request, Account account, double stockPrice) {
         stockOwnedRepository.save(new StockOwned(
-                account, buyStock.getTicker(), buyStock.getSharesToBuy(), stockPrice));
+                account, request.getTicker(), request.getCount(), stockPrice));
     }
 
-    public void sellStock(SellStockRequest sellStock) {
-        Account account = accountService.getAccountByName(sellStock.getUsername());
-        if (!ValidateStockTransaction.doesAccountHaveEnoughStocks(account, sellStock)) {
+    public void sellStock(StockTransactionRequest request) {
+        Account account = accountService.getAccountByName(request.getUsername());
+        if (!ValidateStockTransaction.doesAccountHaveEnoughStocks(account, request)) {
             throw new AccountInventoryException("Account does not own enough stocks");
         }
-        StockResponse stock = stockMarketRestClient.retrieveStockInfo(sellStock.getTicker());
+        StockResponse stock = stockMarketRestClient.retrieveStockInfo(request.getTicker());
         StockOwned stockOwned = findStockOwned(account, stock);
         account.updateTotalProfits(
                 stockOwned.getCostBasis(),
-                sellStock.getSharesToSell(),
+                request.getCount(),
                 stock.getPrice());
-        accountService.updateBalanceAndSave(account, stock.getPrice() * sellStock.getSharesToSell());
-        if (sellStock.getSharesToSell() - stockOwned.getAmountOwned() == 0) {
+        accountService.updateBalanceAndSave(account, stock.getPrice() * request.getCount());
+        if (request.getCount() - stockOwned.getAmountOwned() == 0) {
             clearAndDeleteStockOwned(stockOwned);
         } else {
-            stockOwned.setAmountOwned(stockOwned.getAmountOwned() - sellStock.getSharesToSell());
+            stockOwned.setAmountOwned(stockOwned.getAmountOwned() - request.getCount());
             stockOwnedRepository.save(stockOwned);
         }
     }

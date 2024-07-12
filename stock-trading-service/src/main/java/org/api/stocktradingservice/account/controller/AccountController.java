@@ -1,16 +1,14 @@
 package org.api.stocktradingservice.account.controller;
 
 import lombok.AllArgsConstructor;
-import org.api.stocktradingservice.account.client.StockMarketRestClient;
 import org.api.stocktradingservice.account.exception.InvalidAccountException;
+import org.api.stocktradingservice.account.model.payload.DepositRequest;
 import org.api.stocktradingservice.account.service.AccountHistoryService;
 import org.api.stocktradingservice.account.service.AccountService;
 import org.api.stocktradingservice.account.exception.AccountBalanceException;
 import org.api.stocktradingservice.account.exception.AccountNotFoundException;
 import org.api.stocktradingservice.account.model.entity.Account;
 import org.api.stocktradingservice.account.model.entity.AccountHistory;
-import org.api.stocktradingservice.account.model.payload.AccountTransaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +35,8 @@ public class AccountController {
     }
 
     @PostMapping(value = "/deposit")
-    public void depositToAccount(@RequestBody AccountTransaction accountTransaction) throws AccountNotFoundException, AccountBalanceException {
-        accountService.updateBalanceAndSave(accountTransaction);
+    public void depositToAccount(@RequestBody DepositRequest request) throws AccountNotFoundException, AccountBalanceException {
+        accountService.updateBalanceAndSave(request);
     }
 
     @GetMapping(value = "/history/{username}")

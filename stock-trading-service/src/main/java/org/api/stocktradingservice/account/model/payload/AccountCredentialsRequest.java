@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class AccountTransaction {
+public class AccountCredentialsRequest {
 
-    private String username;
-    private Double amountToAdd;
+    private final String username;
+    private final String password;
 }
