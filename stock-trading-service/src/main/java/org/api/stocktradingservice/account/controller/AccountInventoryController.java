@@ -13,6 +13,7 @@ import org.api.stocktradingservice.account.service.AccountService;
 import org.api.stocktradingservice.account.service.AuthenticationService;
 import org.api.stocktradingservice.account.service.LimitOrderService;
 import org.api.stocktradingservice.account.service.StockOwnedService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,20 +39,20 @@ public class AccountInventoryController {
     }
 
     @PostMapping(value = "/limit")
-    public List<LimitOrder> limitOrder(@RequestBody LimitOrderRequest request) {
+    public ResponseEntity<List<LimitOrder>> limitOrder(@RequestBody LimitOrderRequest request) {
         Account account = authenticationService.authenticate(request.getUsername(), request.getPassword());
         limitOrderService.saveLimitOrder(new LimitOrder(
                 account,
                 request.getTicker(),
                 request.getSharesToBuy(), request.getLimitPrice()));
 
-        return limitOrderService.findLimitOrdersByAccount(account);
+        return ResponseEntity.ok(limitOrderService.findLimitOrdersByAccount(account));
     }
 
     @GetMapping(value = "/limit")
-    public List<LimitOrder> getLimitOrders(@RequestBody AccountCredentialsRequest request) {
-        return limitOrderService.findLimitOrdersByAccount(
-                authenticationService.authenticate(request.getUsername(), request.getPassword()));
+    public ResponseEntity<List<LimitOrder>> getLimitOrders(@RequestBody AccountCredentialsRequest request) {
+        return ResponseEntity.ok(limitOrderService.findLimitOrdersByAccount(
+                authenticationService.authenticate(request.getUsername(), request.getPassword())));
     }
 
 }
