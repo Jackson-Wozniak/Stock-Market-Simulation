@@ -10,6 +10,7 @@ import lombok.Setter;
 public class LimitOrderRequest {
 
     private String username;
+    private String password;
     private String ticker;
     private int sharesToBuy;
     private double limitPrice;
