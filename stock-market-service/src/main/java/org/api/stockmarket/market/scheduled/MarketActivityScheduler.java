@@ -2,12 +2,9 @@ package org.api.stockmarket.market.scheduled;
 
 import lombok.AllArgsConstructor;
 
-import org.api.stockmarket.indexfund.service.IndexFundService;
-import org.api.stockmarket.market.constants.MarketIntervals;
+import org.api.stockmarket.market.properties.MarketIntervals;
 import org.api.stockmarket.market.enums.TimeStamp;
 import org.api.stockmarket.market.service.MarketService;
-import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;

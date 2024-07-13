@@ -1,4 +1,4 @@
-package org.api.stockmarket.market.constants;
+package org.api.stockmarket.market.properties;
 
 public class MarketIntervals {
 
@@ -9,4 +9,6 @@ public class MarketIntervals {
     public static final long THIRTY_SECONDS = 30_000L;
 
     public static final long ONE_HOUR = 3_600_000L;
+
+    public static final long PRICE_CHANGES_PER_DAY = 24;
 }
