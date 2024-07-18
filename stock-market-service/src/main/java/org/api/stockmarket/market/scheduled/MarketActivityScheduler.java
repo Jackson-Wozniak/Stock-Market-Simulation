@@ -20,26 +20,13 @@ import java.time.Instant;
 public class MarketActivityScheduler {
 
     private final MarketManager marketManager;
-    private final MarketService marketService;
     private static final Logger stockLogger = LoggerFactory.getLogger("stockLogger");
 
     @Scheduled(fixedRate = MarketIntervals.ONE_SECOND)
     @SuppressWarnings("unused")
-    public void dailyMarketActivity() {
-        TimeStamp time = marketService.incrementAndSave();
-
-        if(time.equals(TimeStamp.EndOfDay)){
-            marketManager.dailyMarketActivity();
-            return;
-        }
-        if(time.equals(TimeStamp.EndOfMonth)){
-            marketManager.monthlyMarketActivity();
-            return;
-        }
-        Instant start = Instant.now();
-        marketManager.hourlyMarketActivity();
-        Instant end = Instant.now();
-        stockLogger.info("{}ms", Duration.between(start, end).toMillis());
+    public void scheduledMarketActivity() {
+        long millis = marketManager.advanceMarket();
+        stockLogger.info("{}ms", millis);
     }
 
 }

@@ -19,7 +19,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MarketService {
 
-    @Autowired
     private final MarketRepository marketRepository;
 
     public TimeStamp incrementAndSave(){
@@ -27,10 +26,6 @@ public class MarketService {
         TimeStamp time = market.increment();
         saveMarketEntity(market);
         return time;
-    }
-
-    public ZonedDateTime getMarketDate(){
-        return findMarketEntity().getDate();
     }
 
     public Market findMarketEntity() {
@@ -48,8 +43,7 @@ public class MarketService {
     }
 
     public void saveMarketEntity(Market market) {
-        if (market == null)
-            return;
+        if (market == null) return;
         marketRepository.save(market);
     }
 }

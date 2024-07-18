@@ -1,6 +1,7 @@
 package org.api.stockmarket.stocks.news.helpers;
 
 import java.time.ZonedDateTime;
+import java.util.Random;
 
 import org.api.stockmarket.stocks.news.defaults.DefaultNewsEvents;
 import org.api.stockmarket.stocks.news.service.NewsService;
@@ -16,12 +17,17 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RandomNewsEvents {
 
-    @Autowired
     private final NewsService newsService;
-    @Autowired
     private final StockService stockService;
+    private static final Random random = new Random();
 
-    public void processPositiveNewsEvent(ZonedDateTime date) {
+    public void newsRunner(ZonedDateTime dateTime){
+        int rand = random.nextInt(30);
+        if (rand == 10) processPositiveNewsEvent(dateTime);
+        if (rand == 20) processNegativeNewsEvents(dateTime);
+    }
+
+    private void processPositiveNewsEvent(ZonedDateTime date) {
         Stock stock = stockService.getRandomStock();
         stock.setPrice(stock.getPrice() * 1.1);
         stock.newsEvent(true);
@@ -30,7 +36,7 @@ public class RandomNewsEvents {
         newsService.saveNewsForStock(stock, DefaultNewsEvents.positiveNewsEvents(stock), date);
     }
 
-    public void processNegativeNewsEvents(ZonedDateTime date) {
+    private void processNegativeNewsEvents(ZonedDateTime date) {
         Stock stock = stockService.getRandomStock();
         stock.setPrice(stock.getPrice() * .9);
         stock.newsEvent(false);
