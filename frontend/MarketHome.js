@@ -1,29 +1,24 @@
 function getData(){
-    const data = fetch('http://localhost:8080/api/v1/stocks/all/detailed')
+    const data = fetch('http://localhost:8000/api/v1/market/sim/price_history?stocks=100')
     .then(res => res.json())
     .then(data => {
-        let dataSize = Math.round(((new TextEncoder().encode(data).length) / 1024) * 100.000) /100.000 + "kb";
-        console.log(dataSize);
         if(myChart == null){
-            data[0].stockHistory.forEach(history => {
-                dates.push(history.marketDate);
-            });     
+            Object.keys(data[0]).forEach(date => dates.push(date));
         }
-        data.forEach(stock => {
-            if(stock.marketCap != "Large"){
-                return;
-            }
-            stock.stockHistory.forEach(history => {
-                prices.push(history.stockPrice);
+
+        data.forEach(obj => {
+            let prices = [];
+            Object.keys(obj).forEach(date => {
+                const value = obj[date];
+                prices.push(value);
             });
+
             let randomColor = getRandomColor();
             datasets.push({
-                label: stock.ticker,
                 data: prices,
                 borderColor: randomColor,
                 backgroundColor: randomColor
             });
-            prices = [];
         });  
         if(myChart == null){
             myChart = createChart();
@@ -36,13 +31,12 @@ function getData(){
 }
 
 let dates = [];
-let prices = [];
 const datasets = [];
 let myChart = null;
 
 function createChart(){
-    let min = datasets[0].data[0] * .8;
-    let max = datasets[0].data[0] * 1.2;
+    let min = 80//datasets[0].data[0] * .8;
+    let max = 120//datasets[0].data[0] * 1.2;
     const ctx = document.querySelector('#myChart').getContext('2d');
     return myChart = new Chart(ctx, {
         type: 'line',
@@ -51,6 +45,11 @@ function createChart(){
             datasets: datasets
         },
         options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
             elements: {
                 point:{
                     radius: 0
@@ -60,14 +59,14 @@ function createChart(){
             borderWidth : 2,
             scales: {
                 y: {
-                    min: 60,
-                    max: 140,
+                    min: 80,
+                    max: 120,
                     grid: {
-                        borderColor: '#FF4500',
+                        borderColor: '#FBFCF8',
                         borderWidth : 3
                     },
                     ticks : {
-                        color : '#FF4500',
+                        color : '#FBFCF8',
                         font: {
                             size: 18,
                         }
@@ -75,11 +74,11 @@ function createChart(){
                 },
                 x: {
                     grid: {
-                        borderColor: '#FF4500',
+                        borderColor: '#FBFCF8',
                         borderWidth : 3
                     },
                     ticks : {
-                        color : '#FF4500',
+                        color : '#FBFCF8',
                         font: {
                             size: 18,
                         }
@@ -90,7 +89,27 @@ function createChart(){
         }
     });
 }
+
+const commonColors = [
+    "#FF5733", // Red Orange
+    "#33FF57", // Lime Green
+    "#3357FF", // Blue
+    "#FF33A8", // Pink
+    "#FFD700", // Gold
+    "#FF6347", // Tomato
+    "#8A2BE2", // Blue Violet
+    "#FF4500", // Orange Red
+    "#2E8B57", // Sea Green
+    "#FF1493", // Deep Pink
+    "#1E90FF", // Dodger Blue
+    "#32CD32", // Lime Green
+    "#FFD700", // Gold
+    "#DAA520", // Goldenrod
+    "#FF8C00", // Dark Orange
+    "#BA55D3", // Medium Orchid
+];
+
 function getRandomColor(){
-    return "#" + Math.floor(Math.random()*16777215).toString(16);
+    return commonColors[Math.floor(Math.random() * commonColors.length)];
 }
 
