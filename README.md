@@ -882,13 +882,14 @@ Note: {___} in url represents path variable
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :notebook: Results & Data From Simulation <a id="results"></a>
+## :notebook: Data Simulation & Market Performance Metrics <a id="results"></a>
 
-### Current Stock Price Simulation
+### Stock Price Simulation
 
-Below is a chart where prices are simulated four times using the current method. Each simulation is one month in duration and their movements are overlayed
+Below is a chart that uses the market simulation endpoint with 100 stocks over 30 days to display price changes. The simulation is seperate from that actual market
+as it does not retrieve stock info from the database, but uses the same price change formula to re-enact the real market simulation
 
-![Result_Overlay_4_Large_Cap](https://user-images.githubusercontent.com/105665813/196005634-671f4912-5b00-4f71-a6d3-e1a6cea8c1ba.png)
+![image](https://github.com/user-attachments/assets/4c514002-7696-4797-8f6e-53c50c4bdba7)
 
 The current calculation method is as followed:
 ```diff
@@ -901,10 +902,14 @@ V -> Volatility of the stock. Values of 0 to 4
 M -> Momentum of the stock. Values of -2 to 2
 PR -> Positive random number up to .002
 ```
-It's worth noting that the large flucuations betweens single days are new announcements that affect stock prices
 
-### The Benchmark
+#### The Benchmark
 
 A common way to randomly simulate stock data is the model of [Geometric Brownian Motion](https://demonstrations.wolfram.com/GeometricBrownianMotionWithNonuniformTimeGrid/). An example of this can be seen below, with the same price and duration as my simulations:
 
 ![Screenshot (51)](https://user-images.githubusercontent.com/105665813/196005304-e35a47d3-c9a5-4750-801d-64796f326ce3.png)
+
+### Market Performance Metrics
+
+Using the log-parser python script, this chart shows the duration of each market interval (aka how long it takes for the program to change prices and save them to the
+database)
