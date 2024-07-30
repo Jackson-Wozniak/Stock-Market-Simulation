@@ -1,5 +1,6 @@
 package org.api.stockmarket.market.utils;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -31,5 +32,13 @@ public class DateConversion {
         };
 
         return month + " " + day + ordinalIndicator + ", " + year;
+    }
+
+    public static String toDashedDate(LocalDate date){
+        return date.getMonth() +
+                "/" +
+                date.getDayOfMonth() +
+                "/" +
+                date.getYear();
     }
 }
