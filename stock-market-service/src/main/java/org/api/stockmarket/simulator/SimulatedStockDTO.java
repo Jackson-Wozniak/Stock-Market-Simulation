@@ -21,7 +21,7 @@ public class SimulatedStockDTO {
                 .stream()
                 .sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(
-                        entry -> entry.getKey().toString(),
+                        entry -> DateConversion.toDashedDate(entry.getKey()),
                         Map.Entry::getValue,
                         (e1, e2) -> e1,
                         LinkedHashMap::new

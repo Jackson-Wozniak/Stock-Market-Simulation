@@ -3,17 +3,16 @@ package org.api.stockmarket.simulator;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.stocks.stock.dto.StockPriceHistoryDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/v1/market/sim")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class MarketSimulationController {
 
     private MarketSimulationManager marketSimulationManager;
@@ -31,13 +30,13 @@ public class MarketSimulationController {
 
     //Only prices are relevant, meaning this simulation can use default stocks instead of real ones
     @GetMapping(value = "/price_history")
-    public ResponseEntity<List<SimulatedStockDTO>> simulatePrices(
+    public ResponseEntity<List<Map<String, Double>>> simulatePrices(
             @RequestParam(name = "days") Optional<Integer> daysSimulatedParam,
             @RequestParam(name = "stocks") Optional<Integer> stockCountParam){
         int daysSimulated = daysSimulatedParam.orElse(DEFAULT_DAYS_SIMULATED);
         int stockCount = stockCountParam.orElse(DEFAULT_STOCK_COUNT);
 
         return ResponseEntity.ok(marketSimulationManager.simulate(daysSimulated, stockCount)
-                .stream().map(SimulatedStockDTO::new).toList());
+                .stream().map(stock -> new SimulatedStockDTO(stock).getMap()).toList());
     }
 }

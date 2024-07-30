@@ -35,7 +35,7 @@ public class DateConversion {
     }
 
     public static String toDashedDate(LocalDate date){
-        return date.getMonth() +
+        return date.getMonthValue() +
                 "/" +
                 date.getDayOfMonth() +
                 "/" +
