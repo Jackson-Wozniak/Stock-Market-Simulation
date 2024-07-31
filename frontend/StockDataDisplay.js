@@ -1,4 +1,4 @@
-function getData(){
+function stockPrices(){
     const data = fetch('http://localhost:8000/api/v1/market/sim/price_history?stocks=100')
     .then(res => res.json())
     .then(data => {
@@ -37,7 +37,7 @@ let myChart = null;
 function createChart(){
     let min = 80//datasets[0].data[0] * .8;
     let max = 120//datasets[0].data[0] * 1.2;
-    const ctx = document.querySelector('#myChart').getContext('2d');
+    const ctx = document.querySelector('#line-chart').getContext('2d');
     return myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -90,26 +90,6 @@ function createChart(){
     });
 }
 
-const commonColors = [
-    "#FF5733", // Red Orange
-    "#33FF57", // Lime Green
-    "#3357FF", // Blue
-    "#FF33A8", // Pink
-    "#FFD700", // Gold
-    "#FF6347", // Tomato
-    "#8A2BE2", // Blue Violet
-    "#FF4500", // Orange Red
-    "#2E8B57", // Sea Green
-    "#FF1493", // Deep Pink
-    "#1E90FF", // Dodger Blue
-    "#32CD32", // Lime Green
-    "#FFD700", // Gold
-    "#DAA520", // Goldenrod
-    "#FF8C00", // Dark Orange
-    "#BA55D3", // Medium Orchid
-];
-
 function getRandomColor(){
     return "#" + Math.floor(Math.random()*16777215).toString(16);
 }
-

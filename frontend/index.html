@@ -5,13 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Market</title>
+    <link rel="stylesheet" href="index.css">
     <script src="PerformanceDisplay.js" defer></script>
     <script src="StockDataDisplay.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
-<body style="background-color: #0D1117">
-    <canvas id="myChart" width="1000" height="450" background-color="black"></canvas>
+<body>
+    <div id="button-utils">
+        <button onclick="stockPrices()">Generate Stock Chart</button>
+        <button onClick="performanceMetrics()">Generate Performance Metrics</button>
+    </div>
+
+    <canvas id="line-chart" width="1000" height="420"></canvas>
     <br/>
-    <button onclick="getData()">Get Data</button>
+    <canvas id="bar-chart" width="1000" height="420"></canvas>
 </body>
 </html>
