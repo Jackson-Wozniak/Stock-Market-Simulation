@@ -55,6 +55,38 @@ reflective of real world market activity.
 
 Default stock data, such as the name, ticker symbol, market cap and sector are based on real world companies
 
+#### Market
+* The market date is tracked on intervals that can be altered. The default "day" is 24 intervals of 10 seconds, and 30 "days" is a month
+* The date is formatted as month/day/year
+* Stock prices change after each 10 second interval, and certain stock events can happen at the end of each day
+* There are 3 market types; Bear, Bull and Normal. Bear markets occur if the average stock price falls 10% in a month, while
+  bull markets happen if prices rise 10% monthly. Normal market conditions cover all scenarios in between
+
+#### Stocks
+* Stock prices change on an interval (10 seconds)
+* Stock prices change based on three factors: market cap, momentum, and volatility
+* Market Cap: Large and small cap stocks experience higher movement, in an upward or downward trajectory
+* Momentum: When stock prices rise for 3 days, they experience positive momentum, while they experience negative momentum if they fall for 3 days
+* Volatility: Each stock is judged on whether it is volatile or not. This is an unchangeable boolean value, and is based on the nature of the real world company. Volatile stocks receive a slight increase in movement each time their prices change
+
+#### News
+* At the end of each day, there is a chance that a specific stock will release a news story, which will have a large effect on their price
+* Positive news, such as buyouts, will increase the stocks by around price 10%
+* Negative news, such as lawsuits or management shakeups will decrease stock price by around 10%
+* Bankruptcies will occur if a stock price dips below $1, where a buyout will occur and the stocks price will reset back to the default
+
+#### Earnings Reports
+* Stocks release earnings reports on the first day of every 3rd month (3rd, 6th, 9th, 12th)
+* Earnings reports effect stock prices and optimism, and are also affected by previous optimism
+
+#### Index Funds
+* Index funds track the average price of a specific category of stocks
+* These cannot be traded, but only serve to estimate the total market trajectory
+
+#### Accounts
+
+#### Leaderboards
+
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -79,13 +111,6 @@ Here are the main justifications for doing this:
   The trading API acts a brokerage firm, the market API simulated a countries stock market, and the trading bot service acts a quant firm that interacts
   with its domestic market through publically-unavailable bots. Seperating the server into these 3 services means that it more closely follows the goal
   of having 3 seperate "companies" that all work together to build a stock market simulation
-
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-## 📝: Contributing <a id="contributing"></a>
-
-For all info on contributing, please head to [this](https://github.com/Jackson-Wozniak/Stock-Market-Simulation/blob/main/CONTRIBUTING.md) document
 
 <br/>
 
@@ -115,769 +140,190 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 <br/>
 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<details>
-<summary>
-  <h2> :electric_plug: API Endpoints <a id="api-endpoints"></a></h2><p>(click to see details)</p>
-</summary>
 
-  ## :calendar: Market <a id="market"></a>
-
-* The market date is tracked on intervals that can be altered. The default "day" is 24 intervals of 10 seconds, and 30 "days" is a month
-* The date is formatted as month/day/year
-* Stock prices change after each 10 second interval, and certain stock events can happen at the end of each day
-* There are 3 market types; Bear, Bull and Normal. Bear markets occur if the average stock price falls 10% in a month, while 
-bull markets happen if prices rise 10% monthly. Normal market conditions cover all scenarios in between
-
-#### :arrow_right: Market Endpoints
+<h2> :electric_plug: API Endpoints <a id="api-endpoints"></a></h2>
 
 <details>
-  <summary>Market Conditions: GET | http://localhost:8080/api/v1/market</summary>
-  <p>
-    
-```JSON
+    <summary>Stock Market Service API Docs (click to expand)</summary>
+
+### Object Definitions
+<details>
+ <summary><code>Market</code></summary>
+
+```json
 {
-  "id" : 1,
-  "date" : "1/4/1",
-  "lastMonthAveragePrice" : 100.0,
-  "marketTrajectory" : "NORMAL"
+  "date": String,
+  "trajectory": String,
+  "lastMonthPrice": double
 }
 ```
-  </p>
-  
 </details>
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-## :dollar: Stocks <a id="stocks"></a>
-
-* Stock prices change on an interval (10 seconds)
-* Stock prices change based on three factors: market cap, momentum, and volatility
-* Market Cap: Large and small cap stocks experience higher movement, in an upward or downward trajectory
-* Momentum: When stock prices rise for 3 days, they experience positive momentum, while they experience negative momentum if they fall for 3 days
-* Volatility: Each stock is judged on whether it is volatile or not. This is an unchangeable boolean value, and is based on the nature of the real world company. Volatile stocks receive a slight increase in movement each time their prices change
-
-#### :arrow_right: Stock Endpoints
-
-Note: {___} in url represents path variable
 
 <details>
-<summary>Specific Stock By Name: GET | http://localhost:8080/api/v1/stocks/{ticker}</summary>
-  <p>
-    
-```JSON
+ <summary><code>StockSummary</code></summary>
+
+```json
 {
-  "ticker" : "AAPL",
-  "companyName" : "Apple",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 99.742,
-  "lastDayPrice" : 99.457,
-  "optimism" : -1,
-  "volatileStock" : false
+  "ticker" : String,
+  "companyName" : String,
+  "price" : double,
+  "lastDayPrice" : double,
+  "percentChange" : double
 }
 ```
-    
-  </p>
 </details>
 
 <details>
-  <summary>Specific Stock Price: GET | http://localhost:8080/api/v1/stocks/price/{ticker}</summary>
-  <p>
-    
-```JSON
+ <summary><code>Stock</code></summary>
+
+```json
 {
-  104.36
+ "ticker" : String,
+  "companyName" : String,
+  "sector" : String,
+  "marketCap" : String,
+  "price" : double,
+  "lastDayPrice" : double,
+  "momentum" : integer,
+  "momentumStreakInDays" : integer,
+  "volatileStock" : String,
+  "investorRating" : String
 }
 ```
-  
-  </p>
-</details>
-  
-<details>  
-  <summary>All Stocks: GET | http://localhost:8080/api/v1/stocks</summary>
-The data below doesn't show all stocks, but shows the general format
-  <p>
-  
-```JSON
-[ {
-  "ticker" : "AAPL",
-  "companyName" : "Apple",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 104.2,
-  "lastDayPrice" : 103.01,
-  "momentum" : 1,
-  "momentumStreakInDays" : 5,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "AMZN",
-  "companyName" : "Amazon",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 104.66,
-  "lastDayPrice" : 105.63,
-  "momentum" : 1,
-  "momentumStreakInDays" : 3,
-  "volatileStock" : true,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "BRK.B",
-  "companyName" : "Berkshire Hathaway",
-  "sector" : "Insurance",
-  "marketCap" : "Large",
-  "price" : 100.62,
-  "lastDayPrice" : 100.87,
-  "momentum" : 1,
-  "momentumStreakInDays" : 3,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-}]
-```
-
-  </p>
-</details>  
-
-<details>  
-  <summary>Detailed Stock Data: GET | http://localhost:8080/api/v1/stocks/detailed</summary>
-The data below doesn't show all stocks, but shows the general format
-  <p>
-  
-```JSON
-[ {
-  "ticker" : "AAPL",
-  "companyName" : "Apple",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 104.2,
-  "lastDayPrice" : 103.01,
-  "momentum" : 1,
-  "momentumStreakInDays" : 5,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "AMZN",
-  "companyName" : "Amazon",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 104.66,
-  "lastDayPrice" : 105.63,
-  "momentum" : 1,
-  "momentumStreakInDays" : 3,
-  "volatileStock" : true,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "BRK.B",
-  "companyName" : "Berkshire Hathaway",
-  "sector" : "Insurance",
-  "marketCap" : "Large",
-  "price" : 100.62,
-  "lastDayPrice" : 100.87,
-  "momentum" : 1,
-  "momentumStreakInDays" : 3,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-}]
-```
-
-  </p>
-</details> 
-
-<details>
-  <summary>Stocks By Sector: GET | http://localhost:8080/api/v1/stocks/sector/{sector}</summary>
-  <p>
-
-```JSON
-[ {
-  "ticker" : "AAPL",
-  "companyName" : "Apple",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 103.94,
-  "lastDayPrice" : 104.09,
-  "momentum" : 1,
-  "momentumStreakInDays" : 6,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "AMZN",
-  "companyName" : "Amazon",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 105.66,
-  "lastDayPrice" : 105.29,
-  "momentum" : 0,
-  "momentumStreakInDays" : 2,
-  "volatileStock" : true,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "GME",
-  "companyName" : "GameStop Corp",
-  "sector" : "Technology",
-  "marketCap" : "Mid",
-  "price" : 20.32,
-  "lastDayPrice" : 20.38,
-  "momentum" : 1,
-  "momentumStreakInDays" : 4,
-  "volatileStock" : true,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "GOOG",
-  "companyName" : "Google",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 100.58,
-  "lastDayPrice" : 100.58,
-  "momentum" : 0,
-  "momentumStreakInDays" : -2,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "SLAB",
-  "companyName" : "Silicon Laboratories",
-  "sector" : "Technology",
-  "marketCap" : "Mid",
-  "price" : 19.69,
-  "lastDayPrice" : 19.67,
-  "momentum" : -2,
-  "momentumStreakInDays" : -3,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "TSLA",
-  "companyName" : "Tesla",
-  "sector" : "Technology",
-  "marketCap" : "Large",
-  "price" : 98.08,
-  "lastDayPrice" : 98.24,
-  "momentum" : -2,
-  "momentumStreakInDays" : -4,
-  "volatileStock" : true,
-  "newsHistory" : [ ]
-} ]
-```
-
-  </p>
 </details>
 
 <details>
-  <summary>Stocks By Market Cap: GET | http://localhost:8080/api/v1/stocks/marketCap/{marketCap}</summary>
-  <p>
+ <summary><code>DetailedStock</code></summary>
 
-```JSON
-[ {
-  "ticker" : "GME",
-  "companyName" : "GameStop Corp",
-  "sector" : "Technology",
-  "marketCap" : "Mid",
-  "price" : 20.34,
-  "lastDayPrice" : 20.38,
-  "momentum" : 1,
-  "momentumStreakInDays" : 4,
-  "volatileStock" : true,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "OWL",
-  "companyName" : "Big Owl Capital",
-  "sector" : "Finance",
-  "marketCap" : "Mid",
-  "price" : 19.67,
-  "lastDayPrice" : 19.65,
-  "momentum" : -2,
-  "momentumStreakInDays" : -4,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-}, {
-  "ticker" : "SLAB",
-  "companyName" : "Silicon Laboratories",
-  "sector" : "Technology",
-  "marketCap" : "Mid",
-  "price" : 19.69,
-  "lastDayPrice" : 19.67,
-  "momentum" : -2,
-  "momentumStreakInDays" : -3,
-  "volatileStock" : false,
-  "newsHistory" : [ ]
-} ]
-```
-    
-  </p>
-</details>  
-
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-## :chart_with_upwards_trend: Stock History <a id="stock-history"></a>
-
-* Stock prices are saved each day, and the history of a stocks price can be viewed
-* Price history is reset at the end of each year
-
-#### :arrow_right: Stock History Endpoints
-
-<details>
-  <summary>Stock History By Ticker Symbol: GET | http://localhost:8080/api/v1/stocks/history/{ticker}</summary>
-  <p>
-  
-  ```JSON
-  [ {
-  "marketDate" : "7/7/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 97.8
-}, {
-  "marketDate" : "7/8/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 98.66
-}, {
-  "marketDate" : "7/9/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 101.1
-}, {
-  "marketDate" : "7/10/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 101.79
-}, {
-  "marketDate" : "7/11/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 102.92
-}, {
-  "marketDate" : "7/12/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 101.48
-}, {
-  "marketDate" : "7/13/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 102.53
-}, {
-  "marketDate" : "7/14/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 102.04
-}, {
-  "marketDate" : "7/15/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 102.59
-}, {
-  "marketDate" : "7/16/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 100.57
-}, {
-  "marketDate" : "7/17/1",
-  "ticker" : "AMZN",
-  "stockPrice" : 100.79
-} ]
-  ```
-  
-  </p>
-</details>  
-  
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-## :newspaper: Stock News <a id="Stock-News"></a>
-
-* At the end of each day, there is a chance that a specific stock will release a news story, which will have a large effect on their price
-* Positive news, such as buyouts, will increase the stocks by around price 10%
-* Negative news, such as lawsuits or management shakeups will decrease stock price by around 10%
-* Bankruptcies will occur if a stock price dips below $1, where a buyout will occur and the stocks price will reset back to the default
-
-#### :arrow_right: News Endpoints
-
-Note: {___} in url represents path variable
-
-<details>
-  <summary>All News On The Market: GET | http://localhost:8080/api/v1/news</summary>
-  <p>
-    
-```JSON
-[ {
-  "event" : "Charles Schwab Corporation announces buyout of small Finance company. There price soared as a result",
-  "dateReleased" : "1/2/1"
-}, {
-  "event" : "Lawsuit announced against GameStop today. Investigations are ongoing.",
-  "dateReleased" : "2/15/1"
-} ]
-```
-
-  </p>
-</details>
-<details>
-  <summary>All News On A Specific Stock: GET | http://localhost:8080/api/v1/news/{ticker}</summary>
-  <p>
-    
-```JSON
-[ {
-  "event" : "Charles Schwab Corporation announces buyout of small Finance company. There price soared as a result",
-  "dateReleased" : "1/2/1"
-} ]
-```
-    
-  </p>
-</details>  
-
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-
-## :heavy_dollar_sign: Stock Earnings Reports <a id="Stock-Earnings"></a>
-
-* Stocks release earnings reports on the first day of every 3rd month (3rd, 6th, 9th, 12th)
-* Earnings reports effect stock prices and optimism, and are also affected by previous optimism
-
-#### :arrow_right: Earnings Reports Endpoints
-
-Note: {___} in url represents path variable
-
-
-<details>
-  <summary>All Earnings Reports History: GET | http://localhost:8080/api/v1/earnings</summary>
-  <p>
-  
-```JSON
-[ {
-  "estimatedEPS" : 2.03,
-  "actualEPS" : 3.3,
-  "reportMessage" : "Date: 1/1/1. Apple announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 3.3 exceeded expectations of 2.03 EPS.",
-  "dateOfRelease" : "3/1/1"
-}, {
-  "estimatedEPS" : 2.84,
-  "actualEPS" : 4.16,
-  "reportMessage" : "Date: 1/1/1. Amazon announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.16 exceeded expectations of 2.84 EPS.",
-  "dateOfRelease" : "6/1/1"
-}, {
-  "estimatedEPS" : 2.68,
-  "actualEPS" : 4.06,
-  "reportMessage" : "Date: 1/1/1. Berkshire Hathaway announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.06 exceeded expectations of 2.68 EPS.",
-  "dateOfRelease" : "3/1/1"
-}, {
-  "estimatedEPS" : 2.72,
-  "actualEPS" : 3.09,
-  "reportMessage" : "Date: 1/1/1. Costco Wholesale announces stable profits in new earnings report today. Their EPS of 3.09 fell in line with expectations of 2.72 EPS.",
-  "dateOfRelease" : "12/1/1"
-}]
-```    
-    
-  </p>
-</details>
-
-  
-<details>
-  <summary>All Earnings Report History Of A Specific Stock: GET | http://http://localhost:8080/api/v1/earnings/stock/{ticker}</summary>
-    <p>
-    
-```JSON
-[ {
-  "estimatedEPS" : 2.84,
-  "actualEPS" : 4.16,
-  "reportMessage" : "Date: 1/1/1. Amazon announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.16 exceeded expectations of 2.84 EPS.",
-  "dateOfRelease" : "3/1/1"
-}, {
-  "estimatedEPS" : 2.72,
-  "actualEPS" : 3.09,
-  "reportMessage" : "Date: 1/1/1. Amazon announces stable profits in new earnings report today. Their EPS of 3.09 fell in line with expectations of 2.72 EPS.",
-  "dateOfRelease" : "6/1/1"
-} ]
-```
-    
-   </p>
-</details>  
-
-<details>
-  <summary>All Earnings Report History On A Date: GET | http://http://localhost:8080/api/v1/earnings/date/{date}</summary>
-  <p>
-    
-Date is formatted as month_day_year and will return an error if incorrectly formatted
-```JSON
-[ {
-  "estimatedEPS" : 2.03,
-  "actualEPS" : 3.3,
-  "reportMessage" : "Date: 1/1/1. Apple announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 3.3 exceeded expectations of 2.03 EPS.",
-  "dateOfRelease" : "3/1/1"
-}, {
-  "estimatedEPS" : 2.84,
-  "actualEPS" : 4.16,
-  "reportMessage" : "Date: 1/1/1. Amazon announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.16 exceeded expectations of 2.84 EPS.",
-  "dateOfRelease" : "3/1/1"
-}, {
-  "estimatedEPS" : 2.68,
-  "actualEPS" : 4.06,
-  "reportMessage" : "Date: 1/1/1. Berkshire Hathaway announces increased profits in new earnings report today, causing a spike in their stock price. Their EPS of 4.06 exceeded expectations of 2.68 EPS.",
-  "dateOfRelease" : "3/1/1"
-} ]
-```
-    
-  </p>
-</details>  
-
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-
-## :bar_chart: Index Funds <a id="index-funds"></a>
- 
-* Index funds track the average price of a specific category of stocks
-* These cannot be traded, but only serve to estimate the total market trajectory
-
-#### :arrow_right: Index Fund Endpoints
-
-Note: {___} in url represents path variable
-
-<details>
-  <summary>Total Market Fund: GET | http://localhost:8080/api/v1/funds/total-market</summary>
-  <p>
-    
-```JSON
+```json
 {
-  "name" : "Total Market ETF",
-  "price" : 78.44,
-  "fundTracking" : "TOTAL_MARKET"
+  
 }
 ```
-    
-  </p>
 </details>
 
 <details>
-  <summaryIndex Fund By Market Cap: GET | http://localhost:8080/api/v1/funds/cap/{marketCap}</summary>
-  <p>
-    
-```JSON
-{
-  "name" : "Large Cap Index Fund",
-  "price" : 101.0,
-  "fundTracking" : "MARKET_CAP",
-  "marketCap" : "large"
-}
-```
-    
-  </p>
-</details>
+ <summary><code>StockPriceHistory</code></summary>
 
-<details>
-  <summary>Index Fund By Sector: GET | http://localhost:8080/api/v1/funds/sector/{sector}</summary>
-  <p>
-    
-```JSON
-{
-  "name" : "Technology Fund",
-  "price" : 74.86,
-  "fundTracking" : "SECTOR",
-  "sector" : "technology"
-}
-```
-    
-  </p>
-</details>
-
-<details>
-  <summary>Stable Fund (Non Volatile): GET | http://localhost:8080/api/v1/funds/stable</summary>
-  <p>
-    
-```JSON
-{
-  "name" : "Stable Index Fund",
-  "price" : 86.02,
-  "fundTracking" : "VOLATILITY",
-  "volatility" : false
-}
-```
-    
-  </p>
-</details>
-
-<details>
-  <summary>Volatile Fund: GET | http://localhost:8080/api/v1/fund/volatile</summary>
-  <p>
-    
-```JSON
-{
-  "name" : "Volatile Index Fund",
-  "price" : 57.3,
-  "fundTracking" : "VOLATILITY",
-  "volatility" : true
-}
-```
-    
-  </p>
-</details>  
-
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-## :credit_card: Trading & Accounts <a id="trading"></a>
-
-#### :arrow_right: Trading & Account Endpoints
-<details>
-  <summary>Get Account By Name : GET | http://localhost:8080/api/v1/account/{username}</summary>
-  <p>
-
-```JSON
-{
-  "username" : "username",
-  "accountBalance" : "1000",
-  "stocksOwned" : [ {
-    "ticker" : "AMZN" ,
-    "amountOwned" : 2
-  }, {
-    "ticker" : "GOOG",
-    "amountOwned" : 5
-  } ]
-}
-```
-    
-  </p>
-</details>  
-
-<details>
-  <summary>Get Account History  By Name : GET | http://localhost:8080/api/v1/account/history/{username}</summary>
-  <p>
-
-```JSON
-[ {
-  "date" : "3/20/1",
-  "balance" : -8.06
-}, {
-  "date" : "3/21/1",
-  "balance" : -8.06
-}, {
-  "date" : "3/22/1",
-  "balance" : -8.06
-}, {
-  "date" : "3/23/1",
-  "balance" : 3.4
-}, {
-  "date" : "3/24/1",
-  "balance" : 4.3
-}, {
-  "date" : "3/25/1",
-  "balance" : 4.3
-}, {
-  "date" : "3/26/1",
-  "balance" : 4.3
-}, {
-  "date" : "3/27/1",
-  "balance" : 4.3
-}, {
-  "date" : "3/28/1",
-  "balance" : 4.3
-} ]
-```
-
-
-<details>
-  <summary>Get Active Limit Orders By Name : GET | http://localhost:8080/api/v1/inventory/orders/get/{username}</summary>
-</details> 
-    
-  </p>
-</details>  
-
-<details>
-  <summary>Create Account : POST | http://localhost:8080/api/v1/account/{username}</summary>
-</details>
-
-<details>
-  <summary>Deposit Funds To Account: POST | http://localhost:8080/api/v1/account/deposit</summary>
-</details>
-
-<br/> 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-## :trophy: Leaderboard <a id="leaderboard"></a>
-
-* A leaderboard tracks total user profits for each account, sorting them by how much each account earns
-* Trading stocks for a profit will push you up the leaderboard, with the goal of beating a trading bot
-
-#### :arrow_right: Leaderboard Endpoints
-<details>
-  <summary>Get Top 10 User Accounts On Leaderboard | http://localhost:8080/api/v1/leaderboard</summary>
-  <p>
-  
-  ```JSON
- [ {
-  "ranking" : 1,
-  "username" : "user2",
-  "totalProfits" : 4.5
-}, {
-  "ranking" : 2,
-  "username" : "user3",
-  "totalProfits" : 4.3
-}, {
-  "ranking" : 3,
-  "username" : "user1",
-  "totalProfits" : 1.23
-}, {
-  "ranking" : 4,
-  "username" : "user4",
-  "totalProfits" : -2.00
-}, {
-  "ranking" : 5,
-  "username" : "user6",
-  "totalProfits" : -4.3
-}, {
-  "ranking" : 6,
-  "username" : "user6",
-  "totalProfits" : -12.64
-}, {
-  "ranking" : 7,
-  "username" : "user8",
-  "totalProfits" : -16.23
-}, {
-  "ranking" : 8,
-  "username" : "user7",
-  "totalProfits" : -20.00
-}, {
-  "ranking" : 9,
-  "username" : "user10",
-  "totalProfits" : -40.3
-}, {
-  "ranking" : 10,
-  "username" : "user9",
-  "totalProfits" : -122.64
-} ]
-
-```
-  
-  </p>
-</details>
-
-<details>
-  <summary>Get Top 3 User Accounts On Leaderboard | http://localhost:8080/api/v1/leaderboard</summary>
-  <p>
-  
-  ```JSON
-[ {
-  "ranking" : 1,
-  "username" : "user2",
-  "totalProfits" : 4.5
-}, {
-  "ranking" : 2,
-  "username" : "user3",
-  "totalProfits" : 4.3
-}, {
-  "ranking" : 3,
-  "username" : "user1",
-  "totalProfits" : 1.23
-} ]
-  ```
-  
-  </p>
-</details>
-
-<details>
-  <summary>Get Ranking By Account: GET | http://localhost:8080/api/v1/leaderboard/ranking/{username}</summary>
-  <p>
-  
-  ```JSON
+```json
+[
   {
-    "ranking" : 2,
-    "username" : "user3",
-    "totalProfits" : 4.3
+    "marketDate": ZonedDateTime,
+    "price": double
   }
-  ```
-  
-  </p>
-</details> 
+]
+```
 </details>
 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<details>
+ <summary><code>News</code></summary>
+
+```json
+{
+  "event": String,
+  "dateReleased": ZonedDateTime
+}
+```
+</details>
+
+<details>
+ <summary><code>EarningsReport</code></summary>
+
+```json
+{
+  "estimatedEPS": double,
+  "actualEPS": double,
+  "reportMessage": String,
+  "dateOfRelease": ZonedDateTime
+}
+```
+</details>
+
+<details>
+ <summary><code>SimulatedStock</code></summary>
+
+```json
+[
+  {
+    "MM/DD/YYYY": double
+  },
+]
+```
+</details>
+
+<details>
+ <summary><code>IndexFund</code></summary>
+
+```json
+{
+  "name": String,
+  "price": double,
+  "fundTracking": String
+}
+```
+</details>
+
+### Market Endpoints
+
+> <code>GET</code> <code><b>/api/v1/market</b></code> <code><b>200 OK -> Market</b></code>
+
+### Simulation Endpoints
+> <code>GET</code> <code><b>/api/v1/market/sim/price_history?days={String}&stocks={int}</b></code> <code><b>200 OK -> List[SimulatedStock]</b></code>
+
+### Stock Endpoints
+
+> <code>GET</code> <code><b>/api/v1/stocks/{ticker}</b></code> <code><b>200 OK -> StockSummary</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/stocks</b></code> <code><b>200 OK -> List[StockSummary]</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/stocks/detailed</b></code> <code><b>200 OK -> List[Stock]</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/stocks/marketCap/{String}</b></code> <code><b>200 OK -> List[Stock]</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/stocks/sector/{String}</b></code> <code><b>200 OK -> List[Stock]</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/stocks/price/{ticker}</b></code> <code><b>200 OK -> double</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/stocks/random</b></code> <code><b>200 OK -> Stock</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/stocks/history/{ticker}</b></code> <code><b>200 OK -> List[StockPriceHistory]</b></code>
+
+### News Endpoints
+
+> <code>GET</code> <code><b>/api/v1/news/{ticker}</b></code> <code><b>200 OK -> List[News]</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/news/</b></code> <code><b>200 OK -> List[News]</b></code>
+
+### Earnings Endpoints
+
+> <code>GET</code> <code><b>/api/v1/earnings/{ticker}</b></code> <code><b>200 OK -> List[EarningsReport]</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/earnings</b></code> <code><b>200 OK -> List[EarningsReport]</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/earnings/date/{String}</b></code> <code><b>200 OK -> List[EarningsReport]</b></code>
+
+### Index Fund Endpoints
+
+> <code>GET</code> <code><b>/api/v1/funds</b></code> <code><b>200 OK -> List[IndexFund]</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/funds/total-market</b></code> <code><b>200 OK -> IndexFund</b></code>
+>
+> <code>GET</code> <code><b>/api/v1/funds/cap</b></code> <code><b>200 OK -> List[IndexFund] </b></code>
+>
+> <code>GET</code> <code><b>/api/v1/funds/cap/{String}</b></code> <code><b>200 OK -> IndexFund </b></code>
+>
+> <code>GET</code> <code><b>/api/v1/funds/sector</b></code> <code><b>200 OK -> List[IndexFund] </b></code>
+>
+> <code>GET</code> <code><b>/api/v1/funds/sector/{String}</b></code> <code><b>200 OK -> IndexFund </b></code>
+>
+> <code>GET</code> <code><b>/api/v1/funds/volatility</b></code> <code><b>200 OK -> List[IndexFund] </b></code>
+>
+> <code>GET</code> <code><b>/api/v1/funds/volatility/{String}</b></code> <code><b>200 OK -> IndexFund </b></code>
+
+</details>
+
+<br/>
+
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
