@@ -335,7 +335,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 Below is a chart that uses the market simulation endpoint with 100 stocks over 30 days to display price changes. The simulation is seperate from that actual market
 as it does not retrieve stock info from the database, but uses the same price change formula to re-enact the real market simulation
 
-![image](https://github.com/user-attachments/assets/4c514002-7696-4797-8f6e-53c50c4bdba7)
+![Line Chart](https://github.com/user-attachments/assets/2f5b306d-a74f-4320-9e44-2f103dc63f03)
 
 The current calculation method is as followed:
 ```diff
@@ -353,9 +353,14 @@ PR -> Positive random number up to .002
 
 A common way to randomly simulate stock data is the model of [Geometric Brownian Motion](https://demonstrations.wolfram.com/GeometricBrownianMotionWithNonuniformTimeGrid/). An example of this can be seen below, with the same price and duration as my simulations:
 
-![Screenshot (51)](https://user-images.githubusercontent.com/105665813/196005304-e35a47d3-c9a5-4750-801d-64796f326ce3.png)
+![Line Chart 2](https://user-images.githubusercontent.com/105665813/196005304-e35a47d3-c9a5-4750-801d-64796f326ce3.png)
 
 ### Market Performance Metrics
 
 Using the log-parser python script, this chart shows the duration of each market interval (aka how long it takes for the program to change prices and save them to the
 database)
+
+Y-Axis shows the number of times the market advanced intervals, with the X-Axis being the time range of that interval
+
+![Bar Chart](https://github.com/user-attachments/assets/5d15f231-940c-4965-b0ef-ce0ea9dff8c6)
+
