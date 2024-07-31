@@ -25,13 +25,15 @@ function generateBarChart(durations){
         data: Object.values(durations),
         backgroundColor: [
           'rgba(35, 101, 51, 0.6)',
-          'rgba(0, 16, 100, 0.6)',
+          'rgba(217, 230, 80, .6)',
+          'rgba(255, 215, 0, 0.6)',
           'rgba(255, 102, 0, .6)',
           'rgba(217, 33, 33, .6)',
         ],
         borderColor: [
           'rgb(35, 101, 51)',
-          'rgb(0, 16, 100)',
+          'rgb(217, 230, 80)',
+          'rgb(255, 215, 0)',
           'rgb(255, 102, 0)',
           'rgb(217, 33, 33)',
         ],

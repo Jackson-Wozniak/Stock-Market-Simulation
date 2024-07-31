@@ -4,7 +4,9 @@ stock-market-service/target/
 stock-trading-service/.idea/
 stock-trading-service/.mvn/
 stock-trading-service/target/
-log-parser/logs/
+frontend/log-parser/logs/
+frontend/log-parser/duration_stats.txt
+frontend/log-parser/stock_stats.txt
 .idea/
 HELP.md
 mvnw

@@ -36,16 +36,18 @@ def print_duration_stats(duration_map):
 
 def sort_durations_by_range(milli_values):
     duration_map = {
-        '0-250ms' : 0,
-        '251-400ms' : 0,
-        '401-600ms' : 0,
-        '600+ms' : 0
+        '0-200ms' : 0,
+        '201-300ms' : 0,
+        '301-350ms' : 0,
+        '351-450ms' : 0,
+        '450+ms' : 0
     }
     for milli in milli_values:
-        if milli <= 250: duration_map['0-250ms'] += 1
-        elif milli <= 400: duration_map['251-400ms'] += 1
-        elif milli <= 600: duration_map['401-600ms'] += 1
-        else: duration_map['600+ms'] += 1
+        if milli <= 250: duration_map['0-200ms'] += 1
+        elif milli <= 300: duration_map['201-300ms'] += 1
+        elif milli <= 350: duration_map['301-350ms'] += 1
+        elif milli <= 450: duration_map['351-450ms'] += 1
+        else: duration_map['450+ms'] += 1
     return duration_map    
 
 def value_to_millis(stocks):
