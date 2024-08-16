@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class EarningsService {
 
-    @Autowired
     private final EarningsRepository earningsRepository;
 
     public List<EarningsReport> findAllEarningsReports() {
@@ -24,6 +23,12 @@ public class EarningsService {
     public List<EarningsReport> findAllEarningsByDate(ZonedDateTime date) {
         return earningsRepository.findAll().stream()
                 .filter(earnings -> earnings.getDateOfRelease().equals(date))
+                .collect(Collectors.toList());
+    }
+
+    public List<EarningsReport> findEarningsByStock(String ticker) {
+        return earningsRepository.findAll().stream()
+                .filter(earnings -> earnings.getStock().getTicker().equals(ticker))
                 .collect(Collectors.toList());
     }
 

@@ -21,6 +21,12 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
+    public List<News> findNewsByStock(String ticker){
+        return newsRepository.findAll().stream()
+                .filter(news -> news.getStock().getTicker().equals(ticker))
+                .toList();
+    }
+
     public void saveNewsForStock(Stock stock, String newsEvent, ZonedDateTime date) {
         newsRepository.save(new News(stock, newsEvent, date));
     }

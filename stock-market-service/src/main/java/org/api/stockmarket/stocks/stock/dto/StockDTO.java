@@ -27,9 +27,6 @@ public class StockDTO {
     private int momentumStreakInDays;
     private String volatileStock;
     private String investorRating;
-    private List<NewsDTO> newsHistory;
-    private List<EarningsDTO> earningsHistory;
-    private List<StockPriceHistoryDTO> priceHistory;
 
     public StockDTO(Stock stock) {
         this.ticker = stock.getTicker();
@@ -42,15 +39,6 @@ public class StockDTO {
         this.momentumStreakInDays = stock.getMomentumStreakInDays();
         this.volatileStock = String.valueOf(stock.getVolatileStock());
         this.investorRating = String.valueOf(stock.getInvestorRating());
-        this.newsHistory = stock.getNewsHistory().stream()
-                .map(NewsDTO::new)
-                .collect(Collectors.toList());
-        this.earningsHistory = stock.getEarningsHistory().stream()
-                .map(EarningsDTO::new)
-                .collect(Collectors.toList());
-        this.priceHistory = stock.getPriceHistory().stream()
-                .map(StockPriceHistoryDTO::new)
-                .collect(Collectors.toList());
         this.percentChange = getPercentChange(this.getPrice(), this.getLastDayPrice());
     }
 

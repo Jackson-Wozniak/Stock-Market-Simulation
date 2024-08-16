@@ -21,8 +21,6 @@ public class EarningsController {
 
     @Autowired
     private final EarningsService earningsService;
-    @Autowired
-    private final StockService stockService;
 
     @GetMapping
     public List<EarningsReport> getAllEarningsReportHistory() {
@@ -31,7 +29,7 @@ public class EarningsController {
 
     @RequestMapping(value = "/stock/{ticker}")
     public List<EarningsReport> getAllEarningsHistoryFromStock(@PathVariable String ticker) {
-        return stockService.getStockByTickerSymbol(ticker).getEarningsHistory();
+        return earningsService.findEarningsByStock(ticker);
     }
 
     //date is formatted as month_day_year here instead of month/day/year
@@ -40,5 +38,4 @@ public class EarningsController {
         ZonedDateTime parsedDate = ZonedDateTime.parse(date);
         return earningsService.findAllEarningsByDate(parsedDate);
     }
-
 }
