@@ -55,18 +55,6 @@ public abstract class Stock{
     @Enumerated(EnumType.STRING)
     private InvestorRating investorRating;
 
-    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<News> newsHistory;
-
-    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<EarningsReport> earningsHistory;
-
-    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<StockPriceHistory> priceHistory;
-
     protected Stock(String ticker,
                         String companyName,
                         String sector,
