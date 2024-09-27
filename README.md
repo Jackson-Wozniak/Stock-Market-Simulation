@@ -362,5 +362,10 @@ database)
 
 Y-Axis shows the number of times the market advanced intervals, with the X-Axis being the time range of that interval
 
+*NOTE: In the future there could be a system that acts as a cache in order to avoid stocks being queried/saved each cycle.
+  One way to do this may be to have a StockManager that acts as an intermediary between the service classes and repository classes,
+  that keeps the stocks in memory and only saves/queries at the end of the trading day. If there is a better system please
+  to propose the idea by opening a GitHub issue, I would like to hear better systems for this use-case
+
 ![Bar Chart](https://github.com/user-attachments/assets/5d15f231-940c-4965-b0ef-ce0ea9dff8c6)
 
