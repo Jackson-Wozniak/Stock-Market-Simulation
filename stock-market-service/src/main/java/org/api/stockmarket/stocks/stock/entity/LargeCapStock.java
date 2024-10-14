@@ -31,8 +31,8 @@ public class LargeCapStock extends Stock{
     @Override
     public void updatePrice() {
         //Volatile stocks change twice to increase market movements
-        double interval = random.nextDouble(-.002, .002);
-        double positiveInterval = random.nextDouble(0, .0018);
+        double interval = -.002 + (.002 - (-.002)) * random.nextDouble();
+        double positiveInterval = .0018 * random.nextDouble();
         double newPrice = Math.round((getPrice() +
                 (getPrice() * interval) +
                 (getPrice() * (interval * this.getVolatileStock().ordinal())) +

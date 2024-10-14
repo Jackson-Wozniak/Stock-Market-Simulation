@@ -31,8 +31,8 @@ public class SmallCapStock extends Stock{
     @Override
     public void updatePrice() {
         //Volatile stocks change twice to increase market movements
-        double interval = random.nextDouble(-.003, .003);
-        double positiveInterval = random.nextDouble(0, .00028);
+        double interval = -.003 + (.003 - (-.003)) * random.nextDouble();
+        double positiveInterval = .00028 * random.nextDouble();
         double newPrice = Math.round((getPrice() +
                 (getPrice() * interval) +
                 (getPrice() * (interval * this.getVolatileStock().ordinal())) +

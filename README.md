@@ -120,17 +120,14 @@ Here are the main justifications for doing this:
 
 To run locally, first ensure that Docker Desktop & Maven is downloaded to your system. Then run the following commands:
 
+- Stock Market Service will run on http://localhost:8000
+- Stock Trading Service will run on http://localhost:8010
+
 ```
   - git clone https://github.com/Jackson-Wozniak/Stock-Market-Simulation.git
-  - cd Backend/
-  - mvn clean package -DskipTests
-  - cd ../
   - docker-compose up
   
   To update docker-compose after changes to code, run:
-  - cd Backend/
-  - mvn clean package -DskipTests
-  - cd ../
   - docker-compose up --build
   
   To remove created containers after you are done, run:

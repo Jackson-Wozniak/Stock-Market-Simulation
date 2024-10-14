@@ -6,7 +6,7 @@ services:
     image: stock-market-service
     restart: always
     ports:
-      - "8080:8000"
+      - "8000:8000"
     environment:
       MYSQL_HOST: stock_market_db
       MYSQL_USERNAME: root
@@ -29,4 +29,4 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
-      retries: 10      
+      retries: 10

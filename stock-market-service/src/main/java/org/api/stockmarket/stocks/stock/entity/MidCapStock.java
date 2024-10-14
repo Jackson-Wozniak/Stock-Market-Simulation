@@ -31,8 +31,8 @@ public class MidCapStock extends Stock{
     @Override
     public void updatePrice() {
         //Volatile stocks change twice to increase market movements
-        double interval = random.nextDouble(-.001, .001);
-        double positiveInterval = random.nextDouble(0, .0008);
+        double interval = -.001 + (.001 - (-.001)) * random.nextDouble();
+        double positiveInterval = .0008 * random.nextDouble();
         double newPrice = Math.round((getPrice() +
                 (getPrice() * interval) +
                 (getPrice() * (interval * this.getVolatileStock().ordinal())) +
