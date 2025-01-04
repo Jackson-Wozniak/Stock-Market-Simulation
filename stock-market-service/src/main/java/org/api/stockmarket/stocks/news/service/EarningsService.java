@@ -1,9 +1,8 @@
-package org.api.stockmarket.stocks.earnings.service;
+package org.api.stockmarket.stocks.news.service;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
-import org.api.stockmarket.stocks.earnings.repository.EarningsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.api.stockmarket.stocks.news.entity.EarningsReport;
+import org.api.stockmarket.stocks.news.repository.EarningsRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;

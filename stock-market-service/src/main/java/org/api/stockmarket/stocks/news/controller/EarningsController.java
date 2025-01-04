@@ -1,11 +1,10 @@
-package org.api.stockmarket.stocks.earnings.controller;
+package org.api.stockmarket.stocks.news.controller;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
-import org.api.stockmarket.stocks.earnings.service.EarningsService;
-import org.api.stockmarket.stocks.stock.service.StockService;
+import org.api.stockmarket.stocks.news.entity.EarningsReport;
+import org.api.stockmarket.stocks.news.service.EarningsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

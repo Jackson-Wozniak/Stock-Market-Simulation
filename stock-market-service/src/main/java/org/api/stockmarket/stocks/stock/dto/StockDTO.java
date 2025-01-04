@@ -1,10 +1,5 @@
 package org.api.stockmarket.stocks.stock.dto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.api.stockmarket.stocks.earnings.dto.EarningsDTO;
-import org.api.stockmarket.stocks.news.dto.NewsDTO;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import lombok.AllArgsConstructor;

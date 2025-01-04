@@ -9,8 +9,7 @@ import org.api.stockmarket.market.entity.Market;
 import org.api.stockmarket.market.enums.TimeStamp;
 import org.api.stockmarket.market.service.MarketService;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
-import org.api.stockmarket.stocks.earnings.helpers.ReleaseEarningsReport;
-import org.api.stockmarket.stocks.news.factory.NewsFactory;
+import org.api.stockmarket.stocks.news.service.EarningsManager;
 import org.api.stockmarket.stocks.news.service.NewsManager;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
@@ -26,7 +25,7 @@ public class MarketManager {
     private final StockService stockService;
     private final MarketService marketService;
     private final NewsManager newsManager;
-    private final ReleaseEarningsReport releaseEarningsReport;
+    private final EarningsManager earningsManager;
     private final StockPriceHistoryService stockPriceHistoryService;
     private final IndexFundService indexFundService;
 
@@ -57,7 +56,7 @@ public class MarketManager {
         newsManager.runDailyNewsStories(stockService.getAllStocks(), market.getDate());
 
         if (market.isEndOfQuarter()) {
-            releaseEarningsReport.handleQuarterlyEarningsReports(
+            earningsManager.handleQuarterlyEarningsReports(
                     stockService.getAllStocks(), market.getDate());
         }
     }

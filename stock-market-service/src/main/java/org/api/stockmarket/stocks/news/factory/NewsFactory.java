@@ -1,6 +1,6 @@
 package org.api.stockmarket.stocks.news.factory;
 
-import org.api.stockmarket.market.properties.NewsPrompts;
+import org.api.stockmarket.stocks.news.properties.NewsPrompts;
 import org.api.stockmarket.stocks.news.model.NewsStory;
 import org.springframework.stereotype.Component;
 

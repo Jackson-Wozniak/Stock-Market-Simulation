@@ -1,17 +1,13 @@
 package org.api.stockmarket.stocks.stock.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
-import org.api.stockmarket.stocks.news.entity.News;
 import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.enums.Volatility;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity(name = "stock")
 @Table(name = "stock")

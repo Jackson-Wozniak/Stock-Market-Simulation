@@ -1,10 +1,10 @@
-package org.api.stockmarket.stocks.earnings.defaults;
+package org.api.stockmarket.stocks.news.properties;
 
 import java.time.ZonedDateTime;
 
 import org.api.stockmarket.stocks.stock.entity.Stock;
 
-public class DefaultEarningsMessages {
+public class EarningsPrompts {
 
     public static String getPositiveEarningsReport(Stock stock,
                                                    double estimatedEPS,

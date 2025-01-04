@@ -1,4 +1,4 @@
-package org.api.stockmarket.market.properties;
+package org.api.stockmarket.stocks.news.properties;
 
 import org.api.stockmarket.stocks.news.model.NewsStory;
 
