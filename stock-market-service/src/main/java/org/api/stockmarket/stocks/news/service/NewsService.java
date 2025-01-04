@@ -27,6 +27,10 @@ public class NewsService {
                 .toList();
     }
 
+    public void saveNewsForStock(News news) {
+        newsRepository.save(news);
+    }
+
     public void saveNewsForStock(Stock stock, String newsEvent, ZonedDateTime date) {
         newsRepository.save(new News(stock, newsEvent, date));
     }

@@ -3,7 +3,6 @@ package org.api.stockmarket.market.scheduled;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
-import java.util.Random;
 
 import org.api.stockmarket.indexfund.service.IndexFundService;
 import org.api.stockmarket.market.entity.Market;
@@ -11,7 +10,8 @@ import org.api.stockmarket.market.enums.TimeStamp;
 import org.api.stockmarket.market.service.MarketService;
 import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
 import org.api.stockmarket.stocks.earnings.helpers.ReleaseEarningsReport;
-import org.api.stockmarket.stocks.news.helpers.RandomNewsEvents;
+import org.api.stockmarket.stocks.news.factory.NewsFactory;
+import org.api.stockmarket.stocks.news.service.NewsManager;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
 import org.api.stockmarket.stocks.stock.service.StockService;
@@ -25,7 +25,7 @@ public class MarketManager {
 
     private final StockService stockService;
     private final MarketService marketService;
-    private final RandomNewsEvents randomNewsEvents;
+    private final NewsManager newsManager;
     private final ReleaseEarningsReport releaseEarningsReport;
     private final StockPriceHistoryService stockPriceHistoryService;
     private final IndexFundService indexFundService;
@@ -53,7 +53,9 @@ public class MarketManager {
         hourlyMarketActivity();
 
         Market market = marketService.findMarketEntity();
-        randomNewsEvents.newsRunner(market.getDate());
+
+        newsManager.runDailyNewsStories(stockService.getAllStocks(), market.getDate());
+
         if (market.isEndOfQuarter()) {
             releaseEarningsReport.handleQuarterlyEarningsReports(
                     stockService.getAllStocks(), market.getDate());
