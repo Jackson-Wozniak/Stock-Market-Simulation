@@ -18,9 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 public class NewsController {
 
-    @Autowired
-    private final StockService stockService;
-    @Autowired
     private final NewsService newsService;
 
     @RequestMapping(value = "/{ticker}")

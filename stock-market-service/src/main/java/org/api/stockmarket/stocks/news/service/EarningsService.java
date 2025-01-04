@@ -3,6 +3,8 @@ package org.api.stockmarket.stocks.news.service;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.stocks.news.entity.EarningsReport;
 import org.api.stockmarket.stocks.news.repository.EarningsRepository;
+import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
+import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 public class EarningsService {
 
     private final EarningsRepository earningsRepository;
+    private final StockService stockService;
 
     public List<EarningsReport> findAllEarningsReports() {
         return earningsRepository.findAll();
@@ -26,6 +29,7 @@ public class EarningsService {
     }
 
     public List<EarningsReport> findEarningsByStock(String ticker) {
+        if(!stockService.stockTickerExists(ticker)) throw new StockNotFoundException(ticker + " doesn't exist");
         return earningsRepository.findAll().stream()
                 .filter(earnings -> earnings.getStock().getTicker().equals(ticker))
                 .collect(Collectors.toList());

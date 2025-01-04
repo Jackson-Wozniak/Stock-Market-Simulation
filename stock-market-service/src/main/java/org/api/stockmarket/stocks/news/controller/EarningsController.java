@@ -18,7 +18,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class EarningsController {
 
-    @Autowired
     private final EarningsService earningsService;
 
     @GetMapping
