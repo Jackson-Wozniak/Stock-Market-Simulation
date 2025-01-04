@@ -143,7 +143,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 <details>
     <summary>Stock Market Service API Docs (click to expand)</summary>
 
-### Object Definitions
+## Object Definitions
 <details>
  <summary><code>Market</code></summary>
 
@@ -157,7 +157,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 </details>
 
 <details>
- <summary><code>StockSummary</code></summary>
+ <summary><code>Stock</code></summary>
 
 ```json
 {
@@ -171,7 +171,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 </details>
 
 <details>
- <summary><code>Stock</code></summary>
+ <summary><code>DetailedStock</code></summary>
 
 ```json
 {
@@ -185,16 +185,6 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
   "momentumStreakInDays" : integer,
   "volatileStock" : String,
   "investorRating" : String
-}
-```
-</details>
-
-<details>
- <summary><code>DetailedStock</code></summary>
-
-```json
-{
-  
 }
 ```
 </details>
@@ -260,6 +250,10 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 ```
 </details>
 
+## Endpoints
+
+*each endpoint is shown in format {Http Method} {URL Path} {StatusCode -> Return Object}*
+
 ### Market Endpoints
 
 > <code>GET</code> <code><b>/api/v1/market</b></code> <code><b>200 OK -> Market</b></code>
@@ -269,9 +263,11 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 
 ### Stock Endpoints
 
-> <code>GET</code> <code><b>/api/v1/stocks/{ticker}</b></code> <code><b>200 OK -> StockSummary</b></code>
+> <code>GET</code> <code><b>/api/v1/stocks/{ticker}</b></code> <code><b>200 OK -> Stock</b></code>
 >
-> <code>GET</code> <code><b>/api/v1/stocks</b></code> <code><b>200 OK -> List[StockSummary]</b></code>
+><code>GET</code> <code><b>/api/v1/stocks/{ticker}?is_detailed=true</b></code> <code><b>200 OK -> DetailedStock</b></code>
+> 
+> <code>GET</code> <code><b>/api/v1/stocks</b></code> <code><b>200 OK -> List[Stock]</b></code>
 >
 > <code>GET</code> <code><b>/api/v1/stocks/detailed</b></code> <code><b>200 OK -> List[Stock]</b></code>
 >

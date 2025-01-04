@@ -3,15 +3,14 @@ package org.api.stockmarket.stocks.stock.controller;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.indexfund.utils.Capitalize;
 import org.api.stockmarket.stocks.stock.dto.StockPriceHistoryDTO;
-import org.api.stockmarket.stocks.stock.dto.StockSummaryDTO;
+import org.api.stockmarket.stocks.stock.dto.StockDTO;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
 import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
-import org.api.stockmarket.stocks.stock.dto.StockDTO;
+import org.api.stockmarket.stocks.stock.dto.DetailedStockDTO;
 import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
 import org.api.stockmarket.stocks.stock.service.StockService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,39 +30,42 @@ stock class, which ignores news, earnings, and price history fields.
 @SuppressWarnings("unused")
 public class StockController {
 
-    @Autowired
     private StockService stockService;
-    @Autowired
     private final StockPriceHistoryService stockPriceHistoryService;
 
     @GetMapping(value = "/{ticker}")
-    public StockSummaryDTO getIndividualStockData(@PathVariable String ticker) {
-        return new StockSummaryDTO(stockService.getStockByTickerSymbol(ticker));
+    public ResponseEntity<?> getIndividualStockData(
+            @PathVariable String ticker,
+            @RequestParam(value = "is_detailed", required = false) String isDetailed) {
+
+        Stock stock = stockService.getStockByTickerSymbol(ticker);
+
+        if(isDetailed.equalsIgnoreCase("true") || isDetailed.equalsIgnoreCase("t")){
+            return ResponseEntity.ok(new DetailedStockDTO(stockService.getStockByTickerSymbol(ticker)));
+        }
+        return ResponseEntity.ok(new StockDTO(stockService.getStockByTickerSymbol(ticker)));
     }
 
     @GetMapping
-    public List<StockSummaryDTO> getAllStockData() {
-        return stockService.getAllStocks().stream()
-                .map(StockSummaryDTO::new)
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping(value = "/detailed")
-    public List<StockDTO> getAllDetailedStockData() {
+    public List<StockDTO> getAllStockData() {
         return stockService.getAllStocks().stream()
                 .map(StockDTO::new)
                 .collect(Collectors.toList());
     }
 
     @GetMapping(value = "/marketCap/{marketCap}")
-    public List<Stock> getAllStocksByMarketCap(@PathVariable String marketCap) {
+    public List<StockDTO> getAllStocksByMarketCap(@PathVariable String marketCap) {
         MarketCap cap = MarketCap.valueOf(Capitalize.capitalize(marketCap));
-        return stockService.getAllStocksByMarketCap(cap);
+        return stockService.getAllStocksByMarketCap(cap).stream()
+                .map(StockDTO::new)
+                .toList();
     }
 
     @GetMapping(value = "/sector/{sector}")
-    public List<Stock> getAllStocksBySector(@PathVariable String sector) {
-        return stockService.getAllStocksBySector(sector);
+    public List<StockDTO> getAllStocksBySector(@PathVariable String sector) {
+        return stockService.getAllStocksBySector(sector).stream()
+                .map(StockDTO::new)
+                .toList();
     }
 
     @GetMapping(value = "/price/{ticker}")
@@ -72,9 +74,9 @@ public class StockController {
     }
 
     @GetMapping(value = "/random")
-    public StockDTO getRandomStock() {
+    public DetailedStockDTO getRandomStock() {
         Stock stock = stockService.getRandomStock();
-        return new StockDTO(stock);
+        return new DetailedStockDTO(stock);
     }
 
     @RequestMapping(value = "/history/{ticker}")
