@@ -59,7 +59,7 @@ public class NewsManager {
     }
 
     private void processNews(Stock stock, NewsStory news, ZonedDateTime date) {
-        stock.setPrice(stock.getPrice() * news.getPercentChange());
+        stock.multiplyPrice(news.getPercentChange());
         stock.newsEvent(true);
         stockService.updateStockInDatabase(stock);
 

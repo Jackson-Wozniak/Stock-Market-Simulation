@@ -74,6 +74,13 @@ public abstract class Stock{
         this.momentumStreakInDays = 0;
     }
 
+    public double multiplyPrice(double multiplier){
+        double newPrice = price * multiplier;
+        newPrice = Math.round(newPrice * 100.0) / 100.0;
+
+        return newPrice;
+    }
+
     public abstract void updatePrice();
 
     /*
