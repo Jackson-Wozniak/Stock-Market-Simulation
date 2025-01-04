@@ -2,6 +2,7 @@ package org.api.stockmarket.stocks.stock.controller;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.indexfund.utils.Capitalize;
+import org.api.stockmarket.stocks.stock.dto.StockPriceHistoryDTO;
 import org.api.stockmarket.stocks.stock.dto.StockSummaryDTO;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
@@ -77,7 +78,9 @@ public class StockController {
     }
 
     @RequestMapping(value = "/history/{ticker}")
-    public List<StockPriceHistory> getStockHistory(@PathVariable String ticker) {
-        return stockPriceHistoryService.findStockHistoryByTicker(ticker);
+    public List<StockPriceHistoryDTO> getStockHistory(@PathVariable String ticker) {
+        return stockPriceHistoryService.findStockHistoryByTicker(ticker).stream()
+                .map(StockPriceHistoryDTO::new)
+                .toList();
     }
 }
