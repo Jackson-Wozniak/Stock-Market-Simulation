@@ -1,11 +1,11 @@
-package org.api.stockmarket.stocks.earnings.entity;
+package org.api.stockmarket.stocks.news.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.earnings.defaults.DefaultEarningsMessages;
+import org.api.stockmarket.stocks.news.properties.EarningsPrompts;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 
 import jakarta.persistence.*;
@@ -79,14 +79,14 @@ public class EarningsReport implements Serializable {
 
     public String generateEarningsMessage() {
         if (actualEPS - estimatedEPS >= 1) {
-            return DefaultEarningsMessages.getPositiveEarningsReport(
+            return EarningsPrompts.getPositiveEarningsReport(
                     stock, estimatedEPS, actualEPS, dateOfRelease);
         }
         if (actualEPS - estimatedEPS <= -1) {
-            return DefaultEarningsMessages.getNegativeEarningsReport(
+            return EarningsPrompts.getNegativeEarningsReport(
                     stock, estimatedEPS, actualEPS, dateOfRelease);
         }
-        return DefaultEarningsMessages.getNeutralEarningsReport(
+        return EarningsPrompts.getNeutralEarningsReport(
                 stock, estimatedEPS, actualEPS, dateOfRelease);
     }
 }

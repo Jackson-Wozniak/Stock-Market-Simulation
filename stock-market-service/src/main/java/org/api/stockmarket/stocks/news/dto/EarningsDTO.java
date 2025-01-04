@@ -1,11 +1,11 @@
-package org.api.stockmarket.stocks.earnings.dto;
+package org.api.stockmarket.stocks.news.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.ZonedDateTime;
 
-import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
+import org.api.stockmarket.stocks.news.entity.EarningsReport;
 
 @Getter
 @Setter

@@ -1,31 +1,26 @@
-package org.api.stockmarket.stocks.earnings.helpers;
+package org.api.stockmarket.stocks.news.service;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.earnings.entity.EarningsReport;
-import org.api.stockmarket.stocks.earnings.service.EarningsService;
+import org.api.stockmarket.stocks.news.entity.EarningsReport;
+import org.api.stockmarket.stocks.news.factory.EarningsFactory;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.service.StockService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 
-/*
-This class controls the release and saving of earnings reports every 3 market months
- */
 @Component
 @AllArgsConstructor
-public class ReleaseEarningsReport {
+public class EarningsManager {
 
-    @Autowired
     private final EarningsService earningsService;
-    @Autowired
     private final StockService stockService;
+    private final EarningsFactory earningsFactory;
 
     public void handleQuarterlyEarningsReports(List<Stock> stocks, ZonedDateTime marketDate) {
         stocks.forEach(stock -> {
-            EarningsReport earningsReport = createEarningsReport(stock, marketDate);
+            EarningsReport earningsReport = earningsFactory.generate(stock, marketDate);
             if(earningsReport.isPositiveEarnings()){
                 stock.newsEvent(true);
                 stockService.updateStockInDatabase(stock);
@@ -35,9 +30,5 @@ public class ReleaseEarningsReport {
             }
             earningsService.saveEarningsReport(earningsReport);
         });
-    }
-
-    public EarningsReport createEarningsReport(Stock stock, ZonedDateTime marketDate) {
-        return new EarningsReport(stock, marketDate);
     }
 }
