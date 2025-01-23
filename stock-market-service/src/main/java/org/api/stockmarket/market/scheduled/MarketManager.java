@@ -27,7 +27,6 @@ public class MarketManager {
     private final NewsManager newsManager;
     private final EarningsManager earningsManager;
     private final StockPriceHistoryService stockPriceHistoryService;
-    private final IndexFundService indexFundService;
 
     public long advanceMarket(){
         TimeStamp time = marketService.incrementAndSave();
@@ -47,7 +46,6 @@ public class MarketManager {
 
     private void dailyMarketActivity() {
         stockPriceHistoryService.saveStockHistoryDaily();
-        indexFundService.updatePriceForAllFundsDaily();
 
         hourlyMarketActivity();
 

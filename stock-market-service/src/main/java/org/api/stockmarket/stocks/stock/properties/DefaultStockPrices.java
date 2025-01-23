@@ -19,4 +19,12 @@ public class DefaultStockPrices {
             case Small -> DEFAULT_SMALL_CAP_PRICE + random.nextInt(-2, 2);
         };
     }
+
+    public static double getDefaultPrice(MarketCap marketCap){
+        return switch (marketCap) {
+            case Large -> DEFAULT_LARGE_CAP_PRICE;
+            case Mid -> DEFAULT_MID_CAP_PRICE;
+            case Small -> DEFAULT_SMALL_CAP_PRICE;
+        };
+    }
 }
