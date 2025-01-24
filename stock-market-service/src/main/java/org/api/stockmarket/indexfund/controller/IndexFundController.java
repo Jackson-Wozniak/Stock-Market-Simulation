@@ -1,10 +1,13 @@
 package org.api.stockmarket.indexfund.controller;
 
 import lombok.AllArgsConstructor;
+import org.api.stockmarket.indexfund.dtos.MarketCapFundDto;
 import org.api.stockmarket.indexfund.enums.FundTracking;
 import org.api.stockmarket.indexfund.exception.IndexFundException;
 import org.api.stockmarket.indexfund.model.IndexFund;
+import org.api.stockmarket.indexfund.model.subclass.MarketCapIndexFund;
 import org.api.stockmarket.indexfund.service.IndexFundService;
+import org.api.stockmarket.stocks.stock.enums.MarketCap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,17 +34,17 @@ public class IndexFundController {
 //                .stream().findFirst().orElse(null);
 //    }
 //
-//    @RequestMapping(value = "/cap")
-//    public List<IndexFund> getAllMarketCapFunds() {
-//        return indexFundService.findIndexFundByTracker(FundTracking.MARKET_CAP);
-//    }
-//
+    @RequestMapping(value = "/cap")
+    public List<MarketCapFundDto> getAllMarketCapFunds() {
+        return indexFundService.findMarketCapFunds().stream()
+                .map(fund -> new MarketCapFundDto((MarketCapIndexFund) fund))
+                .toList();
+    }
+
     @RequestMapping(value = "/cap/{cap}")
-    public IndexFund getMarketCapFund(@PathVariable String cap) {
-        return indexFundService.marketCapFunds().stream()
-                .filter(fund -> fund.getName().equalsIgnoreCase(cap + " Cap Index Fund"))
-                .findFirst()
-                .orElseThrow(IndexFundException::new);
+    public MarketCapFundDto getMarketCapFund(@PathVariable String cap) {
+        if(MarketCap.map(cap) == null) throw new IndexFundException();
+        return new MarketCapFundDto((MarketCapIndexFund) indexFundService.findMarketCapFunds(MarketCap.map(cap)));
     }
 //
 //    @RequestMapping(value = "/sector")

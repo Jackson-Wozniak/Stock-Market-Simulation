@@ -19,7 +19,7 @@ public class IndexFundService {
 
     private final StockService stockService;
 
-    public List<IndexFund> marketCapFunds(){
+    public List<IndexFund> findMarketCapFunds(){
         Map<MarketCap, ArrayList<Stock>> allMarketCaps = new HashMap<>();
         stockService.getAllStocks().forEach(stock -> {
             if(!allMarketCaps.containsKey(stock.getMarketCap())){
@@ -34,5 +34,12 @@ public class IndexFundService {
                     double average = sum / entry.getValue().size();
                     return (IndexFund) new MarketCapIndexFund(entry.getKey(), average);
                 }).toList();
+    }
+
+    public IndexFund findMarketCapFunds(MarketCap marketCap){
+        double average = stockService.getAllStocks().stream()
+                .mapToDouble(Stock::getPrice)
+                .average().orElse(0.0);
+        return new MarketCapIndexFund(marketCap, average);
     }
 }
