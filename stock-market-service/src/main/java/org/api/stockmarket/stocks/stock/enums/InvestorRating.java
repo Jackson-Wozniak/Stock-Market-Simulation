@@ -16,4 +16,15 @@ public enum InvestorRating {
             case StrongBuy -> 2;
         };
     }
+
+    public static InvestorRating map(String str){
+        return switch (str.toLowerCase()){
+            case "buy" -> Buy;
+            case "sell" -> Sell;
+            case "hold" -> Hold;
+            case "neutral" -> Neutral;
+            case "strongbuy" -> StrongBuy;
+            default -> null;
+        };
+    }
 }
