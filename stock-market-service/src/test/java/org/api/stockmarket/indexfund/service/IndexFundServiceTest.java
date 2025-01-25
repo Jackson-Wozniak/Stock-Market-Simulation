@@ -53,7 +53,7 @@ public class IndexFundServiceTest {
                 Stock.largeCap("GOOG", "Google", "Technology", Volatility.VOLATILE, InvestorRating.Buy)
         );
 
-        when(mockStockService.getAllStocks()).thenReturn(mockStocks);
+        when(mockStockService.getAllStocksByMarketCap(MarketCap.Large)).thenReturn(mockStocks);
         IndexFundService indexFundService = new IndexFundService(mockStockService);
         IndexFund fund = indexFundService.findMarketCapFunds(MarketCap.Large);
 

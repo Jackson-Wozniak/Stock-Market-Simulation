@@ -2,6 +2,8 @@ package org.api.stockmarket.indexfund.model.subclass;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.api.stockmarket.indexfund.dtos.IndexFundDto;
+import org.api.stockmarket.indexfund.dtos.MarketCapFundDto;
 import org.api.stockmarket.indexfund.enums.FundTracking;
 import org.api.stockmarket.indexfund.model.IndexFund;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
@@ -24,5 +26,10 @@ public class MarketCapIndexFund extends IndexFund {
                 0.0,
                 FundTracking.MARKET_CAP);
         this.marketCap = marketCap;
+    }
+
+    @Override
+    public IndexFundDto toDto(){
+        return new MarketCapFundDto(this);
     }
 }

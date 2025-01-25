@@ -1,10 +1,15 @@
 package org.api.stockmarket.indexfund.service;
 
 import lombok.AllArgsConstructor;
+import org.api.stockmarket.indexfund.exception.IndexFundException;
 import org.api.stockmarket.indexfund.model.IndexFund;
 import org.api.stockmarket.indexfund.model.subclass.MarketCapIndexFund;
+import org.api.stockmarket.indexfund.model.subclass.SectorIndexFund;
+import org.api.stockmarket.indexfund.model.subclass.TotalMarketIndexFund;
+import org.api.stockmarket.indexfund.model.subclass.VolatilityIndexFund;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
+import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.api.stockmarket.stocks.stock.service.StockService;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +23,22 @@ import java.util.Map;
 public class IndexFundService {
 
     private final StockService stockService;
+
+    public List<IndexFund> findAllIndexFunds(){
+        List<IndexFund> funds = new ArrayList<>();
+        funds.add(findTotalMarketFund());
+        funds.addAll(findMarketCapFunds());
+        funds.addAll(findSectorFunds());
+        funds.addAll(findVolatilityFunds());
+        return funds;
+    }
+
+    public IndexFund findTotalMarketFund(){
+        double average = stockService.getAllStocks().stream()
+                .mapToDouble(Stock::getPrice)
+                .average().orElse(0.0);
+        return new TotalMarketIndexFund(average);
+    }
 
     public List<IndexFund> findMarketCapFunds(){
         Map<MarketCap, ArrayList<Stock>> allMarketCaps = new HashMap<>();
@@ -37,9 +58,60 @@ public class IndexFundService {
     }
 
     public IndexFund findMarketCapFunds(MarketCap marketCap){
-        double average = stockService.getAllStocks().stream()
+        double average = stockService.getAllStocksByMarketCap(marketCap).stream()
                 .mapToDouble(Stock::getPrice)
                 .average().orElse(0.0);
         return new MarketCapIndexFund(marketCap, average);
+    }
+
+    public List<IndexFund> findSectorFunds(){
+        Map<String, ArrayList<Stock>> allSectors = new HashMap<>();
+        stockService.getAllStocks().forEach(stock -> {
+            if(!allSectors.containsKey(stock.getSector())){
+                allSectors.put(stock.getSector(), new ArrayList<>());
+            }
+            allSectors.get(stock.getSector()).add(stock);
+        });
+        return allSectors.entrySet().stream()
+                .map((entry) -> {
+                    double sum = entry.getValue().stream()
+                            .mapToDouble(Stock::getPrice).sum();
+                    double average = sum / entry.getValue().size();
+                    return (IndexFund) new SectorIndexFund(entry.getKey(), average);
+                }).toList();
+    }
+
+    public IndexFund findSectorFunds(String sector){
+        List<Stock> sectorStocks = stockService.getAllStocksBySector(sector);
+        if(sectorStocks.isEmpty()) throw IndexFundException.invalidSector(sector);
+
+        double average = sectorStocks.stream()
+                .mapToDouble(Stock::getPrice)
+                .average().orElse(0.0);
+        return new SectorIndexFund(sector, average);
+    }
+
+    public List<IndexFund> findVolatilityFunds(){
+        Map<Volatility, ArrayList<Stock>> allVolatilities = new HashMap<>();
+        stockService.getAllStocks().forEach(stock -> {
+            if(!allVolatilities.containsKey(stock.getVolatileStock())){
+                allVolatilities.put(stock.getVolatileStock(), new ArrayList<>());
+            }
+            allVolatilities.get(stock.getVolatileStock()).add(stock);
+        });
+        return allVolatilities.entrySet().stream()
+                .map((entry) -> {
+                    double sum = entry.getValue().stream()
+                            .mapToDouble(Stock::getPrice).sum();
+                    double average = sum / entry.getValue().size();
+                    return (IndexFund) new VolatilityIndexFund(entry.getKey(), average);
+                }).toList();
+    }
+
+    public IndexFund findVolatilityFunds(Volatility volatility){
+        double average = stockService.getAllStocksByVolatility(volatility).stream()
+                .mapToDouble(Stock::getPrice)
+                .average().orElse(0.0);
+        return new VolatilityIndexFund(volatility, average);
     }
 }

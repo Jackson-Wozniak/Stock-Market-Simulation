@@ -1,10 +1,30 @@
 package org.api.stockmarket.stocks.stock.enums;
 
 public enum Volatility {
-    STABLE,
-    NORMAL,
-    VOLATILE,
-    EXTRA_VOLATILE;
+    STABLE {
+        @Override
+        public String toString(){
+            return "Stable";
+        }
+    },
+    NORMAL {
+        @Override
+        public String toString(){
+            return "Normal";
+        }
+    },
+    VOLATILE {
+        @Override
+        public String toString(){
+            return "Volatile";
+        }
+    },
+    EXTRA_VOLATILE {
+        @Override
+        public String toString(){
+            return "Extra Volatile";
+        }
+    };
 
     public int multiplier(){
         return switch(this){
@@ -12,6 +32,16 @@ public enum Volatility {
             case NORMAL -> 1;
             case VOLATILE -> 2;
             case EXTRA_VOLATILE -> 3;
+        };
+    }
+
+    public static Volatility map(String str){
+        return switch (str.replace(" ", "_").toLowerCase()){
+            case "stable" -> STABLE;
+            case "normal" -> NORMAL;
+            case "volatile" -> VOLATILE;
+            case "extra_volatile" -> EXTRA_VOLATILE;
+            default -> null;
         };
     }
 }
