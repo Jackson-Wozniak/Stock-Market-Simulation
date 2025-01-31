@@ -7,7 +7,9 @@ import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,6 +82,11 @@ public class StockService {
         return (int) stockRepository.count();
     }
 
+    /*
+    This method does NOT override or delete any stocks. We only add stocks that do not
+    show up in the database already. A separate method may be needed if we want to delete/modify stocks
+    upon startup.
+     */
     public void saveDefaultStockToDatabase(List<Stock> defaultStocks) {
         List<Stock> currentStocks = stockRepository.findAll();
         List<Stock> unsavedStocks = new ArrayList<>();

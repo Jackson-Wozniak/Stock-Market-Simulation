@@ -14,11 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CsvReaderTest {
 
+    private static final int ROW_COUNT = 4;
+
     @Test
     void allStocksRead() throws IOException {
         CsvReader csvReader = new CsvReader("text/test_stocks.csv");
 
         List<Stock> stocks = csvReader.readAllStocks();
+
+        assertEquals(ROW_COUNT, stocks.size());
 
         Stock test1 = stocks.get(0);
         assertEquals("test1", test1.getTicker());

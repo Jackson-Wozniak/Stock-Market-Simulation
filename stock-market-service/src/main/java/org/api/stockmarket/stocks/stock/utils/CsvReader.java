@@ -1,8 +1,6 @@
 package org.api.stockmarket.stocks.stock.utils;
 
 import lombok.NoArgsConstructor;
-import lombok.SneakyThrows;
-import org.api.stockmarket.indexfund.exception.IndexFundException;
 import org.api.stockmarket.stocks.stock.entity.Stock;
 import org.api.stockmarket.stocks.stock.enums.InvestorRating;
 import org.api.stockmarket.stocks.stock.enums.MarketCap;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +23,13 @@ public class CsvReader {
     //for testing with different csv file
     public CsvReader(String path){
         this.stocksPath = path;
+    }
+
+    public int count() throws IOException {
+        ClassPathResource resource = new ClassPathResource(stocksPath);
+        InputStreamReader streamReader = new InputStreamReader(resource.getInputStream());
+
+        return new BufferedReader(streamReader).lines().toList().size();
     }
 
     public List<Stock> readAllStocks() throws IOException {
