@@ -26,6 +26,11 @@ public class SimulatedStock {
                 "DEFAULT", Volatility.NORMAL, InvestorRating.Neutral));
     }
 
+    public static SimulatedStock customInfo(Volatility volatility, InvestorRating rating){
+        return new SimulatedStock(Stock.largeCap("CUSTOM", "CUSTOM",
+                "CUSTOM", volatility, rating));
+    }
+
     public void changePrice(){
         this.stock.updatePrice();
     }

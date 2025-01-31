@@ -2,6 +2,8 @@ package org.api.stockmarket.simulator;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.stocks.stock.dto.StockPriceHistoryDTO;
+import org.api.stockmarket.stocks.stock.enums.InvestorRating;
+import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +31,7 @@ public class MarketSimulationController {
      */
 
     //Only prices are relevant, meaning this simulation can use default stocks instead of real ones
-    @GetMapping(value = "/price_history")
+    @GetMapping
     public ResponseEntity<List<Map<String, Double>>> simulatePrices(
             @RequestParam(name = "days") Optional<Integer> daysSimulatedParam,
             @RequestParam(name = "stocks") Optional<Integer> stockCountParam){
@@ -38,5 +40,14 @@ public class MarketSimulationController {
 
         return ResponseEntity.ok(marketSimulationManager.simulate(daysSimulated, stockCount)
                 .stream().map(stock -> new SimulatedStockDTO(stock).getMap()).toList());
+    }
+
+    @PostMapping
+    public ResponseEntity<?> simulatePrices(@RequestBody SimulationRequest req){
+        if(Volatility.map(req.getVolatility()) == null || InvestorRating.map(req.getRating()) == null){
+            return ResponseEntity.badRequest().body("Invalid");
+        }
+        SimulatedStock stock = marketSimulationManager.simulate(req);
+        return ResponseEntity.ok(new SimulatedStockDTO(stock).getMap());
     }
 }

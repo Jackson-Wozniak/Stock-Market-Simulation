@@ -1,6 +1,9 @@
 package org.api.stockmarket.simulator;
 
 import org.api.stockmarket.market.properties.MarketIntervals;
+import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.stocks.stock.enums.InvestorRating;
+import org.api.stockmarket.stocks.stock.enums.Volatility;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -25,5 +28,20 @@ public class MarketSimulationManager {
             date = date.plusDays(1);
         }
         return stocks;
+    }
+
+    public SimulatedStock simulate(SimulationRequest req){
+        SimulatedStock stock = SimulatedStock.customInfo(
+                Volatility.map(req.getVolatility()), InvestorRating.map(req.getRating()));
+        stock.getStock().setMomentum(req.getMomentum());
+
+        LocalDate date = LocalDate.now();
+        for(int i = 0; i < req.getDays(); i++){
+            stock.changePrice();
+            LocalDate dateCopy = date;
+            stock.savePrice(dateCopy);
+            date = date.plusDays(1);
+        }
+        return stock;
     }
 }
