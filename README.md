@@ -332,14 +332,16 @@ as it does not retrieve stock info from the database, but uses the same price ch
 
 The current calculation method is as followed:
 ```diff
-NP = P + (P * R) + (P * (R * V)) + (M * PR)
+NewPrice = P +
+            (P * R) +
+            (P * (Volatility * R)) +
+            (P * (Momentum * PR)) +
+            (P * (InvestorRatingValue * PR))
 
-NP = New Price
+NP -> New Price
 P -> Original Price
-R -> Random Number. For these simulations the number weres -.0015 to .0015 and -.002 to .002
-V -> Volatility of the stock. Values of 0 to 4
-M -> Momentum of the stock. Values of -2 to 2
-PR -> Positive random number up to .002
+R -> Random Number. Value is dependent on the market cap
+PR -> Positive random number dependent on market cap
 ```
 
 #### The Benchmark
