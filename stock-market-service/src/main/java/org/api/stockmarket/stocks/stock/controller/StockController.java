@@ -36,7 +36,7 @@ public class StockController {
     @GetMapping(value = "/{ticker}")
     public ResponseEntity<?> getIndividualStockData(
             @PathVariable String ticker,
-            @RequestParam(value = "is_detailed", required = false) String isDetailed) {
+            @RequestParam(value = "is_detailed", required = false, defaultValue = "f") String isDetailed) {
 
         Stock stock = stockService.getStockByTickerSymbol(ticker);
 
