@@ -12,6 +12,6 @@ import lombok.Setter;
 public class SimulationRequest {
     private int days = 1;
     private int momentum = 0;
-    private String volatility = "Neutral";
+    private String volatility = "Normal";
     private String rating = "Neutral";
 }

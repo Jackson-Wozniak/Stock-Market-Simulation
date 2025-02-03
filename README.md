@@ -323,12 +323,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 
 ## :notebook: Data Simulation & Market Performance Metrics <a id="results"></a>
 
-### Stock Price Simulation
-
-Below is a chart that uses the market simulation endpoint with 100 stocks over 30 days to display price changes. The simulation is seperate from that actual market
-as it does not retrieve stock info from the database, but uses the same price change formula to re-enact the real market simulation
-
-![Line Chart](https://github.com/user-attachments/assets/2f5b306d-a74f-4320-9e44-2f103dc63f03)
+### Simulation Details
 
 The current calculation method is as followed:
 ```diff
@@ -344,13 +339,49 @@ R -> Random Number. Value is dependent on the market cap
 PR -> Positive random number dependent on market cap
 ```
 
-#### The Benchmark
+
+### Stock Price Simulation
+
+Below is a chart that uses the market simulation endpoint with 100 stocks over 30 days to display price changes
+
+![Line Chart](https://github.com/user-attachments/assets/2f5b306d-a74f-4320-9e44-2f103dc63f03)
+
+### The Benchmark
 
 A common way to randomly simulate stock data is the model of [Geometric Brownian Motion](https://demonstrations.wolfram.com/GeometricBrownianMotionWithNonuniformTimeGrid/). An example of this can be seen below, with the same price and duration as my simulations:
 
 ![Line Chart 2](https://user-images.githubusercontent.com/105665813/196005304-e35a47d3-c9a5-4750-801d-64796f326ce3.png)
 
+### How Stock Attributes Affect Price Movements
+
+Here is a graph with 4 stocks of different attributes:
+
+- Red: Stable Large Cap Stock
+  - Stable
+  - Neutral Momentum
+  - Neutral Investor Rating
+- Blue: Negative Large Cap Stock
+  - Volatile
+  - Negative Momentum
+  - Sell Rating
+- Green: Positive Large Cap Stock
+  - Extra Volatile
+  - Positive Momentum
+  - Buy Rating
+- Purple: Neutral Volatile Stock
+  - Volatile
+  - Neutral Momentum
+  - Neutral Rating
+
+
+
+[CHART GOES HERE]
+
+
 ### Market Performance Metrics
+
+<details>
+    <summary>Details (Click to expand)</summary>
 
 Using the log-parser python script, this chart shows the duration of each market interval (aka how long it takes for the program to change prices and save them to the
 database)
@@ -358,9 +389,10 @@ database)
 Y-Axis shows the number of times the market advanced intervals, with the X-Axis being the time range of that interval
 
 *NOTE: In the future there could be a system that acts as a cache in order to avoid stocks being queried/saved each cycle.
-  One way to do this may be to have a StockManager that acts as an intermediary between the service classes and repository classes,
-  that keeps the stocks in memory and only saves/queries at the end of the trading day. If there is a better system please
-  to propose the idea by opening a GitHub issue, I would like to hear better systems for this use-case
+One way to do this may be to have a StockManager that acts as an intermediary between the service classes and repository classes,
+that keeps the stocks in memory and only saves/queries at the end of the trading day. If there is a better system please
+to propose the idea by opening a GitHub issue, I would like to hear better systems for this use-case
 
 ![Bar Chart](https://github.com/user-attachments/assets/5d15f231-940c-4965-b0ef-ce0ea9dff8c6)
+</details>
 
