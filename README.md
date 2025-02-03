@@ -354,28 +354,31 @@ A common way to randomly simulate stock data is the model of [Geometric Brownian
 
 ### How Stock Attributes Affect Price Movements
 
-Here is a graph with 4 stocks of different attributes:
+Here is a graph with 4 stocks of different attributes. We can see here that the attributes a stock has during the simulation plays
+a direct role in both the direction and size of price change each day:
 
-- Red: Stable Large Cap Stock
+- Red
   - Stable
   - Neutral Momentum
   - Neutral Investor Rating
-- Blue: Negative Large Cap Stock
+- Blue
   - Volatile
   - Negative Momentum
   - Sell Rating
-- Green: Positive Large Cap Stock
+- Green
   - Extra Volatile
   - Positive Momentum
   - Buy Rating
-- Purple: Neutral Volatile Stock
+- Purple
   - Volatile
   - Neutral Momentum
   - Neutral Rating
 
+SIM 1:
+![Screenshot (151)](https://github.com/user-attachments/assets/8143f3cf-4ba6-4edf-ac66-01df75d884ed)
 
-
-[CHART GOES HERE]
+SIM 2: 
+![Screenshot (152)](https://github.com/user-attachments/assets/a6905e61-2dfe-4545-a3ed-7ffb8ee034ed)
 
 
 ### Market Performance Metrics
