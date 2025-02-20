@@ -19,11 +19,23 @@ public class StockConfiguration {
 
     private final StockService stockService;
     private final CsvReader csvReader;
+    private static final boolean IS_CSV_FULL = false;
 
     private final Logger logger = LoggerFactory.getLogger(StockConfiguration.class);
 
     @PostConstruct
     public void saveStocksToDatabaseOnStartup() throws IOException {
+        /*
+            CSV is not filled yet with stock info so use the original hard-coded defaults
+        */
+        if(!IS_CSV_FULL){
+            if (DefaultStocksList.getCountForDefaultStocks() != stockService.findStockRowCount()) {
+                logger.info("Saving Default Stocks");
+                stockService.saveDefaultStockToDatabase(DefaultStocksList.getAllDefaultStocks());
+            }
+            return;
+        }
+
         if (csvReader.count() != stockService.findStockRowCount()) {
             logger.info("Saving Default Stocks");
             stockService.saveDefaultStockToDatabase(csvReader.readAllStocks());
