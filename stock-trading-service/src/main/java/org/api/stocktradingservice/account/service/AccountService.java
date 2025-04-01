@@ -29,15 +29,15 @@ public class AccountService implements UserDetailsService {
                 .orElseThrow(() -> new AccountNotFoundException("No account with that username"));
     }
 
-    public void saveAccount(Account account) {
-        accountRepository.save(account);
+    public Account saveAccount(Account account) {
+        return accountRepository.save(account);
     }
 
-    public void createNewAccount(String username, String password) throws InvalidAccountException {
+    public Account createNewAccount(String username, String password) throws InvalidAccountException {
         if (accountExists(username)) {
             throw new InvalidAccountException("Account already exists with that username");
         }
-        accountRepository.save(new Account(username, password));
+        return accountRepository.save(new Account(username, password));
     }
 
     public boolean accountExists(String username) {
@@ -49,16 +49,16 @@ public class AccountService implements UserDetailsService {
         }
     }
 
-    public void updateBalanceAndSave(DepositRequest request)
+    public Account updateBalanceAndSave(DepositRequest request)
             throws AccountNotFoundException, AccountBalanceException {
         Account account = getAccountByName(request.getUsername());
         account.updateAccountBalance(request.getValue());
-        saveAccount(account);
+        return saveAccount(account);
     }
 
-    public void updateBalanceAndSave(Account account, double amountToAdd) {
+    public Account updateBalanceAndSave(Account account, double amountToAdd) {
         account.updateAccountBalance(amountToAdd);
-        saveAccount(account);
+        return saveAccount(account);
     }
 
     @Override

@@ -24,12 +24,12 @@ public class AuthenticationService {
         return (Account) authentication.getPrincipal();
     }
 
-    public void createAccount(String username, String password){
-        accountService.createNewAccount(username, password);
+    public Account createAccount(String username, String password){
+        return accountService.createNewAccount(username, password);
     }
 
-    public void updateBalance(DepositRequest request){
+    public Account updateBalance(DepositRequest request){
         Account account = authenticate(request.getUsername(), request.getPassword());
-        accountService.updateBalanceAndSave(account, request.getValue());
+        return accountService.updateBalanceAndSave(account, request.getValue());
     }
 }

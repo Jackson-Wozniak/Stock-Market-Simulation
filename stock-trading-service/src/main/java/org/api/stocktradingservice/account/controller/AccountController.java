@@ -11,6 +11,8 @@ import org.api.stocktradingservice.account.exception.AccountNotFoundException;
 import org.api.stocktradingservice.account.model.entity.Account;
 import org.api.stocktradingservice.account.model.entity.AccountHistory;
 import org.api.stocktradingservice.account.service.AuthenticationService;
+import org.api.stocktradingservice.account.utils.AccountControllerUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,13 +31,15 @@ public class AccountController {
     }
 
     @PostMapping
-    public void createAccount(@RequestBody AccountCredentialsRequest request) {
-        authenticationService.createAccount(request.getUsername(), request.getPassword());
+    public ResponseEntity<String> createAccount(@RequestBody AccountCredentialsRequest request) {
+        Account created = authenticationService.createAccount(request.getUsername(), request.getPassword());
+        return AccountControllerUtils.createdAccount(created.getUsername(), created.getAccountBalance());
     }
 
     @PostMapping(value = "/deposit")
-    public void depositToAccount(@RequestBody DepositRequest request) {
-        authenticationService.updateBalance(request);
+    public ResponseEntity<String> depositToAccount(@RequestBody DepositRequest request) {
+        Account account = authenticationService.updateBalance(request);
+        return AccountControllerUtils.depositedToAccount(account.getUsername(), account.getAccountBalance());
     }
 
     @GetMapping(value = "/history")
