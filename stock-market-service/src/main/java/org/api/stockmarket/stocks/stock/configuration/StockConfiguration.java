@@ -19,7 +19,7 @@ public class StockConfiguration {
 
     private final StockService stockService;
     private final CsvReader csvReader;
-    private static final boolean IS_CSV_FULL = false;
+    private static final boolean IS_CSV_FULL = true;
 
     private final Logger logger = LoggerFactory.getLogger(StockConfiguration.class);
 

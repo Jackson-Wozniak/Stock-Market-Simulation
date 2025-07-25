@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,21 +38,27 @@ public class CsvReader {
         InputStreamReader streamReader = new InputStreamReader(resource.getInputStream());
 
         List<String[]> allLines = toArray(new BufferedReader(streamReader).lines().toList());
-        List<Stock> stocks = allLines.stream().map(this::mapStocksFromLine).toList();
+        List<Stock> stocks = allLines.stream().map(this::mapStocksFromLine)
+                .filter(Objects::nonNull)
+                .toList();
         if(stocks.stream().anyMatch(Objects::isNull)) throw new IOException("Data not clean");
 
         return stocks;
     }
 
     private List<String[]> toArray(List<String> strings){
-        return strings.stream().map(str -> str.split(",")).toList();
+        return strings.stream().map(str -> str.split(",")).filter(arr -> !arr[0].contains(("#"))).toList();
     }
 
     private Stock mapStocksFromLine(String[] line){
         MarketCap cap = MarketCap.map(line[2]);
         if(cap == null || !enumChecks(line)) return null;
 
+        System.out.println(Stock.largeCap(line[0], line[1], line[3], Volatility.map(line[4]), InvestorRating.map(line[5])));
+
         return switch (cap){
+            case Mega -> Stock.largeCap(
+                    line[0], line[1], line[3], Volatility.map(line[4]), InvestorRating.map(line[5]));
             case Large -> Stock.largeCap(
                     line[0], line[1], line[3], Volatility.map(line[4]), InvestorRating.map(line[5]));
             case Mid -> Stock.midCap(
