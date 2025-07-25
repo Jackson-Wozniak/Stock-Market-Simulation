@@ -1,4 +1,4 @@
-package org.api.stockmarket.simulatedmarket;
+package org.api.stockmarket.modules.simulatedmarket;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;

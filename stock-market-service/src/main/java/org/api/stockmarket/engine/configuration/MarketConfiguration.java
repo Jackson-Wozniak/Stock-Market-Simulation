@@ -14,7 +14,6 @@ import jakarta.annotation.PostConstruct;
 @AllArgsConstructor
 public class MarketConfiguration {
 
-    @Autowired
     private final MarketService marketService;
     private final Logger logger = LoggerFactory.getLogger(MarketConfiguration.class);
 

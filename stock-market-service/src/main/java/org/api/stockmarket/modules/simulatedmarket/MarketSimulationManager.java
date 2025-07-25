@@ -1,4 +1,4 @@
-package org.api.stockmarket.simulatedmarket;
+package org.api.stockmarket.modules.simulatedmarket;
 
 import org.api.stockmarket.engine.properties.MarketIntervals;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;

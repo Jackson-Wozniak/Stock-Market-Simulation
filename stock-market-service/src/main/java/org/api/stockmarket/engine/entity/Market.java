@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.api.stockmarket.engine.enums.TimeStamp;
-import org.api.stockmarket.engine.utils.DateConversion;
+import org.api.stockmarket.common.utils.DateConversion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

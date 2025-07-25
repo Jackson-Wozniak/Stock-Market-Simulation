@@ -6,7 +6,7 @@ import org.api.stockmarket.modules.indexfunds.dtos.IndexFundDto;
 import org.api.stockmarket.modules.indexfunds.dtos.SectorIndexFundDto;
 import org.api.stockmarket.modules.indexfunds.enums.FundTracking;
 import org.api.stockmarket.modules.indexfunds.model.IndexFund;
-import org.api.stockmarket.modules.indexfunds.utils.Capitalize;
+import org.api.stockmarket.common.utils.Capitalize;
 
 @Getter
 @Setter
