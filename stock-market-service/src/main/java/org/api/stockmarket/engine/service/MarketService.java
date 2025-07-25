@@ -1,4 +1,4 @@
-package org.api.stockmarket.market.service;
+package org.api.stockmarket.engine.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 import org.api.stockmarket.engine.entity.Market;
 import org.api.stockmarket.engine.enums.MarketTrajectory;
 import org.api.stockmarket.engine.enums.TimeStamp;
-import org.api.stockmarket.market.repository.MarketRepository;
+import org.api.stockmarket.engine.repository.MarketRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.stock.utils;
+package org.api.stockmarket.modules.stocks.stock.utils;
 
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;

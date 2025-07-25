@@ -1,9 +1,9 @@
-package org.api.stockmarket.market.entity;
+package org.api.stockmarket.engine.entity;
 
 import java.time.Month;
 import java.time.ZonedDateTime;
 
-import org.api.stockmarket.market.enums.MarketTrajectory;
+import org.api.stockmarket.engine.enums.MarketTrajectory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,8 +20,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.api.stockmarket.market.enums.TimeStamp;
-import org.api.stockmarket.market.utils.DateConversion;
+import org.api.stockmarket.engine.enums.TimeStamp;
+import org.api.stockmarket.engine.utils.DateConversion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

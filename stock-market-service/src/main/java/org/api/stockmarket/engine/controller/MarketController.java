@@ -1,8 +1,8 @@
-package org.api.stockmarket.market.controller;
+package org.api.stockmarket.engine.controller;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.market.payload.MarketDTO;
-import org.api.stockmarket.market.service.MarketService;
+import org.api.stockmarket.engine.dtos.MarketDTO;
+import org.api.stockmarket.engine.service.MarketService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

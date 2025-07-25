@@ -1,12 +1,11 @@
-package org.api.stockmarket.stocks.stock.configuration;
+package org.api.stockmarket.modules.stocks.configuration;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.stock.properties.DefaultStocksList;
-import org.api.stockmarket.stocks.stock.service.StockService;
-import org.api.stockmarket.stocks.stock.utils.CsvReader;
+import org.api.stockmarket.modules.stocks.properties.DefaultStocksList;
+import org.api.stockmarket.modules.stocks.service.StockService;
+import org.api.stockmarket.modules.stocks.utils.CsvReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import jakarta.annotation.PostConstruct;

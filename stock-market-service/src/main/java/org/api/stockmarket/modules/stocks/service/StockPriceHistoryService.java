@@ -1,11 +1,11 @@
-package org.api.stockmarket.stocks.stock.service;
+package org.api.stockmarket.modules.stocks.service;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.engine.entity.Market;
 import org.api.stockmarket.engine.service.MarketService;
-import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
-import org.api.stockmarket.stocks.stock.entity.idclass.StockPriceHistoryId;
-import org.api.stockmarket.stocks.stock.repository.StockPriceHistoryRepository;
+import org.api.stockmarket.modules.stocks.entity.StockPriceHistory;
+import org.api.stockmarket.modules.stocks.entity.idclass.StockPriceHistoryId;
+import org.api.stockmarket.modules.stocks.repository.StockPriceHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

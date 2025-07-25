@@ -1,36 +1,28 @@
-package org.api.stockmarket.indexfund.exception;
+package org.api.stockmarket.modules.indexfunds.exception;
 
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
+import org.api.stockmarket.engine.exception.base.BadRequestException;
 
-@Getter
-public class IndexFundException extends RuntimeException {
+public class IndexFundException extends BadRequestException {
 
-    private final HttpStatus status;
-
-    private IndexFundException(String message, HttpStatus status) {
-        super(message);
-        this.status = status;
+    private IndexFundException(String message) {
+        super(message, "IndexFundController");
     }
 
     public static IndexFundException invalidMarketCap(String cap){
         return new IndexFundException(
-                String.format("{%s} not a market cap. Must be one of: Small, Mid, Large", cap),
-                HttpStatus.BAD_REQUEST
+                String.format("{%s} not a market cap. Must be one of: Small, Mid, Large", cap)
         );
     }
 
     public static IndexFundException invalidSector(String sector){
         return new IndexFundException(
-                String.format("No stocks have sector {%s}", sector),
-                HttpStatus.BAD_REQUEST
+                String.format("No stocks have sector {%s}", sector)
         );
     }
 
     public static IndexFundException invalidVolatility(String volatility){
         return new IndexFundException(
-                String.format("{%s} not a volatility type", volatility),
-                HttpStatus.BAD_REQUEST
+                String.format("{%s} not a volatility type", volatility)
         );
     }
 }

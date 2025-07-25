@@ -1,12 +1,12 @@
-package org.api.stockmarket.stocks.news.entity;
+package org.api.stockmarket.modules.news.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.news.properties.EarningsPrompts;
-import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.modules.news.properties.EarningsPrompts;
+import org.api.stockmarket.modules.stocks.entity.Stock;
 
 import jakarta.persistence.*;
 import java.io.Serializable;

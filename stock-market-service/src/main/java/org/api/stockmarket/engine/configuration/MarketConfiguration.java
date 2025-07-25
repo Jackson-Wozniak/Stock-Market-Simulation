@@ -1,8 +1,8 @@
-package org.api.stockmarket.market.configuration;
+package org.api.stockmarket.engine.configuration;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.market.entity.Market;
-import org.api.stockmarket.market.service.MarketService;
+import org.api.stockmarket.engine.entity.Market;
+import org.api.stockmarket.engine.service.MarketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

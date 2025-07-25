@@ -1,12 +1,12 @@
-package org.api.stockmarket.indexfund.model.subclass;
+package org.api.stockmarket.modules.indexfunds.model.subclass;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.stockmarket.indexfund.dtos.IndexFundDto;
-import org.api.stockmarket.indexfund.dtos.SectorIndexFundDto;
-import org.api.stockmarket.indexfund.enums.FundTracking;
-import org.api.stockmarket.indexfund.model.IndexFund;
-import org.api.stockmarket.indexfund.utils.Capitalize;
+import org.api.stockmarket.modules.indexfunds.dtos.IndexFundDto;
+import org.api.stockmarket.modules.indexfunds.dtos.SectorIndexFundDto;
+import org.api.stockmarket.modules.indexfunds.enums.FundTracking;
+import org.api.stockmarket.modules.indexfunds.model.IndexFund;
+import org.api.stockmarket.modules.indexfunds.utils.Capitalize;
 
 @Getter
 @Setter

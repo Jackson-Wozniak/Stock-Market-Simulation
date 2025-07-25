@@ -1,7 +1,7 @@
-package org.api.stockmarket.indexfund.dtos;
+package org.api.stockmarket.modules.indexfunds.dtos;
 
 import lombok.Getter;
-import org.api.stockmarket.indexfund.model.subclass.VolatilityIndexFund;
+import org.api.stockmarket.modules.indexfunds.model.subclass.VolatilityIndexFund;
 
 @Getter
 public class VolatileIndexFundDto extends IndexFundDto{

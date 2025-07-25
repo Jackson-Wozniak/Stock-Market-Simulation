@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.stock.enums;
+package org.api.stockmarket.modules.stocks.enums;
 
 public enum MarketCap {
     Small,

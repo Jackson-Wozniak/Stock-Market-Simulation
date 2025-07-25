@@ -1,8 +1,8 @@
-package org.api.stockmarket.simulator;
+package org.api.stockmarket.simulatedmarket;
 
-import org.api.stockmarket.market.properties.MarketIntervals;
-import org.api.stockmarket.stocks.stock.enums.InvestorRating;
-import org.api.stockmarket.stocks.stock.enums.Volatility;
+import org.api.stockmarket.engine.properties.MarketIntervals;
+import org.api.stockmarket.modules.stocks.enums.InvestorRating;
+import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

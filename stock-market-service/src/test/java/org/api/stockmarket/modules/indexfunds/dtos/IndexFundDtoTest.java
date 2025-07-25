@@ -1,4 +1,4 @@
-package org.api.stockmarket.indexfund.dtos;
+package org.api.stockmarket.modules.indexfunds.dtos;
 
 import org.api.stockmarket.modules.indexfunds.dtos.IndexFundDto;
 import org.api.stockmarket.modules.indexfunds.dtos.MarketCapFundDto;

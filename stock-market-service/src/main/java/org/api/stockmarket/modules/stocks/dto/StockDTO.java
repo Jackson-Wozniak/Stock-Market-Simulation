@@ -1,8 +1,8 @@
-package org.api.stockmarket.stocks.stock.dto;
+package org.api.stockmarket.modules.stocks.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.modules.stocks.entity.Stock;
 
 //This class is used when getting a list of stocks, where fields such as earnings and price history is not needed
 @Getter

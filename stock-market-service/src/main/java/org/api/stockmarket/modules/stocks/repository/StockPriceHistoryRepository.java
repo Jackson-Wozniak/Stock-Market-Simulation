@@ -1,7 +1,7 @@
-package org.api.stockmarket.stocks.stock.repository;
+package org.api.stockmarket.modules.stocks.repository;
 
-import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
-import org.api.stockmarket.stocks.stock.entity.idclass.StockPriceHistoryId;
+import org.api.stockmarket.modules.stocks.entity.StockPriceHistory;
+import org.api.stockmarket.modules.stocks.entity.idclass.StockPriceHistoryId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,16 +1,16 @@
-package org.api.stockmarket.indexfund.service;
+package org.api.stockmarket.modules.indexfunds.service;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.indexfund.exception.IndexFundException;
-import org.api.stockmarket.indexfund.model.IndexFund;
-import org.api.stockmarket.indexfund.model.subclass.MarketCapIndexFund;
-import org.api.stockmarket.indexfund.model.subclass.SectorIndexFund;
-import org.api.stockmarket.indexfund.model.subclass.TotalMarketIndexFund;
-import org.api.stockmarket.indexfund.model.subclass.VolatilityIndexFund;
-import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.api.stockmarket.stocks.stock.enums.Volatility;
-import org.api.stockmarket.stocks.stock.service.StockService;
+import org.api.stockmarket.modules.indexfunds.exception.IndexFundException;
+import org.api.stockmarket.modules.indexfunds.model.IndexFund;
+import org.api.stockmarket.modules.indexfunds.model.subclass.MarketCapIndexFund;
+import org.api.stockmarket.modules.indexfunds.model.subclass.SectorIndexFund;
+import org.api.stockmarket.modules.indexfunds.model.subclass.TotalMarketIndexFund;
+import org.api.stockmarket.modules.indexfunds.model.subclass.VolatilityIndexFund;
+import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.enums.MarketCap;
+import org.api.stockmarket.modules.stocks.enums.Volatility;
+import org.api.stockmarket.modules.stocks.service.StockService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

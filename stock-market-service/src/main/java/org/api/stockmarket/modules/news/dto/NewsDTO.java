@@ -1,8 +1,8 @@
-package org.api.stockmarket.stocks.news.dto;
+package org.api.stockmarket.modules.news.dto;
 
 import java.time.ZonedDateTime;
 
-import org.api.stockmarket.stocks.news.entity.News;
+import org.api.stockmarket.modules.news.entity.News;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,8 +1,8 @@
-package org.api.stockmarket.stocks.news.model;
+package org.api.stockmarket.modules.news.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.modules.stocks.entity.Stock;
 
 @Getter
 @Setter

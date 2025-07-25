@@ -1,10 +1,10 @@
-package org.api.stockmarket.stocks.stock.entity;
+package org.api.stockmarket.modules.stocks.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.entity.idclass.StockPriceHistoryId;
+import org.api.stockmarket.modules.stocks.entity.idclass.StockPriceHistoryId;
 
 import jakarta.persistence.*;
 import java.io.Serializable;

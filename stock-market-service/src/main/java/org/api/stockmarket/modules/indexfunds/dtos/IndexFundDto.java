@@ -1,7 +1,7 @@
-package org.api.stockmarket.indexfund.dtos;
+package org.api.stockmarket.modules.indexfunds.dtos;
 
 import lombok.Getter;
-import org.api.stockmarket.indexfund.model.IndexFund;
+import org.api.stockmarket.modules.indexfunds.model.IndexFund;
 
 /*
 Base class for all IndexFund DTOs. The class 'IndexFund' which is an abstract base class

@@ -1,8 +1,8 @@
-package org.api.stockmarket.stocks.stock.dto;
+package org.api.stockmarket.modules.stocks.dto;
 
 import java.time.ZonedDateTime;
 
-import org.api.stockmarket.stocks.stock.entity.StockPriceHistory;
+import org.api.stockmarket.modules.stocks.entity.StockPriceHistory;
 
 import lombok.Getter;
 import lombok.Setter;

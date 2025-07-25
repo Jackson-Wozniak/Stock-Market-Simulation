@@ -1,8 +1,8 @@
-package org.api.stockmarket.simulator;
+package org.api.stockmarket.simulatedmarket;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.stockmarket.market.utils.DateConversion;
+import org.api.stockmarket.engine.utils.DateConversion;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

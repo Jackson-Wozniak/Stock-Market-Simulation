@@ -1,8 +1,8 @@
-package org.api.stockmarket.market.scheduled;
+package org.api.stockmarket.engine.scheduling;
 
 import lombok.AllArgsConstructor;
 
-import org.api.stockmarket.market.properties.MarketIntervals;
+import org.api.stockmarket.engine.properties.MarketIntervals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;

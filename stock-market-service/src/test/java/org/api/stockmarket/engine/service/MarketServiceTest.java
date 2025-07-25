@@ -1,4 +1,4 @@
-package org.api.stockmarket.market.service;
+package org.api.stockmarket.engine.service;
 
 import org.api.stockmarket.engine.service.MarketService;
 import org.junit.jupiter.api.Test;

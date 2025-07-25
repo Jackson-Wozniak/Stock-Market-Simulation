@@ -1,8 +1,8 @@
-package org.api.stockmarket.market.utils;
+package org.api.stockmarket.engine.utils;
 
 import org.api.stockmarket.engine.entity.Market;
 import org.api.stockmarket.engine.enums.MarketTrajectory;
-import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.modules.stocks.entity.Stock;
 
 import java.util.List;
 

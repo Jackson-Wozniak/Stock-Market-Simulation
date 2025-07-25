@@ -1,12 +1,8 @@
-package org.api.stockmarket.stocks.stock.properties;
+package org.api.stockmarket.modules.stocks.properties;
 
-import org.api.stockmarket.stocks.stock.entity.LargeCapStock;
-import org.api.stockmarket.stocks.stock.entity.MidCapStock;
-import org.api.stockmarket.stocks.stock.entity.SmallCapStock;
-import org.api.stockmarket.stocks.stock.enums.InvestorRating;
-import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.api.stockmarket.stocks.stock.enums.Volatility;
-import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.enums.InvestorRating;
+import org.api.stockmarket.modules.stocks.enums.Volatility;
 
 import java.util.List;
 

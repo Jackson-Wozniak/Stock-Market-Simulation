@@ -1,7 +1,7 @@
-package org.api.stockmarket.stocks.news.factory;
+package org.api.stockmarket.modules.news.factory;
 
-import org.api.stockmarket.stocks.news.properties.NewsPrompts;
-import org.api.stockmarket.stocks.news.model.NewsStory;
+import org.api.stockmarket.modules.news.model.NewsStory;
+import org.api.stockmarket.modules.news.properties.NewsPrompts;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;

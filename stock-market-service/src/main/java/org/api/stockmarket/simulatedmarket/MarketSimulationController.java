@@ -1,8 +1,8 @@
-package org.api.stockmarket.simulator;
+package org.api.stockmarket.simulatedmarket;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.stock.enums.InvestorRating;
-import org.api.stockmarket.stocks.stock.enums.Volatility;
+import org.api.stockmarket.modules.stocks.enums.InvestorRating;
+import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

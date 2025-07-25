@@ -1,8 +1,8 @@
-package org.api.stockmarket.stocks.news.properties;
+package org.api.stockmarket.modules.news.properties;
 
 import java.time.ZonedDateTime;
 
-import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.modules.stocks.entity.Stock;
 
 public class EarningsPrompts {
 

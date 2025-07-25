@@ -1,6 +1,6 @@
-package org.api.stockmarket.stocks.stock.dto;
+package org.api.stockmarket.modules.stocks.dto;
 
-import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.modules.stocks.entity.Stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

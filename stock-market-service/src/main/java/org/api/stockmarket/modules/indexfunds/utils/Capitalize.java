@@ -1,4 +1,4 @@
-package org.api.stockmarket.indexfund.utils;
+package org.api.stockmarket.modules.indexfunds.utils;
 
 public class Capitalize {
 

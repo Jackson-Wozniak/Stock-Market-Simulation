@@ -1,4 +1,4 @@
-package org.api.stockmarket.indexfund.service;
+package org.api.stockmarket.modules.indexfunds.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 

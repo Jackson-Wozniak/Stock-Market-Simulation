@@ -1,4 +1,4 @@
-package org.api.stockmarket.market.enums;
+package org.api.stockmarket.engine.enums;
 
 /*
 Tracks the total market trajectory

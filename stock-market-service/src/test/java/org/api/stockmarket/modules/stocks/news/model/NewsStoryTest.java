@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.news.model;
+package org.api.stockmarket.modules.stocks.news.model;
 
 import org.api.stockmarket.modules.news.model.NewsStory;
 import org.api.stockmarket.modules.stocks.entity.Stock;

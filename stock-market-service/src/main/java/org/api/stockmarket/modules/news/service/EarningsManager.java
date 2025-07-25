@@ -1,10 +1,10 @@
-package org.api.stockmarket.stocks.news.service;
+package org.api.stockmarket.modules.news.service;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.news.entity.EarningsReport;
-import org.api.stockmarket.stocks.news.factory.EarningsFactory;
-import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.service.StockService;
+import org.api.stockmarket.modules.news.entity.EarningsReport;
+import org.api.stockmarket.modules.news.factory.EarningsFactory;
+import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.service.StockService;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;

@@ -1,7 +1,7 @@
-package org.api.stockmarket.stocks.news.factory;
+package org.api.stockmarket.modules.news.factory;
 
-import org.api.stockmarket.stocks.news.entity.EarningsReport;
-import org.api.stockmarket.stocks.stock.entity.Stock;
+import org.api.stockmarket.modules.news.entity.EarningsReport;
+import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;

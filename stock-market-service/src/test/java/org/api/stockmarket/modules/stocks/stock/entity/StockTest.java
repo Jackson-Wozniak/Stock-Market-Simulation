@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.stock.entity;
+package org.api.stockmarket.modules.stocks.stock.entity;
 
 import org.api.stockmarket.modules.stocks.entity.SmallCapStock;
 import org.api.stockmarket.modules.stocks.entity.Stock;

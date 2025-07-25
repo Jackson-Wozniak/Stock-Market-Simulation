@@ -1,4 +1,4 @@
-package org.api.stockmarket.simulator;
+package org.api.stockmarket.simulatedmarket;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

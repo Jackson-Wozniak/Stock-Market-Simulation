@@ -1,17 +1,16 @@
-package org.api.stockmarket.stocks.stock.utils;
+package org.api.stockmarket.modules.stocks.utils;
 
 import lombok.NoArgsConstructor;
-import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.enums.InvestorRating;
-import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.api.stockmarket.stocks.stock.enums.Volatility;
+import org.api.stockmarket.modules.stocks.enums.InvestorRating;
+import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.enums.MarketCap;
+import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

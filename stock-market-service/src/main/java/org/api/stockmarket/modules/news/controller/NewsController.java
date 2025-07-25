@@ -1,11 +1,9 @@
-package org.api.stockmarket.stocks.news.controller;
+package org.api.stockmarket.modules.news.controller;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.news.entity.News;
-import org.api.stockmarket.stocks.news.service.NewsService;
-import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
-import org.api.stockmarket.stocks.stock.service.StockService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.api.stockmarket.modules.news.entity.News;
+import org.api.stockmarket.modules.news.service.NewsService;
+import org.api.stockmarket.modules.stocks.exception.StockNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

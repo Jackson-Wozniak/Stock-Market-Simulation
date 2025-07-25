@@ -1,4 +1,4 @@
-package org.api.stockmarket.market.scheduled;
+package org.api.stockmarket.engine.scheduling;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.api.stockmarket.engine.entity.Market;
 import org.api.stockmarket.engine.enums.TimeStamp;
-import org.api.stockmarket.market.service.MarketService;
-import org.api.stockmarket.market.utils.MarketTrajectoryUtils;
-import org.api.stockmarket.stocks.news.service.EarningsManager;
-import org.api.stockmarket.stocks.news.service.NewsManager;
-import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.service.StockPriceHistoryService;
-import org.api.stockmarket.stocks.stock.service.StockService;
+import org.api.stockmarket.engine.service.MarketService;
+import org.api.stockmarket.engine.utils.MarketTrajectoryUtils;
+import org.api.stockmarket.modules.news.service.EarningsManager;
+import org.api.stockmarket.modules.news.service.NewsManager;
+import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.service.StockPriceHistoryService;
+import org.api.stockmarket.modules.stocks.service.StockService;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;

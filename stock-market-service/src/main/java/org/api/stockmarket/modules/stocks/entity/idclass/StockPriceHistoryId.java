@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.stock.entity.idclass;
+package org.api.stockmarket.modules.stocks.entity.idclass;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;

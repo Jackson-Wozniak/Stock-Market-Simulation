@@ -1,10 +1,10 @@
-package org.api.stockmarket.simulator;
+package org.api.stockmarket.simulatedmarket;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.enums.InvestorRating;
-import org.api.stockmarket.stocks.stock.enums.Volatility;
+import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.enums.InvestorRating;
+import org.api.stockmarket.modules.stocks.enums.Volatility;
 
 import java.time.LocalDate;
 import java.util.HashMap;

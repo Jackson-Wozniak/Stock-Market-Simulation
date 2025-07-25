@@ -1,6 +1,6 @@
-package org.api.stockmarket.stocks.news.properties;
+package org.api.stockmarket.modules.news.properties;
 
-import org.api.stockmarket.stocks.news.model.NewsStory;
+import org.api.stockmarket.modules.news.model.NewsStory;
 
 import java.util.List;
 

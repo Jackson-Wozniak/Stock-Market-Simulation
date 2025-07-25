@@ -1,6 +1,6 @@
-package org.api.stockmarket.stocks.stock.properties;
+package org.api.stockmarket.modules.stocks.properties;
 
-import org.api.stockmarket.stocks.stock.enums.MarketCap;
+import org.api.stockmarket.modules.stocks.enums.MarketCap;
 
 import java.util.Random;
 

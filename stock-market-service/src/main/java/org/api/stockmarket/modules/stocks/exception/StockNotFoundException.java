@@ -1,14 +1,10 @@
-package org.api.stockmarket.stocks.stock.exception;
+package org.api.stockmarket.modules.stocks.exception;
 
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
+import org.api.stockmarket.engine.exception.base.NotFoundException;
 
-@Getter
-public class StockNotFoundException extends RuntimeException {
-
-    private final HttpStatus status = HttpStatus.NOT_FOUND;
+public class StockNotFoundException extends NotFoundException {
 
     public StockNotFoundException(String message) {
-        super(message);
+        super(message, "StockController");
     }
 }

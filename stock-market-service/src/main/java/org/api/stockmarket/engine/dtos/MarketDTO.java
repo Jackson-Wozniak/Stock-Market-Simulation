@@ -1,9 +1,9 @@
-package org.api.stockmarket.market.payload;
+package org.api.stockmarket.engine.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.api.stockmarket.engine.entity.Market;
-import org.api.stockmarket.market.utils.DateConversion;
+import org.api.stockmarket.engine.utils.DateConversion;
 
 @Getter
 @Setter

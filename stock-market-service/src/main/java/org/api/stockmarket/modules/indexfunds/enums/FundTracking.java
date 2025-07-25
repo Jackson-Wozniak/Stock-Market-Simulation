@@ -1,4 +1,4 @@
-package org.api.stockmarket.indexfund.enums;
+package org.api.stockmarket.modules.indexfunds.enums;
 
 public enum FundTracking {
     TOTAL_MARKET {

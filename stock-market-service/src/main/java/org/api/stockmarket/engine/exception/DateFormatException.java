@@ -1,14 +1,11 @@
-package org.api.stockmarket.market.exception;
+package org.api.stockmarket.engine.exception;
 
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
+import org.api.stockmarket.engine.exception.base.BadRequestException;
 
-@Getter
-public class DateFormatException extends RuntimeException {
-
-    private final HttpStatus status = HttpStatus.BAD_REQUEST;
+public class DateFormatException extends BadRequestException {
+    private static final String MESSAGE = "Date in request query is formatted incorrectly. Ensure format of MM/dd/yyyy";
 
     public DateFormatException() {
-        super("Date Is Not Formatted Correctly");
+        super(MESSAGE, "MarketController");
     }
 }

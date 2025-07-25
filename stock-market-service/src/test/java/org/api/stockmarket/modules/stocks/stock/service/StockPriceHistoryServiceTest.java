@@ -1,4 +1,4 @@
-package org.api.stockmarket.stocks.stock.service;
+package org.api.stockmarket.modules.stocks.stock.service;
 
 import org.api.stockmarket.modules.stocks.entity.StockPriceHistory;
 import org.api.stockmarket.modules.stocks.service.StockPriceHistoryService;

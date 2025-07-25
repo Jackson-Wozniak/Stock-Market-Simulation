@@ -1,11 +1,11 @@
-package org.api.stockmarket.stocks.stock.entity;
+package org.api.stockmarket.modules.stocks.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.stocks.stock.enums.InvestorRating;
-import org.api.stockmarket.stocks.stock.enums.MarketCap;
-import org.api.stockmarket.stocks.stock.enums.Volatility;
+import org.api.stockmarket.modules.stocks.enums.InvestorRating;
+import org.api.stockmarket.modules.stocks.enums.MarketCap;
+import org.api.stockmarket.modules.stocks.enums.Volatility;
 
 import jakarta.persistence.*;
 

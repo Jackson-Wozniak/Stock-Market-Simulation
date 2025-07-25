@@ -1,12 +1,11 @@
-package org.api.stockmarket.stocks.news.service;
+package org.api.stockmarket.modules.news.service;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.stocks.news.entity.News;
-import org.api.stockmarket.stocks.news.repository.NewsRepository;
-import org.api.stockmarket.stocks.stock.entity.Stock;
-import org.api.stockmarket.stocks.stock.exception.StockNotFoundException;
-import org.api.stockmarket.stocks.stock.service.StockService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.api.stockmarket.modules.news.entity.News;
+import org.api.stockmarket.modules.news.repository.NewsRepository;
+import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.exception.StockNotFoundException;
+import org.api.stockmarket.modules.stocks.service.StockService;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
