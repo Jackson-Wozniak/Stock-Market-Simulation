@@ -1,5 +1,6 @@
 package org.api.stockmarket.modules.simulatedmarket;
 
+import lombok.AllArgsConstructor;
 import org.api.stockmarket.engine.properties.MarketIntervals;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;
 import org.api.stockmarket.modules.stocks.enums.Volatility;
@@ -10,7 +11,10 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Component
+@AllArgsConstructor
 public class MarketSimulationManager {
+
+    private final SimulatedStockFactory simulatedStockFactory;
 
     public List<SimulatedStock> simulate(int days, int stockCount){
         List<SimulatedStock> stocks = IntStream.range(0, stockCount)
@@ -41,5 +45,9 @@ public class MarketSimulationManager {
             date = date.plusDays(1);
         }
         return stock;
+    }
+
+    public List<SimulatedStock> simulateAll(){
+        return null;
     }
 }

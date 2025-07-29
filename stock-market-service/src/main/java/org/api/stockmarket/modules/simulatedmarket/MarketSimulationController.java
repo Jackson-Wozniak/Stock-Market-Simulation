@@ -1,7 +1,9 @@
 package org.api.stockmarket.modules.simulatedmarket;
 
 import lombok.AllArgsConstructor;
+import org.api.stockmarket.modules.stocks.entity.PricingModel;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;
+import org.api.stockmarket.modules.stocks.enums.PriceVolatility;
 import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/v1/market/sim")
@@ -39,6 +42,26 @@ public class MarketSimulationController {
 
         return ResponseEntity.ok(marketSimulationManager.simulate(daysSimulated, stockCount)
                 .stream().map(stock -> new SimulatedStockDTO(stock).getMap()).toList());
+    }
+
+    @GetMapping("/testing")
+    public ResponseEntity<Map<String, Map<String, Double>>> testAll(){
+        PricingModel model = new PricingModel(100.0, PriceVolatility.STABLE,
+                50, .2, .005,
+                -50, .2, .05,
+                50, .2, .005,
+                50, .2, .005,
+                50, .2, .005);
+
+        for(int i = 0; i < 10000; i++){
+            model.changePrice();
+            if(i % 10 == 0) System.out.println(model.getCurrentPrice());
+        }
+
+        List<SimulatedStock> stocks = marketSimulationManager.simulateAll();
+        return ResponseEntity.ok(stocks.stream().collect(Collectors.toMap(
+                s -> s.getStock().getTicker(), s -> new SimulatedStockDTO(s).getMap()
+        )));
     }
 
     @PostMapping
