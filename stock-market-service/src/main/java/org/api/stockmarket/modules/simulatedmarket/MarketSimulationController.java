@@ -45,23 +45,65 @@ public class MarketSimulationController {
     }
 
     @GetMapping("/testing")
-    public ResponseEntity<Map<String, Map<String, Double>>> testAll(){
+    public ResponseEntity<String> testAll(){
         PricingModel model = new PricingModel(100.0, PriceVolatility.STABLE,
                 50, .2, .005,
-                -50, .2, .05,
+                -30, .2, .2,
+                50, .2, .005,
+                50, .2, .005,
+                50, .2, .005);
+        PricingModel model2 = new PricingModel(100.0, PriceVolatility.EXTREME,
+                50, .2, .005,
+                -12, .2, .25,
+                50, .2, .005,
+                50, .2, .005,
+                50, .2, .005);
+        PricingModel model3 = new PricingModel(100.0, PriceVolatility.NORMAL,
+                50, .2, .005,
+                5, .2, .25,
+                50, .2, .005,
+                50, .2, .005,
+                50, .2, .005);
+        PricingModel model4 = new PricingModel(100.0, PriceVolatility.HIGH,
+                50, .2, .005,
+                40, .2, .25,
                 50, .2, .005,
                 50, .2, .005,
                 50, .2, .005);
 
+        String begin = String.valueOf(model.getCurrentPrice());
+        String begin2 = String.valueOf(model.getCurrentPrice());
+        String begin3 = String.valueOf(model.getCurrentPrice());
+        String begin4 = String.valueOf(model.getCurrentPrice());
+
+        StringBuilder builder = new StringBuilder();
         for(int i = 0; i < 10000; i++){
             model.changePrice();
-            if(i % 10 == 0) System.out.println(model.getCurrentPrice());
+            model2.changePrice();
+            model3.changePrice();
+            model4.changePrice();
+
+            if(i % 1000 == 0){
+                builder.append("Price Change: 1" + begin
+                                + " -> " + model.getCurrentPrice())
+                        .append("\nPrice Change 2: " + begin2
+                                        + " -> " + model2.getCurrentPrice())
+                        .append("\nPrice Change 3: "
+                                        + begin3 + " -> " + model3.getCurrentPrice())
+                        .append("\nPrice Change 4: " + begin4 + " -> "
+                                + model4.getCurrentPrice()).append("\n");
+            }
         }
 
-        List<SimulatedStock> stocks = marketSimulationManager.simulateAll();
-        return ResponseEntity.ok(stocks.stream().collect(Collectors.toMap(
-                s -> s.getStock().getTicker(), s -> new SimulatedStockDTO(s).getMap()
-        )));
+        builder.append("Price Change: 1" + begin
+                        + " -> " + model.getCurrentPrice())
+                .append("\nPrice Change 2: " + begin2
+                        + " -> " + model2.getCurrentPrice())
+                .append("\nPrice Change 3: "
+                        + begin3 + " -> " + model3.getCurrentPrice())
+                .append("\nPrice Change 4: " + begin4 + " -> "
+                        + model4.getCurrentPrice());
+        return ResponseEntity.ok(builder.toString());
     }
 
     @PostMapping

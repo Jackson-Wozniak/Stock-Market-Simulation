@@ -62,6 +62,12 @@ public class PricingModel {
             Macro influences
                 determines whether macro changes (sector related factors, total market factors
                 etc. have major changes on the direction of the company)
+
+        IMPORTANT TODO:
+            To increase realism, short term factors, especially news sentiment
+            should regress toward the mean over time, to simulate the fact
+            that news from a company will eventually become irrelevant. This ensures
+            that long term factors are the focus
      */
     private double currentPrice;
 
@@ -132,15 +138,18 @@ public class PricingModel {
         //altering the value in tanh affects range (/ 25.0 would mean less numbers
         //are closer to -1 or 1 than if you did /10.0)
         //narrowing the range of factors (instead of -50 to 50) may work better
-        double newsFactorScale = Math.tanh(newsSentimentFactor / 50.0) * .1;
+        double normalizedInput = newsSentimentFactor / 25.0; // now roughly in [-2, 2]
+
+        double signal = Math.tanh(normalizedInput);
+
         double noise = volatility.applyMagnitude(baseNewsSentimentNoise);
 
         //standard deviation comes from sigma, where volatility dictates it
-        double sigma = noise * (1 - Math.abs(newsFactorScale / .1));
+        double sigma = noise * (1 - (.75 * Math.abs(signal)));
 
-        double totalNoise = random.nextGaussian() * sigma;
+        double totalNoise = (random.nextDouble() * 2 - 1) * sigma;
 
-        double change = (newsFactorScale + totalNoise) * currentPrice;
+        double change = ((signal * .07) + totalNoise) * currentPrice;
 
         //System.out.println(change);
         double tickScale = 1000.0; //as a percent
