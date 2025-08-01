@@ -19,7 +19,7 @@ public class MarketActivityScheduler {
     private final MarketManager marketManager;
     private static final Logger stockLogger = LoggerFactory.getLogger("stockLogger");
 
-    @Scheduled(fixedRate = MarketIntervals.ONE_SECOND)
+    @Scheduled(fixedRate = MarketEnvironmentProperties.MARKET_TIME_INTERVAL)
     @SuppressWarnings("unused")
     public void scheduledMarketActivity() {
         if(MarketEnvironmentProperties.MARKET_MODE.equals(MarketSimulatorMode.SIMULATOR_ONLY)){

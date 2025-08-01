@@ -44,7 +44,8 @@ public class MarketManager {
     }
 
     private void dailyMarketActivity() {
-        //priceRecordService.savePricesEOD();
+        priceRecordService.savePricesEOD(stockService.getAllStocks(),
+                marketService.findMarketEntity().getDate());
 
         hourlyMarketActivity();
 
