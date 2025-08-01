@@ -1,6 +1,5 @@
 package org.api.stockmarket.modules.stocks.stock.entity;
 
-import org.api.stockmarket.modules.stocks.entity.SmallCapStock;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;
 import org.api.stockmarket.modules.stocks.enums.Volatility;

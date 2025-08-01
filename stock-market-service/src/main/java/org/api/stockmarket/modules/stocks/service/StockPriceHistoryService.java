@@ -3,8 +3,7 @@ package org.api.stockmarket.modules.stocks.service;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.engine.entity.Market;
 import org.api.stockmarket.engine.service.MarketService;
-import org.api.stockmarket.modules.stocks.entity.StockPriceHistory;
-import org.api.stockmarket.modules.stocks.entity.idclass.StockPriceHistoryId;
+import org.api.stockmarket.modules.stocks.entity.PriceRecord;
 import org.api.stockmarket.modules.stocks.repository.StockPriceHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,19 +25,20 @@ public class StockPriceHistoryService {
     private final MarketService marketService;
 
     public void saveStockHistoryDaily() {
-        Market market = marketService.findMarketEntity();
-        stockService.getAllStocks().forEach(stock ->
-                stockPriceHistoryRepository.save(new StockPriceHistory(
-                        new StockPriceHistoryId(market.getDate(), stock.getTicker()),
-                        stock,
-                        stock.getPrice())));
+//        Market market = marketService.findMarketEntity();
+//        stockService.getAllStocks().forEach(stock ->
+//                stockPriceHistoryRepository.save(new PriceRecord(
+//                        new StockPriceHistoryId(market.getDate(), stock.getTicker()),
+//                        stock,
+//                        stock.getPrice())));
     }
 
-    public List<StockPriceHistory> findStockHistoryByTicker(String ticker) {
-        return stockPriceHistoryRepository.findAll().stream()
-                .filter(history -> history.getStock().getTicker().equalsIgnoreCase(ticker))
-                .sorted(Comparator.comparing(history -> history.getId().getMarketDate()))
-                .collect(Collectors.toList());
+    public List<PriceRecord> findStockHistoryByTicker(String ticker) {
+//        return stockPriceHistoryRepository.findAll().stream()
+//                .filter(history -> history.getStock().getTicker().equalsIgnoreCase(ticker))
+//                .sorted(Comparator.comparing(history -> history.getId().getMarketDate()))
+//                .collect(Collectors.toList());
+        return null;
     }
 
     @Transactional

@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class StockService {
 
-    @Autowired
     private final StockRepository stockRepository;
 
     public List<Stock> getAllStocks() {
@@ -34,20 +33,14 @@ public class StockService {
 
     public List<Stock> getAllStocksByMarketCap(MarketCap marketCap) {
         return stockRepository.findAll().stream()
-                .filter(stock -> stock.getMarketCap()
+                .filter(stock -> stock.getCompany().getMarketCap()
                         .equals(marketCap)).collect(Collectors.toList());
     }
 
     public List<Stock> getAllStocksBySector(String sector) {
         return stockRepository.findAll().stream()
-                .filter(stock -> stock.getSector()
+                .filter(stock -> stock.getCompany().getSector()
                         .equalsIgnoreCase(sector)).collect(Collectors.toList());
-    }
-
-    public List<Stock> getAllStocksByVolatility(Volatility volatility) {
-        return stockRepository.findAll().stream()
-                .filter(stock -> stock.getVolatileStock() .equals(volatility))
-                .collect(Collectors.toList());
     }
 
     public Stock getStockByTickerSymbol(String ticker) {
@@ -60,7 +53,7 @@ public class StockService {
         if (stockTickerExists(ticker)) {
             throw new StockNotFoundException("No stock with ticker symbol " + ticker + " exists");
         }
-        return getStockByTickerSymbol(ticker).getPrice();
+        return getStockByTickerSymbol(ticker).getPricingModel().getPrice().doubleValue();
     }
 
     //Ignore any stocks that do not currently exist

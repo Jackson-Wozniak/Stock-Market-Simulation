@@ -2,7 +2,7 @@ package org.api.stockmarket.modules.stocks.dto;
 
 import java.time.ZonedDateTime;
 
-import org.api.stockmarket.modules.stocks.entity.StockPriceHistory;
+import org.api.stockmarket.modules.stocks.entity.PriceRecord;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ public class StockPriceHistoryDTO {
     private ZonedDateTime  marketDate;
     private double stockPrice;
 
-    public StockPriceHistoryDTO(StockPriceHistory history){
+    public StockPriceHistoryDTO(PriceRecord history){
         this.marketDate = history.getId().getMarketDate();
         this.stockPrice = history.getStockPrice();
     }

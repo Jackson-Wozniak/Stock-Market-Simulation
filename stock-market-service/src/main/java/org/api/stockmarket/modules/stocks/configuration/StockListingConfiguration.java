@@ -2,10 +2,8 @@ package org.api.stockmarket.modules.stocks.configuration;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.common.csv.CSVReader;
-import org.api.stockmarket.engine.configuration.MarketConfiguration;
 import org.api.stockmarket.modules.stocks.csv.StockCSVObject;
 import org.api.stockmarket.modules.stocks.entity.Stock;
-import org.api.stockmarket.modules.stocks.properties.DefaultStocksList;
 import org.api.stockmarket.modules.stocks.service.StockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

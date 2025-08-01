@@ -1,16 +1,38 @@
 package org.api.stockmarket.modules.stocks.entity;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.api.stockmarket.modules.stocks.enums.PriceVolatility;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
+@Entity(name = "pricingModel")
 @Getter
 @Setter
 @NoArgsConstructor
 public class PricingModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ticker")
+    private Stock stock;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "last_day_price")
+    private Double lastDayPrice;
+
+    @Column(name = "momentum")
+    private Integer momentum;
+
+    @Column(name = "momentum_streak")
+    private Integer momentumStreakInDays;
     /*
     TODO:
         This class will store the price info for a stock. This allows for pulling only this
