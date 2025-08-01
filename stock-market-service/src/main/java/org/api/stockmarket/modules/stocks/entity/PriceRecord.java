@@ -26,7 +26,7 @@ public class PriceRecord implements Serializable {
     private String ticker;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stock")
+    @JoinColumn(name = "stock_id")
     private Stock stock;
 
     @Column(name = "date")

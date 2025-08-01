@@ -20,7 +20,7 @@ public class PricingModel {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticker")
+    @JoinColumn(name = "stock_id")
     private Stock stock;
 
     @Column(name = "price")
@@ -134,6 +134,10 @@ public class PricingModel {
             this.liquidityWeight = weight;
             this.baseLiquidityNoise = baseNoise;
             return this;
+        }
+
+        public PricingModel build(){
+            return new PricingModel(this);
         }
     }
 }

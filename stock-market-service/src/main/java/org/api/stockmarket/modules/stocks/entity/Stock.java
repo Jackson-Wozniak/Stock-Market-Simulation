@@ -39,10 +39,8 @@ public class Stock{
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PriceRecord> priceRecords = new ArrayList<>();
 
-    public Stock(String ticker, Company company, PricingModel pricingModel) {
+    public Stock(String ticker) {
         this.ticker = ticker;
-        this.company = company;
-        this.pricingModel = pricingModel;
     }
 
     public double getPrice(){

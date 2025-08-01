@@ -1,18 +1,31 @@
 package org.api.stockmarket.modules.stocks.enums;
 
-import java.util.Random;
+import lombok.Getter;
 
+@Getter
 public enum PriceVolatility {
-    STABLE(0.2),
-    LOW(0.35),
-    NORMAL(0.5),
-    HIGH(0.7),
-    EXTREME(1.0);
+    STABLE("Stable", 0.2),
+    LOW("Low", 0.35),
+    NORMAL("Normal", 0.5),
+    HIGH("High", 0.7),
+    EXTREME("Extreme", 1.0),
+    UNKNOWN("Unknown", 0.0);
 
+    private final String name;
     private final double magnitude;
 
-    PriceVolatility(double val){
+    PriceVolatility(String name, double val){
+        this.name = name;
         this.magnitude = val;
+    }
+
+    public static PriceVolatility fromName(String name) {
+        for (PriceVolatility style : PriceVolatility.values()) {
+            if (style.name.equalsIgnoreCase(name)) {
+                return style;
+            }
+        }
+        return UNKNOWN;
     }
 
     /*

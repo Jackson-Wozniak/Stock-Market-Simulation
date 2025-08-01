@@ -6,7 +6,6 @@ import org.api.stockmarket.modules.news.factory.NewsFactory;
 import org.api.stockmarket.modules.news.model.NewsStory;
 import org.api.stockmarket.modules.news.service.NewsService;
 import org.api.stockmarket.modules.stocks.entity.Stock;
-import org.api.stockmarket.modules.stocks.properties.DefaultStockPrices;
 import org.api.stockmarket.modules.stocks.service.StockService;
 import org.springframework.stereotype.Service;
 

@@ -21,12 +21,12 @@ public class StockCSVReader implements CSVReader<StockCSVObject, Stock> {
     }
 
     @Override
-    public List<Stock> toEntity(List<StockCSVObject> data) {
+    public List<Stock> toEntities(List<StockCSVObject> data) {
         return data.stream().map(stockFactory::create).toList();
     }
 
     @Override
-    public List<Stock> toEntity() {
+    public List<Stock> toEntities() {
         return map().stream().map(stockFactory::create).toList();
     }
 

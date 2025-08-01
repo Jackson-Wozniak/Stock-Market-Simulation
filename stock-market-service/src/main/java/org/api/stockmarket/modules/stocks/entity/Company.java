@@ -19,7 +19,7 @@ public class Company {
     private Long id;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ticker")
+    @JoinColumn(name = "stock_id")
     private Stock stock;
 
     @Column(name = "company_name")
@@ -41,6 +41,7 @@ public class Company {
     private InvestmentStyle investmentStyle;
 
     public Company(Builder builder){
+        this.stock = builder.stock;
         this.companyName = builder.companyName;
         this.sector = builder.sector;
         this.marketCap = builder.marketCap;
@@ -49,17 +50,19 @@ public class Company {
     }
 
     public static class Builder{
-        private final String companyName;
+        private final Stock stock;
+        private String companyName;
         private String sector;
         private MarketCap marketCap;
         private InvestorRating investorRating;
         private InvestmentStyle investmentStyle;
 
-        public Builder(String companyName){
-            this.companyName = companyName;
+        public Builder(Stock stock){
+            this.stock = stock;
         }
 
-        public Builder companyDetails(String sector, MarketCap marketCap){
+        public Builder companyDetails(String companyName, String sector, MarketCap marketCap){
+            this.companyName = companyName;
             this.sector = sector;
             this.marketCap = marketCap;
             return this;

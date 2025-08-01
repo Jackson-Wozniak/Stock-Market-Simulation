@@ -37,8 +37,8 @@ public class IndexFundController {
 
     @GetMapping(value = "/cap/{cap}")
     public IndexFundDto getMarketCapFund(@PathVariable String cap) {
-        if(MarketCap.map(cap) == null) throw IndexFundException.invalidMarketCap(cap);
-        return indexFundService.findMarketCapFunds(MarketCap.map(cap)).toDto();
+        if(MarketCap.fromName(cap) == null) throw IndexFundException.invalidMarketCap(cap);
+        return indexFundService.findMarketCapFunds(MarketCap.fromName(cap)).toDto();
     }
 
     @GetMapping(value = "/sector")

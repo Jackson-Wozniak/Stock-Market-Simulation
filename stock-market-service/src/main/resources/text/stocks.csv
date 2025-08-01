@@ -1,95 +1,81 @@
-#Ticker,Company Name,Market Cap,Mega/Large, Sector,Volatility,Investor Rating,Starting Price
-AAPL,Apple Inc.,Mega,Technology,Stable,StrongBuy,213.76
-MSFT,Microsoft Corporation,Mega,Technology,Stable,StrongBuy,510.88
-GOOGL,Alphabet Inc.,Large,Communication Services,Normal,Buy,192.17
-AMZN,Amazon.com Inc.,Large,Consumer Discretionary,Normal,Buy,232.23
-NVDA,NVIDIA Corporation,Large,Technology,Volatile,StrongBuy,173.74
-META,Meta Platforms Inc.,Large,Communication Services,Normal,Buy,714.80
-TSLA,Tesla Inc.,Large,Consumer Discretionary,Extra Volatile,Neutral,305.30
-JPM,JP Morgan Chase & Co.,Large,Financials,Stable,Buy,296.55
-UNH,UnitedHealth Group Inc.,Large,Healthcare,Stable,Buy,278.58
-LLY,Eli Lilly & Co.,Large,Healthcare,Stable,StrongBuy,805.43
-BRK.B,Berkshire Hathaway Inc.,Mega,Financials,Normal,Buy,505.00
-V,Visa Inc.,Mega,Financials,Normal,Buy,240.00
-WMT,Walmart Inc.,Large,Consumer Staples,Stable,Neutral,160.00
-PG,Procter & Gamble Co.,Large,Consumer Staples,Stable,Buy,145.00
-HD,Home Depot Inc.,Large,Consumer Discretionary,Normal,Buy,360.00
-MA,Mastercard Inc.,Large,Financials,Normal,StrongBuy,380.00
-DIS,Walt Disney Co.,Large,Communication Services,Volatile,Hold,95.00
-BAC,Bank of America Corp.,Large,Financials,Stable,Neutral,32.00
-KO,Coca‑Cola Co.,Large,Consumer Staples,Stable,Buy,62.00
-PEP,PepsiCo Inc.,Large,Consumer Staples,Stable,Buy,190.00
-CMCSA,Comcast Corp.,Large,Communication Services,Normal,Hold,45.00
-CSCO,Cisco Systems Inc.,Large,Technology,Stable,Neutral,55.00
-XOM,Exxon Mobil Corp.,Large,Energy,Normal,Hold,110.00
-CVX,Chevron Corp.,Large,Energy,Normal,Hold,180.00
-INTC,Intel Corp.,Large,Technology,Volatile,Hold,35.00
-ORCL,Oracle Corp.,Large,Technology,Normal,Buy,100.00
-TSM,TSMC,Large,Technology,Normal,Buy,120.00
-ABT,Abbott Laboratories,Large,Healthcare,Stable,Buy,110.00
-MRK,Merck & Co.,Large,Healthcare,Stable,Buy,98.00
-SBUX,Starbucks Corp.,Large,Consumer Discretionary,Normal,Buy,115.00
-IBM,IBM Corp.,Large,Technology,Normal,Hold,130.00
-C,Citigroup Inc.,Large,Financials,Normal,Hold,55.00
-GE,General Electric Co.,Large,Industrial,Volatile,Hold,105.00
-MMM,3M Co.,Large,Industrial,Normal,Hold,155.00
-NFLX,Netflix Inc.,Large,Communication Services,Volatile,Neutral,500.00
-ADBE,Adobe Inc.,Large,Technology,Normal,Buy,580.00
-CRM,Salesforce Inc.,Large,Technology,Volatile,Hold,230.00
-NKE,Nike Inc.,Large,Consumer Discretionary,Normal,Hold,115.00
-TXN,Texas Instruments,Large,Technology,Normal,Buy,170.00
-NEE,NextEra Energy Inc.,Large,Utilities,Stable,Buy,80.00
-AVGO,Broadcom Inc.,Large,Technology,Normal,Buy,1100.00
-QCOM,Qualcomm Inc.,Large,Technology,Normal,Buy,140.00
-COST,Costco Wholesale Corp.,Large,Consumer Staples,Stable,Buy,600.00
-UPS,United Parcel Service Inc.,Large,Industrials,Normal,Hold,200.00
-LLD,LLD Insurance (example),Large,Financials,Normal,Hold,50.00
-CVS,CVS Health Corp.,Large,Healthcare,Normal,Hold,55.00
-WFC,Wells Fargo & Co.,Large,Financials,Normal,Hold,45.00
-AXP,American Express Co.,Large,Financials,Stable,Buy,185.00
-DE,Deere & Co.,Large,Industrial,Stable,Buy,430.00
-MDT,Medtronic plc,Large,Healthcare,Stable,Buy,95.00
-LOW,Lowes Companies Inc.,Large,Consumer Discretionary,Normal,Buy,200.00
-PM,Philip Morris International,Large,Consumer Staples,Stable,Hold,100.00
-RTX,Raytheon Technologies,Large,Industrial,Normal,Neutral,75.00
-INTU,Intuit Inc.,Large,Technology,Normal,Buy,550.00
-S&P_ER,S&P 500 ETF (example),Large,Mixed,Normal,Hold,450.00
-F, Ford Motor Company,Mid,Consumer Discretionary,Normal,Hold,15.00
-FCAU,Stellantis NV,Mid,Consumer Discretionary,Volatile,Hold,18.00
-DAL,Delta Air Lines Inc.,Mid,Industrials,Volatile,Neutral,45.00
-UAL,United Airlines Holdings Inc.,Mid,Industrials,Volatile,Neutral,42.00
-ROKU,Roku Inc.,Mid,Communication Services,Extra Volatile,Buy,90.00
-ETSY,Etsy Inc.,Mid,Consumer Discretionary,Volatile,Buy,160.00
-SNAP,Snap Inc.,Mid,Communication Services,Extra Volatile,Neutral,40.00
-ZM,Zoom Video Communications Inc.,Mid,Technology,Extra Volatile,Hold,80.00
-UBER,Uber Technologies Inc.,Mid,Technology,Volatile,Buy,60.00
-LYFT,Lyft Inc.,Mid,Technology,Extra Volatile,Hold,26.00
-SQ,Block Inc.,Mid,Financials,Volatile,Buy,70.00
-PINS,Pinterest Inc.,Mid,Technology,Extra Volatile,Neutral,25.00
-HPE,Hewlett Packard Enterprise,Mid,Technology,Normal,Hold,18.00
-DOCU,DocuSign Inc.,Mid,Technology,Volatile,Hold,85.00
-OKTA,Okta Inc.,Mid,Technology,Volatile,Buy,120.00
-MDB,MongoDB Inc.,Mid,Technology,Extra Volatile,Buy,350.00
-CLDR,Cloudera Inc.,Mid,Technology,Volatile,Hold,18.00
-AI, C3.ai Inc.,Mid,Technology,Extra Volatile,Neutral,25.00
-UPST,Upstart Holdings Inc.,Small,Financials,Extra Volatile,Hold,33.00
-GME,GameStop Corp.,Small,Consumer Discretionary,Extra Volatile,Neutral,24.00
-BBBY,Bed Bath & Beyond Inc.,Small,Consumer Discretionary,Extra Volatile,Sell,0.30
-AMC,AMC Entertainment Holdings Inc.,Small,Communication Services,Extra Volatile,Neutral,5.00
-PLTR,Palantir Technologies Inc.,Small,Technology,Extra Volatile,Buy,28.00
-CRSR,Corsair Gaming Inc.,Small,Technology,Extra Volatile,Hold,20.00
-RIOT,Riot Platforms Inc.,Small,Technology,Extra Volatile,Neutral,10.00
-MARA,Marathon Digital Holdings Inc.,Small,Technology,Extra Volatile,Neutral,12.00
-SNDL,Sundial Growers Inc.,Small,Consumer Staples,Extra Volatile,Sell,1.20
-FUBO,fuboTV Inc.,Small,Communication Services,Extra Volatile,Neutral,3.00
-SSTI,Silver Sun Technologies Inc.,Small,Technology,Extra Volatile,Hold,0.05
-BLNK,Blink Charging Co.,Small,Industrials,Extra Volatile,Hold,4.00
-NNDM,Nano Dimension Ltd.,Small,Technology,Extra Volatile,Neutral,6.00
-WKHS,Workhorse Group Inc.,Small,Industrials,Extra Volatile,Neutral,9.00
-CVNA,Carvana Co.,Small,Consumer Discretionary,Extra Volatile,Sell,20.00
-BEKE,KE Holdings Inc.,Small,Real Estate,Extra Volatile,Neutral,15.00
-RIOT,Riot Platforms Inc.,Small,Technology,Extra Volatile,Neutral,10.00
-BBBY,Bed Bath & Beyond Inc.,Small,Consumer Discretionary,Extra Volatile,Sell,0.30
-ONON,On Holding AG,Small,Consumer Discretionary,Extra Volatile,Neutral,30.00
-EYPT,Eyepoint Pharmaceuticals Inc.,Small,Healthcare,Extra Volatile,Neutral,2.00
-TLRY, Tilray Brands Inc.,Small,Consumer Staples,Extra Volatile,Neutral,5.00
+#Ticker,Company Name,Market Cap,Sector,Volatility,Investor Rating,Investor Style,Starting Price
+AAPL,Apple Inc.,4,Technology,Stable,4,1,190.25
+MSFT,Microsoft Corp.,4,Technology,Stable,4,1,343.75
+AMZN,Amazon.com Inc.,4,Consumer Discretionary,Normal,3,2,129.56
+GOOGL,Alphabet Inc. (Class A),4,Technology,Normal,4,2,127.4
+TSLA,Tesla Inc.,4,Consumer Discretionary,High,2,2,258.44
+NVDA,NVIDIA Corp.,4,Technology,High,4,2,923.12
+META,Meta Platforms Inc.,4,Communication Services,Normal,3,2,364.22
+BRK.B,Berkshire Hathaway Inc.,4,Financials,Low,3,3,413.7
+JPM,JP Morgan Chase & Co.,4,Financials,Low,3,1,158.5
+JNJ,Johnson & Johnson,4,Healthcare,Stable,2,5,165.3
+V,Visa Inc.,4,Financials,Low,3,1,248.6
+PG,Procter & Gamble Co.,4,Consumer Staples,Stable,3,5,156.15
+UNH,UnitedHealth Group Inc.,4,Healthcare,Low,4,1,505.2
+HD,Home Depot Inc.,4,Consumer Discretionary,Normal,3,1,322.45
+MA,Mastercard Inc.,4,Financials,Low,3,1,418.25
+XOM,Exxon Mobil Corp.,4,Energy,Normal,2,5,113.25
+CVX,Chevron Corp.,4,Energy,Normal,2,5,157.35
+BAC,Bank of America Corp.,4,Financials,Normal,2,6,34.55
+PFE,Pfizer Inc.,4,Healthcare,Low,2,5,34.9
+KO,Coca-Cola Co.,4,Consumer Staples,Stable,3,5,61.2
+PEP,PepsiCo Inc.,4,Consumer Staples,Low,3,5,176.9
+INTC,Intel Corp.,3,Technology,Normal,2,3,34.88
+CSCO,Cisco Systems Inc.,3,Technology,Low,2,5,54.75
+T,AT&T Inc.,3,Communication Services,High,1,5,16.28
+WMT,Walmart Inc.,4,Consumer Staples,Low,3,1,158.45
+DIS,Walt Disney Co.,3,Communication Services,High,2,6,85.62
+MRK,Merck & Co. Inc.,4,Healthcare,Low,3,1,131.8
+ABBV,AbbVie Inc.,4,Healthcare,Low,3,5,172.1
+ORCL,Oracle Corp.,3,Technology,Normal,3,3,112.8
+NKE,Nike Inc.,3,Consumer Discretionary,Normal,2,2,98.45
+LLY,Eli Lilly and Co.,4,Healthcare,Low,4,2,892.6
+ADBE,Adobe Inc.,3,Technology,Normal,3,2,552.25
+CRM,Salesforce Inc.,3,Technology,Normal,3,2,254.8
+ABT,Abbott Laboratories,4,Healthcare,Low,3,6,105.4
+MCD,McDonald’s Corp.,4,Consumer Discretionary,Low,4,5,287.9
+COST,Costco Wholesale Corp.,4,Consumer Staples,Low,4,5,782.2
+AVGO,Broadcom Inc.,4,Technology,Normal,3,2,1270.75
+TXN,Texas Instruments Inc.,3,Technology,Low,2,5,176.25
+GE,General Electric Co.,3,Industrials,Normal,3,6,168.1
+AMD,Advanced Micro Devices Inc.,3,Technology,High,3,2,171.3
+PLTR,Palantir Technologies Inc.,2,Technology,High,3,2,23.45
+RIVN,Rivian Automotive Inc.,2,Consumer Discretionary,Extreme,2,4,19.67
+FUBO,FuboTV Inc.,1,Communication Services,Extreme,1,4,2.31
+SOFI,SoFi Technologies Inc.,2,Financials,High,2,2,7.85
+U,Unity Software Inc.,2,Technology,High,2,2,28.67
+RUN,Sunrun Inc.,1,Energy,Extreme,1,3,13.76
+GPRO,GoPro Inc.,1,Technology,High,1,4,3.26
+AFRM,Affirm Holdings Inc.,2,Financials,Extreme,2,4,18.14
+NIO,NIO Inc.,2,Consumer Discretionary,High,2,2,8.19
+CHPT,ChargePoint Holdings Inc.,1,Industrials,Extreme,1,4,1.92
+WISH,ContextLogic Inc.,1,Consumer Discretionary,Extreme,1,4,0.65
+CLOV,Clover Health Investments Corp.,1,Healthcare,Extreme,1,4,0.89
+WKHS,Workhorse Group Inc.,1,Industrials,Extreme,1,4,0.42
+SNDL,SNDL Inc.,1,Healthcare,Extreme,1,4,1.76
+BB,BlackBerry Ltd.,2,Technology,High,2,3,3.84
+OPEN,Opendoor Technologies Inc.,2,Real Estate,High,2,4,2.31
+HIMS,Hims & Hers Health Inc.,2,Healthcare,High,3,2,17.45
+BMBL,Bumble Inc.,2,Communication Services,Normal,2,2,13.84
+APPH,AppHarvest Inc.,1,Industrials,Extreme,1,4,0.67
+DNA,Ginkgo Bioworks Holdings Inc.,2,Healthcare,Extreme,1,4,1.23
+RIOT,Riot Platforms Inc.,2,Financials,Extreme,3,4,15.72
+MARA,Marathon Digital Holdings Inc.,2,Financials,Extreme,3,4,17.35
+TLRY,Tilray Brands Inc.,1,Healthcare,Extreme,1,4,2.19
+CANO,Cano Health Inc.,1,Healthcare,Extreme,1,4,0.28
+NOVA,Sunnova Energy International Inc.,2,Energy,Extreme,2,2,10.76
+DNMR,Danimer Scientific Inc.,1,Materials,Extreme,1,4,0.75
+ASTR,Astra Space Inc.,1,Industrials,Extreme,1,4,0.37
+INDI,Indie Semiconductor Inc.,2,Technology,High,2,2,7.15
+SKLZ,Skillz Inc.,1,Communication Services,Extreme,1,4,0.43
+SABR,Sabre Corp.,2,Technology,High,2,3,3.25
+NKLA,Nikola Corp.,2,Industrials,Extreme,1,4,0.92
+GOSS,Gossamer Bio Inc.,1,Healthcare,Extreme,1,4,0.91
+BBIG,Vinco Ventures Inc.,1,Communication Services,Extreme,1,4,0.12
+LMND,Lemonade Inc.,2,Financials,High,2,2,11.72
+AEHR,Aehr Test Systems,2,Technology,High,3,2,23.51
+AVXL,Anavex Life Sciences Corp.,2,Healthcare,High,2,2,6.38
+FSLY,Fastly Inc.,2,Technology,High,2,2,13.26
+BIGC,BigCommerce Holdings Inc.,2,Technology,High,2,2,8.42
+MVIS,MicroVision Inc.,2,Technology,Extreme,1,4,1.45
+VERU,Veru Inc.,1,Healthcare,Extreme,1,4,0.89
