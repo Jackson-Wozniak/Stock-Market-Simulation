@@ -20,22 +20,4 @@ public class SimulatedStock {
     private SimulatedStock(Stock stock){
         this.stock = stock;
     }
-
-    public static SimulatedStock defaultInfo(){
-        return new SimulatedStock(Stock.largeCap("DEFAULT", "DEFAULT",
-                "DEFAULT", Volatility.NORMAL, InvestorRating.Neutral));
-    }
-
-    public static SimulatedStock customInfo(Volatility volatility, InvestorRating rating){
-        return new SimulatedStock(Stock.largeCap("CUSTOM", "CUSTOM",
-                "CUSTOM", volatility, rating));
-    }
-
-    public void changePrice(){
-        this.stock.updatePrice();
-    }
-
-    public void savePrice(LocalDate date){
-        this.priceHistory.put(date, stock.getPrice());
-    }
 }

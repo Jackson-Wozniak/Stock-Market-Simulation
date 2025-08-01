@@ -16,11 +16,12 @@ public class StockDTO {
     private double percentChange;
 
     public StockDTO(Stock stock) {
-        this.ticker = stock.getTicker();
-        this.companyName = stock.getCompanyName();
-        this.price = stock.getPrice();
-        this.lastDayPrice = stock.getLastDayPrice();
-        this.percentChange = getPercentChange();
+        //TODO
+//        this.ticker = stock.getTicker();
+//        this.companyName = stock.getCompanyName();
+//        this.price = stock.getPrice();
+//        this.lastDayPrice = stock.getLastDayPrice();
+//        this.percentChange = getPercentChange();
     }
 
     public double getPercentChange() {

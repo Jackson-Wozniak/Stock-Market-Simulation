@@ -28,8 +28,8 @@ public class NewsStory {
     }
 
     public String getStory(Stock stock){
-        return story.replace("{name}", stock.getCompanyName())
+        return story.replace("{name}", stock.getCompany().getCompanyName())
                 .replace("{ticker}", stock.getTicker())
-                .replace("{sector}", stock.getSector());
+                .replace("{sector}", stock.getCompany().getSector());
     }
 }

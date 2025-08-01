@@ -22,8 +22,11 @@ public class PriceRecord implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "ticker")
+    private String ticker;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticker")
+    @JoinColumn(name = "stock")
     private Stock stock;
 
     @Column(name = "date")
@@ -32,9 +35,10 @@ public class PriceRecord implements Serializable {
     @Column(name = "price")
     private Double stockPrice;
 
-    public PriceRecord(Stock stock, ZonedDateTime date, double price){
+    public PriceRecord(Stock stock, ZonedDateTime date){
         this.stock = stock;
+        this.ticker = stock.getTicker();
         this.date = date;
-        this.stockPrice = price;
+        this.stockPrice = stock.getPricingModel().getPrice().doubleValue();
     }
 }

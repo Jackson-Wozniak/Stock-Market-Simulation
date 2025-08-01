@@ -8,7 +8,7 @@ import org.api.stockmarket.modules.stocks.dto.StockPriceHistoryDTO;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.enums.MarketCap;
 import org.api.stockmarket.modules.stocks.exception.StockNotFoundException;
-import org.api.stockmarket.modules.stocks.service.StockPriceHistoryService;
+import org.api.stockmarket.modules.stocks.service.PriceRecordService;
 import org.api.stockmarket.modules.stocks.service.StockService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/*
-This controller provides the endpoints related to stocks on the market.
-All individual stocks here will be sent using the StockDto class as that class includes
-    news, earnings, and price history.
-All lists of stocks (such as sorting by sector ar cap) will be sent using the default
-stock class, which ignores news, earnings, and price history fields.
- */
 @RestController
 @RequestMapping(value = "/api/v1/stocks")
 @CrossOrigin(origins = {"http://127.0.0.1:5500", "http://127.0.0.1:5501"})
@@ -31,7 +24,7 @@ stock class, which ignores news, earnings, and price history fields.
 public class StockController {
 
     private StockService stockService;
-    private final StockPriceHistoryService stockPriceHistoryService;
+    private final PriceRecordService priceRecordService;
 
     @GetMapping(value = "/{ticker}")
     public ResponseEntity<?> getIndividualStockData(
@@ -81,7 +74,7 @@ public class StockController {
 
     @GetMapping(value = "/history/{ticker}")
     public List<StockPriceHistoryDTO> getStockHistory(@PathVariable String ticker) {
-        return stockPriceHistoryService.findStockHistoryByTicker(ticker).stream()
+        return priceRecordService.findRecordsByStock(ticker).stream()
                 .map(StockPriceHistoryDTO::new)
                 .toList();
     }

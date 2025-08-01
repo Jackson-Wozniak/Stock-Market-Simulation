@@ -6,7 +6,6 @@ import org.api.stockmarket.modules.indexfunds.exception.IndexFundException;
 import org.api.stockmarket.modules.indexfunds.model.IndexFund;
 import org.api.stockmarket.modules.indexfunds.service.IndexFundService;
 import org.api.stockmarket.modules.stocks.enums.MarketCap;
-import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,16 +49,5 @@ public class IndexFundController {
     @GetMapping(value = "/sector/{sector}")
     public IndexFundDto getSectorIndexFund(@PathVariable String sector) {
         return indexFundService.findSectorFunds(sector).toDto();
-    }
-
-    @GetMapping(value = "/volatility")
-    public List<IndexFundDto> getAllVolatilityFunds() {
-        return indexFundService.findVolatilityFunds().stream().map(IndexFund::toDto).toList();
-    }
-
-    @GetMapping(value = "/volatility/{volatility}")
-    public IndexFundDto getVolatileIndexFund(@PathVariable String volatility) {
-        if(Volatility.map(volatility) == null) throw IndexFundException.invalidVolatility(volatility);
-        return indexFundService.findVolatilityFunds(Volatility.map(volatility)).toDto();
     }
 }

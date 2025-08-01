@@ -16,7 +16,8 @@ public class StockPriceHistoryDTO {
     private double stockPrice;
 
     public StockPriceHistoryDTO(PriceRecord history){
-        this.marketDate = history.getId().getMarketDate();
-        this.stockPrice = history.getStockPrice();
+        //TODO
+//        this.marketDate = history.getId().getMarketDate();
+//        this.stockPrice = history.getStockPrice();
     }
 }

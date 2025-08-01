@@ -1,13 +1,8 @@
 package org.api.stockmarket.modules.indexfunds.dtos;
 
-import org.api.stockmarket.modules.indexfunds.dtos.IndexFundDto;
-import org.api.stockmarket.modules.indexfunds.dtos.MarketCapFundDto;
-import org.api.stockmarket.modules.indexfunds.dtos.SectorIndexFundDto;
-import org.api.stockmarket.modules.indexfunds.dtos.VolatileIndexFundDto;
 import org.api.stockmarket.modules.indexfunds.model.subclass.MarketCapIndexFund;
 import org.api.stockmarket.modules.indexfunds.model.subclass.SectorIndexFund;
 import org.api.stockmarket.modules.indexfunds.model.subclass.TotalMarketIndexFund;
-import org.api.stockmarket.modules.indexfunds.model.subclass.VolatilityIndexFund;
 import org.api.stockmarket.modules.stocks.enums.MarketCap;
 import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.junit.jupiter.api.Test;

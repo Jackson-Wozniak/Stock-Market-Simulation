@@ -34,21 +34,6 @@ public class StockCSVObject implements CSVObject<Stock> {
     }
 
     @Override
-    public Stock mapToEntity() {
-        if(!fieldsValid()) return null;
-
-        MarketCap marketCap = MarketCap.map(this.marketCap);
-        Volatility volatility = Volatility.map(this.volatility);
-        InvestorRating investorRating = InvestorRating.map(this.investorRating);
-
-        return switch (marketCap){
-            case Large, Mega -> Stock.largeCap(ticker, companyName, sector, volatility, investorRating);
-            case Mid -> Stock.midCap(ticker, companyName, sector, volatility, investorRating);
-            case Small -> Stock.smallCap(ticker, companyName, sector, volatility, investorRating);
-        };
-    }
-
-    @Override
     public boolean fieldsValid(){
         return ticker != null &&
                 !ticker.contains("#") &&

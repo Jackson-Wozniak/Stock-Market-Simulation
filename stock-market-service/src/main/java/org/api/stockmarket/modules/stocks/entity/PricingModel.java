@@ -62,6 +62,10 @@ public class PricingModel {
 
     }
 
+    public double getPriceValue(){
+        return this.price.doubleValue();
+    }
+
     public static class Builder{
         private final Stock stock;
         private double price;

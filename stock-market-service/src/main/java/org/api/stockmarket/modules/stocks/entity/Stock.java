@@ -45,6 +45,14 @@ public class Stock{
         this.pricingModel = pricingModel;
     }
 
+    public double getPrice(){
+        return this.pricingModel.getPriceValue();
+    }
+
+    public void runPriceChange(){
+        this.pricingModel.runPriceChange();
+    }
+
     /*
     I wanted to separate this to be able to call momentum change methods
     so that I could make those private to avoid being called in other classes.

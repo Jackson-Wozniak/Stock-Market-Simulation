@@ -1,15 +1,17 @@
 package org.api.stockmarket.modules.stocks.csv;
 
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.api.stockmarket.common.csv.*;
 import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.factory.StockFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@NoArgsConstructor
+@AllArgsConstructor
 public class StockCSVReader implements CSVReader<StockCSVObject, Stock> {
+    private final StockFactory stockFactory;
     private static final String FILE_PATH = "text/stocks.csv";
 
     @Override
@@ -20,12 +22,12 @@ public class StockCSVReader implements CSVReader<StockCSVObject, Stock> {
 
     @Override
     public List<Stock> toEntity(List<StockCSVObject> data) {
-        return data.stream().map(StockCSVObject::mapToEntity).toList();
+        return data.stream().map(stockFactory::create).toList();
     }
 
     @Override
     public List<Stock> toEntity() {
-        return map().stream().map(StockCSVObject::mapToEntity).toList();
+        return map().stream().map(stockFactory::create).toList();
     }
 
     @Override

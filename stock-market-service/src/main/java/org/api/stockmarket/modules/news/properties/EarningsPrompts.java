@@ -10,7 +10,7 @@ public class EarningsPrompts {
                                                    double estimatedEPS,
                                                    double actualEPS,
                                                    ZonedDateTime marketDate) {
-        return "Date: " + marketDate + ". " + stock.getCompanyName() + " announces increased " +
+        return "Date: " + marketDate + ". " + stock.getCompany().getCompanyName() + " announces increased " +
                 "profits in new earnings report today, causing a spike in their stock price." +
                 " Their EPS of " + actualEPS + " exceeded expectations of " + estimatedEPS + " EPS.";
     }
@@ -19,7 +19,7 @@ public class EarningsPrompts {
                                                   double estimatedEPS,
                                                   double actualEPS,
                                                   ZonedDateTime marketDate) {
-        return "Date: " + marketDate + ". " + stock.getCompanyName() + " announces stable " +
+        return "Date: " + marketDate + ". " + stock.getCompany().getCompanyName() + " announces stable " +
                 "profits in new earnings report today. Their EPS of " +
                 actualEPS + " fell in line with expectations of " + estimatedEPS + " EPS.";
     }
@@ -28,7 +28,7 @@ public class EarningsPrompts {
                                                    double estimatedEPS,
                                                    double actualEPS,
                                                    ZonedDateTime marketDate) {
-        return "Date: " + marketDate + ". " + stock.getCompanyName() + " announces a slip in " +
+        return "Date: " + marketDate + ". " + stock.getCompany().getCompanyName() + " announces a slip in " +
                 "profits in new earnings report today, causing a drop in their stock price." +
                 " Their EPS of " + actualEPS + " came in lower than the expected " +
                 estimatedEPS + " EPS.";
