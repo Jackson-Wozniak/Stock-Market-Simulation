@@ -79,7 +79,7 @@ public class StockController {
         return new DetailedStockDTO(stock);
     }
 
-    @RequestMapping(value = "/history/{ticker}")
+    @GetMapping(value = "/history/{ticker}")
     public List<StockPriceHistoryDTO> getStockHistory(@PathVariable String ticker) {
         return stockPriceHistoryService.findStockHistoryByTicker(ticker).stream()
                 .map(StockPriceHistoryDTO::new)

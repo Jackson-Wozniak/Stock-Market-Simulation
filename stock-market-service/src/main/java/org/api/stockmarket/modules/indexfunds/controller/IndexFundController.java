@@ -26,38 +26,38 @@ public class IndexFundController {
         return indexFundService.findAllIndexFunds().stream().map(IndexFund::toDto).toList();
     }
 
-    @RequestMapping(value = "/total-market")
+    @GetMapping(value = "/total-market")
     public IndexFundDto getTotalMarketFund() {
         return indexFundService.findTotalMarketFund().toDto();
     }
 
-    @RequestMapping(value = "/cap")
+    @GetMapping(value = "/cap")
     public List<IndexFundDto> getAllMarketCapFunds() {
         return indexFundService.findMarketCapFunds().stream().map(IndexFund::toDto).toList();
     }
 
-    @RequestMapping(value = "/cap/{cap}")
+    @GetMapping(value = "/cap/{cap}")
     public IndexFundDto getMarketCapFund(@PathVariable String cap) {
         if(MarketCap.map(cap) == null) throw IndexFundException.invalidMarketCap(cap);
         return indexFundService.findMarketCapFunds(MarketCap.map(cap)).toDto();
     }
 
-    @RequestMapping(value = "/sector")
+    @GetMapping(value = "/sector")
     public List<IndexFundDto> getAllSectorIndexFunds() {
         return indexFundService.findSectorFunds().stream().map(IndexFund::toDto).toList();
     }
 
-    @RequestMapping(value = "/sector/{sector}")
+    @GetMapping(value = "/sector/{sector}")
     public IndexFundDto getSectorIndexFund(@PathVariable String sector) {
         return indexFundService.findSectorFunds(sector).toDto();
     }
 
-    @RequestMapping(value = "/volatility")
+    @GetMapping(value = "/volatility")
     public List<IndexFundDto> getAllVolatilityFunds() {
         return indexFundService.findVolatilityFunds().stream().map(IndexFund::toDto).toList();
     }
 
-    @RequestMapping(value = "/volatility/{volatility}")
+    @GetMapping(value = "/volatility/{volatility}")
     public IndexFundDto getVolatileIndexFund(@PathVariable String volatility) {
         if(Volatility.map(volatility) == null) throw IndexFundException.invalidVolatility(volatility);
         return indexFundService.findVolatilityFunds(Volatility.map(volatility)).toDto();

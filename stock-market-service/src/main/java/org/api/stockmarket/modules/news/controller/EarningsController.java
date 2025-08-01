@@ -24,13 +24,13 @@ public class EarningsController {
         return earningsService.findAllEarningsReports();
     }
 
-    @RequestMapping(value = "/stock/{ticker}")
+    @GetMapping(value = "/stock/{ticker}")
     public List<EarningsReport> getAllEarningsHistoryFromStock(@PathVariable String ticker) {
         return earningsService.findEarningsByStock(ticker);
     }
 
     //date is formatted as month_day_year here instead of month/day/year
-    @RequestMapping(value = "/date/{date}")
+    @GetMapping(value = "/date/{date}")
     public List<EarningsReport> getEarningsOnDate(@PathVariable String date) {
         ZonedDateTime parsedDate = ZonedDateTime.parse(date);
         return earningsService.findAllEarningsByDate(parsedDate);
