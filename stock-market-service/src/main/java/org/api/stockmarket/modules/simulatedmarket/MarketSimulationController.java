@@ -3,9 +3,7 @@ package org.api.stockmarket.modules.simulatedmarket;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.modules.stocks.entity.PricingModel;
 import org.api.stockmarket.modules.stocks.entity.Stock;
-import org.api.stockmarket.modules.stocks.enums.InvestorRating;
 import org.api.stockmarket.modules.stocks.enums.PriceVolatility;
-import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +12,6 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/v1/market/sim")

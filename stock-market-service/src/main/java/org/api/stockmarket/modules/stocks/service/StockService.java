@@ -3,13 +3,10 @@ package org.api.stockmarket.modules.stocks.service;
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.enums.MarketCap;
-import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.api.stockmarket.modules.stocks.exception.StockNotFoundException;
 import org.api.stockmarket.modules.stocks.repository.StockRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

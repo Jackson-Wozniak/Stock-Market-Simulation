@@ -3,8 +3,6 @@ package org.api.stockmarket.modules.simulatedmarket;
 import lombok.Getter;
 import lombok.Setter;
 import org.api.stockmarket.modules.stocks.entity.Stock;
-import org.api.stockmarket.modules.stocks.enums.InvestorRating;
-import org.api.stockmarket.modules.stocks.enums.Volatility;
 
 import java.time.LocalDate;
 import java.util.HashMap;

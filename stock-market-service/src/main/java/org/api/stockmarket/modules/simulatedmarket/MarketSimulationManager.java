@@ -1,14 +1,7 @@
 package org.api.stockmarket.modules.simulatedmarket;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.engine.properties.MarketIntervals;
-import org.api.stockmarket.modules.stocks.enums.InvestorRating;
-import org.api.stockmarket.modules.stocks.enums.Volatility;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.IntStream;
 
 @Component
 @AllArgsConstructor
