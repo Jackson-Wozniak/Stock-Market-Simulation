@@ -10,4 +10,7 @@ public class MarketEnvironmentProperties {
     public static final double PRICE_SCALE_DIMINISHER = 800.0;
     public static final int ABSOLUTE_VALUE_FACTOR_RANGE = 50;
     public static final double PRICE_SIGNAL_DIMINISHER = 35.0;
+
+    //Stocks above this price will dampen their price change scales
+    public static final double PRICE_CEILING_DAMPENER = 10_000.0;
 }

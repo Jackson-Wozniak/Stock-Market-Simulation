@@ -93,7 +93,7 @@ public class MarketSimulationController {
         counter++;
 
         Instant time = Instant.now();
-        for(int i = 0; i <= 10000; i++){
+        for(int i = 0; i <= 10_000; i++){
             model.runPriceChange();
             model2.runPriceChange();
             model3.runPriceChange();
@@ -114,8 +114,7 @@ public class MarketSimulationController {
         var l2 = map2.entrySet().stream().toList().stream().sorted((e, i) -> e.getKey()).toList();
         var l3 = map3.entrySet().stream().toList().stream().sorted((e, i) -> e.getKey()).toList();
         var l4 = map4.entrySet().stream().toList().stream().sorted((e, i) -> e.getKey()).toList();
-        List<Map.Entry<Integer, Double>> t = Map.of(-1, (double)Duration.between(time, end)
-                        .toMillis()).entrySet().stream().toList();
+        System.out.println(Duration.between(time, end).toMillis());
         return ResponseEntity.ok(List.of(l1, l2, l3, l4));
     }
 //

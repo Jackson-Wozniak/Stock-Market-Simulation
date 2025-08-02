@@ -87,7 +87,7 @@ function createChart(){
             scales: {
                 y: {
                     min: 0,
-                    max: 200,
+                    max: 1000,
                     grid: {
                         borderColor: '#FBFCF8',
                         borderWidth : 4

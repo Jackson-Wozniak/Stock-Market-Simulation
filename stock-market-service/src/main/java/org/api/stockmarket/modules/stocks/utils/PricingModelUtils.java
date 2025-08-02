@@ -2,6 +2,7 @@ package org.api.stockmarket.modules.stocks.utils;
 
 import static org.api.stockmarket.engine.properties.MarketEnvironmentProperties.PRICE_SCALE_DIMINISHER;
 import static org.api.stockmarket.engine.properties.MarketEnvironmentProperties.PRICE_SIGNAL_DIMINISHER;
+import static org.api.stockmarket.engine.properties.MarketEnvironmentProperties.PRICE_CEILING_DAMPENER;
 
 import java.util.Random;
 
@@ -18,8 +19,10 @@ public class PricingModelUtils {
 
         double randomizedNoise = (random.nextDouble() * 2 - 1) * sigma;
 
+        double dampener = 1.0 / (1.0 + Math.pow(currentPrice / PRICE_CEILING_DAMPENER, 1.5));
+
         double priceDelta = ((signal * .06) + randomizedNoise) * currentPrice;
 
-        return priceDelta / PRICE_SCALE_DIMINISHER;
+        return (priceDelta * dampener) / PRICE_SCALE_DIMINISHER;
     }
 }
