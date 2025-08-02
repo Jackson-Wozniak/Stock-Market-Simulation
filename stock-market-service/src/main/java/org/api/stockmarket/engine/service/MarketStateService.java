@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.api.stockmarket.common.exceptions.ConfigurationException;
 import org.api.stockmarket.engine.entity.MarketState;
 import org.api.stockmarket.engine.entity.MarketSingletonEntity;
+import org.api.stockmarket.engine.enums.CurrentTimeRange;
 import org.api.stockmarket.engine.repository.MarketSingletonRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +36,27 @@ public class MarketStateService {
         return findOrRegisterMarket(false).getState();
     }
 
-    public MarketState incrementAndSave(){
-        MarketSingletonEntity market = findOrRegisterMarket(false);
-        ZonedDateTime time = market.getDate();
-        time = time.plusHours(1);
-        cachedMarketSingleton.setDate(time);
+    public MarketState incrementAndGet(){
+        MarketSingletonEntity priorMarket = findOrRegisterMarket(false);
+
+        CurrentTimeRange priorRange = priorMarket.getTimeRange();
+        ZonedDateTime currentTime = priorMarket.getDate();
+
+        ZonedDateTime newTime = currentTime.plusMinutes(PLUS_MINUTES_PER_RUN);
+
+        cachedMarketSingleton.setDate(newTime);
+        cachedMarketSingleton = marketRepository.save(cachedMarketSingleton);
+        return cachedMarketSingleton.getState(priorRange);
+    }
+
+    public MarketState incrementAfterHours(){
+        MarketSingletonEntity priorMarket = findOrRegisterMarket(false);
+
+        ZonedDateTime currentTime = priorMarket.getDate();
+
+        ZonedDateTime newTime = currentTime.plusHours(1);
+
+        cachedMarketSingleton.setDate(newTime);
         cachedMarketSingleton = marketRepository.save(cachedMarketSingleton);
         return cachedMarketSingleton.getState();
     }

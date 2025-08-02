@@ -1,7 +1,5 @@
 package org.api.stockmarket.engine.service;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -11,6 +9,8 @@ import org.api.stockmarket.modules.news.engines.NewsEngine;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.service.PriceRecordService;
 import org.api.stockmarket.modules.stocks.service.StockService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -22,15 +22,14 @@ import static org.api.stockmarket.engine.enums.TemporalMarketMilestone.*;
 public class MarketExecutorService {
 
     private final StockService stockService;
-    private final MarketStateService marketStateService;
     private final NewsEngine newsEngine;
     private final EarningsEngine earningsEngine;
     private final PriceRecordService priceRecordService;
+    private static final Logger logger = LoggerFactory.getLogger(MarketExecutorService.class);
 
-    public void advanceMarket(){
-        MarketState marketState = marketStateService.incrementAndSave();
-
+    public void advanceMarket(MarketState marketState){
         if(marketState.getTemporalMarketMilestone().equals(END_OF_DAY)){
+            logger.info("END OF DAY: {}", marketState);
             dailyMarketActivity(marketState.getDateTime());
         }
         if(marketState.getTemporalMarketMilestone().equals(END_OF_MONTH)){

@@ -35,4 +35,44 @@ public enum MarketCap {
         }
         return UNKNOWN;
     }
+
+    public int defaultInnovationFactor(){
+        return switch(this){
+            case SMALL -> 10;
+            case MID -> 5;
+            case LARGE -> -2;
+            case MEGA -> -5;
+            case UNKNOWN -> 0;
+        };
+    }
+
+    public int defaultTradingDemandFactor(){
+        return switch(this){
+            case SMALL -> -3;
+            case MID -> -1;
+            case LARGE -> 3;
+            case MEGA -> 5;
+            case UNKNOWN -> 0;
+        };
+    }
+
+    public int defaultLiquidityFactor(){
+        return switch(this){
+            case SMALL -> -5;
+            case MID -> -2;
+            case LARGE -> 5;
+            case MEGA -> 10;
+            case UNKNOWN -> 0;
+        };
+    }
+
+    public int defaultInvestorConfidenceFactor(){
+        return switch(this){
+            case SMALL -> -10;
+            case MID -> -5;
+            case LARGE -> 5;
+            case MEGA -> 10;
+            case UNKNOWN -> 0;
+        };
+    }
 }

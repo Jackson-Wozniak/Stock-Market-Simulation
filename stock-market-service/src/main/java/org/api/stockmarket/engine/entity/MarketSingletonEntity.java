@@ -5,11 +5,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.engine.enums.CurrentTimeRange;
 import org.api.stockmarket.engine.enums.MarketSentiment;
+import org.api.stockmarket.engine.enums.TemporalMarketMilestone;
 import org.api.stockmarket.engine.properties.MarketEnvironmentProperties;
 
 import java.time.Month;
 import java.time.ZonedDateTime;
+import java.util.Optional;
 
 @Entity(name = "market")
 @Table(name = "market")
@@ -41,7 +44,20 @@ public class MarketSingletonEntity {
     }
 
     public MarketState getState(){
-        return new MarketState(date, sentiment);
+        return new MarketState(date, sentiment, TemporalMarketMilestone.NONE);
+    }
+
+    public MarketState getState(CurrentTimeRange priorStatus){
+        if(priorStatus.equals(CurrentTimeRange.TRADING_HOURS) &&
+        getTimeRange().equals(CurrentTimeRange.AFTER_HOURS)){
+            return new MarketState(date, sentiment, TemporalMarketMilestone.END_OF_DAY);
+        }
+        return getState();
+    }
+
+    public CurrentTimeRange getTimeRange(){
+        return ((date.getHour() >= 17) ||
+                (date.getHour() < 9)) ? CurrentTimeRange.AFTER_HOURS : CurrentTimeRange.TRADING_HOURS;
     }
 
 //    public TimeStamp increment() {

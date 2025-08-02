@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
 
 @Getter
 public enum TemporalMarketMilestone {
+    START_OF_DAY("Start of Day"),
     NONE("Middle of Day"),
     END_OF_DAY("End of Day"),
     END_OF_MONTH("End of Month"),
@@ -16,9 +17,5 @@ public enum TemporalMarketMilestone {
 
     TemporalMarketMilestone(String name){
         this.name = name;
-    }
-
-    public static TemporalMarketMilestone of(ZonedDateTime dateTime){
-        return TemporalMarketMilestone.NONE;
     }
 }

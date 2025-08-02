@@ -1,8 +1,8 @@
 package org.api.stockmarket.engine.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.api.stockmarket.engine.enums.CurrentTimeRange;
 import org.api.stockmarket.engine.enums.MarketSentiment;
 import org.api.stockmarket.engine.enums.TemporalMarketMilestone;
 
@@ -15,10 +15,16 @@ public class MarketState {
     private final MarketSentiment sentiment;
     private final TemporalMarketMilestone temporalMarketMilestone;
 
-    public MarketState(ZonedDateTime dateTime, MarketSentiment sentiment){
+    public MarketState(ZonedDateTime dateTime, MarketSentiment sentiment,
+                       TemporalMarketMilestone marketMilestone){
         this.dateTime = dateTime;
         this.sentiment = sentiment;
-        this.temporalMarketMilestone = TemporalMarketMilestone.of(dateTime);
+        this.temporalMarketMilestone = marketMilestone;
+    }
+
+    public CurrentTimeRange getCurrentTimeRange(){
+        return ((dateTime.getHour() >= 17) ||
+                (dateTime.getHour() < 9)) ? CurrentTimeRange.AFTER_HOURS : CurrentTimeRange.TRADING_HOURS;
     }
 
     @Override
@@ -28,6 +34,8 @@ public class MarketState {
                 .append(dateTime)
                 .append(",\n    sentiment : ")
                 .append(sentiment.getName())
+                .append(",\n    status : ")
+                .append(getCurrentTimeRange().toString())
                 .append("\n}")
                 .toString();
     }
