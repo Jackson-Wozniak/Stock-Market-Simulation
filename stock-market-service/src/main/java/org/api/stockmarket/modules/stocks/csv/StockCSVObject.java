@@ -24,7 +24,7 @@ public class StockCSVObject implements CSVObject<Stock> {
 
     public StockCSVObject(String[] line){
         if(line.length < 7){
-            ConfigurationException.exit("stocks.csv has invalid data", "StockCSVReader");
+            ConfigurationException.failAndExit("stocks.csv has invalid data", "StockCSVReader");
         }
         try{
             ticker = line[0];
@@ -36,7 +36,7 @@ public class StockCSVObject implements CSVObject<Stock> {
             investorStyle = InvestmentStyle.fromValue(Integer.parseInt(line[6]));
             initialPrice = Double.parseDouble(line[7]);
         }catch (Exception ex){
-            ConfigurationException.exit("stocks.csv has invalid data", "StockCSVReader");
+            ConfigurationException.failAndExit("stocks.csv has invalid data", "StockCSVReader");
         }
     }
 

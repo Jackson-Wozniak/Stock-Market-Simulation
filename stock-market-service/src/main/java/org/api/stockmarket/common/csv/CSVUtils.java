@@ -1,7 +1,6 @@
 package org.api.stockmarket.common.csv;
 
 import org.api.stockmarket.common.exceptions.ConfigurationException;
-import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.BufferedReader;
@@ -15,7 +14,7 @@ public class CSVUtils {
             InputStreamReader streamReader = new InputStreamReader(resource.getInputStream());
             return toArray(new BufferedReader(streamReader).lines().toList());
         }catch (Exception ex){
-            ConfigurationException.exit("Error reading file " + filepath + ".", calledClass);
+            ConfigurationException.failAndExit("Error reading file " + filepath + ".", calledClass);
             return List.of();
         }
     }
@@ -26,7 +25,7 @@ public class CSVUtils {
             InputStreamReader streamReader = new InputStreamReader(resource.getInputStream());
             return new BufferedReader(streamReader).lines().toList().size();
         }catch (Exception ex){
-            ConfigurationException.exit("Error reading file " + filepath + ".", calledClass);
+            ConfigurationException.failAndExit("Error reading file " + filepath + ".", calledClass);
             return 0L;
         }
     }

@@ -1,8 +1,8 @@
 package org.api.stockmarket.engine.controller;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.engine.dtos.MarketDTO;
-import org.api.stockmarket.engine.service.MarketService;
+import org.api.stockmarket.engine.dtos.MarketState;
+import org.api.stockmarket.engine.service.MarketStateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class MarketController {
 
-    private final MarketService marketService;
+    private final MarketStateService marketStateService;
 
     @GetMapping()
-    public ResponseEntity<MarketDTO> getMarketEntity() {
-        return ResponseEntity.ok(new MarketDTO(marketService.findMarketEntity()));
+    public ResponseEntity<MarketState> getMarketEntity() {
+        return ResponseEntity.ok(new MarketState(marketStateService.findMarketState()));
     }
 }

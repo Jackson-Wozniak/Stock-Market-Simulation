@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 
 import org.api.stockmarket.engine.enums.MarketSimulatorMode;
 import org.api.stockmarket.engine.properties.MarketEnvironmentProperties;
-import org.api.stockmarket.engine.properties.MarketIntervals;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.api.stockmarket.engine.service.MarketExecutorService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,8 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @AllArgsConstructor
 public class MarketActivityScheduler {
 
-    private final MarketManager marketManager;
-    private static final Logger stockLogger = LoggerFactory.getLogger("stockLogger");
+    private final MarketExecutorService marketExecutorService;
 
     @Scheduled(fixedRate = MarketEnvironmentProperties.MARKET_TIME_INTERVAL)
     @SuppressWarnings("unused")
@@ -25,9 +22,7 @@ public class MarketActivityScheduler {
         if(MarketEnvironmentProperties.MARKET_MODE.equals(MarketSimulatorMode.SIMULATOR_ONLY)){
             return; //testing mode
         }
-
-        long millis = marketManager.advanceMarket();
-        stockLogger.info("{}ms", millis);
+        marketExecutorService.advanceMarket();
     }
 
 }

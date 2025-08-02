@@ -2,7 +2,16 @@ package org.api.stockmarket.engine.properties;
 
 import org.api.stockmarket.engine.enums.MarketSimulatorMode;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 public class MarketEnvironmentProperties {
+    public static final int MARKET_SINGLETON_ID = 1;
+    public static final ZonedDateTime STARTING_MARKET_DATE =
+            ZonedDateTime.of(LocalDate.of(2025,1,1),
+                    LocalTime.of(9, 0), ZoneId.systemDefault());
     public static final MarketSimulatorMode MARKET_MODE = MarketSimulatorMode.FULL_FUNCTIONALITY;
     public static final long MARKET_TIME_INTERVAL = MarketIntervals.TEN_SECONDS;
     public static final boolean CSV_ENUMS_USE_STRINGS = false;

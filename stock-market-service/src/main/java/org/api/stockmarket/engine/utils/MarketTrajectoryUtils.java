@@ -1,26 +1,12 @@
 package org.api.stockmarket.engine.utils;
 
-import org.api.stockmarket.engine.entity.Market;
-import org.api.stockmarket.engine.enums.MarketTrajectory;
+import org.api.stockmarket.engine.dtos.MarketState;
+import org.api.stockmarket.engine.enums.MarketSentiment;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 
 import java.util.List;
 
 public class MarketTrajectoryUtils {
-
-    public static MarketTrajectory getNewMarketTrajectory(Market market, List<Stock> stockList) {
-        if (stockList == null || stockList.size() == 0) return MarketTrajectory.NORMAL;
-
-        double stockPricesAverage = stockPricesAverage(stockList);
-        double priceChange = (stockPricesAverage / market.getLastMonthAveragePrice()) * 100;
-        if (priceChange >= 110) {
-            return MarketTrajectory.BULL;
-        }
-        if (priceChange <= 90) {
-            return MarketTrajectory.BEAR;
-        }
-        return MarketTrajectory.NORMAL;
-    }
 
     public static double stockPricesAverage(List<Stock> stockList) {
         return Math.round((stockPricesSum(stockList) / stockList.size()) * 100.00) / 100.00;
