@@ -1,0 +1,23 @@
+body{
+    background-color: #1a212b;
+    scrollbar-width: 0px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+#button-utils{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px
+}
+
+#line-chart{
+
+}
+
+#bar-chart{
+
+}

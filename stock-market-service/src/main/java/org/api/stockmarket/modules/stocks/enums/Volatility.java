@@ -1,5 +1,6 @@
 package org.api.stockmarket.modules.stocks.enums;
 
+@Deprecated
 public enum Volatility {
     STABLE {
         @Override

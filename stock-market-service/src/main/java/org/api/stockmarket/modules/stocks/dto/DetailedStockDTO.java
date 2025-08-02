@@ -24,7 +24,7 @@ public class DetailedStockDTO {
         this.sector = stock.getCompany().getSector();
         this.marketCap = String.valueOf(stock.getCompany().getMarketCap());
         this.price = stock.getPrice();
-        this.volatility = stock.getPricingModel().getVolatility().getName();
+        this.volatility = stock.getPricingModel().getAttributes().getVolatility().getName();
         this.investorRating = stock.getCompany().getInvestorRating().getName();
     }
 }

@@ -26,10 +26,6 @@ public class PricingModel {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "pricing_volatility")
-    @Enumerated(EnumType.STRING)
-    private PriceVolatility volatility;
-
     @Embedded
     private PricingAttributes attributes;
 
@@ -38,8 +34,8 @@ public class PricingModel {
     public PricingModel(Builder builder) {
         this.stock = builder.stock;
         this.price = new BigDecimal(builder.price);
-        this.volatility = builder.volatility;
         this.attributes = new PricingAttributes(
+            builder.volatility,
             builder.investorConfidenceFactor,
             builder.investorConfidenceWeight,
             builder.baseInvestorConfidenceNoise,
@@ -59,7 +55,16 @@ public class PricingModel {
     }
 
     public void runPriceChange(){
+        double currentPrice = price.doubleValue();
+        double newsFactorDelta = attributes.calculateNewsDelta(currentPrice);
+        double investorConfidenceDelta = attributes.calculateInvestorConfidenceDelta(currentPrice);
+        double innovationDelta = attributes.calculateInnovationDelta(currentPrice);
+        double tradingDemandDelta = attributes.calculateTradingDemandDelta(currentPrice);
+        double liquidityDelta = attributes.calculateLiquidityDelta(currentPrice);
 
+        double totalDelta = newsFactorDelta + investorConfidenceDelta + innovationDelta
+                + tradingDemandDelta + liquidityDelta;
+        setPrice(BigDecimal.valueOf(currentPrice + totalDelta));
     }
 
     public double getPriceValue(){

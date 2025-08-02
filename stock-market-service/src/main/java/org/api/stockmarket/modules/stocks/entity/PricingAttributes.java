@@ -2,10 +2,15 @@ package org.api.stockmarket.modules.stocks.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.modules.stocks.enums.PriceVolatility;
+
+import static org.api.stockmarket.modules.stocks.utils.PricingModelUtils.*;
 
 @Embeddable
 @Getter
@@ -13,6 +18,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PricingAttributes {
+    @Column(name = "pricing_volatility")
+    @Enumerated(EnumType.STRING)
+    private PriceVolatility volatility;
+
     @Column(name = "investor_confidence_factor")
     private int investorConfidenceFactor;
 
@@ -57,6 +66,51 @@ public class PricingAttributes {
 
     @Column(name = "base_liquidity_noise")
     private double baseLiquidityNoise;
+
+    public double calculateNewsDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedNewsSentimentFactor(),
+                volatility.applyMagnitude(baseNewsSentimentNoise));
+    }
+
+    public double calculateInvestorConfidenceDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedInvestorConfidenceFactor(),
+                volatility.applyMagnitude(baseInvestorConfidenceNoise));
+    }
+
+    public double calculateInnovationDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedInnovationFactor(),
+                volatility.applyMagnitude(baseInnovationNoise));
+    }
+
+    public double calculateTradingDemandDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedTradingDemandFactor(),
+                volatility.applyMagnitude(baseTradingDemandNoise));
+    }
+
+    public double calculateLiquidityDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedLiquidityFactor(),
+                volatility.applyMagnitude(baseLiquidityNoise));
+    }
+
+    private double weightedInvestorConfidenceFactor(){
+        return investorConfidenceFactor * investorConfidenceWeight;
+    }
+
+    private double weightedNewsSentimentFactor(){
+        return newsSentimentFactor * newsSentimentWeight;
+    }
+
+    private double weightedInnovationFactor(){
+        return innovationFactor * innovationWeight;
+    }
+
+    private double weightedTradingDemandFactor(){
+        return tradingDemandFactor * tradingDemandWeight;
+    }
+
+    private double weightedLiquidityFactor(){
+        return liquidityFactor * liquidityWeight;
+    }
 
     /*
     TODO:
