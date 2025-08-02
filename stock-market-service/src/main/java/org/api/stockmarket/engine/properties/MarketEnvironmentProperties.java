@@ -8,6 +8,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 public class MarketEnvironmentProperties {
+    public static final boolean PERFORMANCE_DEBUG = true;
+
     public static final int MARKET_SINGLETON_ID = 1;
     public static final ZonedDateTime STARTING_MARKET_DATE =
             ZonedDateTime.of(LocalDate.of(2025,1,1),

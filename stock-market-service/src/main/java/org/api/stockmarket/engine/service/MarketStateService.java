@@ -25,7 +25,11 @@ public class MarketStateService {
     private MarketSingletonEntity findOrRegisterMarket(boolean isConstructor){
         if(cachedMarketSingleton != null) return cachedMarketSingleton;
         Optional<MarketSingletonEntity> market = marketRepository.findById(MARKET_SINGLETON_ID);
-        if(market.isEmpty() && !isConstructor){
+        if(market.isPresent()){
+            cachedMarketSingleton = market.get();
+            return cachedMarketSingleton;
+        }
+        if(!isConstructor){
             return ConfigurationException.failAndExitAs("Market state was not in cache or in DB", getClass().getName());
         }
         cachedMarketSingleton = marketRepository.save(MarketSingletonEntity.getDefault());

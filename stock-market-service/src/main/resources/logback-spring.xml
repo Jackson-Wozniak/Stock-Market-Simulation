@@ -10,8 +10,8 @@
         </encoder>
     </appender>
 
-    <appender name="STOCK_FILE" class="ch.qos.logback.core.FileAppender">
-        <file>./log-parser/logs/stocks.log</file>
+    <appender name="PERFORMANCE_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./log-parser/logs/stopwatch.log</file>
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss} | %msg%n</pattern>
             <charset>utf8</charset>
@@ -19,8 +19,8 @@
     </appender>
 
     <!-- Logger configurations -->
-    <logger name="stockLogger" level="INFO" additivity="false">
-        <appender-ref ref="STOCK_FILE"/>
+    <logger name="performanceLogger" level="INFO" additivity="false">
+        <appender-ref ref="PERFORMANCE_FILE"/>
     </logger>
 
     <root level="INFO">
