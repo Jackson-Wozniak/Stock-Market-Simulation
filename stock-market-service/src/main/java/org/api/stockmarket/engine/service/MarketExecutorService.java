@@ -48,9 +48,7 @@ public class MarketExecutorService {
     }
 
     private void hourlyMarketActivity(){
-        List<Stock> stocks = stockService.getAllStocks();
-        stocks.forEach(Stock::runPriceChange);
-        stockService.updateAllStocksInDatabase(stocks);
+        stockService.runPriceChanges();
     }
 
     private void monthlyMarketActivity(ZonedDateTime date){
