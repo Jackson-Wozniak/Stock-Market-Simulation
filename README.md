@@ -47,7 +47,7 @@
 
 ## :notebook: Market Engine Overview <a id="overview"></a>
 
-#### Market Calendar Tracking
+### Market Calendar Tracking
 
 The Market Engine is the core of this stock market, handling the execution of all features in the market. To accurately track
 time passage, the engine uses a universal 'Market State' that is handled by an internal service class, handling time and date changes
@@ -61,20 +61,20 @@ and also saves an 'Intra Day Pricing Record' to be able to populate pricing char
 the month and year, where they are moved out of the database and into a long-term CSV file. This can be read in more detail in the 
 <a href="performance-optimization">Optimizing For Performance</a> section.
 
-#### News Stories
+### News Stories
 
 Alongside these pricing-related operations, the market executor also handles News and Earnings reports. Earnings run once at the end of
 each fiscal quarter, and have a slight affect on the pricing model of each stock. The News executor plays a vital role in the sentiment of stocks,
 releasing a range of news stories for stocks across the market, each of which having a realistic affect on the short-term sentiment of the stock.
 These short-term factors regress toward zero over time, simulating the fact that news stories impact decays over time.
 
-#### Custom Simulations
+### Custom Simulations
 
 To enable real-time testing, this application provides a multitude of customizable simulations through the MarketSimulationController. These
 simulations are contained in-memory and have no effect on the database of stocks. This allows for extensive testing of different market features,
 and is especially useful for testing the pricing model and seeing how different factors involved in price changes alter the direction of a stock.
 
-#### Index Funds
+### Index Funds
 
 Index funds currently operate very simply, by returning the average price of all stocks under the umbrella of that index fund. This can be traded
 just like any other stock in the Trading Service, so they act much like an Exchange Traded Fund (ETF). There are a broad range of options for index
@@ -86,14 +86,14 @@ funds, and the total market index fund is used as a basis for gauging the market
 
 ## :chart_with_upwards_trend: Pricing Model <a id="pricing-model"></a>
 
-#### Company Attributes
+### Company Attributes
 
 To ensure a realistic simulation, each company is assigned a default attribute for each of the company attributes in the simulation. These
 are investment style (growth, value, etc.), investor rating (buy, sell, hold, etc.), sector and market cap. These attributes are not changed
 throughout the simulation's running, and are instead used as a basis for the expected direction a stock will move in, before random noise and
 environment variables (such as news stories) are taken into account.
 
-#### Pricing Attributes and Factors
+### Pricing Attributes and Factors
 
 All 5 factors are tracked using a range of values from [-50, 50]. The closer to the edges of these values, the higher the change that the
 stock trends in that direction, with the price changes scaling up as the factors reach closer to 50. A stock with factor values of 0
@@ -103,7 +103,7 @@ Alongside this, each factor is also assigned a weight, where the total weight of
 more accuracy, scaling the importance of each factor based on the companies attributes and which is most important at a point in time.
 
 
-1. Pricing Volatility
+### 1. Pricing Volatility
 
 The pricing volatility is represented as ENUM value, with values of [Stable, Low, Normal, High, Extreme]. The volatility of a stock
 is determined at the beginning of the simulation, and is given as one of the attributes of the company in the CSV file. This pricing volatility
@@ -112,14 +112,14 @@ on the direction of the stock, as this solely seeks to amplify the movement a st
 main factors are also assigned a 'base noise' value that is added onto the volatility value, used to place a floor on how much random noise a stock
 has (to ensure that stocks do not remain deterministic no matter how stable their attributes may be).
 
-2. Investor Confidence
+### 2. Investor Confidence
 
 Representing the long-term confidence and health of a company, investor confidence seeks to track the long-term sentiment of the company, relying
 primarily on the financial health and stability of a companies profile. Companies with consistent positive news will see an uptake in their
 investor confidence, and likewise the basis of the default investor confidence is primarily based on a companies Investment Style and Investor Rating, which are both provided in the CSV file as company attributes. Direct financial data is not simulated in this application, so the
 movement of a stocks investor confidence is largely based on the rating assigned to a company at the start, and the style of investment it is.
 
-3. Trading Demand
+### 3. Trading Demand
 
 Trading demand encapsulates the short-term demand for a stock, representing both speculative demand and the buying frequency a stock sees. This
 is derived from the companies base attributes, but is primarily altered based on recent price movement as well as news sentiment. Some influence
@@ -127,7 +127,7 @@ will be given to the performance of related companies and stocks, but this has n
 
 *This stock accounts for factor regression outlined in the News Sentiment section*
 
-4. Liquidity
+### 4. Liquidity
 
 This factor tracks how easy it is to trade a stock, partnering closely with trading demand to simulate the fact that a very popular stock will
 see reliable upward price movement as more people look to buy in, and less shares become available. This is initially derived from the companies
@@ -136,7 +136,7 @@ counterparts. Alongside this, as a companies trading demand moves, a strong corr
 
 *This stock accounts for factor regression outlined in the News Sentiment section*
 
-5. News Sentiment
+### 5. News Sentiment
 
 News sentiment begins at 0 for all stocks, and only changes based on the release of news stories. Some news stories will affect multiple stocks,
 for example legislation may put pressure on all technology stocks. To accurately account for a news stories timeline, the influence of news
@@ -145,13 +145,13 @@ relevance as time passes.
 
 *This stock accounts for factor regression outlined in the News Sentiment section*
 
-6. Innovation Potential
+### 6. Innovation Potential
 
 Innovation potential seeks to track the confidence investors have on how much growth potential a company has. Stocks in growth sectors will see a
 higher baseline innovation factor, as you can assume a Technology company would provide more innovation than a similarly rated company in a sector
 such as traditional energy.
 
-#### Pricing Formula
+### Pricing Formula
 
 ```diff
 New Price = currentPrice
@@ -187,9 +187,9 @@ RandomNoise = random([-1.0, 1.0]) * Sigma
 
 ## :bar_chart: Statistical Analysis & Results <a id="results"></a>
 
-#### Accurately modelling a stock market
+### Accurately modelling a stock market
 
-#### Results
+### Results
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
@@ -197,7 +197,7 @@ RandomNoise = random([-1.0, 1.0]) * Sigma
 
 ## :clock1: Optimizing For Performance <a id="#performance-optimization"></a>
 
-#### Stock Caching
+### Stock Caching
 
 Stocks are cached using a ConcurrentHashMap implementation. All interactions with the Stock DB table is done through the StockService,
 which stores an internal stock cache that is referenced. This is especially useful for price changes, to enable a scalable implementation that
@@ -215,7 +215,7 @@ ticks, meaning that every 10 ticks took ~5sec. This however could be minimized b
 any reason to save every 10 ticks when all read/write operations on stocks are done through the cache. Likewise, saving of the cache to the DB
 could also be done concurrently, reducing the downtime of the market execution thread and increasing the reliability of the true tick rate.
 
-#### Pricing Record Archives
+### Pricing Record Archives
 
 To avoid an exponentially growing amount of data in the database, price records are archived on a rolling basis, where old
 price records are archived at the same time new ones are put in the database. At the end of the month, intra-day price records
