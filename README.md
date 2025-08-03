@@ -9,7 +9,6 @@
     </br>
     <p>
       <img src="https://img.shields.io/github/commit-activity/m/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
-      <img src="https://img.shields.io/tokei/lines/github/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
       <img src="https://img.shields.io/github/issues/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
       <img src="https://img.shields.io/github/license/Jackson-Wozniak/Stock-Market-Simulation" alt="license" />
       <img src="https://img.shields.io/github/languages/count/Jackson-Wozniak/Stock-Market-Simulation?color=brightgreen" alt="license" />
@@ -24,10 +23,11 @@
 ## :books: Table of Contents
 
 <ol>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#design">Design Choices</a></li>
+    <li><a href="#overview">Market Engine Overview</a></li>
+    <li><a href="#pricing-model">Pricing Model Details</a></li>
+    <li><a href="#results">Statistical Analysis & Results</a></li>
+    <li><a href="#performance-optimization">Optimizing For Performance</a></li>
     <li><a href="#local-dev">Local Deployment</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li>
       <a href="#api-endpoints">Api Documentation</a>
       <ul>
@@ -38,83 +38,194 @@
         <li><a href="#trading">Trading</a></li>
         <li><a href="#leaderboard">Leaderboards</a></li>
       </ul>
-    </li>  
-    <li><a href="#results">Results & Data From Simulations</a></li>
+    </li>
 </ol>    
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## :notebook: Features & Overview <a id="features"></a>
 
-A server side implementation for a stock market and stock trading simulator. Users can create accounts and trade stocks using paper money
-with the goal of increasing their profits and outperforming other accounts, while keeping track of market activity to best plan for price trajectories
+## :notebook: Market Engine Overview <a id="overview"></a>
 
-All stock prices, news, earnings etc. are completely simulated and are not 
-reflective of real world market activity. 
+#### Market Calendar Tracking
 
-Default stock data, such as the name, ticker symbol, market cap and sector are based on real world companies
+The Market Engine is the core of this stock market, handling the execution of all features in the market. To accurately track
+time passage, the engine uses a universal 'Market State' that is handled by an internal service class, handling time and date changes
+on each 'market tick.' A market tick is one run of the market, where the default tick is run every 1 second. Each tick, the market
+time is incremented by 5 minutes. However, during after hours this is then upped to 30 minutes per tick, ensuring that the downtime between
+trading days is accounted for, yet minimized. For the rest of this README, you can assume that when I reference time, it is the
+internal Market Timing, as opposed to real-world time.
 
-#### Market
-* The market date is tracked on intervals that can be altered. The default "day" is 24 intervals of 10 seconds, and 30 "days" is a month
-* The date is formatted as month/day/year
-* Stock prices change after each 10 second interval, and certain stock events can happen at the end of each day
-* There are 3 market types; Bear, Bull and Normal. Bear markets occur if the average stock price falls 10% in a month, while
-  bull markets happen if prices rise 10% monthly. Normal market conditions cover all scenarios in between
+The market opens at 9am, and runs trading until closing at 5pm. On each market tick, the pricing model runs one change for each stock in the market,
+and also saves an 'Intra Day Pricing Record' to be able to populate pricing charts. After each End-Of-Day, the closing prices are saved as a price record to be able to showcase market movement over long-term simulations. End-Of-Month and End-Of-Year milestones are also tracked, where the market trajectory is altered based on the movement over the course of the month. This trajectory than has a slight affect on the pricing model, simulating 'Bull' and 'Bear' markets that occur in the real world. Alongside this, both intra-day and end-of-day pricing records are archived at the end of
+the month and year, where they are moved out of the database and into a long-term CSV file. This can be read in more detail in the 
+<a href="performance-optimization">Optimizing For Performance</a> section.
 
-#### Stocks
-* Stock prices change on an interval (10 seconds)
-* Stock prices change based on three factors: market cap, momentum, and volatility
-* Market Cap: Large and small cap stocks experience higher movement, in an upward or downward trajectory
-* Momentum: When stock prices rise for 3 days, they experience positive momentum, while they experience negative momentum if they fall for 3 days
-* Volatility: Each stock is judged on whether it is volatile or not. This is an unchangeable boolean value, and is based on the nature of the real world company. Volatile stocks receive a slight increase in movement each time their prices change
+#### News Stories
 
-#### News
-* At the end of each day, there is a chance that a specific stock will release a news story, which will have a large effect on their price
-* Positive news, such as buyouts, will increase the stocks by around price 10%
-* Negative news, such as lawsuits or management shakeups will decrease stock price by around 10%
-* Bankruptcies will occur if a stock price dips below $1, where a buyout will occur and the stocks price will reset back to the default
+Alongside these pricing-related operations, the market executor also handles News and Earnings reports. Earnings run once at the end of
+each fiscal quarter, and have a slight affect on the pricing model of each stock. The News executor plays a vital role in the sentiment of stocks,
+releasing a range of news stories for stocks across the market, each of which having a realistic affect on the short-term sentiment of the stock.
+These short-term factors regress toward zero over time, simulating the fact that news stories impact decays over time.
 
-#### Earnings Reports
-* Stocks release earnings reports on the first day of every 3rd month (3rd, 6th, 9th, 12th)
-* Earnings reports effect stock prices and optimism, and are also affected by previous optimism
+#### Custom Simulations
+
+To enable real-time testing, this application provides a multitude of customizable simulations through the MarketSimulationController. These
+simulations are contained in-memory and have no effect on the database of stocks. This allows for extensive testing of different market features,
+and is especially useful for testing the pricing model and seeing how different factors involved in price changes alter the direction of a stock.
 
 #### Index Funds
-* Index funds track the average price of a specific category of stocks
-* These cannot be traded, but only serve to estimate the total market trajectory
 
-#### Accounts
-
-#### Leaderboards
+Index funds currently operate very simply, by returning the average price of all stocks under the umbrella of that index fund. This can be traded
+just like any other stock in the Trading Service, so they act much like an Exchange Traded Fund (ETF). There are a broad range of options for index
+funds, and the total market index fund is used as a basis for gauging the market sentiment.
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-## 📝: Design Choices <a id="design"></a>
 
-### Microservices
+## :chart_with_upwards_trend: Pricing Model <a id="pricing-model"></a>
 
-I am currently in the process of migrating the current backend server to multiple microservices.
-The three microservices will be:
-  1. Stock Market API
-  2. Trading API
-  3. Trading Bots
+#### Company Attributes
 
-Here are the main justifications for doing this:
-- Learn microservices & gain experience building applications that talk to other services
+To ensure a realistic simulation, each company is assigned a default attribute for each of the company attributes in the simulation. These
+are investment style (growth, value, etc.), investor rating (buy, sell, hold, etc.), sector and market cap. These attributes are not changed
+throughout the simulation's running, and are instead used as a basis for the expected direction a stock will move in, before random noise and
+environment variables (such as news stories) are taken into account.
 
-- Implement Spring Security, but isolate its features only to the trading API. The market is a publically available API, and so
-  its endpoints do not require any authorization/authentication. Likewise, the trading bot service has no endpoints, and so requires
-  minimal security measures, at least in the context of APIs. This means Spring Security is only relevant for 1/3 functions
+#### Pricing Attributes and Factors
 
-- Although this is a simulation, and there are no plans for deployment, the idea here is that each of the 3 services would be seperate "companies."
-  The trading API acts a brokerage firm, the market API simulated a countries stock market, and the trading bot service acts a quant firm that interacts
-  with its domestic market through publically-unavailable bots. Seperating the server into these 3 services means that it more closely follows the goal
-  of having 3 seperate "companies" that all work together to build a stock market simulation
+All 5 factors are tracked using a range of values from [-50, 50]. The closer to the edges of these values, the higher the change that the
+stock trends in that direction, with the price changes scaling up as the factors reach closer to 50. A stock with factor values of 0
+can be expected to trend nearly stable, relying primarily on randomized noise for their long-term movements.
 
-<br/>
+Alongside this, each factor is also assigned a weight, where the total weight of all 5 stocks adds up to 1.0. This weight provides
+more accuracy, scaling the importance of each factor based on the companies attributes and which is most important at a point in time.
 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+1. Pricing Volatility
+
+The pricing volatility is represented as ENUM value, with values of [Stable, Low, Normal, High, Extreme]. The volatility of a stock
+is determined at the beginning of the simulation, and is given as one of the attributes of the company in the CSV file. This pricing volatility
+affects the scale of random noise, with volatile stocks seeing more random noise during trading. This volatility has no direct influence
+on the direction of the stock, as this solely seeks to amplify the movement a stock may see based on its other attributes. Each of the 5
+main factors are also assigned a 'base noise' value that is added onto the volatility value, used to place a floor on how much random noise a stock
+has (to ensure that stocks do not remain deterministic no matter how stable their attributes may be).
+
+2. Investor Confidence
+
+Representing the long-term confidence and health of a company, investor confidence seeks to track the long-term sentiment of the company, relying
+primarily on the financial health and stability of a companies profile. Companies with consistent positive news will see an uptake in their
+investor confidence, and likewise the basis of the default investor confidence is primarily based on a companies Investment Style and Investor Rating, which are both provided in the CSV file as company attributes. Direct financial data is not simulated in this application, so the
+movement of a stocks investor confidence is largely based on the rating assigned to a company at the start, and the style of investment it is.
+
+3. Trading Demand
+
+Trading demand encapsulates the short-term demand for a stock, representing both speculative demand and the buying frequency a stock sees. This
+is derived from the companies base attributes, but is primarily altered based on recent price movement as well as news sentiment. Some influence
+will be given to the performance of related companies and stocks, but this has not yet been introduced into the model.
+
+*This stock accounts for factor regression outlined in the News Sentiment section*
+
+4. Liquidity
+
+This factor tracks how easy it is to trade a stock, partnering closely with trading demand to simulate the fact that a very popular stock will
+see reliable upward price movement as more people look to buy in, and less shares become available. This is initially derived from the companies
+attributes, with a heavy emphasis on market cap, as you could expect the share availability for a large company is more consistent than their smaller
+counterparts. Alongside this, as a companies trading demand moves, a strong correlation can be seen with the movement of a stocks liquidity factor.
+
+*This stock accounts for factor regression outlined in the News Sentiment section*
+
+5. News Sentiment
+
+News sentiment begins at 0 for all stocks, and only changes based on the release of news stories. Some news stories will affect multiple stocks,
+for example legislation may put pressure on all technology stocks. To accurately account for a news stories timeline, the influence of news
+will regress over time, also regressing other short-term factors. This regression tends toward 0, so that news stories are rolled out of
+relevance as time passes.
+
+*This stock accounts for factor regression outlined in the News Sentiment section*
+
+6. Innovation Potential
+
+Innovation potential seeks to track the confidence investors have on how much growth potential a company has. Stocks in growth sectors will see a
+higher baseline innovation factor, as you can assume a Technology company would provide more innovation than a similarly rated company in a sector
+such as traditional energy.
+
+#### Pricing Formula
+
+```diff
+New Price = currentPrice
+          +  newsFactorDelta
+          + investorConfidenceDelta
+          + innovationDelta
+          + tradingDemandDelta
+          + liquidityDelta
+```
+
+All factor delta's are determined by the following formula:
+
+```diff
+Factor Delta = ((((Scaled Signal * .06) +  Random Noise) 
+             * CurrentPrice)
+             * (1 / (1 + (currentPrice / 10,000)^1.5)))   <-- Growth dampender to ensure prices over 10,000 dont grow exponentially
+             / PRICE_SCALE_DIMINISHER   <-- Usually 800.0, ensures price delta scales based on market tick rate
+```
+
+```diff
+ScaledSignal = tanh((factorValue * factorWeight) / 35.0)  <-- value between +-1
+
+FactorNoise = volatility + baseFactorNoise
+
+Sigma = max(.05, (FactorNoise * 1 - (.7 * | ScaledSignal |)))   <-- Ensures floor of noise, scaling up as signal is closer to +-50
+
+RandomNoise = random([-1.0, 1.0]) * Sigma 
+```
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+## :bar_chart: Statistical Analysis & Results <a id="results"></a>
+
+#### Accurately modelling a stock market
+
+#### Results
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+## :clock1: Optimizing For Performance <a id="#performance-optimization"></a>
+
+#### Stock Caching
+
+Stocks are cached using a ConcurrentHashMap implementation. All interactions with the Stock DB table is done through the StockService,
+which stores an internal stock cache that is referenced. This is especially useful for price changes, to enable a scalable implementation that
+remains fast even as the market tick rate is shortened and performance becomes paramount.
+
+To see the results of the addition of the stock cache, I will use the performance logger to track how long it took the market to execute one tick:
+
+Without the stock cache, values of ~7sec to ~8sec where most common, meaning that executing a single price change for all stocks took 8 seconds.
+In this case, my tick rate was set at a one second delay, but the tick rate was 9 seconds in practice. This limited the ability to accurately
+change stock prices over the course of the day, but the true bottleneck was that the number of stocks was limited in the database to ensure
+executions did not take too long.
+
+Once the stock cache was introduced, the average performance of one execution hovered around ~80ms. Prices were saved to the database every 10
+ticks, meaning that every 10 ticks took ~5sec. This however could be minimized by reducing the frequency of cache validation, as we do not have
+any reason to save every 10 ticks when all read/write operations on stocks are done through the cache. Likewise, saving of the cache to the DB
+could also be done concurrently, reducing the downtime of the market execution thread and increasing the reliability of the true tick rate.
+
+#### Pricing Record Archives
+
+To avoid an exponentially growing amount of data in the database, price records are archived on a rolling basis, where old
+price records are archived at the same time new ones are put in the database. At the end of the month, intra-day price records
+from two months ago are deleted from the database and inserted into the CSV archive file for long term storage. At the end of the year, 
+end-of-day price records from two years ago are deleted and stored in long term storage. This ensures that recent price records are available,
+but retrieving old prices is read from the archives instead, keeping DB data clean and relevant.
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 
 ## :pencil2: Local Deployment <a id="local-dev"></a>
 
@@ -135,8 +246,8 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 ```
 
 <br/>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------->
 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 <h2> :electric_plug: API Endpoints <a id="api-endpoints"></a></h2>
 
@@ -320,82 +431,3 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-## :notebook: Data Simulation & Market Performance Metrics <a id="results"></a>
-
-### Simulation Details
-
-The current calculation method is as followed:
-```diff
-NewPrice = P +
-            (P * R) +
-            (P * (Volatility * R)) +
-            (P * (Momentum * PR)) +
-            (P * (InvestorRatingValue * PR))
-
-NP -> New Price
-P -> Original Price
-R -> Random Number. Value is dependent on the market cap
-PR -> Positive random number dependent on market cap
-```
-
-
-### Stock Price Simulation
-
-Below is a chart that uses the market simulation endpoint with 100 stocks over 30 days to display price changes
-
-![Line Chart](https://github.com/user-attachments/assets/2f5b306d-a74f-4320-9e44-2f103dc63f03)
-
-### The Benchmark
-
-A common way to randomly simulate stock data is the model of [Geometric Brownian Motion](https://demonstrations.wolfram.com/GeometricBrownianMotionWithNonuniformTimeGrid/). An example of this can be seen below, with the same price and duration as my simulations:
-
-![Line Chart 2](https://user-images.githubusercontent.com/105665813/196005304-e35a47d3-c9a5-4750-801d-64796f326ce3.png)
-
-### How Stock Attributes Affect Price Movements
-
-Here is a graph with 4 stocks of different attributes. We can see here that the attributes a stock has during the simulation plays
-a direct role in both the direction and size of price change each day:
-
-- Red
-  - Stable
-  - Neutral Momentum
-  - Neutral Investor Rating
-- Blue
-  - Volatile
-  - Negative Momentum
-  - Sell Rating
-- Green
-  - Extra Volatile
-  - Positive Momentum
-  - Buy Rating
-- Purple
-  - Volatile
-  - Neutral Momentum
-  - Neutral Rating
-
-SIM 1:
-![Screenshot (151)](https://github.com/user-attachments/assets/8143f3cf-4ba6-4edf-ac66-01df75d884ed)
-
-SIM 2: 
-![Screenshot (152)](https://github.com/user-attachments/assets/a6905e61-2dfe-4545-a3ed-7ffb8ee034ed)
-
-
-### Market Performance Metrics
-
-<details>
-    <summary>Details (Click to expand)</summary>
-
-Using the log-parser python script, this chart shows the duration of each market interval (aka how long it takes for the program to change prices and save them to the
-database)
-
-Y-Axis shows the number of times the market advanced intervals, with the X-Axis being the time range of that interval
-
-*NOTE: In the future there could be a system that acts as a cache in order to avoid stocks being queried/saved each cycle.
-One way to do this may be to have a StockManager that acts as an intermediary between the service classes and repository classes,
-that keeps the stocks in memory and only saves/queries at the end of the trading day. If there is a better system please
-to propose the idea by opening a GitHub issue, I would like to hear better systems for this use-case
-
-![Bar Chart](https://github.com/user-attachments/assets/5d15f231-940c-4965-b0ef-ce0ea9dff8c6)
-</details>
-
