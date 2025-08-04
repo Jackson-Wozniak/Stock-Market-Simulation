@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import StockSimulatorDashboard from "./components/simulator-dashboard/StockSimulatorDashboard"
-import MarketDashboard from "./components/market-dashboard/MarketDashboard"
+import StockSimulatorDashboard from "./components/stock-simulator/StockSimulatorDashboard"
+import MarketDashboard from "./components/market/MarketDashboard"
 
 function App(){
     return (
