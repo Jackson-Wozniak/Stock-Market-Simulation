@@ -1,4 +1,4 @@
-import Page from "../shared/Page";
+import Page from "../shared/page-defaults/Page";
 
 
 const MarketDashboard: React.FC<{}> = ({}) => {

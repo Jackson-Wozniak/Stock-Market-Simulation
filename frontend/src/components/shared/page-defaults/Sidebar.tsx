@@ -1,4 +1,4 @@
-import './../../styles/shared.css';
+import './../../../styles/shared.css';
 
 const Sidebar: React.FC<{
 

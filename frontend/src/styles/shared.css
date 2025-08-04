@@ -5,11 +5,26 @@ html, body {
 }
 
 .page-container{
+    display: flex;
+    margin: 0;
+    padding: 0;
     width: 100%;
+    top: 0;
+    left: 0;
+    background-color: whitesmoke;
+    overflow: hidden;
 }
 
 .page-content-container{
-    width: 90%;
+    min-width: 90%;
+    max-width: 90%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .sidebar-container{
