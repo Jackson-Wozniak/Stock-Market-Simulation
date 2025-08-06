@@ -59,7 +59,7 @@ internal Market Timing, as opposed to real-world time.
 The market opens at 9am, and runs trading until closing at 5pm. On each market tick, the pricing model runs one change for each stock in the market,
 and also saves an 'Intra Day Pricing Record' to be able to populate pricing charts. After each End-Of-Day, the closing prices are saved as a price record to be able to showcase market movement over long-term simulations. End-Of-Month and End-Of-Year milestones are also tracked, where the market trajectory is altered based on the movement over the course of the month. This trajectory than has a slight affect on the pricing model, simulating 'Bull' and 'Bear' markets that occur in the real world. Alongside this, both intra-day and end-of-day pricing records are archived at the end of
 the month and year, where they are moved out of the database and into a long-term CSV file. This can be read in more detail in the 
-<a href="performance-optimization">Optimizing For Performance</a> section.
+<a href="#performance-optimization">Optimizing For Performance</a> section.
 
 ### News Stories
 
@@ -195,7 +195,7 @@ RandomNoise = random([-1.0, 1.0]) * Sigma
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-## :clock1: Optimizing For Performance <a id="#performance-optimization"></a>
+## :clock1: Optimizing For Performance <a id="performance-optimization"></a>
 
 ### Stock Caching
 
@@ -249,10 +249,7 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------->
 
 
-<h2> :electric_plug: API Endpoints <a id="api-endpoints"></a></h2>
-
-<details>
-    <summary>Stock Market Service API Docs (click to expand)</summary>
+<h2> :electric_plug: API Documentation <a id="api-endpoints"></a></h2>
 
 ## Object Definitions
 <details>
@@ -423,11 +420,6 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 > <code>GET</code> <code><b>/api/v1/funds/volatility</b></code> <code><b>200 OK -> List[IndexFund] </b></code>
 >
 > <code>GET</code> <code><b>/api/v1/funds/volatility/{String}</b></code> <code><b>200 OK -> IndexFund </b></code>
-
-</details>
-
-<br/>
-
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
