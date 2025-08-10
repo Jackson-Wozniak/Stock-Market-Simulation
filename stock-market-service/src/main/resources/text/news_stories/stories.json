@@ -1,0 +1,92 @@
+[
+  {
+    "eventType": "productLaunch",
+    "weight": 25,
+    "template": "{companyName} announces the release of its new {productType}, expected to disrupt the {sector} market."
+  },
+  {
+    "eventType": "productRecall",
+    "weight": -35,
+    "template": "{companyName} issues a recall for its {productType} due to safety concerns, impacting consumer trust."
+  },
+  {
+    "eventType": "ceoResignation",
+    "weight": -30,
+    "template": "CEO of {companyName}, {ceoName}, resigns unexpectedly, raising uncertainty about the company's leadership."
+  },
+  {
+    "eventType": "ceoAppointment",
+    "weight": 20,
+    "template": "{companyName} appoints {ceoName} as its new CEO, bringing a fresh vision and experience from {previousCompany}."
+  },
+  {
+    "eventType": "lawsuitFiled",
+    "weight": -40,
+    "template": "{companyName} faces a class-action lawsuit alleging {lawsuitReason}, potentially leading to costly settlements."
+  },
+  {
+    "eventType": "lawsuitResolved",
+    "weight": 15,
+    "template": "{companyName} reaches a settlement in its {lawsuitType} case, removing a major overhang for investors."
+  },
+  {
+    "eventType": "mergerAnnouncement",
+    "weight": 35,
+    "template": "{companyName} announces plans to merge with {partnerCompany}, aiming to strengthen its position in the {sector} sector."
+  },
+  {
+    "eventType": "mergerCollapse",
+    "weight": -25,
+    "template": "Merger talks between {companyName} and {partnerCompany} collapse, ending hopes for a major industry shake-up."
+  },
+  {
+    "eventType": "regulatoryApproval",
+    "weight": 30,
+    "template": "{companyName} secures regulatory approval for its {productType}, clearing the way for commercial launch."
+  },
+  {
+    "eventType": "regulatoryBlock",
+    "weight": -30,
+    "template": "{companyName} faces a setback after regulators block its {initiative}, citing {reason}."
+  },
+  {
+    "eventType": "macroInterestRateCut",
+    "weight": 20,
+    "template": "Central bank cuts interest rates by {rateChange}%, sparking optimism across the {sector} sector."
+  },
+  {
+    "eventType": "macroInterestRateHike",
+    "weight": -20,
+    "template": "Central bank raises interest rates by {rateChange}%, increasing pressure on {sector} companies."
+  },
+  {
+    "eventType": "analystUpgrade",
+    "weight": 15,
+    "template": "Analyst at {analystFirm} upgrades {companyName} to '{newRating}', citing strong fundamentals."
+  },
+  {
+    "eventType": "analystDowngrade",
+    "weight": -15,
+    "template": "Analyst at {analystFirm} downgrades {companyName} to '{newRating}', citing valuation concerns."
+  },
+  {
+    "eventType": "shareBuyback",
+    "weight": 25,
+    "template": "{companyName} announces a {buybackAmount} share buyback program, signaling confidence in future performance."
+  },
+  {
+    "eventType": "dividendIncrease",
+    "weight": 20,
+    "template": "{companyName} increases its quarterly dividend by {dividendPercent}%, rewarding long-term shareholders."
+  },
+  {
+    "eventType": "dividendCut",
+    "weight": -25,
+    "template": "{companyName} cuts its quarterly dividend to {dividendAmount}, citing cash flow challenges."
+  },
+  {
+    "eventType": "supplyChainDisruption",
+    "weight": -35,
+    "template": "{companyName} warns of production delays due to supply chain issues in {region}, affecting {productType} availability."
+  }
+]

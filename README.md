@@ -65,8 +65,8 @@ the month and year, where they are moved out of the database and into a long-ter
 
 Alongside these pricing-related operations, the market executor also handles News and Earnings reports. Earnings run once at the end of
 each fiscal quarter, and have a slight affect on the pricing model of each stock. The News executor plays a vital role in the sentiment of stocks,
-releasing a range of news stories for stocks across the market, each of which having a realistic affect on the short-term sentiment of the stock.
-These short-term factors regress toward zero over time, simulating the fact that news stories impact decays over time.
+releasing a range of newsRelease stories for stocks across the market, each of which having a realistic affect on the short-term sentiment of the stock.
+These short-term factors regress toward zero over time, simulating the fact that newsRelease stories impact decays over time.
 
 ### Custom Simulations
 
@@ -91,7 +91,7 @@ funds, and the total market index fund is used as a basis for gauging the market
 To ensure a realistic simulation, each company is assigned a default attribute for each of the company attributes in the simulation. These
 are investment style (growth, value, etc.), investor rating (buy, sell, hold, etc.), sector and market cap. These attributes are not changed
 throughout the simulation's running, and are instead used as a basis for the expected direction a stock will move in, before random noise and
-environment variables (such as news stories) are taken into account.
+environment variables (such as newsRelease stories) are taken into account.
 
 ### Pricing Attributes and Factors
 
@@ -115,14 +115,14 @@ has (to ensure that stocks do not remain deterministic no matter how stable thei
 ### 2. Investor Confidence
 
 Representing the long-term confidence and health of a company, investor confidence seeks to track the long-term sentiment of the company, relying
-primarily on the financial health and stability of a companies profile. Companies with consistent positive news will see an uptake in their
+primarily on the financial health and stability of a companies profile. Companies with consistent positive newsRelease will see an uptake in their
 investor confidence, and likewise the basis of the default investor confidence is primarily based on a companies Investment Style and Investor Rating, which are both provided in the CSV file as company attributes. Direct financial data is not simulated in this application, so the
 movement of a stocks investor confidence is largely based on the rating assigned to a company at the start, and the style of investment it is.
 
 ### 3. Trading Demand
 
 Trading demand encapsulates the short-term demand for a stock, representing both speculative demand and the buying frequency a stock sees. This
-is derived from the companies base attributes, but is primarily altered based on recent price movement as well as news sentiment. Some influence
+is derived from the companies base attributes, but is primarily altered based on recent price movement as well as newsRelease sentiment. Some influence
 will be given to the performance of related companies and stocks, but this has not yet been introduced into the model.
 
 *This stock accounts for factor regression outlined in the News Sentiment section*
@@ -138,9 +138,9 @@ counterparts. Alongside this, as a companies trading demand moves, a strong corr
 
 ### 5. News Sentiment
 
-News sentiment begins at 0 for all stocks, and only changes based on the release of news stories. Some news stories will affect multiple stocks,
-for example legislation may put pressure on all technology stocks. To accurately account for a news stories timeline, the influence of news
-will regress over time, also regressing other short-term factors. This regression tends toward 0, so that news stories are rolled out of
+News sentiment begins at 0 for all stocks, and only changes based on the release of newsRelease stories. Some newsRelease stories will affect multiple stocks,
+for example legislation may put pressure on all technology stocks. To accurately account for a newsRelease stories timeline, the influence of newsRelease
+will regress over time, also regressing other short-term factors. This regression tends toward 0, so that newsRelease stories are rolled out of
 relevance as time passes.
 
 *This stock accounts for factor regression outlined in the News Sentiment section*
@@ -391,9 +391,9 @@ To run locally, first ensure that Docker Desktop & Maven is downloaded to your s
 
 ### News Endpoints
 
-> <code>GET</code> <code><b>/api/v1/news/{ticker}</b></code> <code><b>200 OK -> List[News]</b></code>
+> <code>GET</code> <code><b>/api/v1/newsRelease/{ticker}</b></code> <code><b>200 OK -> List[News]</b></code>
 >
-> <code>GET</code> <code><b>/api/v1/news/</b></code> <code><b>200 OK -> List[News]</b></code>
+> <code>GET</code> <code><b>/api/v1/newsRelease/</b></code> <code><b>200 OK -> List[News]</b></code>
 
 ### Earnings Endpoints
 

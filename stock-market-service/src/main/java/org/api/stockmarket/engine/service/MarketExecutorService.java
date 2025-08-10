@@ -1,12 +1,9 @@
 package org.api.stockmarket.engine.service;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 
 import org.api.stockmarket.engine.entity.MarketState;
-import org.api.stockmarket.modules.news.engines.EarningsEngine;
-import org.api.stockmarket.modules.news.engines.NewsEngine;
-import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.news.engines.NewsReleaseEngine;
 import org.api.stockmarket.modules.stocks.service.PriceRecordService;
 import org.api.stockmarket.modules.stocks.service.StockService;
 import org.slf4j.Logger;
@@ -22,8 +19,7 @@ import static org.api.stockmarket.engine.enums.TemporalMarketMilestone.*;
 public class MarketExecutorService {
 
     private final StockService stockService;
-    private final NewsEngine newsEngine;
-    private final EarningsEngine earningsEngine;
+    private final NewsReleaseEngine newsReleaseEngine;
     private final PriceRecordService priceRecordService;
     private static final Logger logger = LoggerFactory.getLogger(MarketExecutorService.class);
 

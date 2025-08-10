@@ -9,33 +9,28 @@ import org.api.stockmarket.modules.stocks.entity.Stock;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-@Table
+@Entity(name = "newsRelease")
+@Table(name = "news_releases")
 @NoArgsConstructor
 @Getter
 @Setter
-public class News implements Serializable {
+public class NewsRelease implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "stock_id", nullable = false)
-    private Stock stock;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Stock> stocks = new ArrayList<>();
 
-    @Column(name = "news_event")
-    private String event;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "template")
+    private NewsTemplate newsTemplate;
 
     @Column(name = "date_released")
     @Temporal(TemporalType.TIMESTAMP)
     private ZonedDateTime dateReleased;
-
-    public News(Stock stock, String event, ZonedDateTime dateReleased) {
-        this.stock = stock;
-        this.event = event;
-        this.dateReleased = dateReleased;
-    }
 }

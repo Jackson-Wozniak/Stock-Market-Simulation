@@ -3,8 +3,7 @@ package org.api.stockmarket.modules.stocks.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.modules.news.entity.EarningsReport;
-import org.api.stockmarket.modules.news.entity.News;
+import org.api.stockmarket.modules.news.entity.NewsRelease;
 
 import jakarta.persistence.*;
 
@@ -30,11 +29,8 @@ public class Stock{
     @OneToOne(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
     private PricingModel pricingModel;
 
-    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<News> news = new ArrayList<>();
-
-    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<EarningsReport> earningsReports = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<NewsRelease> newsReleases = new ArrayList<>();
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PriceRecord> priceRecords = new ArrayList<>();
