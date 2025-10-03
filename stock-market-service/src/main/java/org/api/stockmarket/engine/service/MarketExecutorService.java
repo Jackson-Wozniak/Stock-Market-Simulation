@@ -3,9 +3,9 @@ package org.api.stockmarket.engine.service;
 import java.time.ZonedDateTime;
 
 import org.api.stockmarket.engine.entity.MarketState;
-import org.api.stockmarket.modules.news.engines.NewsReleaseEngine;
 import org.api.stockmarket.modules.stocks.service.PriceRecordService;
 import org.api.stockmarket.modules.stocks.service.StockService;
+import org.api.stockmarket.modules.news.engines.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -40,7 +40,7 @@ public class MarketExecutorService {
     private void dailyMarketActivity(ZonedDateTime date) {
         priceRecordService.savePricesEOD(stockService.getAllStocks(), date);
 
-        //newsEngine.runDailyNewsStories(stockService.getAllStocks(), date);
+        newsReleaseEngine.executeNewsCycle(date);
     }
 
     private void hourlyMarketActivity(){

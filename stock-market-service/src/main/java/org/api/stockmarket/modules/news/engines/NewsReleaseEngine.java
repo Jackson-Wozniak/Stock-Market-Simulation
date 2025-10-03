@@ -1,18 +1,41 @@
 package org.api.stockmarket.modules.news.engines;
 
 import lombok.AllArgsConstructor;
+import org.api.stockmarket.modules.news.entity.NewsRelease;
+import org.api.stockmarket.modules.news.entity.NewsTemplate;
+import org.api.stockmarket.modules.news.service.NewsReleaseService;
+import org.api.stockmarket.modules.news.service.NewsTemplateService;
+import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.modules.stocks.service.StockService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Random;
 
 /*
 Class that manages the creation and release of news stories
 Begin by releasing news stories at a certain % chance, and then generate/save new stories
  */
-@Service
+@Component
 @AllArgsConstructor
 public class NewsReleaseEngine {
+    private final StockService stockService;
+    private final NewsTemplateService newsTemplateService;
+    private final NewsReleaseService newsReleaseService;
+    private static final Random random = new Random();
 
-    public void executeNewsCycle(){
-        
+    public void executeNewsCycle(ZonedDateTime date){
+        List<Stock> stocks = stockService.getAllStocks();
+
+        List<NewsTemplate> templates = newsTemplateService.findAllTemplates();
+
+        stocks.forEach(stock -> {
+            if(random.nextInt(10) != 3) return;
+            NewsTemplate template = templates.get(random.nextInt(templates.size()));
+            newsReleaseService.saveNewsRelease(new NewsRelease(stock, template, date));
+        });
     }
 
 //    private final NewsService newsService;

@@ -19,5 +19,7 @@ public class NewsReleaseService {
     private NewsTemplateService newsTemplateService;
     private StockService stockService;
 
-
+    public void saveNewsRelease(NewsRelease release){
+        newsReleaseRepository.save(release);
+    }
 }

@@ -33,4 +33,10 @@ public class NewsRelease implements Serializable {
     @Column(name = "date_released")
     @Temporal(TemporalType.TIMESTAMP)
     private ZonedDateTime dateReleased;
+
+    public NewsRelease(Stock stock, NewsTemplate newsTemplate, ZonedDateTime dateReleased) {
+        this.stocks.add(stock);
+        this.newsTemplate = newsTemplate;
+        this.dateReleased = dateReleased;
+    }
 }

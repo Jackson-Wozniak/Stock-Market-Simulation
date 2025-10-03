@@ -12,6 +12,10 @@ import java.util.List;
 public class NewsTemplateService {
     private final NewsTemplateRepository newsTemplateRepository;
 
+    public List<NewsTemplate> findAllTemplates(){
+        return newsTemplateRepository.findAll();
+    }
+
     public void saveAllTemplates(List<NewsTemplate> templates){
         newsTemplateRepository.saveAll(templates);
     }
