@@ -4,7 +4,6 @@
 <ol>
     <li><a href="#design-overview">Market Engine Overview</a></li>
     <li><a href="#folder-structure">Folder Structure Guide</a></li>
-    <li><a href="#features">Stock Market Features</a></li>
     <li>
       <a href="#api-endpoints">Api Documentation</a>
       <ul>
@@ -17,6 +16,23 @@
       </ul>
     </li>
 </ol>    
+
+<br/> 
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<h2> :folder: Folder Structure Guide <a id="folder-structure"></a></h2>
+
+```md
+.
+└── stock-market-service/src/org/api/stockmarket/
+    ├── common/ -> holds generic tools and utils
+    ├── engine/ -> the core of the app, including @Scheduled class to handle tick rate and market advancement
+    └── modules/
+        ├── indexfunds/
+        ├── news/
+        ├── simulatedmarket/ -> all in-memory market simulation interfaces
+        └── stocks/
+```
 
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
