@@ -20,7 +20,7 @@
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<h2> :folder: Folder Structure Guide <a id="folder-structure"></a></h2>
+<h2> 📂: Folder Structure Guide <a id="folder-structure"></a></h2>
 
 ```md
 .
