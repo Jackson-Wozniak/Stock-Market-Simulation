@@ -27,7 +27,7 @@ public class MarketActivityScheduler {
     private static final Logger logger = LoggerFactory.getLogger(MarketActivityScheduler.class);
     private static final Logger performanceLogger = LoggerFactory.getLogger("performanceLogger");
 
-    @Scheduled(fixedDelay = MarketEnvironmentProperties.MARKET_TIME_INTERVAL)
+    @Scheduled(fixedDelay = 100L)
     @SuppressWarnings("unused")
     public void scheduledMarketActivity() {
         Instant start, end;

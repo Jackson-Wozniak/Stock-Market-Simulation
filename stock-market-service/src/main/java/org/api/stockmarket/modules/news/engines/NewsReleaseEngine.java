@@ -1,6 +1,7 @@
 package org.api.stockmarket.modules.news.engines;
 
 import lombok.AllArgsConstructor;
+import org.api.stockmarket.core.utils.RandomUtils;
 import org.api.stockmarket.engine.properties.MarketEnvironmentProperties;
 import org.api.stockmarket.modules.news.entity.NewsRelease;
 import org.api.stockmarket.modules.news.service.NewsReleaseService;
@@ -45,15 +46,17 @@ public class NewsReleaseEngine {
     of a stock guide the likelihood of news sentiment over time
      */
     public NewsRelease generateNewsReleaseOrNull(Stock stock, ZonedDateTime date){
-        /*
-        TODO:
-            - calculate a % chance of both positive and negative story
-            - get random number
-            - if within range of either one, create a release
-            - if not within range, return null
-         */
         InvestorRating rating = stock.getCompany().getInvestorRating();
         InvestmentStyle style = stock.getCompany().getInvestmentStyle();
+        int positiveRange = (int) percentChanceOfPositiveNews(rating, style) * 10;
+        int negativeRange = positiveRange + (int) (percentChanceOfNegativeNews(rating, style) * 10);
+        int random = RandomUtils.getRandomInt(0, 1000);
+        if(random <= positiveRange){
+            return new NewsRelease(stock, newsTemplateService.findRandomTemplate(true), date);
+        }
+        if(random <= negativeRange){
+            return new NewsRelease(stock, newsTemplateService.findRandomTemplate(false), date);
+        }
         return null;
     }
 
