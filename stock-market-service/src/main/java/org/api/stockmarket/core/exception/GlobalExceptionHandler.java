@@ -1,7 +1,7 @@
-package org.api.stockmarket.engine.exception;
+package org.api.stockmarket.core.exception;
 
-import org.api.stockmarket.engine.exception.base.BadRequestException;
-import org.api.stockmarket.engine.exception.base.NotFoundException;
+import org.api.stockmarket.core.exception.base.BadRequestException;
+import org.api.stockmarket.core.exception.base.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

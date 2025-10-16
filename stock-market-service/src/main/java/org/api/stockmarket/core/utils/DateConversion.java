@@ -1,4 +1,4 @@
-package org.api.stockmarket.common.utils;
+package org.api.stockmarket.core.utils;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;

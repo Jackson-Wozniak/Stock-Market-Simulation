@@ -2,8 +2,8 @@ package org.api.stockmarket.modules.stocks.csv;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.api.stockmarket.common.csv.CSVObject;
-import org.api.stockmarket.common.exceptions.ConfigurationException;
+import org.api.stockmarket.core.csv.CSVObject;
+import org.api.stockmarket.core.exception.ConfigurationException;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.enums.InvestmentStyle;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;

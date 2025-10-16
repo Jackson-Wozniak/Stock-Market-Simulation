@@ -3,6 +3,7 @@ package org.api.stockmarket.modules.stocks.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.core.entity.BaseEntity;
 import org.api.stockmarket.modules.news.entity.NewsRelease;
 
 import jakarta.persistence.*;
@@ -15,11 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Stock{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Stock extends BaseEntity {
     @Column(name = "ticker")
     private String ticker;
 

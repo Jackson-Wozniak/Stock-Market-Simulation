@@ -1,7 +1,8 @@
 package org.api.stockmarket.modules.stocks.csv;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.common.csv.*;
+import org.api.stockmarket.core.csv.CSVReader;
+import org.api.stockmarket.core.csv.CSVUtils;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.factory.StockFactory;
 import org.springframework.stereotype.Component;

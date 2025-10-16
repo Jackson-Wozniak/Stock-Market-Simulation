@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.core.entity.BaseEntity;
 import org.api.stockmarket.modules.stocks.enums.PriceVolatility;
 
 import java.math.BigDecimal;
@@ -14,10 +15,7 @@ import java.util.Random;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PricingModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PricingModel extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stock_id")

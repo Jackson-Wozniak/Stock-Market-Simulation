@@ -1,4 +1,4 @@
-package org.api.stockmarket.common.utils;
+package org.api.stockmarket.core.utils;
 
 public class Capitalize {
 

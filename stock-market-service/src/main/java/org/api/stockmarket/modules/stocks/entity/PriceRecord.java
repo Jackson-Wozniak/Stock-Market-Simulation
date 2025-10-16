@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
+import org.api.stockmarket.core.entity.BaseEntity;
+
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
@@ -16,12 +18,7 @@ Saves daily stock history for one year.
 @Getter
 @Setter
 @NoArgsConstructor
-public class PriceRecord implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class PriceRecord extends BaseEntity implements Serializable {
     @Column(name = "ticker")
     private String ticker;
 

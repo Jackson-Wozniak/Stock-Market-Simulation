@@ -2,7 +2,7 @@ package org.api.stockmarket.engine.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.stockmarket.common.utils.DateConversion;
+import org.api.stockmarket.core.utils.DateConversion;
 
 @Getter
 @Setter

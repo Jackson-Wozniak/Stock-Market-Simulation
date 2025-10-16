@@ -1,7 +1,7 @@
 package org.api.stockmarket.modules.stocks.controller;
 
 import lombok.AllArgsConstructor;
-import org.api.stockmarket.common.utils.Capitalize;
+import org.api.stockmarket.core.utils.Capitalize;
 import org.api.stockmarket.modules.stocks.dto.DetailedStockDTO;
 import org.api.stockmarket.modules.stocks.dto.StockDTO;
 import org.api.stockmarket.modules.stocks.dto.StockPriceHistoryDTO;

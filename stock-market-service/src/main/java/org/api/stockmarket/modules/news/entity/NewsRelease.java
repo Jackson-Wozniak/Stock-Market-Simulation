@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.core.entity.BaseEntity;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 
 import jakarta.persistence.*;
@@ -17,12 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NewsRelease implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class NewsRelease extends BaseEntity implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Stock> stocks = new ArrayList<>();
 

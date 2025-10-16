@@ -1,9 +1,7 @@
-package org.api.stockmarket.common.exceptions;
+package org.api.stockmarket.core.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Optional;
 
 public class ConfigurationException{
     private static final Logger logger = LoggerFactory.getLogger(ConfigurationException.class);

@@ -1,4 +1,4 @@
-package org.api.stockmarket.engine.exception.base;
+package org.api.stockmarket.core.exception.base;
 
 import org.springframework.http.HttpStatus;
 

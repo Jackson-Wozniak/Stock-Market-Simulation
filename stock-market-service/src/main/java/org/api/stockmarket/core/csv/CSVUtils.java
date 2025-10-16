@@ -1,6 +1,6 @@
-package org.api.stockmarket.common.csv;
+package org.api.stockmarket.core.csv;
 
-import org.api.stockmarket.common.exceptions.ConfigurationException;
+import org.api.stockmarket.core.exception.ConfigurationException;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.BufferedReader;

@@ -1,6 +1,6 @@
 package org.api.stockmarket.modules.stocks.exception;
 
-import org.api.stockmarket.engine.exception.base.NotFoundException;
+import org.api.stockmarket.core.exception.base.NotFoundException;
 
 public class StockNotFoundException extends NotFoundException {
 

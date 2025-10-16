@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.core.entity.BaseEntity;
 import org.api.stockmarket.modules.stocks.enums.InvestmentStyle;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;
 import org.api.stockmarket.modules.stocks.enums.MarketCap;
@@ -13,11 +14,7 @@ import org.api.stockmarket.modules.stocks.enums.MarketCap;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Company {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Company extends BaseEntity {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "stock_id")
     private Stock stock;

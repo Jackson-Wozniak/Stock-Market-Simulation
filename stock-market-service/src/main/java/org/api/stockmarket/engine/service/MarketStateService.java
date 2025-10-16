@@ -3,7 +3,7 @@ package org.api.stockmarket.engine.service;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-import org.api.stockmarket.common.exceptions.ConfigurationException;
+import org.api.stockmarket.core.exception.ConfigurationException;
 import org.api.stockmarket.engine.entity.MarketState;
 import org.api.stockmarket.engine.entity.MarketSingletonEntity;
 import org.api.stockmarket.engine.enums.CurrentTimeRange;

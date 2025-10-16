@@ -1,21 +1,17 @@
 package org.api.stockmarket.modules.news.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.api.stockmarket.core.entity.BaseEntity;
 
 @Entity(name = "newsTemplate")
 @Table(name = "news_templates")
 @Getter
 @Setter
 @NoArgsConstructor
-public class NewsTemplate {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class NewsTemplate extends BaseEntity {
     @Column(name = "event_type")
     private String eventType;
 
