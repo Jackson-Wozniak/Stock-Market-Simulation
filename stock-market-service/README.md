@@ -34,7 +34,7 @@
 
 ### High-Level Market Tick Flow
 
-<img src="./documentation/MarketTickFlow.jpg" alt="market-tick-img" height="500" width="250"/>
+<img src="documentation/MarketTickFlow.jpg" alt="market-tick-img" height="500" width="250"/>
 
 
 <br/> 
