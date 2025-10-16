@@ -2,16 +2,15 @@ package org.api.stockmarket.modules.news.engines;
 
 import lombok.AllArgsConstructor;
 import org.api.stockmarket.modules.news.entity.NewsRelease;
-import org.api.stockmarket.modules.news.entity.NewsTemplate;
 import org.api.stockmarket.modules.news.service.NewsReleaseService;
 import org.api.stockmarket.modules.news.service.NewsTemplateService;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.service.StockService;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 /*
@@ -26,72 +25,26 @@ public class NewsReleaseEngine {
     private final NewsReleaseService newsReleaseService;
     private static final Random random = new Random();
 
-    public void executeNewsCycle(ZonedDateTime date){
+    public List<NewsRelease> executeNewsCycle(ZonedDateTime date){
         List<Stock> stocks = stockService.getAllStocks();
 
-        List<NewsTemplate> templates = newsTemplateService.findAllTemplates();
+        List<NewsRelease> releases = stocks.stream()
+                .map(stock -> generateNewsReleaseOrNull(stock, date))
+                .filter(Objects::nonNull)
+                .toList();
+        newsReleaseService.saveNewsReleases(releases);
 
-        stocks.forEach(stock -> {
-            if(random.nextInt(10) != 3) return;
-            NewsTemplate template = templates.get(random.nextInt(templates.size()));
-            newsReleaseService.saveNewsRelease(new NewsRelease(stock, template, date));
-        });
+        return List.of();
     }
 
-//    private final NewsService newsService;
-//    private final NewsFactory newsFactory;
-//    private final StockService stockService;
-//    private static final Random random = new Random();
-//
-//    public void runDailyNewsStories(List<Stock> stocks, ZonedDateTime date){
-//        stocks.forEach(stock -> {
-//            if(stock.getPrice() < 1){
-//                stockBankruptNews(stock, date);
-//                return;
-//            }
-//
-//            //~2% chance of news story being released daily
-//            //positive/negative depends on the random value and the stocks momentum
-//            int rand = random.nextInt(100);
-//
-//            switch(rand){
-//                case 10 : {
-//                    processNews(stock, newsFactory.generate(true), date);
-//                    break;
-//                }
-//                case 20 : {
-//                    processNews(stock, newsFactory.generate(false), date);
-//                    break;
-//                }
-//                case 25 : {
-//                    if(stock.getMomentum() == -1){
-//                        processNews(stock, newsFactory.generate(false), date);
-//                    }else if (stock.getMomentum() == 1){
-//                        processNews(stock, newsFactory.generate(true), date);
-//                    }
-//                    break;
-//                }
-//            }
-//        });
-//    }
-//
-//    private void processNews(Stock stock, NewsStory news, ZonedDateTime date) {
-//        stock.multiplyPrice(news.getPercentChange());
-//        stock.newsEvent(true);
-//        stockService.updateStockInDatabase(stock);
-//
-//        newsService.saveNewsForStock(new News(stock, news.getStory(stock), date));
-//    }
-//
-//    // Method is called if a stock reaches below 1 and has to be reset to avoid
-//    // going to zero
-//    private void stockBankruptNews(Stock stock, ZonedDateTime date) {
-//        String eventAnnouncement = stock.getCompanyName() + " declared bankruptcy today. A buyout has " +
-//                "been announced, leading to a new start for the company";
-//        newsService.saveNewsForStock(stock, eventAnnouncement, date);
-//
-//        stock.setPrice(DefaultStockPrices.getDefaultPriceWithCap(stock.getMarketCap()));
-//        stock.newsEvent(false);
-//        stockService.updateStockInDatabase(stock);
-//    }
+    public NewsRelease generateNewsReleaseOrNull(Stock stock, ZonedDateTime date){
+        /*
+        TODO:
+            - calculate a % chance of both positive and negative story
+            - get random number
+            - if within range of either one, create a release
+            - if not within range, return null
+         */
+        return null;
+    }
 }

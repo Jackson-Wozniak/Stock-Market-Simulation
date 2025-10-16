@@ -21,6 +21,15 @@ public class PriceRecordService {
         priceRecordRepository.saveAll(records);
     }
 
+    public void archiveRecordsAtOrBeforeDate(ZonedDateTime date){
+        /*
+        TODO:
+            - get all records in DB that are before date (inclusive)
+            - delete these records from the DB
+            - save all records to an archive CSV file
+         */
+    }
+
     public List<PriceRecord> findRecordsByStock(String ticker){
         return priceRecordRepository.findAll().stream()
                 .filter(record -> record.getTicker().equalsIgnoreCase(ticker)).toList();

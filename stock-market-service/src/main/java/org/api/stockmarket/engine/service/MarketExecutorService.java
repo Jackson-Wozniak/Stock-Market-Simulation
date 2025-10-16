@@ -1,8 +1,10 @@
 package org.api.stockmarket.engine.service;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import org.api.stockmarket.engine.entity.MarketState;
+import org.api.stockmarket.modules.news.entity.NewsRelease;
 import org.api.stockmarket.modules.stocks.service.PriceRecordService;
 import org.api.stockmarket.modules.stocks.service.StockService;
 import org.api.stockmarket.modules.news.engines.*;
@@ -26,32 +28,21 @@ public class MarketExecutorService {
     public void advanceMarket(MarketState marketState){
         if(marketState.getTemporalMarketMilestone().equals(END_OF_DAY)){
             logger.info("END OF DAY: {}", marketState);
-            dailyMarketActivity(marketState.getDateTime());
+            executeEndOfDayTick(marketState.getDateTime());
         }
-        if(marketState.getTemporalMarketMilestone().equals(END_OF_MONTH)){
-            monthlyMarketActivity(marketState.getDateTime());
-        }
-        if(marketState.getTemporalMarketMilestone().equals(END_OF_QUARTER)){
-            quarterlyMarketActivity(marketState.getDateTime());
-        }
-        hourlyMarketActivity();
+        executeIntraDayTick();
     }
 
-    private void dailyMarketActivity(ZonedDateTime date) {
-        priceRecordService.savePricesEOD(stockService.getAllStocks(), date);
-
-        newsReleaseEngine.executeNewsCycle(date);
-    }
-
-    private void hourlyMarketActivity(){
+    private void executeIntraDayTick() {
         stockService.runPriceChanges();
     }
 
-    private void monthlyMarketActivity(ZonedDateTime date){
+    private void executeEndOfDayTick(ZonedDateTime date) {
+        priceRecordService.savePricesEOD(stockService.getAllStocks(), date);
+        priceRecordService.archiveRecordsAtOrBeforeDate(date.minusDays(7));
 
-    }
+        List<NewsRelease> stories = newsReleaseEngine.executeNewsCycle(date);
 
-    private void quarterlyMarketActivity(ZonedDateTime date){
-
+        stockService.updatePricingAttributesAfterNews(stories);
     }
 }

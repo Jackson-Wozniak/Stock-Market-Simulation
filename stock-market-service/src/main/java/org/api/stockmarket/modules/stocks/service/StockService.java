@@ -1,5 +1,6 @@
 package org.api.stockmarket.modules.stocks.service;
 
+import org.api.stockmarket.modules.news.entity.NewsRelease;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.enums.MarketCap;
 import org.api.stockmarket.modules.stocks.exception.StockNotFoundException;
@@ -106,5 +107,9 @@ public class StockService {
         stockCache.clear();
         stockCache.putAll(stocks.stream().collect(Collectors.toMap(Stock::getId,st -> st)));
         totalStocks.set(stocks.size());
+    }
+
+    public void updatePricingAttributesAfterNews(List<NewsRelease> releases){
+
     }
 }

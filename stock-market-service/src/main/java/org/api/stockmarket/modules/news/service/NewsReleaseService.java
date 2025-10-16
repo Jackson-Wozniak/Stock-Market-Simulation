@@ -16,8 +16,10 @@ import java.util.List;
 public class NewsReleaseService {
 
     private NewsReleaseRepository newsReleaseRepository;
-    private NewsTemplateService newsTemplateService;
-    private StockService stockService;
+
+    public void saveNewsReleases(List<NewsRelease> releases){
+        newsReleaseRepository.saveAll(releases);
+    }
 
     public void saveNewsRelease(NewsRelease release){
         newsReleaseRepository.save(release);
