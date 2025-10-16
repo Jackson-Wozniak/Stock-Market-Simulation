@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.7">
+  <diagram name="Page-1" id="83t-LJ-FGysKCBEK_Y52">
+    <mxGraphModel dx="1572" dy="2002" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-1" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Action&lt;/font&gt;" style="html=1;whiteSpace=wrap;aspect=fixed;shape=isoRectangle;" vertex="1" parent="1">
+          <mxGeometry x="80" y="-360" width="233.33" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-2" value="Class&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Routine&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="450" y="-350" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-4" value="MarketActivityScheduler&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Scheduled Tick&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="270" y="-140" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-5" value="MarketExecutorService&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Handle Activity Tick&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="270" y="60" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-6" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-4" target="a4Kh_ChPgdYt2BTgaDG2-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="120" as="sourcePoint" />
+            <mxPoint x="460" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-7" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Intra-day&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Tick&lt;/font&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;aspect=fixed;shape=isoRectangle;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="233.33" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-8" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;EOD&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Tick&lt;/font&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;aspect=fixed;shape=isoRectangle;" vertex="1" parent="1">
+          <mxGeometry x="460" y="200" width="233.33" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-9" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.537;entryY=0.019;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-5" target="a4Kh_ChPgdYt2BTgaDG2-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="120" as="sourcePoint" />
+            <mxPoint x="460" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-10" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.503;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-5" target="a4Kh_ChPgdYt2BTgaDG2-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="120" as="sourcePoint" />
+            <mxPoint x="460" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-11" value="Market Executor Service&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Run Price Change&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="86.67000000000002" y="380" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-12" value="Stock Service&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Save Prices&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="86.66" y="550" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.497;exitY=0.99;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-7" target="a4Kh_ChPgdYt2BTgaDG2-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="520" as="sourcePoint" />
+            <mxPoint x="460" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-15" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-11" target="a4Kh_ChPgdYt2BTgaDG2-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="520" as="sourcePoint" />
+            <mxPoint x="460" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-16" target="a4Kh_ChPgdYt2BTgaDG2-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-16" value="Stock Service&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Save Prices EOD&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="466.65999999999997" y="380" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-17" target="a4Kh_ChPgdYt2BTgaDG2-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-17" value="News Release Engine&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Release Stories&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="466.65999999999997" y="550" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-18" target="a4Kh_ChPgdYt2BTgaDG2-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-18" value="Stock Service&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Update Pricing Attributes After News&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="425" y="720" width="303.34" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-20" value="Price Record Service&lt;div&gt;:&lt;/div&gt;&lt;div&gt;Archive Records&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="466.65999999999997" y="910" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a4Kh_ChPgdYt2BTgaDG2-21" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.509;exitY=0.99;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4Kh_ChPgdYt2BTgaDG2-8" target="a4Kh_ChPgdYt2BTgaDG2-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="520" as="sourcePoint" />
+            <mxPoint x="460" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
