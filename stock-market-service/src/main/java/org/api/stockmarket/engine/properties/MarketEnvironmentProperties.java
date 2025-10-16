@@ -25,4 +25,9 @@ public class MarketEnvironmentProperties {
 
     //Stocks above this price will dampen their price change scales
     public static final double PRICE_CEILING_DAMPENER = 10_000.0;
+
+    public static final double MAX_PERCENT_CHANCE_POSITIVE_NEWS = 5.0;
+    public static final double MAX_PERCENT_CHANCE_NEGATIVE_NEWS = 4.0;
+    public static final double MIN_PERCENT_CHANCE_POSITIVE_NEWS = 0.25;
+    public static final double MIN_PERCENT_CHANCE_NEGATIVE_NEWS = 0.1;
 }

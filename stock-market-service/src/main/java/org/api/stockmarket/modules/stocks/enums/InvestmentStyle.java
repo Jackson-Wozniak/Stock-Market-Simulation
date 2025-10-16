@@ -85,4 +85,16 @@ public enum InvestmentStyle {
             case UNKNOWN -> 0;
         };
     }
+
+    //returns the sentiment that this rating has. 1 is most negative 100 is most positive
+    public double getPositivityScoreOutOf100(){
+        return switch (this){
+            case MEME -> 10;
+            case BALANCED -> 40;
+            case UNKNOWN -> 50;
+            case DIVIDEND -> 60;
+            case VALUE, GROWTH -> 65;
+            case BLUE_CHIP -> 80;
+        };
+    }
 }

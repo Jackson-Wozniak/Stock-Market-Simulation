@@ -77,4 +77,15 @@ public enum InvestorRating {
             case STRONG_BUY -> 20;
         };
     }
+
+    //returns the sentiment that this rating has. 1 is most negative 100 is most positive
+    public double getPositivityScoreOutOf100(){
+        return switch (this){
+            case SELL -> 10;
+            case HOLD -> 30;
+            case NEUTRAL, UNKNOWN -> 50;
+            case BUY -> 70;
+            case STRONG_BUY -> 90;
+        };
+    }
 }
