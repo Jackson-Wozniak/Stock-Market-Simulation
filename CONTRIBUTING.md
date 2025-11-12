@@ -19,16 +19,8 @@ When contributing to this repository, please make sure to discusses changes (or 
 This project was ultimately made for me to learn how to build REST apis, and most of the changes I make now are just for entertainment. Here are some plans that I may decide to make 
   in the future. Feel free to choose one of these, or any ideas you have yourself, to contribute:
   
-  - Options trading. This will be built of the Black-Scholes model of options, which is a way of calculating european option prices
+  - Options pricing. This will be built of the Black-Scholes model of options, which is a way of calculating european option prices
 
-  - Adding the ability to trade index funds
-
-  - A series of trading bots. The idea here would be to create them seperately following the microservice architecture, and have them interact with the API through HTTP calls.
-    I would probably add different types of bots that serve different purposes or are more heavily optimized to see which one performs best.
-    
-  - Improvements in company earnings. To build off of this, earnings would have a large affect on the grade of the stock, and perhaps there could be more values that are used
-    to grade stocks, with each value having an affect on price movements. 
-    
 ### Code of Conduct
 
 If you decide to contribute, please be respectful of all fellow participants. This project was ultimately made to help me improve my coding skills, so I want to keep this environment open to 
