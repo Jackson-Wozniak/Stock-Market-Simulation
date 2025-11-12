@@ -18,24 +18,6 @@ services:
       stock_market_db:
         condition: service_healthy
 
-  stock-trading-service:
-    build:
-      context: stock-trading-service
-    image: stock-trading-service
-    restart: always
-    ports:
-      - "8010:8010"
-    environment:
-      MYSQL_HOST: stock_trading_db
-      MYSQL_USERNAME: root
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: stock_trading
-      MYSQL_PORT: 3306
-      SPRING_DATASOURCE_URL: jdbc:mysql://stock_market_db:3306/stock_trading?createDatabaseIfNotExist=true
-    depends_on:
-      stock_market_db:
-        condition: service_healthy
-
   stock_market_db:
     container_name: stock_market_db
     image: mysql
@@ -46,18 +28,5 @@ services:
       MYSQL_ROOT_PASSWORD: password
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
-
-  stock_trading_db:
-    container_name: stock_trading_db
-    image: mysql
-    ports:
-      - "3308:3306"
-    environment:
-      MYSQL_DATABASE: stock_trading
-      MYSQL_ROOT_PASSWORD: password
-    healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 20s
       retries: 10
