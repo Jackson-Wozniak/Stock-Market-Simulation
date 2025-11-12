@@ -24,7 +24,7 @@ public class CSVUtils {
             ClassPathResource resource = new ClassPathResource(filepath);
             InputStreamReader streamReader = new InputStreamReader(resource.getInputStream());
             return new BufferedReader(streamReader).lines().
-                    filter(line -> line.split(",")[0].contains("#")).
+                    filter(line -> !line.split(",")[0].contains("#")).
                     toList().size();
         }catch (Exception ex){
             ConfigurationException.failAndExit("Error reading file " + filepath + ".", calledClass);

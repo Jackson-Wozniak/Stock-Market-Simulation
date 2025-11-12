@@ -1,6 +1,5 @@
-package org.api.stockmarket.modules.indexfunds.utils;
+package org.api.stockmarket.core.utils;
 
-import org.api.stockmarket.core.utils.Capitalize;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
