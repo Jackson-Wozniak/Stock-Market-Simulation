@@ -46,7 +46,7 @@ public class MarketStateService {
         CurrentTimeRange priorRange = priorMarket.getTimeRange();
         ZonedDateTime currentTime = priorMarket.getDate();
 
-        ZonedDateTime newTime = currentTime.plusMinutes(PLUS_MINUTES_PER_RUN);
+        ZonedDateTime newTime = currentTime.plusMinutes(ADDED_MINUTES_PER_RUN);
 
         cachedMarketSingleton.setDate(newTime);
         cachedMarketSingleton = marketRepository.save(cachedMarketSingleton);

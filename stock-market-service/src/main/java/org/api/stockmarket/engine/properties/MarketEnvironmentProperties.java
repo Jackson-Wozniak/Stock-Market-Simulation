@@ -15,8 +15,8 @@ public class MarketEnvironmentProperties {
             ZonedDateTime.of(LocalDate.of(2025,1,1),
                     LocalTime.of(9, 0), ZoneId.systemDefault());
     public static final MarketSimulatorMode MARKET_MODE = MarketSimulatorMode.FULL_FUNCTIONALITY;
-    public static final long MARKET_TIME_INTERVAL = MarketIntervals.ONE_SECOND;
-    public static final int PLUS_MINUTES_PER_RUN = 30;
+    public static final long MARKET_TIME_INTERVAL = MarketIntervals.TEN_SECONDS;
+    public static final int ADDED_MINUTES_PER_RUN = 30;
     public static final boolean CSV_ENUMS_USE_STRINGS = false;
 
     public static final double PRICE_SCALE_DIMINISHER = 800.0;
