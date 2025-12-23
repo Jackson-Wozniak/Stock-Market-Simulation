@@ -33,10 +33,10 @@ public class MarketActivityScheduler {
     private static final Logger logger = LoggerFactory.getLogger(MarketActivityScheduler.class);
     private static final Logger performanceLogger = LoggerFactory.getLogger("performanceLogger");
 
-//    @PostConstruct
-//    public void start(){
-//        schedule(MarketEnvironmentProperties.MARKET_TIME_INTERVAL);
-//    }
+    @PostConstruct
+    public void start(){
+        schedule(MarketEnvironmentProperties.MARKET_TIME_INTERVAL);
+    }
 
     public void schedule(long intervalMs) {
         stop();
