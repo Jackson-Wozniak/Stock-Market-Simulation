@@ -26,10 +26,10 @@ public class Stock extends BaseEntity {
     @OneToOne(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
     private PricingModel pricingModel;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<NewsRelease> newsReleases = new ArrayList<>();
 
-    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "stock", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<PriceRecord> priceRecords = new ArrayList<>();
 
     public Stock(String ticker) {
