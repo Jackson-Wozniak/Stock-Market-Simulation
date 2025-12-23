@@ -2,7 +2,10 @@ import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { mapDTO, type MarketState, type MarketStateDTO } from "../../../types/MarketDTOs";
 import { fetchMarketState, fetchPauseMarket, fetchResumeMarket, fetchUpdateInterval } from "../../../api/MarketClient";
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Button, CircularProgress, IconButton, Typography } from "@mui/material";
+import PauseIcon from '@mui/icons-material/Pause';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import FastForwardIcon from '@mui/icons-material/FastForward';
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
@@ -27,7 +30,7 @@ const MarketUtilities: React.FC = () => {
     useEffect(() => {
         const intervalMs = marketState?.currentIntervalMs ?? DEFAULT_INTERVAL;
         const intervalId = setInterval(pollMarket, intervalMs);
-        
+
         return () => clearInterval(intervalId);
     }, [marketState?.currentIntervalMs]);
 
@@ -63,10 +66,12 @@ const MarketUtilities: React.FC = () => {
         <Box sx={{width: "100%", height: "20%"}}>
             <Typography>{dateFormatter.format(marketState.date)}</Typography>
             <Typography>{timeFormatter.format(marketState.date)}</Typography>
-            <Typography>Market Interval: {marketState.currentIntervalMs / 1000} seconds</Typography>
-            <Button onClick={() => updateMarketInterval(false)}>-</Button>
-            <Button onClick={updateMarketStatus}>{marketState.running ? "Pause" : "Resume"}</Button>
-            <Button onClick={() => updateMarketInterval(true)}>+</Button>
+            <Typography>Market runs every {marketState.currentIntervalMs / 1000} seconds</Typography>
+            <IconButton onClick={() => updateMarketInterval(false)}><FastForwardIcon sx={{ transform: 'scaleX(-1)' }} /></IconButton>
+            <IconButton onClick={updateMarketStatus}>
+                {marketState.running ? (<PauseIcon/>) : <PlayArrowIcon/>}
+            </IconButton>
+            <IconButton onClick={() => updateMarketInterval(true)}><FastForwardIcon/></IconButton>
         </Box>
     )
 }
