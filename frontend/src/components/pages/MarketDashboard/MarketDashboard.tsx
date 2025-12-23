@@ -1,5 +1,7 @@
 import { Box } from "@mui/material";
 import Page from "../../layout/Page";
+import MarketUtilities from "./MarketUtilities";
+import StockDisplay from "./StockDisplay";
 
 const MarketDashboard: React.FC = () => {
     return (
@@ -8,7 +10,8 @@ const MarketDashboard: React.FC = () => {
                 width: "100%", height: "100%", display: "flex", flexDirection: "column",
                 alignItems: "center", justifyContent: "center"
             }}>
-
+                <MarketUtilities/>
+                <StockDisplay/>
             </Box>
         </Page>
     )

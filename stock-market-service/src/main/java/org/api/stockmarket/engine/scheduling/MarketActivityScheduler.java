@@ -28,30 +28,40 @@ public class MarketActivityScheduler {
     private final TaskScheduler taskScheduler;
 
     private ScheduledFuture<?> future;
-    private long intervalMs;
+    private boolean running = false;
+    private long intervalMs = MarketEnvironmentProperties.MARKET_TIME_INTERVAL;
 
     private static final Logger logger = LoggerFactory.getLogger(MarketActivityScheduler.class);
     private static final Logger performanceLogger = LoggerFactory.getLogger("performanceLogger");
 
     @PostConstruct
     public void start(){
-        schedule(MarketEnvironmentProperties.MARKET_TIME_INTERVAL);
+        schedule();
     }
 
-    public void schedule(long intervalMs) {
+    public void updateInterval(long intervalMs){
+        this.intervalMs = intervalMs;
+        if(running){
+            schedule();
+        }else{
+            marketStateService.updateSchedulingConfig(false, intervalMs);
+        }
+    }
+
+    public void schedule() {
         stop();
         future = taskScheduler.scheduleWithFixedDelay(
                 this::scheduledMarketActivity, Duration.ofMillis(intervalMs)
         );
-        this.intervalMs = intervalMs;
+        running = true;
         marketStateService.updateSchedulingConfig(true, intervalMs);
     }
 
     public void stop() {
-        if (future != null) {
-            future.cancel(false);
-            marketStateService.updateSchedulingConfig(false, this.intervalMs);
-        }
+        if(!running) return;
+        future.cancel(false);
+        running = false;
+        marketStateService.updateSchedulingConfig(false, this.intervalMs);
     }
 
     @SuppressWarnings("unused")

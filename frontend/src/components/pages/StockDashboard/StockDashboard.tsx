@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import Page from "../../layout/Page";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import type { StockFullDTO } from "../../../types/StockDTO";
+import type { StockFullDTO } from "../../../types/StockDTOs";
 import { fetchFullStockByTicker } from "../../../api/StockClient";
 
 const StockDashboard: React.FC = () => {

@@ -14,7 +14,7 @@ public class MarketStateDTO {
     private String trajectory;
 
     public MarketStateDTO(MarketState market){
-        this.date = DateConversion.toFormattedString(market.getDateTime());
+        this.date = market.getDateTime().toString();
         this.trajectory = market.getSentiment().toString();
         this.isRunning = market.isRunning();
         this.currentIntervalMs = market.getCurrentIntervalMs();

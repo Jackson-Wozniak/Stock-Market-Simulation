@@ -14,18 +14,14 @@ public class MarketSchedulingService {
         if(millis < 100){
             throw new BadRequestException("Intervals must be 1 second or more");
         }
-        marketActivityScheduler.schedule(millis);
+        marketActivityScheduler.updateInterval(millis);
     }
 
     public void pause(){
         marketActivityScheduler.stop();
     }
 
-    public void resume(long millis){
-        marketActivityScheduler.schedule(millis);
-    }
-
     public void resume(){
-        marketActivityScheduler.schedule(MarketEnvironmentProperties.MARKET_TIME_INTERVAL);
+        marketActivityScheduler.schedule();
     }
 }
