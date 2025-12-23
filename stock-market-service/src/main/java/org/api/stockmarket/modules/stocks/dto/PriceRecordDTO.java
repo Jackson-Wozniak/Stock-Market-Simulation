@@ -9,11 +9,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StockPriceHistoryDTO {
+public class PriceRecordDTO {
     private ZonedDateTime  marketDate;
     private double stockPrice;
 
-    public StockPriceHistoryDTO(PriceRecord history){
+    public PriceRecordDTO(PriceRecord history){
         this.marketDate = history.getDate();
         this.stockPrice = history.getStockPrice();
     }

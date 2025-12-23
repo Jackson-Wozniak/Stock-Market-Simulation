@@ -1,7 +1,6 @@
 package org.api.stockmarket.core.exception;
 
-import org.api.stockmarket.core.exception.base.BadRequestException;
-import org.api.stockmarket.core.exception.base.NotFoundException;
+import org.api.stockmarket.core.entity.BaseEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,8 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> notFoundException(NotFoundException ex){
+    @ExceptionHandler(BaseEntity.NotFoundException.class)
+    public ResponseEntity<String> notFoundException(BaseEntity.NotFoundException ex){
         return new ResponseEntity<>(ex.getMessage(), ex.getStatus());
     }
 

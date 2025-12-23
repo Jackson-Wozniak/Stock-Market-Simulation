@@ -1,6 +1,6 @@
 package org.api.stockmarket.modules.indexfunds.exception;
 
-import org.api.stockmarket.core.exception.base.BadRequestException;
+import org.api.stockmarket.core.exception.BadRequestException;
 
 public class IndexFundException extends BadRequestException {
 
