@@ -12,12 +12,17 @@ import java.time.ZonedDateTime;
 @Setter
 public class MarketState {
     private final ZonedDateTime dateTime;
+    private final boolean isRunning;
+    private final long currentIntervalMs;
     private final MarketSentiment sentiment;
     private final TemporalMarketMilestone temporalMarketMilestone;
 
     public MarketState(ZonedDateTime dateTime, MarketSentiment sentiment,
+                       boolean isRunning, long currentIntervalMs,
                        TemporalMarketMilestone marketMilestone){
         this.dateTime = dateTime;
+        this.isRunning = isRunning;
+        this.currentIntervalMs = currentIntervalMs;
         this.sentiment = sentiment;
         this.temporalMarketMilestone = marketMilestone;
     }

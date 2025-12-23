@@ -28,25 +28,29 @@ public class MarketActivityScheduler {
     private final TaskScheduler taskScheduler;
 
     private ScheduledFuture<?> future;
+    private long intervalMs;
 
     private static final Logger logger = LoggerFactory.getLogger(MarketActivityScheduler.class);
     private static final Logger performanceLogger = LoggerFactory.getLogger("performanceLogger");
 
-    @PostConstruct
-    public void start(){
-        schedule(MarketEnvironmentProperties.MARKET_TIME_INTERVAL);
-    }
+//    @PostConstruct
+//    public void start(){
+//        schedule(MarketEnvironmentProperties.MARKET_TIME_INTERVAL);
+//    }
 
     public void schedule(long intervalMs) {
         stop();
         future = taskScheduler.scheduleWithFixedDelay(
                 this::scheduledMarketActivity, Duration.ofMillis(intervalMs)
         );
+        this.intervalMs = intervalMs;
+        marketStateService.updateSchedulingConfig(true, intervalMs);
     }
 
     public void stop() {
         if (future != null) {
             future.cancel(false);
+            marketStateService.updateSchedulingConfig(false, this.intervalMs);
         }
     }
 
@@ -58,7 +62,6 @@ public class MarketActivityScheduler {
         }
 
         MarketState marketState = marketStateService.findMarketState();
-        System.out.println(marketState.getDateTime());
 
         if(marketState.getCurrentTimeRange().equals(CurrentTimeRange.AFTER_HOURS)){
             marketState = marketStateService.incrementAfterHours();

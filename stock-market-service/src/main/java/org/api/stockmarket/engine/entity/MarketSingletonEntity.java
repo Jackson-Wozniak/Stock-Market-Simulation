@@ -43,16 +43,16 @@ public class MarketSingletonEntity {
         );
     }
 
-    public MarketState getState(){
-        return new MarketState(date, sentiment, TemporalMarketMilestone.NONE);
+    public MarketState getState(boolean isRunning, long currentIntervalMs){
+        return new MarketState(date, sentiment, isRunning, currentIntervalMs, TemporalMarketMilestone.NONE);
     }
 
-    public MarketState getState(CurrentTimeRange priorStatus){
+    public MarketState getState(CurrentTimeRange priorStatus, boolean isRunning, long currentIntervalMs){
         if(priorStatus.equals(CurrentTimeRange.TRADING_HOURS) &&
         getTimeRange().equals(CurrentTimeRange.AFTER_HOURS)){
-            return new MarketState(date, sentiment, TemporalMarketMilestone.END_OF_DAY);
+            return new MarketState(date, sentiment, isRunning, currentIntervalMs, TemporalMarketMilestone.END_OF_DAY);
         }
-        return getState();
+        return getState(isRunning, currentIntervalMs);
     }
 
     public CurrentTimeRange getTimeRange(){

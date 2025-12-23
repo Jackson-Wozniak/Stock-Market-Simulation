@@ -1,7 +1,5 @@
 package org.api.stockmarket.engine.utils;
 
-import org.api.stockmarket.engine.dtos.MarketState;
-import org.api.stockmarket.engine.enums.MarketSentiment;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 
 import java.util.List;
