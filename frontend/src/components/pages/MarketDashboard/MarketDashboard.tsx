@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Page from "../../shared/PageComponents/Page";
+import Page from "../../layout/Page";
 
 const MarketDashboard: React.FC = () => {
     return (

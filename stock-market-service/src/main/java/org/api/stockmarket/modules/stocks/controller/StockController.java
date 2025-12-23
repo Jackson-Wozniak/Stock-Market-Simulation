@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/v1/stocks")
-@CrossOrigin(origins = {"http://127.0.0.1:5500", "http://127.0.0.1:5501"})
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 @SuppressWarnings("unused")
 public class StockController {
