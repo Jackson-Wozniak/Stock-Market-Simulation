@@ -220,8 +220,9 @@ but retrieving old prices is read from the archives instead, keeping DB data cle
 
 To run locally, first ensure that Docker Desktop & Maven is downloaded to your system. Then run the following commands:
 
+*NOTE* API Docs can be found after running by visiting http://localhost:8000/swagger-ui/index.html
+
 - Stock Market Service will run on http://localhost:8000
-- Stock Trading Service will run on http://localhost:8010
 
 ```
   - git clone https://github.com/Jackson-Wozniak/Stock-Market-Simulation.git
