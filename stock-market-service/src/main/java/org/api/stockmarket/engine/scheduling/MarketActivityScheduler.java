@@ -12,6 +12,7 @@ import org.api.stockmarket.engine.service.MarketStateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -21,6 +22,7 @@ import java.time.Instant;
 @Configuration
 @EnableScheduling
 @AllArgsConstructor
+@Profile("!test")
 public class MarketActivityScheduler {
     private final MarketStateService marketStateService;
     private final MarketExecutorService marketExecutorService;

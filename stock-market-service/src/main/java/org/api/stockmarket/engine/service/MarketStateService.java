@@ -64,4 +64,8 @@ public class MarketStateService {
         cachedMarketSingleton = marketRepository.save(cachedMarketSingleton);
         return cachedMarketSingleton.getState();
     }
+
+    public void cleanCache(){
+        cachedMarketSingleton = null;
+    }
 }
