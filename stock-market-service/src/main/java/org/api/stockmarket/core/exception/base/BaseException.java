@@ -9,7 +9,7 @@ public abstract class BaseException extends RuntimeException{
     private final String controllerName;
 
     protected BaseException(HttpStatus status, String message, String controllerName){
-        super("From " + controllerName + ": " + message);
+        super(controllerName.equalsIgnoreCase("unknown") ? message : "From " + controllerName + ": " + message);
         this.status = status;
         this.controllerName = controllerName;
     }
