@@ -1,9 +1,5 @@
 package org.api.stockmarket.modules.stocks.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,58 +8,25 @@ import org.api.stockmarket.modules.stocks.enums.PriceVolatility;
 import static org.api.stockmarket.modules.stocks.utils.PricingModelUtils.*;
 import static org.api.stockmarket.engine.properties.MarketEnvironmentProperties.ABSOLUTE_VALUE_FACTOR_RANGE;
 
-@Embeddable
 @Getter
 @Setter
 @NoArgsConstructor
 public class PricingAttributes {
-    @Column(name = "pricing_volatility")
-    @Enumerated(EnumType.STRING)
     private PriceVolatility volatility;
-
-    @Column(name = "investor_confidence_factor")
     private int investorConfidenceFactor;
-
-    @Column(name = "investor_confidence_weight")
     private double investorConfidenceWeight;
-
-    @Column(name = "base_investor_confidence_noise")
     private double baseInvestorConfidenceNoise;
-
-    @Column(name = "news_sentiment_factor")
     private int newsSentimentFactor;
-
-    @Column(name = "news_sentiment_weight")
     private double newsSentimentWeight;
-
-    @Column(name = "base_news_sentiment_noise")
     private double baseNewsSentimentNoise;
-
-    @Column(name = "innovation_factor")
     private int innovationFactor;
-
-    @Column(name = "innovation_weight")
     private double innovationWeight;
-
-    @Column(name = "base_innovation_noise")
     private double baseInnovationNoise;
-
-    @Column(name = "trading_demand_factor")
     private int tradingDemandFactor;
-
-    @Column(name = "trading_demand_weight")
     private double tradingDemandWeight;
-
-    @Column(name = "base_trading_demand_noise")
     private double baseTradingDemandNoise;
-
-    @Column(name = "liquidity_factor")
     private int liquidityFactor;
-
-    @Column(name = "liquidity_weight")
     private double liquidityWeight;
-
-    @Column(name = "base_liquidity_noise")
     private double baseLiquidityNoise;
 
     public PricingAttributes(PriceVolatility volatility, int investorConfidenceFactor,

@@ -4,37 +4,19 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.core.entity.BaseEntity;
 import org.api.stockmarket.modules.stocks.enums.InvestmentStyle;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;
 import org.api.stockmarket.modules.stocks.enums.MarketCap;
 
-@Entity(name = "company")
-@Table(name = "companies")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Company extends BaseEntity {
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "stock_id")
+public class Company {
     private Stock stock;
-
-    @Column(name = "company_name")
     private String companyName;
-
-    @Column(name = "sector")
     private String sector;
-
-    @Column(name = "cap")
-    @Enumerated(EnumType.STRING)
     private MarketCap marketCap;
-
-    @Column(name = "investor_rating")
-    @Enumerated(EnumType.STRING)
     private InvestorRating investorRating;
-
-    @Column(name = "investment_style")
-    @Enumerated(EnumType.STRING)
     private InvestmentStyle investmentStyle;
 
     public Company(Builder builder){

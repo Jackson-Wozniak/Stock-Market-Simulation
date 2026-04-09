@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import org.api.stockmarket.core.utils.RandomUtils;
 import org.api.stockmarket.engine.properties.MarketEnvironmentProperties;
 import org.api.stockmarket.modules.news.entity.NewsRelease;
-import org.api.stockmarket.modules.news.service.NewsReleaseService;
-import org.api.stockmarket.modules.news.service.NewsTemplateService;
 import org.api.stockmarket.modules.stocks.entity.Stock;
 import org.api.stockmarket.modules.stocks.enums.InvestmentStyle;
 import org.api.stockmarket.modules.stocks.enums.InvestorRating;
@@ -25,18 +23,15 @@ Begin by releasing news stories at a certain % chance, and then generate/save ne
 @AllArgsConstructor
 public class NewsReleaseEngine {
     private final StockService stockService;
-    private final NewsTemplateService newsTemplateService;
-    private final NewsReleaseService newsReleaseService;
 
     public List<NewsRelease> executeNewsCycle(ZonedDateTime date){
-        List<Stock> stocks = stockService.getAllStocks();
-
-        List<NewsRelease> releases = stocks.stream()
-                .map(stock -> generateNewsReleaseOrNull(stock, date))
-                .filter(Objects::nonNull)
-                .toList();
-        newsReleaseService.saveNewsReleases(releases);
-
+//        List<Stock> stocks = stockService.getAllStocks();
+//
+//        List<NewsRelease> releases = stocks.stream()
+//                .map(stock -> generateNewsReleaseOrNull(stock, date))
+//                .filter(Objects::nonNull)
+//                .toList();
+//        newsReleaseService.saveNewsReleases(releases);
         return List.of();
     }
 
@@ -52,10 +47,10 @@ public class NewsReleaseEngine {
         int negativeRange = positiveRange + (int) (percentChanceOfNegativeNews(rating, style) * 10);
         int random = RandomUtils.getRandomInt(0, 1000);
         if(random <= positiveRange){
-            return new NewsRelease(stock, newsTemplateService.findRandomTemplate(true), date);
+            //return new NewsRelease(stock, newsTemplateService.findRandomTemplate(true), date);
         }
         if(random <= negativeRange){
-            return new NewsRelease(stock, newsTemplateService.findRandomTemplate(false), date);
+            //return new NewsRelease(stock, newsTemplateService.findRandomTemplate(false), date);
         }
         return null;
     }

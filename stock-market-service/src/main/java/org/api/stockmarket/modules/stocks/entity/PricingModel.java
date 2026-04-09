@@ -4,27 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.core.entity.BaseEntity;
 import org.api.stockmarket.modules.stocks.enums.PriceVolatility;
 
 import java.math.BigDecimal;
 import java.util.Random;
 
-@Entity(name = "pricingModel")
-@Table(name = "pricing_models")
 @Getter
 @Setter
 @NoArgsConstructor
-public class PricingModel extends BaseEntity {
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stock_id")
+public class PricingModel {
     private Stock stock;
-
-    @Column(name = "price")
     private BigDecimal price;
-
-    @Embedded
     private PricingAttributes attributes;
 
     private static final Random random = new Random();

@@ -3,33 +3,19 @@ package org.api.stockmarket.modules.stocks.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.api.stockmarket.core.entity.BaseEntity;
 import org.api.stockmarket.modules.news.entity.NewsRelease;
-
-import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "stock")
-@Table(name = "stocks")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Stock extends BaseEntity {
-    @Column(name = "ticker")
+public class Stock {
     private String ticker;
-
-    @OneToOne(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
     private Company company;
-
-    @OneToOne(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
     private PricingModel pricingModel;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<NewsRelease> newsReleases = new ArrayList<>();
-
-    @OneToMany(mappedBy = "stock", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<PriceRecord> priceRecords = new ArrayList<>();
 
     public Stock(String ticker) {
