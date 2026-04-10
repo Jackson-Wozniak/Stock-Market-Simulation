@@ -8,16 +8,10 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 public class MarketEnvironmentProperties {
-    public static final boolean PERFORMANCE_DEBUG = true;
-
-    public static final int MARKET_SINGLETON_ID = 1;
     public static final ZonedDateTime STARTING_MARKET_DATE =
             ZonedDateTime.of(LocalDate.of(2025,1,1),
                     LocalTime.of(9, 0), ZoneId.systemDefault());
-    public static final MarketSimulatorMode MARKET_MODE = MarketSimulatorMode.FULL_FUNCTIONALITY;
-    public static final long MARKET_TIME_INTERVAL = MarketIntervals.TEN_SECONDS;
     public static final int ADDED_MINUTES_PER_RUN = 30;
-    public static final boolean CSV_ENUMS_USE_STRINGS = false;
 
     public static final double PRICE_SCALE_DIMINISHER = 800.0;
     public static final int ABSOLUTE_VALUE_FACTOR_RANGE = 50;
