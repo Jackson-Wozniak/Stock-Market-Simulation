@@ -1,0 +1,34 @@
+package io.github.stockmarket.market.news.engines;
+
+import io.github.stockmarket.market.stocks.enums.InvestmentStyle;
+import io.github.stockmarket.market.stocks.enums.InvestorRating;
+import org.junit.jupiter.api.Test;
+
+import static io.github.stockmarket.engine.properties.MarketEnvironmentProperties.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class NewsReleaseEngineTest {
+    @Test
+    public void testPositiveNewsPercentChance(){
+        NewsReleaseEngine engine = new NewsReleaseEngine(null, null, null);
+
+        double expectedPercent = MAX_PERCENT_CHANCE_POSITIVE_NEWS * .85;
+        assertEquals(expectedPercent, engine.percentChanceOfPositiveNews(
+                InvestorRating.STRONG_BUY, InvestmentStyle.BLUE_CHIP));
+
+        assertEquals(MIN_PERCENT_CHANCE_POSITIVE_NEWS, engine.percentChanceOfPositiveNews(
+                InvestorRating.SELL, InvestmentStyle.MEME));
+    }
+
+    @Test
+    void testNegativeNewsPercentChance(){
+        NewsReleaseEngine engine = new NewsReleaseEngine(null, null, null);
+
+        double expectedPercent = MAX_PERCENT_CHANCE_NEGATIVE_NEWS * .9;
+        assertEquals(expectedPercent, engine.percentChanceOfNegativeNews(
+                InvestorRating.SELL, InvestmentStyle.MEME));
+
+        assertEquals(MIN_PERCENT_CHANCE_NEGATIVE_NEWS, engine.percentChanceOfNegativeNews(
+                InvestorRating.STRONG_BUY, InvestmentStyle.BLUE_CHIP));
+    }
+}

@@ -8,7 +8,7 @@
 		<version>3.5.4</version>
 		<relativePath/>
 	</parent>
-	<groupId>org.api</groupId>
+	<groupId>io.github</groupId>
 	<artifactId>stock-market-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>stock-market-service</name>
@@ -78,7 +78,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>org.api.StockMarketApplication</mainClass>
+					<mainClass>io.github.StockMarketApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

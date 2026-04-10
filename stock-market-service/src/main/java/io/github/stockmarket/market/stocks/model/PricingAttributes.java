@@ -1,0 +1,105 @@
+package io.github.stockmarket.market.stocks.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import io.github.stockmarket.market.stocks.enums.PriceVolatility;
+
+import static io.github.stockmarket.market.stocks.utils.PricingModelUtils.*;
+import static io.github.stockmarket.engine.properties.MarketEnvironmentProperties.ABSOLUTE_VALUE_FACTOR_RANGE;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class PricingAttributes {
+    private PriceVolatility volatility;
+    private int investorConfidenceFactor;
+    private double investorConfidenceWeight;
+    private double baseInvestorConfidenceNoise;
+    private int newsSentimentFactor;
+    private double newsSentimentWeight;
+    private double baseNewsSentimentNoise;
+    private int innovationFactor;
+    private double innovationWeight;
+    private double baseInnovationNoise;
+    private int tradingDemandFactor;
+    private double tradingDemandWeight;
+    private double baseTradingDemandNoise;
+    private int liquidityFactor;
+    private double liquidityWeight;
+    private double baseLiquidityNoise;
+
+    public PricingAttributes(PriceVolatility volatility, int investorConfidenceFactor,
+                             double investorConfidenceWeight, double baseInvestorConfidenceNoise,
+                             int newsSentimentFactor, double newsSentimentWeight, double baseNewsSentimentNoise,
+                             int innovationFactor, double innovationWeight, double baseInnovationNoise,
+                             int tradingDemandFactor, double tradingDemandWeight, double baseTradingDemandNoise,
+                             int liquidityFactor, double liquidityWeight, double baseLiquidityNoise) {
+        this.volatility = volatility;
+        this.investorConfidenceFactor = clampFactor(investorConfidenceFactor);
+        this.investorConfidenceWeight = investorConfidenceWeight;
+        this.baseInvestorConfidenceNoise = baseInvestorConfidenceNoise;
+        this.newsSentimentFactor = clampFactor(newsSentimentFactor);
+        this.newsSentimentWeight = newsSentimentWeight;
+        this.baseNewsSentimentNoise = baseNewsSentimentNoise;
+        this.innovationFactor = clampFactor(innovationFactor);
+        this.innovationWeight = innovationWeight;
+        this.baseInnovationNoise = baseInnovationNoise;
+        this.tradingDemandFactor = clampFactor(tradingDemandFactor);
+        this.tradingDemandWeight = tradingDemandWeight;
+        this.baseTradingDemandNoise = baseTradingDemandNoise;
+        this.liquidityFactor = clampFactor(liquidityFactor);
+        this.liquidityWeight = liquidityWeight;
+        this.baseLiquidityNoise = baseLiquidityNoise;
+    }
+
+    private static int clampFactor(int rawValue){
+        return Math.max(-ABSOLUTE_VALUE_FACTOR_RANGE,
+                Math.min(rawValue, ABSOLUTE_VALUE_FACTOR_RANGE));
+    }
+
+    public double calculateNewsDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedNewsSentimentFactor(),
+                volatility.applyMagnitude(baseNewsSentimentNoise));
+    }
+
+    public double calculateInvestorConfidenceDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedInvestorConfidenceFactor(),
+                volatility.applyMagnitude(baseInvestorConfidenceNoise));
+    }
+
+    public double calculateInnovationDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedInnovationFactor(),
+                volatility.applyMagnitude(baseInnovationNoise));
+    }
+
+    public double calculateTradingDemandDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedTradingDemandFactor(),
+                volatility.applyMagnitude(baseTradingDemandNoise));
+    }
+
+    public double calculateLiquidityDelta(double currentPrice){
+        return randomPriceDelta(currentPrice, weightedLiquidityFactor(),
+                volatility.applyMagnitude(baseLiquidityNoise));
+    }
+
+    private double weightedInvestorConfidenceFactor(){
+        return investorConfidenceFactor * investorConfidenceWeight;
+    }
+
+    private double weightedNewsSentimentFactor(){
+        return newsSentimentFactor * newsSentimentWeight;
+    }
+
+    private double weightedInnovationFactor(){
+        return innovationFactor * innovationWeight;
+    }
+
+    private double weightedTradingDemandFactor(){
+        return tradingDemandFactor * tradingDemandWeight;
+    }
+
+    private double weightedLiquidityFactor(){
+        return liquidityFactor * liquidityWeight;
+    }
+}
