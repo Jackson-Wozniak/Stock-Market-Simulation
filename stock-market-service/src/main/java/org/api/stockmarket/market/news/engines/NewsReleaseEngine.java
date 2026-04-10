@@ -1,0 +1,73 @@
+package org.api.stockmarket.market.news.engines;
+
+import lombok.AllArgsConstructor;
+import org.api.stockmarket.core.utils.RandomUtils;
+import org.api.stockmarket.engine.properties.MarketEnvironmentProperties;
+import org.api.stockmarket.market.news.entity.NewsRelease;
+import org.api.stockmarket.market.stocks.model.Stock;
+import org.api.stockmarket.market.stocks.enums.InvestmentStyle;
+import org.api.stockmarket.market.stocks.enums.InvestorRating;
+import org.api.stockmarket.market.stocks.service.StockService;
+import org.springframework.stereotype.Component;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+
+/*
+Class that manages the creation and release of news stories
+Begin by releasing news stories at a certain % chance, and then generate/save new stories
+ */
+@Component
+@AllArgsConstructor
+public class NewsReleaseEngine {
+    private final StockService stockService;
+
+    public List<NewsRelease> executeNewsCycle(ZonedDateTime date){
+//        List<Stock> stocks = stockService.getAllStocks();
+//
+//        List<NewsRelease> releases = stocks.stream()
+//                .map(stock -> generateNewsReleaseOrNull(stock, date))
+//                .filter(Objects::nonNull)
+//                .toList();
+//        newsReleaseService.saveNewsReleases(releases);
+        return List.of();
+    }
+
+    /*
+    This method uses the stock's company attributes to determine the likelihood
+    of positive or negative stories. This design ensures that the default attributes
+    of a stock guide the likelihood of news sentiment over time
+     */
+    public NewsRelease generateNewsReleaseOrNull(Stock stock, ZonedDateTime date){
+        InvestorRating rating = stock.getCompany().getInvestorRating();
+        InvestmentStyle style = stock.getCompany().getInvestmentStyle();
+        int positiveRange = (int) percentChanceOfPositiveNews(rating, style) * 10;
+        int negativeRange = positiveRange + (int) (percentChanceOfNegativeNews(rating, style) * 10);
+        int random = RandomUtils.getRandomInt(0, 1000);
+        if(random <= positiveRange){
+            //return new NewsRelease(stock, newsTemplateService.findRandomTemplate(true), date);
+        }
+        if(random <= negativeRange){
+            //return new NewsRelease(stock, newsTemplateService.findRandomTemplate(false), date);
+        }
+        return null;
+    }
+
+    public double percentChanceOfPositiveNews(InvestorRating rating, InvestmentStyle style){
+        double averagePositivityScore = (rating.getPositivityScoreOutOf100()
+                + style.getPositivityScoreOutOf100()) / 2.0;
+        if(averagePositivityScore < 50.0)
+            return MarketEnvironmentProperties.MIN_PERCENT_CHANCE_POSITIVE_NEWS;
+        return MarketEnvironmentProperties.MAX_PERCENT_CHANCE_POSITIVE_NEWS
+                * (averagePositivityScore / 100.0);
+    }
+
+    public double percentChanceOfNegativeNews(InvestorRating rating, InvestmentStyle style){
+        double averagePositivityScore = (rating.getPositivityScoreOutOf100()
+                + style.getPositivityScoreOutOf100()) / 2.0;
+        if(averagePositivityScore > 50.0)
+            return MarketEnvironmentProperties.MIN_PERCENT_CHANCE_NEGATIVE_NEWS;
+        return MarketEnvironmentProperties.MAX_PERCENT_CHANCE_NEGATIVE_NEWS
+                * ((100.0 - averagePositivityScore) / 100.0);
+    }
+}

@@ -1,6 +1,6 @@
 package org.api.stockmarket.engine.utils;
 
-import org.api.stockmarket.modules.stocks.entity.Stock;
+import org.api.stockmarket.market.stocks.model.Stock;
 
 import java.util.List;
 
