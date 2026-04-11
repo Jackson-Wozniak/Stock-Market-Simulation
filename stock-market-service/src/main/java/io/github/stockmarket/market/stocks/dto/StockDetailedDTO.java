@@ -14,9 +14,9 @@ public class StockDetailedDTO extends StockBasicDTO{
 
     public StockDetailedDTO(Stock stock) {
         super(stock);
-        this.sector = stock.getCompany().getSector();
-        this.marketCap = String.valueOf(stock.getCompany().getMarketCap());
+        this.sector = stock.getCompanyAttributes().getSector();
+        this.marketCap = String.valueOf(stock.getCompanyAttributes().getMarketCap());
         this.volatility = stock.getPricingModel().getAttributes().getVolatility().getName();
-        this.investorRating = stock.getCompany().getInvestorRating().getName();
+        this.investorRating = stock.getCompanyAttributes().getInvestorRating().getName();
     }
 }

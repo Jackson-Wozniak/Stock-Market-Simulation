@@ -1,9 +1,9 @@
 package io.github.stockmarket.market.stocks.utils;
 
-import io.github.stockmarket.market.stocks.model.Company;
+import io.github.stockmarket.market.stocks.model.CompanyAttributes;
 
 public class StockFactoryUtils {
-    public static int defaultInnovationFactor(Company company){
+    public static int defaultInnovationFactor(CompanyAttributes company){
         int baseFactor = 0;
         baseFactor += company.getInvestorRating().defaultInnovationFactor();
         baseFactor += company.getInvestmentStyle().defaultInnovationFactor();
@@ -13,7 +13,7 @@ public class StockFactoryUtils {
         return baseFactor;
     }
 
-    public static int defaultInvestorConfidence(Company company){
+    public static int defaultInvestorConfidence(CompanyAttributes company){
         int baseFactor = 0;
         baseFactor += company.getInvestorRating().defaultInvestorConfidenceFactor();
         baseFactor += company.getInvestmentStyle().defaultInvestorConfidenceFactor();
@@ -23,7 +23,7 @@ public class StockFactoryUtils {
         return baseFactor;
     }
 
-    public static int defaultLiquidity(Company company){
+    public static int defaultLiquidity(CompanyAttributes company){
         int baseFactor = 0;
         baseFactor += company.getInvestorRating().defaultLiquidityFactor();
         baseFactor += company.getInvestmentStyle().defaultLiquidityFactor();
@@ -33,7 +33,7 @@ public class StockFactoryUtils {
         return baseFactor;
     }
 
-    public static int defaultTradingDemand(Company company){
+    public static int defaultTradingDemand(CompanyAttributes company){
         int baseFactor = 0;
         baseFactor += company.getInvestorRating().defaultTradingDemandFactor();
         baseFactor += company.getInvestmentStyle().defaultTradingDemandFactor();

@@ -1,5 +1,6 @@
 package io.github.stockmarket.market.stocks.model;
 
+import io.github.stockmarket.market.stocks.model.factors.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,38 +17,26 @@ public class PricingModel {
     private BigDecimal price;
     private PricingAttributes attributes;
 
-    private static final Random random = new Random();
-
     public PricingModel(Builder builder) {
         this.stock = builder.stock;
         this.price = new BigDecimal(builder.price);
         this.attributes = new PricingAttributes(
-            builder.volatility,
-            builder.investorConfidenceFactor,
-            builder.investorConfidenceWeight,
-            builder.baseInvestorConfidenceNoise,
-            builder.newsSentimentFactor,
-            builder.newsSentimentWeight,
-            builder.baseNewsSentimentNoise,
-            builder.innovationFactor,
-            builder.innovationWeight,
-            builder.baseInnovationNoise,
-            builder.tradingDemandFactor,
-            builder.tradingDemandWeight,
-            builder.baseTradingDemandNoise,
-            builder.liquidityFactor,
-            builder.liquidityWeight,
-            builder.baseLiquidityNoise
+                builder.volatility,
+                builder.investorConfidenceFactor,
+                builder.newsSentimentFactor,
+                builder.innovationFactor,
+                builder.tradingDemandFactor,
+                builder.liquidityFactor
         );
     }
 
     public void runPriceChange(){
         double currentPrice = price.doubleValue();
-        double newsFactorDelta = attributes.calculateNewsDelta(currentPrice);
-        double investorConfidenceDelta = attributes.calculateInvestorConfidenceDelta(currentPrice);
-        double innovationDelta = attributes.calculateInnovationDelta(currentPrice);
-        double tradingDemandDelta = attributes.calculateTradingDemandDelta(currentPrice);
-        double liquidityDelta = attributes.calculateLiquidityDelta(currentPrice);
+        double newsFactorDelta = attributes.getNewsSentimentFactor().computeDelta(currentPrice);
+        double investorConfidenceDelta = attributes.getInvestorConfidenceFactor().computeDelta(currentPrice);
+        double innovationDelta = attributes.getInnovationFactor().computeDelta(currentPrice);
+        double tradingDemandDelta = attributes.getTradingDemandFactor().computeDelta(currentPrice);
+        double liquidityDelta = attributes.getLiquidityFactor().computeDelta(currentPrice);
 
         double totalDelta = newsFactorDelta + investorConfidenceDelta + innovationDelta
                 + tradingDemandDelta + liquidityDelta;
@@ -62,26 +51,11 @@ public class PricingModel {
         private final Stock stock;
         private double price;
         private PriceVolatility volatility;
-
-        private int investorConfidenceFactor;
-        private double investorConfidenceWeight;
-        private double baseInvestorConfidenceNoise;
-
-        private int newsSentimentFactor;
-        private double newsSentimentWeight;
-        private double baseNewsSentimentNoise;
-
-        private int innovationFactor;
-        private double innovationWeight;
-        private double baseInnovationNoise;
-
-        private int tradingDemandFactor;
-        private double tradingDemandWeight;
-        private double baseTradingDemandNoise;
-
-        private int liquidityFactor;
-        private double liquidityWeight;
-        private double baseLiquidityNoise;
+        private InvestorConfidenceFactor investorConfidenceFactor;
+        private InnovationFactor innovationFactor;
+        private LiquidityFactor liquidityFactor;
+        private NewsSentimentFactor newsSentimentFactor;
+        private TradingDemandFactor tradingDemandFactor;
 
         public Builder(Stock stock){
             this.stock = stock;
@@ -94,37 +68,27 @@ public class PricingModel {
         }
 
         public Builder investorConfidence(int factor, double weight, double baseNoise){
-            this.investorConfidenceFactor = factor;
-            this.investorConfidenceWeight = weight;
-            this.baseInvestorConfidenceNoise = baseNoise;
+            this.investorConfidenceFactor = new InvestorConfidenceFactor(factor, weight, baseNoise);
             return this;
         }
 
         public Builder newsSentiment(int factor, double weight, double baseNoise){
-            this.newsSentimentFactor = factor;
-            this.newsSentimentWeight = weight;
-            this.baseNewsSentimentNoise = baseNoise;
+            this.newsSentimentFactor = new NewsSentimentFactor(factor, weight, baseNoise);
             return this;
         }
 
         public Builder innovation(int factor, double weight, double baseNoise){
-            this.innovationFactor = factor;
-            this.innovationWeight = weight;
-            this.baseInnovationNoise = baseNoise;
+            this.innovationFactor = new InnovationFactor(factor, weight, baseNoise);
             return this;
         }
 
         public Builder tradingDemand(int factor, double weight, double baseNoise){
-            this.tradingDemandFactor = factor;
-            this.tradingDemandWeight = weight;
-            this.baseTradingDemandNoise = baseNoise;
+            this.tradingDemandFactor = new TradingDemandFactor(factor, weight, baseNoise);
             return this;
         }
 
         public Builder liquidity(int factor, double weight, double baseNoise){
-            this.liquidityFactor = factor;
-            this.liquidityWeight = weight;
-            this.baseLiquidityNoise = baseNoise;
+            this.liquidityFactor = new LiquidityFactor(factor, weight, baseNoise);
             return this;
         }
 

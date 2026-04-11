@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Stock {
     private String ticker;
-    private Company company;
+    private CompanyAttributes companyAttributes;
     private PricingModel pricingModel;
     private List<NewsRelease> newsReleases = new ArrayList<>();
     private List<PriceRecord> priceRecords = new ArrayList<>();

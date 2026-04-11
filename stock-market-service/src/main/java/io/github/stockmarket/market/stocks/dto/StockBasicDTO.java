@@ -13,7 +13,7 @@ public class StockBasicDTO {
 
     public StockBasicDTO(Stock stock) {
         this.ticker = stock.getTicker();
-        this.companyName = stock.getCompany().getCompanyName();
+        this.companyName = stock.getCompanyAttributes().getCompanyName();
         this.price = stock.getPrice();
     }
 }

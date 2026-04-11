@@ -39,8 +39,8 @@ public class NewsReleaseEngine {
     of a stock guide the likelihood of news sentiment over time
      */
     public NewsRelease generateNewsReleaseOrNull(Stock stock, ZonedDateTime date){
-        InvestorRating rating = stock.getCompany().getInvestorRating();
-        InvestmentStyle style = stock.getCompany().getInvestmentStyle();
+        InvestorRating rating = stock.getCompanyAttributes().getInvestorRating();
+        InvestmentStyle style = stock.getCompanyAttributes().getInvestmentStyle();
         int positiveRange = (int) percentChanceOfPositiveNews(rating, style) * 10;
         int negativeRange = positiveRange + (int) (percentChanceOfNegativeNews(rating, style) * 10);
         int random = RandomUtils.getRandomInt(0, 1000);
