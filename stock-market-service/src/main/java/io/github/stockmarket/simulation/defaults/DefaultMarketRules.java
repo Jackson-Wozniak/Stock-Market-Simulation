@@ -1,13 +1,11 @@
-package io.github.stockmarket.engine.properties;
-
-import io.github.stockmarket.engine.enums.MarketSimulatorMode;
+package io.github.stockmarket.simulation.defaults;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class MarketEnvironmentProperties {
+public class DefaultMarketRules {
     public static final ZonedDateTime STARTING_MARKET_DATE =
             ZonedDateTime.of(LocalDate.of(2025,1,1),
                     LocalTime.of(9, 0), ZoneId.systemDefault());

@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MarketRules {
-    private PricingRules pricingRules;
-    private FactorRules factorRules;
+    private PricingMovementRules pricingMovementRules;
+    private PricingFactorRules pricingFactorRules;
+    private SentimentRules sentimentRules;
 }
