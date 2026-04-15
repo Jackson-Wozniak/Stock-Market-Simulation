@@ -7,7 +7,6 @@ import lombok.Setter;
 import io.github.stockmarket.market.stocks.enums.PriceVolatility;
 
 import static io.github.stockmarket.market.stocks.utils.PricingModelUtils.*;
-import static io.github.stockmarket.engine.properties.MarketEnvironmentProperties.ABSOLUTE_VALUE_FACTOR_RANGE;
 
 @Getter
 @Setter

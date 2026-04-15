@@ -3,7 +3,6 @@ package io.github.stockmarket.market.stocks.model.factors;
 import lombok.Getter;
 import lombok.Setter;
 
-import static io.github.stockmarket.engine.properties.MarketEnvironmentProperties.ABSOLUTE_VALUE_FACTOR_RANGE;
 import static io.github.stockmarket.market.stocks.utils.PricingModelUtils.randomPriceDelta;
 
 @Getter
@@ -28,6 +27,7 @@ public abstract class PricingFactor {
     }
 
     protected int clamp(int rawValue) {
-        return Math.max(-ABSOLUTE_VALUE_FACTOR_RANGE, Math.min(rawValue, ABSOLUTE_VALUE_FACTOR_RANGE));
+        //return Math.max(-ABSOLUTE_VALUE_FACTOR_RANGE, Math.min(rawValue, ABSOLUTE_VALUE_FACTOR_RANGE));
+        return 0;
     }
 }

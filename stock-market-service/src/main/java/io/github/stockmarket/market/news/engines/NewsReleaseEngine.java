@@ -2,7 +2,6 @@ package io.github.stockmarket.market.news.engines;
 
 import lombok.AllArgsConstructor;
 import io.github.stockmarket.core.utils.RandomUtils;
-import io.github.stockmarket.engine.properties.MarketEnvironmentProperties;
 import io.github.stockmarket.market.news.entity.NewsRelease;
 import io.github.stockmarket.market.stocks.model.Stock;
 import io.github.stockmarket.market.stocks.enums.InvestmentStyle;
@@ -54,20 +53,22 @@ public class NewsReleaseEngine {
     }
 
     public double percentChanceOfPositiveNews(InvestorRating rating, InvestmentStyle style){
-        double averagePositivityScore = (rating.getPositivityScoreOutOf100()
-                + style.getPositivityScoreOutOf100()) / 2.0;
-        if(averagePositivityScore < 50.0)
-            return MarketEnvironmentProperties.MIN_PERCENT_CHANCE_POSITIVE_NEWS;
-        return MarketEnvironmentProperties.MAX_PERCENT_CHANCE_POSITIVE_NEWS
-                * (averagePositivityScore / 100.0);
+//        double averagePositivityScore = (rating.getPositivityScoreOutOf100()
+//                + style.getPositivityScoreOutOf100()) / 2.0;
+//        if(averagePositivityScore < 50.0)
+//            return MarketEnvironmentProperties.MIN_PERCENT_CHANCE_POSITIVE_NEWS;
+//        return MarketEnvironmentProperties.MAX_PERCENT_CHANCE_POSITIVE_NEWS
+//                * (averagePositivityScore / 100.0);
+        return 0;
     }
 
     public double percentChanceOfNegativeNews(InvestorRating rating, InvestmentStyle style){
-        double averagePositivityScore = (rating.getPositivityScoreOutOf100()
-                + style.getPositivityScoreOutOf100()) / 2.0;
-        if(averagePositivityScore > 50.0)
-            return MarketEnvironmentProperties.MIN_PERCENT_CHANCE_NEGATIVE_NEWS;
-        return MarketEnvironmentProperties.MAX_PERCENT_CHANCE_NEGATIVE_NEWS
-                * ((100.0 - averagePositivityScore) / 100.0);
+//        double averagePositivityScore = (rating.getPositivityScoreOutOf100()
+//                + style.getPositivityScoreOutOf100()) / 2.0;
+//        if(averagePositivityScore > 50.0)
+//            return MarketEnvironmentProperties.MIN_PERCENT_CHANCE_NEGATIVE_NEWS;
+//        return MarketEnvironmentProperties.MAX_PERCENT_CHANCE_NEGATIVE_NEWS
+//                * ((100.0 - averagePositivityScore) / 100.0);
+        return 0;
     }
 }

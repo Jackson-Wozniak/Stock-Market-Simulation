@@ -1,5 +1,6 @@
 package io.github.stockmarket.simulation.model;
 
+import io.github.stockmarket.market.core.model.MarketContext;
 import io.github.stockmarket.simulation.rules.MarketRules;
 import lombok.Getter;
 import lombok.Setter;

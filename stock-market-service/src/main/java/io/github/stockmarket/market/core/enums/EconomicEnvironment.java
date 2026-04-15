@@ -1,4 +1,4 @@
-package io.github.stockmarket.simulation.enums;
+package io.github.stockmarket.market.core.enums;
 
 /*
 The goal of EconomicEnvironment is to dictate which types of pricing factors have more impact. This is not currently
