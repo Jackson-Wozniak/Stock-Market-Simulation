@@ -1,4 +1,4 @@
-package io.github.stockmarket.simulation.step;
+package io.github.stockmarket.simulation.step.base;
 
 import io.github.stockmarket.market.core.model.MarketContext;
 import io.github.stockmarket.simulation.rules.MarketRules;

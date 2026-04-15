@@ -3,6 +3,7 @@ package io.github.stockmarket.simulation.step;
 import io.github.stockmarket.market.stocks.model.Stock;
 import io.github.stockmarket.market.core.model.MarketContext;
 import io.github.stockmarket.simulation.rules.MarketRules;
+import io.github.stockmarket.simulation.step.base.MarketStep;
 
 public class PricingMovementStep extends MarketStep {
 
