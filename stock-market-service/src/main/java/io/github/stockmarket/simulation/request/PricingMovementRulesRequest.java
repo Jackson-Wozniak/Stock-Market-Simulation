@@ -1,4 +1,4 @@
-package io.github.stockmarket.simulation.rules;
+package io.github.stockmarket.simulation.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PricingMovementRules {
-    //Stocks above this price will dampen their price change scales
+public class PricingMovementRulesRequest {
     private double priceCeilingDampener;
     private double priceSignalDiminisher;
     private double priceScaleDiminisher;

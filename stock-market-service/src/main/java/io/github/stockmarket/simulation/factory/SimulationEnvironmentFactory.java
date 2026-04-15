@@ -24,14 +24,14 @@ public class SimulationEnvironmentFactory {
 
     public SimulationEnvironment create(SimulationRequest request){
         MarketRules rules = new MarketRules();
-        PricingMovementRules pricingMovementRules = new PricingMovementRules();
+        PricingMovementRules pricingMovementRules = new PricingMovementRules(0, 0, 0);
         pricingMovementRules.setPriceCeilingDampener(DefaultMarketRules.PRICE_CEILING_DAMPENER);
         pricingMovementRules.setPriceScaleDiminisher(DefaultMarketRules.PRICE_SCALE_DIMINISHER);
         pricingMovementRules.setPriceSignalDiminisher(DefaultMarketRules.PRICE_SIGNAL_DIMINISHER);
 
         rules.setSentimentRules(new SentimentRules());
         rules.setPricingMovementRules(pricingMovementRules);
-        rules.setPricingFactorRules(new PricingFactorRules());
+        rules.setPricingFactorRules(new PricingFactorRules(0));
 
         SimulationEnvironment environment = new SimulationEnvironment();
 

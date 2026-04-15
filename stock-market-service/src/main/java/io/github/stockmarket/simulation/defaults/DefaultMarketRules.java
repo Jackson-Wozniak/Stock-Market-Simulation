@@ -1,11 +1,26 @@
 package io.github.stockmarket.simulation.defaults;
 
+import io.github.stockmarket.simulation.rules.MarketRules;
+import io.github.stockmarket.simulation.rules.PricingFactorRules;
+import io.github.stockmarket.simulation.rules.PricingMovementRules;
+import io.github.stockmarket.simulation.rules.SentimentRules;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 public class DefaultMarketRules {
+
+    public static MarketRules createDefault(){
+        MarketRules rules = new MarketRules();
+        rules.setPricingFactorRules(new PricingFactorRules(50));
+        rules.setSentimentRules(new SentimentRules());
+        rules.setPricingMovementRules(new PricingMovementRules(0, 0, 0));
+
+        return rules;
+    }
+
     public static final ZonedDateTime STARTING_MARKET_DATE =
             ZonedDateTime.of(LocalDate.of(2025,1,1),
                     LocalTime.of(9, 0), ZoneId.systemDefault());
