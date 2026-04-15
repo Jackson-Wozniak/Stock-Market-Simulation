@@ -30,19 +30,6 @@ public class PricingModel {
         );
     }
 
-    public void runPriceChange(){
-        double currentPrice = price.doubleValue();
-        double newsFactorDelta = attributes.getNewsSentimentFactor().computeDelta(currentPrice);
-        double investorConfidenceDelta = attributes.getInvestorConfidenceFactor().computeDelta(currentPrice);
-        double innovationDelta = attributes.getInnovationFactor().computeDelta(currentPrice);
-        double tradingDemandDelta = attributes.getTradingDemandFactor().computeDelta(currentPrice);
-        double liquidityDelta = attributes.getLiquidityFactor().computeDelta(currentPrice);
-
-        double totalDelta = newsFactorDelta + investorConfidenceDelta + innovationDelta
-                + tradingDemandDelta + liquidityDelta;
-        setPrice(BigDecimal.valueOf(currentPrice + totalDelta));
-    }
-
     public double getPriceValue(){
         return this.price.doubleValue();
     }

@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import io.github.stockmarket.market.stocks.enums.PriceVolatility;
 
-import static io.github.stockmarket.market.stocks.utils.PricingModelUtils.*;
-
 @Getter
 @Setter
 @NoArgsConstructor

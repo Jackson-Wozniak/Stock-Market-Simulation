@@ -3,8 +3,6 @@ package io.github.stockmarket.market.stocks.model.factors;
 import lombok.Getter;
 import lombok.Setter;
 
-import static io.github.stockmarket.market.stocks.utils.PricingModelUtils.randomPriceDelta;
-
 @Getter
 @Setter
 public abstract class PricingFactor {
@@ -13,21 +11,21 @@ public abstract class PricingFactor {
     protected double baseNoise;
 
     public PricingFactor(int value, double weight, double noise) {
-        this.value = clamp(value);
+        this.value = value;
         this.weight = weight;
         this.baseNoise = noise;
     }
 
-    public double computeDelta(double currentPrice) {
-        return randomPriceDelta(currentPrice, getWeightedValue(), baseNoise);
-    }
-
-    protected double getWeightedValue() {
+    public double getWeightedValue() {
         return value * weight;
     }
 
-    protected int clamp(int rawValue) {
-        //return Math.max(-ABSOLUTE_VALUE_FACTOR_RANGE, Math.min(rawValue, ABSOLUTE_VALUE_FACTOR_RANGE));
-        return 0;
-    }
+    /*
+    TODO: not currently in use, however once factor value updates are done this should be added to a pricing helper
+        to ensure that the market rules dictate max/min factor value
+    */
+//    protected int clamp(int rawValue) {
+//        //return Math.max(-ABSOLUTE_VALUE_FACTOR_RANGE, Math.min(rawValue, ABSOLUTE_VALUE_FACTOR_RANGE));
+//        return 0;
+//    }
 }

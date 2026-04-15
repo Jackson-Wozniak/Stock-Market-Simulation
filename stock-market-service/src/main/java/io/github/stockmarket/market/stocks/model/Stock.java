@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import io.github.stockmarket.market.news.entity.NewsRelease;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class Stock {
         return this.pricingModel.getPriceValue();
     }
 
-    public void runPriceChange(){
-        this.pricingModel.runPriceChange();
+    public void applyPriceDelta(double delta){
+        this.pricingModel.setPrice(BigDecimal.valueOf(this.pricingModel.getPriceValue() + delta));
     }
 
     /*
