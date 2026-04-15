@@ -1,5 +1,7 @@
 package io.github.stockmarket.simulation.controller;
 
+import io.github.stockmarket.response.SimulationResponse;
+import io.github.stockmarket.simulation.model.SimulationEnvironment;
 import io.github.stockmarket.simulation.request.SimulationRequest;
 import io.github.stockmarket.simulation.service.MarketSimulationService;
 import lombok.AllArgsConstructor;
@@ -15,9 +17,9 @@ public class MarketSimulationController{
     private final MarketSimulationService marketSimulationService;
 
     @GetMapping
-    public ResponseEntity<?> test(){
-        marketSimulationService.run(new SimulationRequest());
+    public ResponseEntity<SimulationResponse> test(){
+        SimulationEnvironment result = marketSimulationService.run(new SimulationRequest());
 
-        return ResponseEntity.ok("Testing Passed");
+        return ResponseEntity.ok(new SimulationResponse(result));
     }
 }

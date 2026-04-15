@@ -34,20 +34,20 @@ public class MarketSimulationService {
 
         for(int i = 1; i <= environment.getSimulationSettings().getDays(); i++){
             marketContext.setCurrentPhase(MarketPhase.PRE_MARKET);
-            dailySteps.forEach(d -> d.apply(marketContext));
+            dailySteps.stream().filter(d -> d.getMarketPhase().equals(MarketPhase.PRE_MARKET)).forEach(d -> d.apply(marketContext));
             marketContext.setCurrentPhase(MarketPhase.OPEN);
-            dailySteps.forEach(d -> d.apply(marketContext));
+            dailySteps.stream().filter(d -> d.getMarketPhase().equals(MarketPhase.OPEN)).forEach(d -> d.apply(marketContext));
 
             marketContext.setCurrentPhase(MarketPhase.INTRADAY);
-            dailySteps.forEach(d -> d.apply(marketContext));
+            dailySteps.stream().filter(d -> d.getMarketPhase().equals(MarketPhase.INTRADAY)).forEach(d -> d.apply(marketContext));
             for(int j = 0; j < environment.getSimulationSettings().getTicksPerDay(); j++){
                 steps.forEach(m -> m.apply(marketContext));
             }
 
             marketContext.setCurrentPhase(MarketPhase.CLOSE);
-            dailySteps.forEach(d -> d.apply(marketContext));
+            dailySteps.stream().filter(d -> d.getMarketPhase().equals(MarketPhase.CLOSE)).forEach(d -> d.apply(marketContext));
             marketContext.setCurrentPhase(MarketPhase.AFTER_MARKET);
-            dailySteps.forEach(d -> d.apply(marketContext));
+            dailySteps.stream().filter(d -> d.getMarketPhase().equals(MarketPhase.AFTER_MARKET)).forEach(d -> d.apply(marketContext));
         }
 
         return environment;

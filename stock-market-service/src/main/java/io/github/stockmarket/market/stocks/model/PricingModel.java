@@ -7,6 +7,7 @@ import lombok.Setter;
 import io.github.stockmarket.market.stocks.enums.PriceVolatility;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 @Getter
@@ -31,7 +32,7 @@ public class PricingModel {
     }
 
     public double getPriceValue(){
-        return this.price.doubleValue();
+        return this.price.setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     public static class Builder{
