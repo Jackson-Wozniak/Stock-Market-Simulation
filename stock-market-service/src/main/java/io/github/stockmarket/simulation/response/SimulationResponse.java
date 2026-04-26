@@ -1,4 +1,4 @@
-package io.github.stockmarket.response;
+package io.github.stockmarket.simulation.response;
 
 import io.github.stockmarket.market.stocks.model.PriceRecord;
 import io.github.stockmarket.simulation.model.SimulationEnvironment;
