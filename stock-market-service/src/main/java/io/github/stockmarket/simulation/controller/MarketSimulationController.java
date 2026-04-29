@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.stockmarket.simulation.defaults.DefaultMarketRules;
 import io.github.stockmarket.simulation.mapper.MarketRulesMapper;
+import io.github.stockmarket.simulation.mapper.SimulationSettingsMapper;
 import io.github.stockmarket.simulation.request.MarketRulesRequest;
 import io.github.stockmarket.simulation.request.PricingFactorRulesRequest;
 import io.github.stockmarket.simulation.request.PricingMovementRulesRequest;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MarketSimulationController{
     private final MarketSimulationService marketSimulationService;
     private final MarketRulesMapper mapper;
+    private final SimulationSettingsMapper simulationSettingsMapper;
 
     @GetMapping
     public ResponseEntity<Double> test() throws JsonProcessingException {

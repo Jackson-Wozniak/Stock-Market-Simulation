@@ -7,5 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SimulationRequest {
-    private MarketRules marketRules;
+    private MarketRulesRequest marketRules;
+    private SimulationSettingsRequest simulationSettings;
 }

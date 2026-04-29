@@ -4,6 +4,7 @@ import io.github.stockmarket.simulation.request.MarketRulesRequest;
 import io.github.stockmarket.simulation.request.PricingFactorRulesRequest;
 import io.github.stockmarket.simulation.request.PricingMovementRulesRequest;
 import io.github.stockmarket.simulation.rules.MarketRules;
+import io.github.stockmarket.simulation.rules.PricingFactorRules;
 import io.github.stockmarket.simulation.rules.PricingMovementRules;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -20,5 +21,5 @@ public interface MarketRulesMapper {
     void updatePricingMovementRules(PricingMovementRulesRequest req, @MappingTarget PricingMovementRules obj);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updatePricingFactorRules(PricingFactorRulesRequest req, @MappingTarget PricingFactorRulesRequest obj);
+    void updatePricingFactorRules(PricingFactorRulesRequest req, @MappingTarget PricingFactorRules obj);
 }
