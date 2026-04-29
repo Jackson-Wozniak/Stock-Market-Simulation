@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.stockmarket.simulation.defaults.DefaultMarketRules;
 import io.github.stockmarket.simulation.mapper.MarketRulesMapper;
 import io.github.stockmarket.simulation.request.MarketRulesRequest;
+import io.github.stockmarket.simulation.request.PricingFactorRulesRequest;
 import io.github.stockmarket.simulation.request.PricingMovementRulesRequest;
 import io.github.stockmarket.simulation.rules.MarketRules;
 import io.github.stockmarket.simulation.service.MarketSimulationService;
@@ -26,9 +27,9 @@ public class MarketSimulationController{
         MarketRules rules = DefaultMarketRules.createDefault();
         MarketRulesRequest request = new MarketRulesRequest();
         request.setPricingMovementRules(new PricingMovementRulesRequest(1, 1, 2.0));
+        request.setPricingFactorRules(new PricingFactorRulesRequest(500));
         mapper.updateMarketRules(request, rules);
 
-        ObjectMapper mapper = new ObjectMapper();
-        return ResponseEntity.ok(rules.getPricingMovementRules().getPriceScaleDiminisher());
+        return ResponseEntity.ok(rules.getPricingFactorRules().getAbsoluteValueRange());
     }
 }

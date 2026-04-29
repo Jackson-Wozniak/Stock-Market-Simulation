@@ -8,5 +8,4 @@ import lombok.Setter;
 public class MarketRules {
     private PricingMovementRules pricingMovementRules;
     private PricingFactorRules pricingFactorRules;
-    private SentimentRules sentimentRules;
 }

@@ -3,7 +3,6 @@ package io.github.stockmarket.simulation.defaults;
 import io.github.stockmarket.simulation.rules.MarketRules;
 import io.github.stockmarket.simulation.rules.PricingFactorRules;
 import io.github.stockmarket.simulation.rules.PricingMovementRules;
-import io.github.stockmarket.simulation.rules.SentimentRules;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,9 +13,8 @@ public class DefaultMarketRules {
 
     public static MarketRules createDefault(){
         MarketRules rules = new MarketRules();
-        rules.setPricingFactorRules(new PricingFactorRules(50));
-        rules.setSentimentRules(new SentimentRules());
-        rules.setPricingMovementRules(new PricingMovementRules(0, 0, 0));
+        rules.setPricingFactorRules(new PricingFactorRules(ABSOLUTE_VALUE_FACTOR_RANGE));
+        rules.setPricingMovementRules(new PricingMovementRules(PRICE_CEILING_DAMPENER, PRICE_SIGNAL_DIMINISHER, PRICE_SCALE_DIMINISHER));
 
         return rules;
     }

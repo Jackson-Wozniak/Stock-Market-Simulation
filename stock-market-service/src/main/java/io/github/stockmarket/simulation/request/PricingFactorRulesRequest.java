@@ -1,4 +1,4 @@
-package io.github.stockmarket.simulation.rules;
+package io.github.stockmarket.simulation.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PricingFactorRules {
-    //the range a PricingAttributes factor can be. Example: if 50 then the factor value is [-50, 50]
+public class PricingFactorRulesRequest {
     private double absoluteValueRange;
 }

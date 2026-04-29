@@ -13,7 +13,6 @@ import io.github.stockmarket.simulation.request.SimulationRequest;
 import io.github.stockmarket.simulation.rules.MarketRules;
 import io.github.stockmarket.simulation.rules.PricingFactorRules;
 import io.github.stockmarket.simulation.rules.PricingMovementRules;
-import io.github.stockmarket.simulation.rules.SentimentRules;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
@@ -29,7 +28,6 @@ public class SimulationEnvironmentFactory {
         pricingMovementRules.setPriceScaleDiminisher(DefaultMarketRules.PRICE_SCALE_DIMINISHER);
         pricingMovementRules.setPriceSignalDiminisher(DefaultMarketRules.PRICE_SIGNAL_DIMINISHER);
 
-        rules.setSentimentRules(new SentimentRules());
         rules.setPricingMovementRules(pricingMovementRules);
         rules.setPricingFactorRules(new PricingFactorRules(0));
 

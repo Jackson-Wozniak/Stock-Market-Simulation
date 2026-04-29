@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class MarketRulesRequest {
     private PricingMovementRulesRequest pricingMovementRules;
+    private PricingFactorRulesRequest pricingFactorRules;
 }
