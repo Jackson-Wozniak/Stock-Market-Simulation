@@ -30,6 +30,8 @@
     <li><a href="#local-dev">Local Deployment</a></li>
 </ol>    
 
+:NOTE: I am in the process of overhauling the way this simulation works, in order to drop the database usage and transform it into a suite of in-memory simulations to lean into the stock pricing formula simulation. More details can be found in the stateless-market branch
+
 <br/> 
 <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
